@@ -1,0 +1,2219 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Maximum Likelihood Estimation</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>469874e3-c1e0-49eb-a74d-99857997ff17</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro1">
+      The <term>maximum likelihood estimator</term> (MLE) is an
+      alternative to the minimum variance unbiased estimator (MVUE).  
+      For many estimation problems, the MVUE does not exist. Moreover, 
+      when it does exist, there is no systematic procedure for
+      finding it. In constrast, the MLE does not necessarily satisfy any
+      optimality criterion, but it can almost always be computed, 
+      either through exact formulas or numerical techniques. For this reason,
+      the MLE is one of the most common estimation procedures used in practice.
+    </para>
+    <para id="intro2">
+      The MLE is an important
+      type of estimator for the following reasons:
+      <list id="list1" list-type="enumerated">
+	<item>The MLE implements the likelihood principle.</item>
+	<item>MLEs are often simple and easy to compute.</item>
+	<item>MLEs have asymptotic optimality properties
+	(consistency and efficiency).</item>
+	<item>MLEs are invariant under reparameterization.</item>
+	<item>If an efficient estimator exists, it is the MLE.</item>
+	<item>In signal detection with unknown parameters 
+	  (composite hypothesis testing), MLEs are used in implementing the 
+	  generalized likelihood ratio test (GLRT).</item>
+	  </list>
+	  This module will discuss these properties in detail, with examples.
+	   
+    </para>
+    
+    
+    <section id="sect1">
+      <title>The Likelihood Principle</title>
+      <para id="para1">
+    Supposed the data <m:math><m:ci type="vector">X</m:ci></m:math> is
+	distributed according to the density or mass function 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:condition>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply> 
+	</m:math>. The <term>likelihood function</term> for 
+	<m:math>
+	  <m:ci type="vector">θ</m:ci>
+	</m:math>
+	is defined by
+	<m:math display="block">
+	  <m:apply>
+	    <m:equivalent/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">θ</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> 
+	
+    At first glance, the likelihood function is nothing new - it is
+	simply a way of rewriting the pdf/pmf of <m:math><m:ci type="vector">X</m:ci></m:math>. The difference between the
+	likelihood and the pdf or pmf is what is held fixed and what
+	is allowed to vary. When we talk about the likelihood, we view
+	the observation <m:math><m:ci type="vector">x</m:ci></m:math>
+	as being fixed, and the parameter <m:math> <m:ci type="vector">θ</m:ci> </m:math> as freely varying.
+	
+    <note type="note" id="idp1946256">
+	    It is tempting to view the likelihood function 
+        as a probability density for <m:math><m:ci type="vector">θ</m:ci></m:math>, and to think of
+	    <m:math>
+	      <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	  </m:math> as the conditional density of <m:math><m:ci type="vector">θ</m:ci></m:math> given <m:math><m:ci type="vector">x</m:ci></m:math>. This approach to parameter 
+	    estimation is called <emphasis>fiducial inference</emphasis>, 
+	    and is not accepted by most statisticians.
+        One potential problem, for
+	    example, is that in many cases 
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	  </m:math> is not integrable (
+	  <m:math>
+	    <m:apply>
+	      <m:tendsto/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci type="vector">θ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:infinity/>
+	    </m:apply>
+	  </m:math>) and thus cannot be normalized. A more
+	  fundamental problem is that <m:math> <m:ci type="vector">θ</m:ci> </m:math> is viewed as a fixed
+	  quantity, as opposed to random. Thus, it doesn't make sense
+	  to talk about its density. For the likelihood to be properly
+	  thought of as a density, a <link document="">Bayesian</link>
+	  approach is required.
+	  <!-- FIXME, broken connexion -->
+	</note>
+ 
+	
+	
+    The likelihood principle effectively states that all information we have
+    about the unknown parameter <m:math>
+	  <m:ci type="vector">θ</m:ci>
+	</m:math> is contained in the likelihood function.
+	
+    <rule id="rule2" type="principle"><label>Principle</label>
+	  <title>Likelihood Principle</title>
+	  <statement id="idm6534672">
+	    <para id="para5">
+	      The information brought by an observation <m:math><m:ci type="vector">x</m:ci></m:math> about <m:math><m:ci type="vector">θ</m:ci></m:math> is entirely
+	      contained in the likelihood function 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:math>.  Moreover, if <m:math><m:ci type="vector"><m:msub><m:mi>x</m:mi><m:mn>1</m:mn>
+	      </m:msub></m:ci></m:math> and <m:math><m:ci type="vector"><m:msub><m:mi>x</m:mi><m:mn>2</m:mn>
+	      </m:msub></m:ci></m:math> are two observations depending
+	      on the same parameter <m:math><m:ci type="vector">θ</m:ci></m:math>, such that there
+	      exists a constant <m:math><m:ci>c</m:ci></m:math>
+	      satisfying 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>c</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci type="vector">θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> for every <m:math><m:ci type="vector">θ</m:ci></m:math>, then they bring
+	      the same information about <m:math><m:ci type="vector">θ</m:ci></m:math> and must lead to
+	      identical estimators.
+	    </para>
+	  </statement>
+	  </rule>
+	  
+	In the statement of the likelihood principle, it is
+      <emphasis>not</emphasis> assumed that the two observations
+      <m:math><m:ci type="vector"><m:msub><m:mi>x</m:mi><m:mn>1</m:mn>
+      </m:msub></m:ci></m:math> and <m:math><m:ci type="vector"><m:msub><m:mi>x</m:mi><m:mn>2</m:mn>
+      </m:msub></m:ci></m:math> are generated according to the same
+      model, as long as the model is parameterized by
+	<m:math>
+	  <m:ci type="vector">θ</m:ci>
+	</m:math>.
+	    </para>
+      
+	  <example id="ex2">
+	    <para id="para6">
+	      Suppose a public health official conducts a survey to
+	      estimate 
+	      <m:math>
+		<m:apply>
+		  <m:leq/>
+		  <m:cn>0</m:cn>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>θ</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, the percentage of the population eating pizza
+	      at least once per week.  As a result, the official found
+	      nine people who had eaten pizza in the last week, and three 
+	      who had not.
+	      If no additional information is available regarding how
+	      the survey was implemented, then there are at least two
+	      probability models we can adopt.
+	    
+	    <list id="lp_list" list-type="enumerated">
+	      <item>The official surveyed 12 people, and 9 of them had
+	      eaten pizza in the last week. In this case, we observe
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:cn>9</m:cn>
+		</m:apply>
+	      </m:math>, where 
+
+	      <m:math display="block">
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">Binomial</m:ci>
+		    <m:cn>12</m:cn>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+
+	      The density for 
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>
+	      is 
+
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">f</m:csymbol>
+		    <m:condition>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://www.openmath.org/cd/combinat1.ocd"/>
+		      <m:cn>12</m:cn>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>θ</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>1</m:cn>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>12</m:cn>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+
+	    </item>
+	    <item> Another reasonable model is to assume that the
+	      official surveyed people <emphasis>until</emphasis> he
+	      found 3 non-pizza eaters.  In this case, we observe 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:cn>12</m:cn>
+		</m:apply>
+	      </m:math>, where 
+
+	      <m:math display="block">
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">NegativeBinomial</m:ci>
+		    <m:cn>3</m:cn>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      The density for
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:math> is
+	      
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">g</m:csymbol>
+		    <m:condition>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:condition>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://www.openmath.org/cd/combinat1.ocd"/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>3</m:cn>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>θ</m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci>
+			<m:cn>3</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>1</m:cn>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		      <m:cn>3</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+   	      
+	    </item>
+	  </list>
+	  The likelihoods for these two models are proportional:
+   	  
+	  <m:math display="block">
+	    <m:apply>
+	      <m:mo>∝</m:mo>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+		<m:condition>
+		  <m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:condition>
+		<m:mi>θ</m:mi>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+		<m:condition>
+		  <m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:condition>
+		<m:mi>θ</m:mi>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>θ</m:ci>
+		  <m:cn>9</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:cn>3</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	      
+	  Therefore, any estimator that adheres to the likelihood
+	  principle will produce the same estimate for
+	  <m:math><m:ci>θ</m:ci></m:math>, regardless of which
+	  of the two data-generation models is assumed.  </para>
+      </example>
+      <para id="para200">
+	The likelihood principle is widely accepted among
+	statisticians. In the context of parameter estimation, any
+	reasonable estimator should conform to the likelihood
+	principle. As we will see, the maximum likelihood estimator
+	does.  <note id="idm6262528">While the likelihood principle itself is a fairly
+	reasonable assumption, it can also be derived from two
+	somewhat more intuitive assumptions known as the
+	<term>sufficiency principle</term> and the
+	<term>conditionality principle.</term> See <cite target-id="casella"><cite-title>Casella and Berger, Chapter 6</cite-title></cite>.</note>
+      </para>
+    </section>
+    
+    <section id="sect2">
+      <title>The Maximum Likelihood Estimator</title>
+      <para id="para8">
+        The <term>maximum likelihood estimator</term> 
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:apply>
+		<m:ci type="fn">θ</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+        is defined by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#argmax"/>
+	      <m:domainofapplication>
+		<m:ci type="vector">θ</m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+		<m:condition>
+		  <m:ci type="vector">x</m:ci>
+		</m:condition>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> 
+	Intuitively, we are choosing <m:math><m:ci type="vector">θ</m:ci></m:math> to maximize the
+	probability of occurrence of the observation <m:math><m:ci type="vector">x</m:ci></m:math>.
+      </para>  
+      
+      <note id="idp2587344">
+	It is possible that multiple parameter values maximize the
+	likelihood for a given 
+	<m:math>
+	  <m:ci type="vector">x</m:ci> 
+	</m:math>. In that case, any of
+	these maximizers can be selected as the MLE. It is also
+	possible that the likelihood may be <emphasis>
+	unbounded</emphasis>, in which case the MLE does not exist.
+	  </note>
+	  
+      <para id="lpimp">
+	The MLE rule is an implementation of the likelihood
+	principle. If we have two observations whose likelihoods are
+	proportional (they differ by a constant that does not depend
+	on <m:math> <m:ci type="vector">θ</m:ci> </m:math>),
+	then the value of <m:math> <m:ci type="vector">θ</m:ci>
+	</m:math> that maximizes one likelihood will also maximize the
+	other. In other words, both likelihood functions lead to the
+	same inference about <m:math><m:ci>θ</m:ci></m:math>, as
+	required by the likelihood principle.
+	
+      </para>
+      <para id="lp2">
+	Understand that maximum likelihood is a
+	<emphasis>procedure</emphasis>, not an optimality criterion.
+	From the definition of the MLE, we have no idea how close it
+	comes to the true parameter value relative to other
+	estimators. In constrast, the MVUE is defined as the estimator
+	that satisfies a certain optimality criterion. However, unlike
+	the MLE, we have no clear produre to follow to compute the
+	MVUE.  </para>
+    </section>
+	  
+    <section id="comp">
+      <title>Computing the MLE</title>
+      <para id="para13">
+	If the likelihood function is differentiable, then 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="vector">θ</m:ci>
+	  </m:apply>
+	</m:math> is found by differentiating the likelihood (or
+	log-likelihood), equating with zero, and solving:
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci type="vector">θ</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> If multiple solutions exist, then the MLE is the
+	solution that maximizes 
+	<m:math>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, that is,  the <emphasis>global</emphasis>
+	maximizer.
+      </para>
+
+      <para id="para25">
+	In certain cases, such as pdfs or pmfs with an esponential form, 
+	the MLE can be
+	easily solved for.  That is, 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci type="vector">θ</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">l</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> can be solved using calculus and standard linear
+	algebra.
+      </para>
+      <example id="ex3">
+	<title>DC level in white Guassian noise</title>
+	<para id="para14">
+	  Suppose we observe an unknown amplitude in white Gaussian noise
+	  with unknown variance: 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>A</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>n</m:ci>
+	      <m:set>
+		<m:cn>0</m:cn>
+		<m:cn>1</m:cn>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>N</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:set>
+	    </m:apply>
+	  </m:math>, where 
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> are independent and identically distributed.
+	  We would like to estimate
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">θ</m:ci>
+	      <m:vector>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>
+	  by computing the MLE. Differentiating the log-likelihood gives
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>A</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>A</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>N</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>4</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>N</m:ci>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub></m:ci>
+			<m:ci>A</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>Equating with zero and solving gives us our MLEs:
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci>A</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>N</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>N</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>A</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <note type="note" id="idm6558320">
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math> is biased!
+	  </note>
+	</para>
+      </example>
+      
+      <para id="para26">
+	As an exercise, try the following problem:
+	<exercise id="poisson">
+	  <problem id="idm7167392">
+	    <para id="poissprob">
+	      Suppose we observe a random sample 
+	      <m:math display="inline">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:vector>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>…</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>N</m:mi>
+		      </m:msub></m:ci>
+		  </m:vector>
+		</m:apply>
+	      </m:math> of Poisson measurements with intensity
+	      <m:math><m:ci>λ</m:ci></m:math>: 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>λ</m:ci>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:factorial/>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>,
+	      <m:math>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>n</m:ci>
+		  <m:set>
+		    <m:cn>0</m:cn>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		    <m:ci>…</m:ci>
+		  </m:set>
+		</m:apply>
+	      </m:math>. Find the MLE for
+	      <m:math><m:ci>λ</m:ci></m:math>.
+	    </para>
+	  </problem>
+	</exercise>
+	
+	Unfortunately, this approach is only feasible for the most elementary
+	pdfs and pmfs. In general, we may have to resort to more advanced
+	numerical maximization techniques:
+	<list id="list3" list-type="enumerated">
+	  <item><term>Newton-Raphson</term> iteration</item>
+	  <item>Iteration by the <term>Scoring Method</term></item>
+	  <item><term>Expectation-Maximization Algorithm</term></item>
+	</list>
+	All of these are iterative techniques which posit some initial
+	guess at the MLE, and then incrementally update that
+	guess. The iteration procedes until a local maximum of the
+	likelihood is attained, although in the case of the first two
+	methods, such convergence is not guaranteed.  The EM algorithm
+	has the advantage that the likelihood is always increased at
+	each iteration, and so convergence to at least a local maximum
+	is guaranteed (assuming a bounded likelihood). For each
+	algorithm, the final estimate is highly dependent on the
+	initial guess, and so it is customary to try several different
+	starting values. For details on these algorithms, see <cite target-id="kay"><cite-title>Kay, Vol. I</cite-title></cite>.
+      </para>
+    </section>	  
+    
+    
+    <section id="asymp">
+      <title>Asymptotic Properties of the MLE</title>
+      <para id="asymp1">
+	Let 
+	<m:math display="inline">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:vector>
+	      <m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>…</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>N</m:mi>
+		</m:msub></m:ci>
+	    </m:vector>
+	  </m:apply>
+	</m:math> denote an IID sample of size
+	<m:math><m:ci>N</m:ci></m:math>, and each sample is
+	distributed according to 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:condition>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math>.  Let 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mi>N</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math> denote the MLE based on a sample <m:math><m:ci type="vector">x</m:ci></m:math>.
+      </para>
+      
+      <rule id="rule3" type="theorem">
+	<title>Asymptotic Properties of MLE</title>
+	<statement id="idm6955536">
+	  <para id="para15">
+
+	    If the likelihood 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">x</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> satisfies certain "regularity" conditions<footnote id="idm7869216">The regularity conditions are
+	      essentially the same as those assumed for the <link document="m11429">Cramer-Rao lower bound</link>: the
+	      log-likelihood must be twice differentiable, and the
+	      expected value of the first derivative of the
+	      log-likelihood must be zero.</footnote>, then the MLE
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> is
+	    <emphasis>consistent</emphasis>, and moreover,
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> converges in probability to
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math>, where
+	    <m:math display="block">
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		  <m:ci type="vector">θ</m:ci>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> where 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="matrix">I</m:ci>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is the <term>Fisher Information
+	      matrix</term> evaluated at the true value of
+	    <m:math><m:ci type="vector">θ</m:ci></m:math>.
+	  </para>
+	</statement>
+      </rule> 
+      <para id="para123">
+	Since the mean of the MLE tends to the true parameter value, we say
+	the MLE is <term>asymptotically unbiased</term>. Since the
+	covariance tends to the inverse Fisher information matrix, we say 
+	the MLE is <term>asymptotically efficient</term>.
+      </para>
+      <para id="para124">
+	In general, the rate at which the mean-squared error converges
+	to zero is not known. It is possible that for small sample
+	sizes, some other estimator may have a smaller MSE.The proof
+	of consistency is an application of the weak law of large
+	numbers. Derivation of the asymptotic distribution relies on
+	the central limit theorem. The theorem is also true in more
+	general settings (e.g., dependent samples). See, <cite target-id="kay"><cite-title>Kay, Vol. I, Ch. 7</cite-title></cite> for further discussion.
+      </para>
+    </section>
+    <section id="idp1866208">
+      <title>The MLE and Efficiency</title>
+      <para id="para22">
+	In some cases, the MLE is efficient, not just asymptotically
+	efficient.  In fact, when an efficient estimator exists, it
+	must be the MLE, as described by the following result: 
+      </para>
+
+      <rule id="MLEthm" type="theorem">
+	<statement id="idp824912">
+	  <para id="MLEthm1">If
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is an efficient estimator, and the Fisher
+	    information matrix
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is positive definite for all <m:math><m:ci type="vector">θ</m:ci></m:math>, then 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> maximizes the likelihood.
+	  </para>
+	</statement>
+	
+	<proof id="idm7201728">
+	  <para id="MLEproof">Recall the 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is efficient (meaning it is unbiased and
+	    achieves the Cramer-Rao lower bound) if and only if
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci type="vector">θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> for all <m:math><m:ci type="vector">θ</m:ci></m:math> and <m:math><m:ci type="vector">x</m:ci></m:math>. Since
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is assumed to be efficient, this equation holds,
+	    and in particular it holds when
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">θ</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:apply>
+		    <m:ci type="fn">θ</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>. But then the derivative of the log-likelihood
+	    is zero at 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">θ</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:apply>
+		    <m:ci type="fn">θ</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>. Thus, 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> is a critical point of the likelihood.  Since
+	    the Fisher information matrix, which is the negative of
+	    the matrix of second order derivatives of the
+	    log-likelihood, is positive definite, 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> must be a maximum of the likelihood.
+	  </para>
+	</proof>
+      </rule>
+
+      <para id="para31"> An important case where this happens is
+	described in the following subsection.
+      </para>
+      <section id="linear">
+	<title>Optimality of MLE for Linear Statistical Model</title>
+	<para id="para23">
+	  If the observed data <m:math><m:ci type="vector">x</m:ci></m:math> are described by
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">H</m:ci>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+		<m:ci type="vector">w</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> where <m:math><m:ci type="matrix">H</m:ci></m:math> is 
+	  <m:math>
+	    <m:apply>
+	      <m:cartesianproduct/>
+	      <m:ci>N</m:ci>
+	      <m:ci>p</m:ci>
+	    </m:apply>
+	  </m:math> with full rank, <m:math><m:ci type="vector">θ</m:ci></m:math> is
+	  <m:math>
+	    <m:apply>
+	      <m:cartesianproduct/>
+	      <m:ci>p</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>, and
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci type="vector">w</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:ci type="vector">0</m:ci>
+		<m:ci type="matrix">C</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, then the MLE of <m:math><m:ci type="vector">θ</m:ci></m:math> is
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="matrix">H</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">C</m:ci>
+		    </m:apply>
+		    <m:ci type="matrix">H</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="matrix">H</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">C</m:ci>
+		</m:apply>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  This can be established in two ways. The first is to
+	  compute the CRLB for <m:math><m:ci type="vector">θ</m:ci></m:math>. It turns out that
+	  the condition for equality in the bound is satisfied, and 
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	  </m:math> can be read off from that condition.
+	</para>
+
+	<para id="para24">The second way is to maximize the likelihood
+	directly. Equivalently, we must minimize
+	  <m:math display="block">
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">H</m:ci>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">C</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">x</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">H</m:ci>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  with respect to <m:math><m:ci type="vector">θ</m:ci></m:math>. Since 
+	  <m:math>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">C</m:ci>
+	    </m:apply>
+	  </m:math> is positive definite, we can write
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">C</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="matrix">U</m:ci>
+		</m:apply>
+		<m:ci type="matrix">Λ</m:ci>
+		<m:ci type="matrix">U</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="matrix">D</m:ci>
+		</m:apply>
+		<m:ci type="matrix">D</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, where
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="matrix">D</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci type="matrix">Λ</m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:ci type="matrix">U</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, where <m:math><m:ci type="matrix">U</m:ci></m:math> is an orthogonal matrix
+	  whose columns are eigenvectors of 
+	  <m:math>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">C</m:ci>
+	    </m:apply>
+	  </m:math>, and 
+	  <m:math>
+	    <m:ci type="matrix">Λ</m:ci>
+	  </m:math> is a diagonal matrix with positive diagonal
+	  entries. Thus, we must minimize
+	  <m:math display="block">
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">D</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">D</m:ci>
+		    <m:ci type="matrix">H</m:ci>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">D</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">D</m:ci>
+		  <m:ci type="matrix">H</m:ci>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  But this is a linear least squares problem, so the solution
+	  is given by the pseudoinverse of 
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">D</m:ci>
+	      <m:ci type="matrix">H</m:ci>
+	    </m:apply>
+	  </m:math>:
+	  <equation id="eqn1">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci type="matrix">D</m:ci>
+			  <m:ci type="matrix">H</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:ci type="matrix">D</m:ci>
+			<m:ci type="matrix">H</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci type="matrix">D</m:ci>
+		      <m:ci type="matrix">H</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">D</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="matrix">H</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">C</m:ci>
+		      </m:apply>
+		      <m:ci type="matrix">H</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="matrix">H</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">C</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	</para>
+
+	<exercise id="linearprob">
+	  <problem id="idp927024">
+	    <para id="linprob1">Consider
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:mrow>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>X</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:mo>,</m:mo>
+		    <m:mi>…</m:mi>
+		    <m:mo>,</m:mo>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>N</m:mi>
+		      </m:msub></m:ci>
+		  </m:mrow>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:ci type="vector">s</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, where <m:math><m:ci type="vector">s</m:ci></m:math> is a 
+	      <m:math>
+		<m:apply>
+		  <m:cartesianproduct/>
+		  <m:ci>p</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:math> unknown signal, and 
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:math> is known. Express the data in the linear model
+	      and find the MLE
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:math>
+	      for the signal.
+	    </para>
+	  </problem>
+	</exercise>
+      </section>
+    </section>
+    <section id="sect7">
+      <title>Invariance of MLE</title>
+      <para id="para17">
+	Suppose we wish to estimate the function 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">w</m:ci>
+	    <m:apply>
+	      <m:ci type="fn">W</m:ci>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and not <m:math><m:ci type="vector">θ</m:ci></m:math> itself.  To use the
+	maximum likelihood approach for estimating <m:math><m:ci type="vector">w</m:ci></m:math>, we need an expression for
+	the likelihood 
+
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">w</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">w</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. 
+
+	In other words, we would need to be able to parameterize the
+	distribution of the data by <m:math><m:ci type="vector">w</m:ci></m:math>. If
+	<m:math><m:ci>W</m:ci></m:math> is not a one-to-one function,
+	however, this may not be possible. Therefore, we define the
+	<emphasis>induced</emphasis> likelihood 
+ 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">x</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">w</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:max/>
+		<m:bvar>
+		  <m:ci type="vector">θ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">W</m:ci>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">w</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">ℓ</m:csymbol>
+		<m:condition>
+		  <m:ci type="vector">x</m:ci>
+		</m:condition>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The MLE 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="vector">w</m:ci>
+	  </m:apply>
+	</m:math> is defined to be the value of <m:math><m:ci type="vector">w</m:ci></m:math> that maximizes the induced
+	likelihood. With this definition, the following invariance
+	principle is immediate.
+	
+      </para>
+      <rule id="rule4" type="theorem">
+	<statement id="idm5968784">
+	  <para id="para18">
+	    Let 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> denote the MLE of <m:math><m:ci type="vector">θ</m:ci></m:math>.  Then 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="vector">w</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">W</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> is the MLE of 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">w</m:ci>
+		<m:apply>
+		  <m:ci type="fn">W</m:ci>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</statement>
+	<proof id="idp2281696">
+	  <para id="para19">
+	    The proof follows directly from the definitions
+	    of
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">θ</m:ci>
+	      </m:apply>
+	    </m:math> and
+	     <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="vector">w</m:ci>
+	      </m:apply>
+	    </m:math>. As an exercise, work
+	    through the logical steps of the proof on your own.
+	  </para>
+	</proof>
+	
+	<example id="ex5">
+	  <para id="para20">
+	    Let 
+	    <m:math display="inline">
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">x</m:ci>
+		<m:vector>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>…</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		</m:vector>
+	      </m:apply>
+	    </m:math> where 
+	    <m:math display="block">
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci>Poisson</m:ci>
+		  <m:ci>λ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> Given <m:math><m:ci type="vector">x</m:ci></m:math>, find the MLE of the probability that 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci>x</m:ci>
+		<m:apply>
+		  <m:ci>Poisson</m:ci>
+		  <m:ci>λ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> exceeds the mean
+	    <m:math><m:ci>λ</m:ci></m:math>.
+	  </para>
+	  <para id="para21">
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">W</m:ci>
+		  <m:ci>λ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:apply>
+		    <m:gt/>
+		    <m:ci>x</m:ci>
+		    <m:ci>λ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:floor/>
+		      <m:apply>
+			<m:plus/>
+			<m:ci>λ</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:infinity/>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>λ</m:ci>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:factorial/>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> where 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:floor/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:leq/>
+		  <m:mtext>largest integer</m:mtext>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  The MLE of <m:math><m:ci>w</m:ci></m:math>
+	    is 
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>w</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:floor/>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:infinity/>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:factorial/>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> where 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci>λ</m:ci>
+	      </m:apply>
+	    </m:math> is the MLE of
+	    <m:math><m:ci>λ</m:ci></m:math>:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>λ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>N</m:ci>
+		    </m:uplimit>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</example>
+      </rule>
+      
+      <para id="para130">
+	Be aware that the MLE of a <emphasis>transformed</emphasis>
+	parameter does not necessarily satisfy the asymptotic
+	properties discussed earlier.
+      </para>
+      
+      <exercise id="energy">
+	<problem id="idp1794608">
+	  <para id="en5">
+	    Consider observations 
+	    <m:math>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:math>,…,<m:math>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>N</m:mi>
+		</m:msub></m:ci>
+	    </m:math>, where 
+	    <m:math>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is a <m:math><m:ci>p</m:ci></m:math>-dimensional
+	    vector of the form
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where <m:math><m:ci type="vector">s</m:ci></m:math> is an
+	    unknown signal and 
+	    <m:math>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	    are independent realizations of white Gaussian noise: 
+
+	    <m:math display="block">
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		  <m:ci type="vector">0</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci><m:msub>
+			<m:ci type="matrix">I</m:ci>
+			<m:mrow>
+			  <m:mi>p</m:mi>
+			  <m:mo>×</m:mo>
+			  <m:mi>p</m:mi>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    
+	    Find the maximum likelihood estimate of the energy 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>E</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> of the unknown signal.
+	  </para>
+	</problem>
+      </exercise>
+      
+    </section>
+
+    <section id="sect9">
+      <title>Summary of MLE</title>
+      <para id="sum"> 
+	The likelihood principle states that information brought
+	by an observation <m:math><m:ci type="vector">x</m:ci></m:math> about <m:math><m:ci type="vector">θ</m:ci></m:math> is entirely
+	contained in the likelihood function
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:condition>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:condition>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math>. The maximum likelihood estimator is
+ 	<emphasis>one</emphasis> effective implementation of the
+	likelihood principle. In some cases, the MLE can be computed
+	exactly, using calculus and linear algebra, but at other times
+	iterative numerical algorithms are needed. The MLE has several
+	desireable properties:
+	
+	<list id="list5">	
+	  <item>It is consistent and asymptotically efficient (as
+	    <m:math>
+	      <m:apply>
+		<m:tendsto/>
+		<m:ci>N</m:ci>
+		<m:infinity/>
+	      </m:apply>
+	    </m:math> we are doing as well as MVUE).</item>
+	  
+	  <item>When an efficient estimator exists, it is the MLE. </item>
+	  <item>The MLE is invariant to reparameterization.</item>
+	</list>
+      </para>
+    </section>
+  </content>
+ 
+  <bib:file>
+    <bib:entry id="casella">
+      <bib:book>
+	<bib:author>Casella and Berger</bib:author>
+	<bib:title>Statistical Inference</bib:title>
+	<bib:publisher>Duxbury Press</bib:publisher>
+	<bib:year>1990</bib:year>
+	<bib:address>Belmont, CA</bib:address>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="kay">
+      <bib:book>
+	<bib:author>Steven Kay</bib:author>
+	<bib:title>Fundamentals of Statistical Signal Processing
+	  Volume I: Estimation Theory</bib:title>
+	<bib:publisher>Prentice Hall</bib:publisher>
+	<bib:year>1993</bib:year>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+
+</document>

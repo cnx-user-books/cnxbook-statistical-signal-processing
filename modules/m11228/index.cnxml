@@ -1,0 +1,2843 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Criteria in Hypothesis Testing</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f10c50fb-876a-439a-9c2b-659b9072e626</md:uuid>
+</metadata>
+
+  <content>
+    <para id="critera">
+      The criterion used in the previous section - minimize the
+      average cost of an incorrect decision - may seem to be a
+      contrived way of quantifying decisions.  Well, often it is.  For
+      example, the Bayesian decision rule depends explicitly on the
+      <foreign>a priori</foreign> probabilities; a rational method of
+      assigning values to these - either by experiment or through true
+      knowledge of the relative likelihood of each model - may be
+      unreasonable.  In this section, we develop alternative decision
+      rules that try to answer such objections.  One essential point
+      will emerge from these considerations: <emphasis>the fundamental
+      nature of the decision rule does not change with choice of
+      optimization criterion</emphasis>.  Even criteria remote from
+      error measures can result in the likelihood ratio test (see
+      <link document="m11271" target-id="problem3">this problem</link>).
+      Such results do not occur often in signal processing and
+      underline the likelihood ratio test's significance.
+    </para>
+    <section id="maximum">
+      <title>Maximum Probability of a Correct Decision</title>
+      <para id="models">
+	As only one model can describe any given set of data (the
+	models are mutually exclusive), the probability of being
+	correct 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>c</m:mi>
+	    </m:msub></m:ci> 
+	</m:math> for distinguishing two models is given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>c</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:mrow>
+		  <m:mtext>say  </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:mtext>  when  </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:mtext>  true</m:mtext>
+		</m:mrow>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:mrow>
+		  <m:mtext>say  </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:mtext>  when  </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:mtext>  true</m:mtext>
+		</m:mrow>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> We wish to determine the optimum decision region
+	placement Expressing the probability correct in terms of the
+	likelihood functions
+	<m:math>
+	  <m:apply>
+	    <!--pdf-->
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>, the <foreign>a priori</foreign> probabilities, and
+	the decision regions,
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>c</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℜ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <!--pdf-->
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℜ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <!--pdf-->
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>  We want to maximize 
+	<m:math> 
+	  <m:ci><m:msub> 
+	      <m:mi>P</m:mi>
+	      <m:mi>c</m:mi> 
+	    </m:msub></m:ci> 
+	</m:math> by selecting the decision regions
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math> and
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>.  The probability correct is maximized by
+	associating each value of
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math> with the largest term in the expression for 
+	<m:math>
+	  <m:ci><m:msub> 
+	      <m:mi>P</m:mi> 
+	      <m:mi>c</m:mi> 
+	    </m:msub></m:ci>
+	</m:math>.  Decision region
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, for example, is defined by the collection of values
+	of
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math> for which the first term is largest.  As all of the
+	quantities involved are non-negative, the decision rule
+	maximizing the probability of a correct decision is <note type="correct decision" id="idm6197648"><label>Correct decision</label>Given 
+	  <m:math>
+	    <m:ci type="vector">r</m:ci>
+	  </m:math>, choose
+	  <m:math>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> for which the product
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is largest.
+	</note>  Simple manipulations lead to the likelihood ratio test.
+	<m:math display="block"> 
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> Note that if the Bayes' costs were chosen so that
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>C</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>i</m:mi>
+		</m:mrow>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>C</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>j</m:mi>
+		</m:mrow>
+	      </m:msub>
+	    </m:ci>
+	    <m:ci>C</m:ci>
+	  </m:apply>
+	</m:math>, (
+	<m:math>
+	  <m:apply>
+	    <m:neq/>
+	    <m:ci>i</m:ci>
+	    <m:ci>j</m:ci>
+	  </m:apply>
+	</m:math>), we would have the same threshold as in the
+	previous section.  
+      </para>
+      <para id="evaluate">
+	To evaluate the quality of the decision rule, we usually
+	compute the <term>probability of error</term>
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>e</m:mi>
+	    </m:msub></m:ci> 
+	</m:math> rather than the probability of being correct.  This
+	quantity can be expressed in terms of the observations, the
+	likelihood ratio, and the sufficient statistic.
+	<equation id="proberror">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>e</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:ci><m:msub>
+			  <m:mi>ℜ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <!--pdf-->
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:ci><m:msub>
+			  <m:mi>ℜ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <!--pdf-->
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">Λ</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:apply>
+			<m:gt/>
+			<m:ci>Λ</m:ci>
+			<m:ci>η</m:ci>
+		      </m:apply>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <!--pdf-->
+		      <m:bvar>
+			<m:ci type="vector">Λ</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">Λ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">Λ</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:apply>
+			<m:lt/>
+			<m:ci>Λ</m:ci>
+			<m:ci>η</m:ci>
+		      </m:apply>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <!--pdf-->
+		      <m:bvar>
+			<m:ci type="vector">Λ</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">Λ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">ϒ</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:apply>
+			<m:gt/>
+			<m:ci>ϒ</m:ci>
+			<m:ci>γ</m:ci>
+		      </m:apply>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">ϒ</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">ϒ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci type="vector">ϒ</m:ci>
+		    </m:bvar>
+		    <m:domainofapplication>
+		      <m:apply>
+			<m:lt/>
+			<m:ci>ϒ</m:ci>
+			<m:ci>γ</m:ci>
+		      </m:apply>
+		    </m:domainofapplication>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">ϒ</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">ϒ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation> When the likelihood ratio is non-monotonic, the
+	first expression is most difficult to evaluate.  When
+	monotonic, the middle expression proves the most difficult.
+	Furthermore, these expressions point out that the likelihood
+	ratio and the sufficient statistic can be considered a
+	function of the observations
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math>; hence, they are random variables and have
+	probability densities for each model.  Another aspect of the
+	resulting probability of error is that <emphasis>no other
+	decision rule can yield a lower probability of
+	error</emphasis>.  This statement is obvious as we minimized
+	the probability of error in deriving the likelihood ratio
+	test.  The point is that these expressions represent a lower
+	bound on performance (as assessed by the probability of
+	error).  This probability will be non-zero if the conditional
+	densities overlap over some range of values of
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math>, such as occurred in the previous example.  In this
+	region of overlap, the observed values are ambiguous: either
+	model is consistent with the observations.  Our "optimum"
+	decision rule operates in such regions by selecting that model
+	which is most likely (has the highest probability) of
+	generating any particular value.
+      </para>
+    </section> 
+    <section id="neypear">
+      <title>Neyman-Pearson Criterion</title>
+      <para id="supernova">
+	Situations occur frequently where assigning or measuring the
+	<foreign>a priori</foreign> probabilities
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci> 
+	</m:math> is unreasonable.  For example, just what is the
+	<foreign>a priori</foreign> probability of a supernova
+	occurring in any particular region of the sky?  We clearly
+	need a model evaluation procedure which can function without
+	<foreign>a priori</foreign> probabilities.  This kind of test
+	results when the so-called Neyman-Pearson criterion is used to
+	derive the decision rule.  The ideas behind and decision rules
+	derived with the Neyman-Pearson criterion (<cite target-id="NeymanPearson"><cite-title>Neyman and Pearson</cite-title></cite>) will serve us
+	well in sequel; their result is important!
+      </para>
+      <para id="decisions">
+	Using nomenclature from radar, where model 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math> represents the presence of a target and 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math> its absence, the various types of correct and
+	incorrect decisions have the following names (<cite target-id="Woodward"><cite-title>Woodward, pp. 127-129</cite-title></cite>).<footnote id="idp3724416">In hypothesis testing, a false-alarm is known
+	as a <term>type I error</term> and a miss a <term>type II
+	error</term>.</footnote>
+	<list id="terms" list-type="labeled-item">
+	  <item><label>Detection</label>
+	    <!--Need to have terms in the name-->
+	    
+	    we say it's there when it is; 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">Pr</m:ci>
+		  <m:mrow>
+		    <m:mtext>say  </m:mtext>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>|</m:mo>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mtext>  true</m:mtext>
+		  </m:mrow>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </item>
+	  <item><label>False-alarm</label>
+	    <!--term in name-tag-->
+	    
+	    we say it's there when it's not;
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">Pr</m:ci>
+		    <m:mrow>
+		    <m:mtext>say  </m:mtext>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>|</m:mo>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		    <m:mtext>  true</m:mtext>
+		  </m:mrow>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </item>
+	  <item><label>Miss</label>
+	    <!--term in name-tag-->
+	    
+	    we say it's not there when it is;
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>M</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">Pr</m:ci>
+		    <m:mrow>
+		    <m:mtext>say  </m:mtext>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		    <m:mo>|</m:mo>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mtext>  true</m:mtext>
+		  </m:mrow>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </item>
+	</list>  The remaining probability 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:condition>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:mtext>  true</m:mtext>
+	      </m:mrow>
+	    </m:condition>
+	    <m:mrow>
+	      <m:mtext>say  </m:mtext>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>      
+	    </m:mrow>
+	  </m:apply>
+	</m:math> has historically been left nameless and equals 
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>.  We should also note that the detection and miss
+	probabilities are related by 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>M</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  As these are conditional probabilities, they do
+	not depend on the <foreign>a priori</foreign> probabilities
+	and the two probabilities 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math> characterize the errors when
+	<emphasis>any</emphasis> decision rule is used.
+      </para>
+      <para id="relations">
+	These two probabilities are related to each other in an
+	interesting way.  Expressing these quantities in terms of the
+	decision regions and the likelihood functions, we have
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mi>1</m:mi>
+		  </m:msub></m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mi>1</m:mi>
+		  </m:msub></m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> As the region 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> shrinks, <emphasis>both</emphasis> of these
+	probabilities tend toward zero; as 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> expands to engulf the entire range of observation
+	values, they both tend toward unity.  This rather direct
+	relationship between 
+	<m:math>
+	  <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	</m:math> does not mean that they equal each other;
+	in most cases, as 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math> expands, 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math> increases more rapidly than 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math> (we had better be right more often than we are
+	wrong!).  However, the "ultimate" situation where a rule is
+	always right and never wrong 
+	(<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>) cannot occur when the conditional distributions
+	overlap.  Thus, to increase the detection probability we must
+	also allow the false-alarm probability to increase.  This
+	behavior represents the fundamental tradeoff in hypothesis
+	testing and detection theory.
+      </para>
+      <para id="subtle">
+	One can attempt to impose a performance criterion that depends
+	only on these probabilities with the consequent decision rule
+	not depending on the <foreign>a priori</foreign>
+	probabilities.  The Neyman-Pearson criterion assumes that the
+	false-alarm probability is constrained to be less than or
+	equal to a specified value 
+	<m:math>
+	  <m:ci>α</m:ci>
+	</m:math> while we attempt to maximize the detection
+	probability
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math>.
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:leq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:max/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> A subtlety of the succeeding solution is that the
+	underlying probability distribution functions may not be
+	continuous, with the result that
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math> can never equal the constraining value
+	<m:math>
+	  <m:ci>α</m:ci> 
+	</m:math>.  Furthermore, an (unlikely) possibility is that the
+	optimum value for the false-alarm probability is somewhat less
+	than the criterion value.  Assume, therefore, that we rephrase
+	the optimization problem by requiring that the false-alarm
+	probability equal a value
+	<m:math>
+	  <m:apply>
+	    <m:diff/>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	</m:math> that is less than or equal to
+	<m:math>
+	  <m:ci>α</m:ci> 
+	</m:math>.
+      </para>
+      <para id="optimize">
+	This optimization problem can be solved using Lagrange
+	multipliers (see <link document="m11223">Constrained
+	Optimization</link>); we seek to find the decision rule that
+	maximizes
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>F</m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:diff/>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> where 
+	<m:math>
+	  <m:ci>λ</m:ci> 
+	</m:math> is the Lagrange multiplier.  This optimization
+	technique amounts to finding the decision rule that maximizes
+	<m:math>
+	  <m:ci>F</m:ci> 
+	</m:math>, then finding the value of the multiplier that
+	allows the criterion to be satisfied.  As is usual in the
+	derivation of optimum decision rules, we maximize these
+	quantities with respect to the decision regions.  Expressing
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math> in terms of them, we have
+	<equation id="eq4">
+	<m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>F</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℜ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <!--pdf-->
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:domainofapplication>
+			<m:ci><m:msub>
+			    <m:mi>ℜ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:domainofapplication>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<!--pdf-->
+			<m:bvar>
+			  <m:ci type="vector">r</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:diff/>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>λ</m:ci>
+		    <m:apply>
+		      <m:diff/>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci><m:msub>
+			<m:mi>ℜ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <!--pdf-->
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>λ</m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<!--pdf-->
+			<m:bvar>
+			  <m:ci type="vector">r</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation> To maximize this quantity with respect to
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, we need only to integrate over those regions of
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math> where the integrand is positive.  The region
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> thus corresponds to those values of 
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math> where 
+	<m:math>
+	  <m:apply>
+	    <m:gt/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <!--pdf-->
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and the resulting decision rule is 
+	<m:math display="block">
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mi>≷</m:mi>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>λ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> The ubiquitous likelihood ratio test again appears;
+	it <emphasis>is</emphasis> indeed the fundamental quantity in
+	hypothesis testing.  Using the logarithm of the likelihood
+	ratio or the sufficient statistic, this result can be
+	expressed as either
+	<m:math display="block">
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mi>≷</m:mi>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>λ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> or
+	<m:math display="block">
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:ci type="fn">ϒ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mi>≷</m:mi>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:ci>γ</m:ci>
+	  </m:apply>
+	</m:math>
+      </para>
+      <para id="thresholdval">
+	We have not as yet found a value for the threshold.  The
+	false-alarm probability can be expressed in terms of the
+	Neyman-Pearson threshold in two (useful) ways.
+	<equation id="twoways">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>Λ</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>λ</m:ci>
+		  </m:apply>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--pdf-->
+		  <m:bvar>
+		    <m:ci type="vector">Λ</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">Λ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>ϒ</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:ci>γ</m:ci>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--pdf-->
+		  <m:bvar>
+		    <m:ci type="vector">ϒ</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">ϒ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation> One of these implicit equations must be solved for
+	the threshold by setting
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math> equal to 
+	<m:math>
+	  <m:apply>
+	    <m:diff/>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	</m:math>.  The selection of which to use is usually based on
+	pragmatic considerations: the easiest to compute.  From the
+	previous discussion of the relationship between the detection
+	and false-alarm probabilities, we find that to maximize 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math> we must allow 
+	<m:math>
+	  <m:apply>
+	    <m:diff/>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	</m:math> to be as large as possible while remaining less than
+	<m:math>
+	  <m:ci>α</m:ci> 
+	</m:math>.  Thus, we want to find the
+	<emphasis>smallest</emphasis> value of
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>λ</m:ci>
+	  </m:apply>
+	</m:math> (note the minus sign) consistent with the
+	constraint.  Computation of the threshold is
+	problem-dependent, but a solution always exists.
+      </para>
+      <example id="gaussian">
+	<para id="random">
+	  An important application of the likelihood ratio test occurs
+	  when 
+	  <m:math>
+	    <m:ci type="vector">r</m:ci> 
+	  </m:math> is a Gaussian random vector for each model.
+	  Suppose the models correspond to Gaussian random vectors
+	  having different mean values but sharing the same identity
+	  covariance. 
+	  <list id="list0">
+	    <item>
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>:  
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:cn>0</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </item>
+	    <item>
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>:  
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:ci type="vector">m</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> 
+	    </item>
+	  </list>  Thus, 
+	  <m:math>
+	    <m:ci type="vector">r</m:ci>
+	  </m:math> is of dimension 
+	  <m:math>
+	    <m:ci>L</m:ci> 
+	  </m:math> and has statistically independent, equal variance
+	  components.  The vector of means
+	  <m:math display="inline">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">m</m:ci>
+	      <m:vector>
+		<m:ci><m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>…</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mrow>
+		      <m:mi>L</m:mi>
+		      <m:mo>−</m:mo>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:vector>
+	    </m:apply>
+	  </m:math> distinguishes the two models.  The likelihood
+	  functions associated this problem are
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<!--pdf-->
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn type="rational">1<m:sep/>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:ci><m:msub>
+				<m:mi>r</m:mi>
+				<m:mi>l</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>σ</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn type="rational">1<m:sep/>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci><m:msub>
+				  <m:mi>r</m:mi>
+				  <m:mi>l</m:mi>
+				</m:msub></m:ci>
+			      <m:ci><m:msub>
+				  <m:mi>m</m:mi>
+				  <m:mi>l</m:mi>
+				</m:msub></m:ci>
+			    </m:apply>
+			    <m:ci>σ</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>  The likelihood ratio 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Λ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:math> becomes
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:product/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn type="rational">1<m:sep/>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>r</m:mi>
+				  <m:mi>l</m:mi>
+				</m:msub>
+			      </m:ci>
+			      <m:ci><m:msub>
+				  <m:mi>m</m:mi>
+				  <m:mi>l</m:mi>
+				</m:msub></m:ci>
+			    </m:apply>
+			    <m:ci>σ</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:product/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn type="rational">1<m:sep/>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:ci><m:msub>
+				<m:mi>r</m:mi>
+				<m:mi>l</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>σ</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> This expression for the likelihood ratio is
+	  complicated.  In the Gaussian case (and many others), we use
+	  the logarithm the reduce the complexity of the likelihood
+	  ratio and form a sufficient statistic.
+	  <equation id="eq3">
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:ci type="fn">Λ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn type="rational">-1<m:sep/>2</m:cn>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci><m:msub>
+				<m:mi>r</m:mi>
+				<m:mi>l</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci><m:msub>
+				<m:mi>m</m:mi>
+				<m:mi>l</m:mi>
+			      </m:msub></m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn type="rational">1<m:sep/>2</m:cn>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>     
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+			<m:times/>
+			<m:ci><m:msub>
+			    <m:mi>m</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>	      
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msub>
+			    <m:mi>m</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> 
+	  </equation>  The likelihood ratio test then has the much
+	  simpler, but equivalent form
+	  <m:math display="block">
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>m</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:munderover>
+		    <m:mi>≷</m:mi>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:munderover>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:ln/>
+		      <m:ci>η</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:cn type="rational">1<m:sep/>2</m:cn>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+			<m:mi>m</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> To focus on the model evaluation aspects of this
+	  problem, let's assume means be equal to a positive constant:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>m</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>m</m:ci>
+	    </m:apply>
+	  </m:math>
+	  (<m:math>
+	    <m:apply>
+	      <m:gt/>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>).<footnote id="idm5600144">Why did the authors assume
+	  that the mean was positive?  What would happen if it were
+	  negative?</footnote>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		  <m:munderover>
+		    <m:mi>≷</m:mi>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:munderover>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ln/>
+		      <m:ci>η</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Note that all that need be known about the observations
+	  <m:math>
+	    <m:set>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:set>
+	  </m:math> is their sum.  This quantity is the sufficient
+	  statistic for the Gaussian problem:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">ϒ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>γ</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>η</m:ci>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+	<para id="errorthresh">
+	  When trying to compute the probability of error or the
+	  threshold in the Neyman-Pearson criterion, we must find the
+	  conditional probability density of one of the decision
+	  statistics: the likelihood ratio, the log-likelihood, or the
+	  sufficient statistic.  The log-likelihood and the sufficient
+	  statistic are quite similar in this problem, but clearly we
+	  should use the latter.  One practical property of the
+	  sufficient statistic is that it usually simplifies
+	  computations.  For this Gaussian example, the sufficient
+	  statistic is a Gaussian random variable under each model.
+	  <list id="list1">
+	    <item>
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>:  
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:apply>
+		    <m:ci type="vector">ϒ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:cn>0</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </item>
+	    <item>
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>:  
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:apply>
+		    <m:ci type="vector">ϒ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> 
+	    </item>
+	  </list>  To find the probability of error from <link target-id="proberror"/>, we must evaluate the area under a
+	  Gaussian probability density function.  These integrals are
+	  succinctly expressed in terms of
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	  </m:math>, which denotes the probability that a
+	  unit-variance, zero-mean Gaussian random variable exceeds
+	  <m:math>
+	    <m:ci>x</m:ci> 
+	  </m:math> (see <link document="m11245">Probability and
+	  Stochastic Processes</link>).  As
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, the probability of error can be written as
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>e</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:ci type="fn">Q</m:ci>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>L</m:ci>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:ci>γ</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:root/>
+			  <m:ci>L</m:ci>
+			</m:apply>
+			<m:ci>σ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">Q</m:ci>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>γ</m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:root/>
+			  <m:ci>L</m:ci>
+			</m:apply>
+			<m:ci>σ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  An interesting special case occurs when 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:cn type="rational">1<m:sep/>2</m:cn>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:math>.  In this case, 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>γ</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and the probability of error becomes
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>e</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>  As 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> is a monotonically decreasing function, the
+	  probability of error decreases with increasing values of the
+	  ratio
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:root/>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:ci>σ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  However, as shown in <link document="m11250" target-id="fig1">this figure</link>,
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> decreases in a nonlinear fashion.  Thus,
+	  increasing 
+	  <m:math>
+	    <m:ci>m</m:ci> 
+	  </m:math> by a factor of two may decrease the probability of
+	  error by a larger <emphasis>or</emphasis> a smaller factor;
+	  the amount of change depends on the initial value of the
+	  ratio.
+	</para>
+	<para id="findthresh">
+	  To find the threshold for the Neyman-Pearson test from the
+	  expressions given on <link target-id="twoways"/>, we
+	  need the area under a Gaussian density.
+	  <equation id="density">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>γ</m:ci>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>L</m:ci>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:diff/>
+		  <m:ci>α</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  As 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> is a monotonic and continuous function, we can now set
+	  <m:math>
+	    <m:apply>
+	      <m:diff/>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	  </m:math> equal to the criterion value
+	  <m:math><m:ci>α</m:ci> </m:math> with the result
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>γ</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:root/>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:ci>σ</m:ci>
+		<m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="fn">Q</m:ci>
+		  </m:apply>
+		  <m:ci>α</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where 
+	  <m:math>
+	    <m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="fn">Q</m:ci>
+	      </m:apply>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> denotes the inverse function of 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math>.  The solution of this equation cannot
+	  be performed analytically as no closed form expression
+	  exists for 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> (much less its inverse function); the criterion
+	  value must be found from tables or numerical routines.
+	  Because Gaussian problems arise frequently, the <link target-id="interestingvalues"/> accompanying table provides
+	  numeric values for this quantity at the decade points.
+	  <table frame="all" id="interestingvalues" summary="">
+	    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+	      <thead valign="top">
+		<row>
+		  <entry>
+		    <m:math><m:ci>x</m:ci>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:apply>
+			  <m:inverse/>
+			  <m:ci type="fn">Q</m:ci>
+			</m:apply>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		</row>
+	      </thead>
+	      <tbody valign="top">
+		<row>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-1</m:cn>
+		      </m:apply>
+		    </m:math>			 
+		  </entry>
+		  <entry>
+		    1.281
+		  </entry>
+		</row>
+		<row>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-2</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    2.396
+		  </entry>
+		</row>
+		<row>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-3</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    3.090
+		  </entry>
+		</row>
+		<row>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-4</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    3.719
+		  </entry>
+		</row>
+		<row>  
+		  <entry>
+		    <m:math>	      
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-5</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    4.265
+		  </entry>
+		</row>
+		<row>
+		  <entry>
+		    <m:math>
+		      <m:apply>
+			<m:power/>
+			<m:cn>10</m:cn>
+			<m:cn>-6</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </entry>
+		  <entry>
+		    4.754
+		  </entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	    <caption>
+	      The table displays interesting values for
+	      <m:math>
+		<m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="fn">Q</m:ci>
+		  </m:apply>
+		  <m:ci>·</m:ci>
+		</m:apply>
+	      </m:math> that can be used to determine thresholds in
+	      the Neyman-Pearson variant of the likelihood ratio test.
+	      Note how little the inverse function changes for decade
+	      changes in its argument; 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:ci>·</m:ci>
+		</m:apply>
+	      </m:math> is indeed <emphasis>very</emphasis> nonlinear.
+	    </caption>
+	  </table>
+	  The detection probability is given by
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="fn">Q</m:ci>
+		    </m:apply>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:root/>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+      </example>
+    </section>
+  </content>
+
+  <bib:file>
+    <bib:entry id="NeymanPearson">
+      <bib:article>
+	<bib:author>J. Neyman and E.S. Pearson</bib:author>
+	<bib:title>On the problem of the most efficient tests of statistical hypotheses</bib:title>
+	<bib:journal>Phil. Trans. Roy. Soc. Ser. A</bib:journal>
+	<bib:year>1933</bib:year>
+	<bib:volume>231</bib:volume>
+	<bib:pages>289-337</bib:pages>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="Woodward">
+      <bib:book>
+	<bib:author>P.M. Woodward</bib:author>
+	<bib:title>Probability and Information Theory, with Applications to Radar</bib:title>
+	<bib:publisher>Pergamon Press</bib:publisher>
+	<bib:year>1964</bib:year>
+	<bib:address>Oxford</bib:address>
+	<bib:edition>second edition</bib:edition>
+      </bib:book>
+    </bib:entry>
+
+  </bib:file>
+</document>

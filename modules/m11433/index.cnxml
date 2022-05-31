@@ -1,0 +1,1161 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Introduction to Adaptive Filtering</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a3942714-21cf-418b-88e3-5477b73dbd95</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">The Kalman filter is just one of many
+    <term>adaptive</term> filtering (or estimation)
+    algorithms. Despite its elegant derivation and often excellent
+    performance, the Kalman filter has two drawbacks:
+      <list id="list1" list-type="enumerated">
+	
+	<item>The derivation and hence performance of the Kalman
+	filter depends on the accuracy of the <foreign>a
+	priori</foreign> assumptions. The performance can be less than
+	impressive if the assumptions are erroneous.</item>
+
+	<item>The Kalman filter is fairly computationally demanding,
+	requiring
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">O</m:ci>
+	      <m:apply>
+		<m:power/>
+		<m:ci>P</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> operations per sample. This can limit the utility
+	  of Kalman filters in high rate real time
+	  applications.</item>
+      </list>
+      
+      As a popular alternative to the Kalman filter, we will
+      investigate the so-called <term>least-mean-square</term> (LMS)
+      adaptive filtering algorithm.
+    </para>
+
+    <para id="para2">The principle advantages of LMS are
+      <list id="list2" list-type="enumerated">
+	<item>No prior assumptions are made regarding the signal to be
+	estimated.</item>
+
+	<item>Computationally, LMS is very efficient, requiring
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">O</m:ci>
+	      <m:ci>P</m:ci>
+	    </m:apply>
+	  </m:math> per sample.
+	</item>
+      </list>
+
+      The price we pay with LMS instead of a Kalman filter is that the
+      rate of convergence and adaptation to sudden changes is slower for
+      LMS than for the Kalman filter (with correct prior assumptions).
+    </para>
+
+    <section id="AFA">
+      <title>Adaptive Filtering Applications</title>
+      
+      <section id="CSI">
+	<title>Channel/System Identification</title>
+	
+	<figure id="fig1">
+	  <title>Channel/System Identification</title>
+	  <media id="idp687216" alt=""><image src="../../media/csid.png" mime-type="image/png"/></media>
+	</figure>
+      </section>
+
+      <section id="NC">
+	<title>Noise Cancellation</title>
+	
+	<para id="paranoise">Suppression of maternal ECG component in
+	fetal ECG (<link target-id="fig2"/>).
+
+	  <!-- Missing figure -->
+	  <figure id="fig2">
+	    <media id="idm1018416" alt=""><image src=".png" mime-type="image/png"/></media> 
+	    <caption>Cancelling maternal heartbeat in fetal
+	    electrocardiography (ECG): position of leads.</caption>
+	  </figure>
+	    
+	  <figure id="fig3">
+	    <media id="idp458048" alt=""><image src="../../media/ecg.png" mime-type="image/png"/></media>
+	  </figure>
+	  
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:math> is an estimate of the maternal ECG signal present
+	  in the abdominal signal (<link target-id="fig4"/>).
+	
+	  <!-- Missing figure -->
+	  <figure id="fig4">
+	    <media id="idm10502960" alt=""><image src=".png" mime-type="image/png"/></media> 
+	    <caption>Results of fetal ECG experiment (bandwidth,
+	    3-35Hz; sampling rate, 256Hz): (a)reference input (chest
+	    lead); (b)primary input (abdominal lead);
+	    (c)noise-canceller output.</caption>
+	  </figure>
+	</para>
+      </section>
+
+      <section id="CE">
+	<title>Channel Equalization</title>
+	
+	<figure id="fig5">
+	  <title>Channel Equalization</title>
+	  <media id="idm10127504" alt=""><image src="../../media/ce.png" mime-type="image/png"/></media>
+	</figure>
+      </section>
+
+      <section id="AC">
+	<title>Adaptive Controller</title>
+	
+	<figure id="fig6">
+	  <title>Adaptive Controller</title>
+	  <media id="idm9065680" alt=""><image src="../../media/ac.png" mime-type="image/png"/></media>
+	  <caption>Here, the reference signal is the desired output. 
+	    The adaptive controller adjusts the controller
+	    gains (filter weights) to keep them appropriate to the
+	    system as it changes over time.</caption>
+	</figure>
+      </section>
+    </section>
+
+    <section id="IM">
+      <title>Iterative Minimization</title>
+
+      <para id="im1">Most adaptive filtering alogrithms (LMS
+	included) are modifications of standard iterative procedures
+	for solving minimization problems in a <term>real-time</term>
+	or <term>on-line</term> fashion. Therefore, before deriving
+	the LMS algorithm we will look at iterative methods of
+	minimizing error criteria such as MSE.
+      </para>
+
+      <para id="im2">Conider the following set-up:
+	<m:math display="block">
+	  <m:mrow>
+	    <m:msub>
+	      <m:mi>x</m:mi>
+	      <m:mi>k</m:mi>
+	    </m:msub>
+	    <m:mo>:</m:mo>
+	    <m:mtext>observation</m:mtext>
+	  </m:mrow>
+	</m:math>
+	<m:math display="block">
+	  <m:mrow>
+	    <m:msub>
+	      <m:mi>y</m:mi>
+	      <m:mi>k</m:mi>
+	    </m:msub>
+	    <m:mo>:</m:mo>
+	    <m:mtext>signal to be estimated</m:mtext>
+	  </m:mrow>
+	</m:math>
+      </para>
+	
+      <section id="LE">
+	<title>Linear estimator</title>
+	<para id="le1">
+	  <equation id="eqn1">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:apply>
+			<m:minus/>
+			<m:mi>k</m:mi>
+			<m:mn>1</m:mn>
+		      </m:apply>
+		    </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>p</m:mi>
+		    </m:msub></m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:minus/>
+			  <m:mi>k</m:mi>
+			  <m:mi>p</m:mi>
+			</m:apply>
+			<m:mn>1</m:mn>
+		      </m:apply>
+		    </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+
+	  <figure id="fig7">
+	    <media id="idm10006640" alt=""><image src="../../media/fir.png" mime-type="image/png"/></media>
+	  </figure>
+
+	  Impulse response of the filter:
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:mi>…</m:mi>
+	      <m:mo>,</m:mo>
+	      <m:mn>0</m:mn>
+	      <m:mo>,</m:mo>
+	      <m:mn>0</m:mn>
+	      <m:mo>,</m:mo>
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:mo>,</m:mo>
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	      <m:mo>,</m:mo>
+	      <m:mi>…</m:mi>
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mi>p</m:mi>
+	      </m:msub>
+	      <m:mo>,</m:mo>
+	      <m:mn>0</m:mn>
+	      <m:mo>,</m:mo>
+	      <m:mn>0</m:mn>
+	      <m:mo>,</m:mo>
+	      <m:mi>…</m:mi>
+	    </m:mrow>
+	  </m:math>
+	</para>
+      </section>
+
+      <section id="VN">
+	<title>Vector notation</title>
+	<para id="vn1">
+	  <equation id="eqn2">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci type="vector">w</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Where
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:vector>
+		<m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub></m:ci>
+		<m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:apply>
+		    <m:minus/>
+		    <m:mi>k</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:apply>
+		</m:msub></m:ci>
+		<m:ci>⋮</m:ci>
+		<m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:mi>k</m:mi>
+		      <m:mi>p</m:mi>
+		    </m:apply>
+		    <m:mn>1</m:mn>
+		  </m:apply>
+		</m:msub></m:ci>
+	      </m:vector>
+	    </m:apply>
+	  </m:math> and
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">w</m:ci>
+	      <m:vector>
+		<m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+		<m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+		<m:ci>⋮</m:ci>
+		<m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mi>p</m:mi>
+		</m:msub></m:ci>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>
+	</para>
+      </section>
+
+      <section id="ES">
+	<title>Error signal</title>
+	<equation id="eqn3">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		<m:mi>e</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		  <m:mi>y</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		  <m:mi>y</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci type="vector">w</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+      </section>
+
+      <section id="Assump">
+	<title>Assumptions</title>
+	
+	<para id="assump1">
+	  <m:math>
+	    <m:mrow>
+	      <m:mo>(</m:mo>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:mo>,</m:mo>
+	      <m:ci><m:msub>
+		<m:mi>y</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub></m:ci>
+	      <m:mo>)</m:mo>
+	    </m:mrow>
+	  </m:math> are jointly stationary with zero-mean.
+	</para>
+      </section>
+
+      <section id="MSE">
+	<title>MSE</title>
+	<para id="mse1">
+	  <equation id="eqn4">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+		      <m:mi>e</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:msub>
+			<m:mi>y</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub></m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:transpose/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+			<m:ci type="vector">w</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msub>
+			  <m:mi>y</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">w</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci><m:msub>
+			    <m:mi>y</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector">w</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:times/>
+			<m:ci type="vector">
+			  <m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:apply>
+			  <m:transpose/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci type="vector">w</m:ci>
+		  </m:apply>
+		</m:apply>
+
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>yy</m:mi>
+		    </m:msub></m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">w</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>xy</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector">w</m:ci>
+		    </m:apply>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>R</m:mi>
+			<m:mi>xx</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci type="vector">w</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Where
+	  <m:math>
+	    <m:ci><m:msub>
+	      <m:mi>R</m:mi>
+	      <m:mi>yy</m:mi>
+	    </m:msub></m:ci>
+	  </m:math> is the variance of
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		<m:mi>y</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>, 
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>R</m:mi>
+		<m:mi>xx</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> is the covariance matrix of
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>, and
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>R</m:mi>
+		  <m:mi>xy</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is the cross-covariance between 
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> and
+	  <m:math>
+	    <m:ci><m:msub>
+	      <m:mi>y</m:mi>
+	      <m:mi>k</m:mi>
+	    </m:msub></m:ci>
+	  </m:math>
+
+	  <note type="Note" id="idp254656"><label>Note</label>The MSE is quadratic in <m:math> <m:ci type="vector">W</m:ci> </m:math> which implies the MSE
+	    surface is "bowl" shaped with a unique minimum point (<link target-id="fig8"/>).
+	  </note>
+
+	  <figure id="fig8">
+	    <media id="idp765696" alt=""><image src="../../media/mse.png" mime-type="image/png"/></media>
+	  </figure>
+	</para>
+      </section>
+
+      <section id="OF">
+	<title>Optimum Filter</title>
+
+	<para id="of1">Minimize MSE:
+	  <equation id="eqn5">
+	    <m:math>
+	      <m:apply>
+		<m:implies/>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci type="vector">w</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msub>
+			  <m:mi>e</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>-2</m:cn>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>xy</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>xx</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci type="vector">w</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+		
+		<m:apply>
+		  <m:eq/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>opt</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>xx</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>R</m:mi>
+			<m:mi>xy</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Notice that we can re-write <link target-id="eqn5"/> as
+	  <equation id="eqn6">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:ci type="vector">w</m:ci>
+		  </m:apply>
+		</m:apply>
+
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  or
+	  <equation id="eqn7">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:msub>
+			<m:mi>y</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub></m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:transpose/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+			<m:ci type="vector">w</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="vector">
+		      <m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>e</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Which shows that the error signal is orthogonal to the input
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> (by the <term>orthogonality principle</term> of
+	  minimum MSE estimator).
+	</para>
+      </section>
+
+      <section id="SD">
+	<title>Steepest Descent</title>
+	
+	<para id="sd1">Although we can easily determine
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mi>opt</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> by solving the system of equations
+	  <equation id="eqn8">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>xx</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci type="vector">w</m:ci>
+		</m:apply>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>xy</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Let's look at an iterative procedure for solving this
+	  problem. This will set the stage for our adaptive filtering
+	  algorithm.
+	</para>
+
+	<para id="sd2">We want to minimize the MSE. The idea is
+	simple. Starting at some initial weight vector
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>, iteratively adjust the values to decrease the
+	  MSE (<link target-id="fig9"/>).
+
+	  <figure id="fig9">
+	    <title>In One-Dimension</title>
+	    <media id="idm8256624" alt=""><image src="../../media/iterative.png" mime-type="image/png"/></media>
+	  </figure>
+
+	  We want to <emphasis>move</emphasis>
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> towards the optimal vector
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mi>opt</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>. In order to move in the correct direction, we
+	  must move <term>downhill</term> or in the direction opposite
+	  to the gradient of the MSE surface at the point
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>. Thus, a natural and simple adjustment takes the form
+	  <equation id="eqn9">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>μ</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		      <m:bvar>
+			<m:ci type="vector">w</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:ci type="vector">
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:lowlimit>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci type="vector">w</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+			      <m:mi>e</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Where <m:math><m:ci>μ</m:ci></m:math> is the step size and
+	  tells us how far to move in the negative gradient direction
+	  (<link target-id="fig10"/>).
+
+	  <figure id="fig10">
+	    <media id="idm9375696" alt=""><image src="../../media/adjust.png" mime-type="image/png"/></media>
+	  </figure>
+	  
+	  Generalizing this idea to an iterative strategy, we get
+	  <equation id="eqn10">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:apply>
+			<m:minus/>
+			<m:mi>k</m:mi>
+			<m:mn>1</m:mn>
+		      </m:apply>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>μ</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		      <m:bvar>
+			<m:ci type="vector">w</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:ci type="vector">
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:apply>
+			      <m:minus/>
+			      <m:mi>k</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:apply>
+			  </m:msub>
+			</m:ci>
+		      </m:lowlimit>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci type="vector">w</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+			      <m:mi>e</m:mi>
+			      <m:mi>k</m:mi>
+			    </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  and we can repeatedly update 
+	  <m:math>
+	    <m:ci type="vector">w</m:ci>
+	  </m:math>:
+	  <m:math>
+	    <m:mrow>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:mo>,</m:mo>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:mo>,</m:mo>
+	      <m:mi>…</m:mi>
+	      <m:mo>,</m:mo>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:mrow>
+	  </m:math>. Hopefully each subsequent
+	  <m:math>
+	    <m:ci type="vector">
+		<m:msub>
+		<m:mi>w</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math> is closer to
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>w</m:mi>
+		<m:mi>opt</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>. Does the procedure converge? Can we adapt it to
+	  an on-line, real-time, dynamic situation in which the
+	  signals may not be stationary?
+	</para>
+      </section>
+    </section>
+ 
+  </content>
+  
+</document>

@@ -1,0 +1,4510 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Cramer-Rao Lower Bound</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>838df757-8707-463d-916d-0340029e8632</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The <term>Cramer-Rao Lower Bound</term> (CRLB) sets a lower
+      bound on the variance of <emphasis>any</emphasis> unbiased
+      estimator.  This can be extremely useful in several ways:
+      <list id="list1" list-type="enumerated">
+	<item>If we find an estimator that achieves the CRLB, then we
+	know that we have found an MVUB estimator!</item>
+
+	<item>The CRLB can provide a benchmark against which we can
+	compare the performance of any unbiased estimator.  (We know
+	we're doing very well if our estimator is "close" to the
+	CRLB.)</item>
+
+	<item>The CRLB enables us to rule-out impossible estimators.
+	That is, we know that it is physically impossible to find an
+	unbiased estimator that beats the CRLB.  This is useful in
+	feasibility studies.</item>
+
+	<item>The theory behind the CRLB can tell us if an estimator
+	exists that achieves the bound.</item>
+      </list>      
+    </para>
+    <section id="sect1">
+      <title>Estimator Accuracy</title>
+      <para id="para2">
+	Consider the likelihood function 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:condition>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math>, where <m:math><m:ci>θ</m:ci></m:math> is a
+	scalar unknown (parameter).  We can plot the likelihood as a
+	function of the unknown, as shown in <link target-id="fig1"/>.
+	<figure id="fig1">
+	  <media id="idm6117248" alt=""><image src="" mime-type="image/png"/></media>
+	</figure>
+	The more "peaky" or "spiky" the likelihood function, the
+	easier it is to determind the unknown parameter.
+      </para>
+      <example id="ex1">
+	<para id="para3">
+	  Suppose we observe
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>x</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>A</m:ci>
+		<m:ci>w</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> where 
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci>w</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:ci>σ</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and <m:math><m:ci>A</m:ci></m:math> is an unknown
+	  parameter.  The "smaller" the noise <m:math><m:ci>w</m:ci>
+	  </m:math> is, the easier it will be to estimate
+	  <m:math><m:ci>A</m:ci></m:math> from the observation
+	  <m:math><m:ci>x</m:ci></m:math>.
+	</para>
+	<para id="para4">
+	  Suppose 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>A</m:ci>
+	      <m:cn>3</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>σ</m:ci>
+	      <m:cn type="rational">1<m:sep/>3</m:cn>
+	    </m:apply>
+	  </m:math>.
+	  <figure id="fig2">
+	    <media id="idm7283696" alt=""><image src="" mime-type="image/png"/></media>
+	  </figure>
+	  Given this density function, we can easily rule-out
+	  estimates of <m:math><m:ci>A</m:ci></m:math> greater than 4
+	  or less than 2, since it is very unlikely that such
+	  <m:math><m:ci>A</m:ci></m:math> could give rise to out
+	  observation.  
+	</para>
+	<para id="para5">
+	  On the other hand, suppose 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>.
+	  <figure id="fig3">
+	    <media id="idm230880" alt=""><image src="" mime-type="image/png"/></media>
+	  </figure>
+	  In this case, it is very difficult to estimate
+	  <m:math><m:ci>A</m:ci></m:math>. Since the noise power is
+	  larger, it is very difficult to distinguish
+	  <m:math><m:ci>A</m:ci></m:math> from the noise.
+	</para>
+	<para id="para6">
+	  The key thing to notice is that the estimation accuracy of
+	  <m:math><m:ci>A</m:ci></m:math> depends on
+	  <m:math><m:ci>σ</m:ci></m:math>, which in effect
+	  determines the peakiness of the likelihood.  The more peaky,
+	  the better localized the data is about the true parameter.
+	</para>
+	<para id="para7">
+	  To quantify the notion, note that the peakiness is
+	  effectively measured by the negative of the second
+	  derivative of the log-likelihood at its peak, as seen in
+	  <link target-id="fig4"/>.
+	  <figure id="fig4">
+	    <media id="idm283968" alt=""><image src="" mime-type="image/png"/></media>
+	  </figure>
+	</para>
+      </example>
+      <example id="ex2">
+	<para id="para8">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>x</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>A</m:ci>
+		<m:ci>w</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <equation id="eq1">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>A</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:root/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>x</m:ci>
+			<m:ci>A</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>A</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>A</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>x</m:ci>
+		  <m:ci>A</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <equation id="eq2">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>A</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>A</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  The curvature increases as 
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math> decreases (curvature=peakiness).  
+	</para>
+	<para id="para9">
+	  In general, the curavture will depend on the observation data; 
+	  <m:math>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>θ</m:ci>
+		  <m:degree>
+		    <m:cn>2</m:cn>
+		  </m:degree>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>A</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is a function of <m:math><m:ci>x</m:ci></m:math>.
+	  Therefore, an average measure of curvature is more appropriate.
+	  <equation id="eq3">
+	    <m:math>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  This average-out randomness due to the data and is a
+	  function of <m:math><m:ci>θ</m:ci></m:math> alone.
+	</para>
+      </example>
+      <para id="para10">
+	We are now ready to state the CRLB theorem.
+	<rule id="rule1" type="theorem">
+	  <title>Cramer-Rao Lower Bound Theorem</title>
+	  <statement id="idp2174640">
+	    <para id="para10a">
+	      Assume that the pdf 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math> satisfies the "regularity" condition
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>θ</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math> where the expectation is take with respect to 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math>.  Then, the variance of any unbiased estimator 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:math> must satisfy
+	      <equation id="eq4">
+		<m:math>
+		  <m:apply>
+		    <m:geq/>
+		    <m:apply>
+		      <m:variance/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			  <m:apply>
+			    <m:partialdiff/>
+			    <m:bvar>
+			      <m:ci>θ</m:ci>
+			      <m:degree>
+				<m:cn>2</m:cn>
+			      </m:degree>
+			    </m:bvar>
+			    <m:apply>
+			      <m:log/>
+			      <m:apply>
+				<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+				<m:condition>
+				  <m:ci>θ</m:ci>
+				</m:condition>
+				<m:ci>x</m:ci>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation> where the derivative is evaluated at the
+	      true value of <m:math><m:ci>θ</m:ci></m:math>
+	      and the expectation is with respect to 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math>.  Moreover, an unbiased estimator may be
+	      found that attains the bound for all 
+	      <m:math><m:ci>θ</m:ci></m:math> if and only if 
+	      <equation id="eq5">
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">I</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:ci type="fn">g</m:ci>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation> for some functions <m:math>
+		<m:ci type="fn">g</m:ci></m:math> and <m:math>
+		<m:ci type="fn">I</m:ci></m:math>.
+	    </para>
+	    <para id="para11">
+	      The corresponding estimator is MVUB and is given by 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, and the minimum variance is 
+	      <m:math>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>.
+	    </para>
+	  </statement>
+	  <example id="ex3">
+	    <para id="para12">
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>x</m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>A</m:ci>
+		    <m:ci>w</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> where
+	      <m:math display="block">
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci>w</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:cn>0</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>θ</m:ci>
+		  <m:ci>A</m:ci>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>A</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:ci type="fn">p</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>x</m:ci>
+			  <m:ci>A</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>CRLB</m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			    <m:degree>
+			      <m:cn>2</m:cn>
+			    </m:degree>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:ci type="fn">p</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      Therefore, any unbiased estimator 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>A</m:ci>
+		</m:apply>
+	      </m:math> has 
+	      <m:math>
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>A</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>.  But we know that 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>A</m:ci>
+		  </m:apply>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math> has 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>A</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>.  Therefore, 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>A</m:ci>
+		  </m:apply>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math> is the MVUB estimator.
+	      <note type="note" id="idp2361664">
+		<m:math display="block">
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci>θ</m:ci>
+		    <m:ci>A</m:ci>
+		  </m:apply>
+		</m:math>
+		<m:math display="block">
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">I</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+		<m:math display="block">
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">g</m:ci>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:math>
+	      </note>
+	    </para>
+	  </example>
+	  <proof id="idm6831776">
+	    <para id="para13">
+	      First consider the reguarity condition:
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      <note type="note" id="idm388256">
+		<m:math display="block">
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>    
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </note>
+	      Now assuming that we can interchange order of differentiation and 
+	      integration
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      So the regularity condition is satisfied whenever this
+	      interchange is possible<footnote id="idp3199792">This is
+		simply the <term>Fundamental Theorem of
+		  Calculus</term> applied to 
+		<m:math>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:math>.  So long as 
+		<m:math>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:math> is absolutely continuous with respect to
+		the <term>Lebesgue measure</term>, this is
+		possible.</footnote>; <foreign>i.e.</foreign>, when
+	      derivative is well-defined, fails for uniform
+	      density.
+	    </para>
+	    <para id="para14">
+	      Now lets derive the CRLB for a scalar parameter 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>α</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, where the pdf is 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:math>.  Consider any unbiased estimator of
+	      <m:math><m:ci>α</m:ci> </m:math>: 
+	      <m:math display="block">
+		<m:apply>
+		  <m:in/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>α</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">g</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>  Note that this is equivalent to 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> where 
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>α</m:ci>
+		</m:apply>
+	      </m:math> is unbiased.  Now differentiate both side
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">g</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> or 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">g</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </para>
+	    <para id="para15">
+	      Now, exmploiting the regularity condition, 
+	      <equation id="eq6">
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>x</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			    <m:minus/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			      <m:ci>α</m:ci>
+			    </m:apply>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			<m:apply>
+			    <m:partialdiff/>
+			    <m:bvar>
+			      <m:ci>θ</m:ci>
+			    </m:bvar>
+			    <m:apply>
+			      <m:log/>
+			      <m:apply>
+				<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+				<m:condition>
+				  <m:ci>θ</m:ci>
+				</m:condition>
+				<m:ci>x</m:ci>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			<m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ci type="fn">g</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation>
+	      since
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>α</m:ci>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>α</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math> Now apply the <term>Cauchy-Schwarz
+	      inequality</term> to the <link target-id="eq6">integral above</link>:
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ci type="fn">g</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>x</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			  <m:ci>α</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:leq/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ci type="fn">g</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>x</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			      <m:ci>α</m:ci>
+			    </m:apply>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:partialdiff/>
+			    <m:bvar>
+			      <m:ci>θ</m:ci>
+			    </m:bvar>
+			    <m:apply>
+			      <m:log/>
+			      <m:apply>
+				<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+				<m:condition>
+				  <m:ci>θ</m:ci>
+				</m:condition>
+				<m:ci>x</m:ci>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math>
+		<m:apply>
+		  <m:variance/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> is 
+	      <m:math>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>x</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>α</m:ci>
+			</m:apply>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, so
+	      <equation id="eq7">
+		<m:math>
+		  <m:apply>
+		    <m:geq/>
+		    <m:apply>
+		      <m:variance/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:ci type="fn">g</m:ci>
+			    <m:ci>θ</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:partialdiff/>
+			    <m:bvar>
+			      <m:ci>θ</m:ci>
+			    </m:bvar>
+			    <m:apply>
+			      <m:log/>
+			      <m:apply>
+				<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+				<m:condition>
+				  <m:ci>θ</m:ci>
+				</m:condition>
+				<m:ci>x</m:ci>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation>  Now we note that 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			  <m:degree>
+			    <m:cn>2</m:cn>
+			  </m:degree>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>  Why?  Regularity condition.
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      Thus,
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>x</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math> or 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			    <m:degree>
+			      <m:cn>2</m:cn>
+			    </m:degree>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			  </m:bvar>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      Therefore, 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			  <m:degree>
+			    <m:cn>2</m:cn>
+			  </m:degree>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      Thus, <link target-id="eq7"/> becomes 
+	      <m:math display="block">
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:ci type="fn">g</m:ci>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			    <m:degree>
+			      <m:cn>2</m:cn>
+			    </m:degree>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <note type="note" id="idm6882656">If 
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">g</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:math>, then numerator is 1.
+	      </note>
+	    </para>
+	  </proof>
+	  <example id="ex4">
+	    <title>DC Level in White Guassian Noise</title>
+	    <para id="para17">
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:in/>
+		      <m:ci>n</m:ci>
+		      <m:set>
+			<m:cn>1</m:cn>
+			<m:ci>…</m:ci>
+			<m:ci>N</m:ci>
+		      </m:set>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>A</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      where 
+	      <m:math display="block">
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:cn>0</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>A</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>N</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>σ</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			</m:apply>
+			  <m:apply>
+			    <m:sum/>
+			    <m:bvar>
+			      <m:ci>n</m:ci>
+			    </m:bvar>
+			    <m:lowlimit>
+			      <m:cn>1</m:cn>
+			    </m:lowlimit>
+			    <m:uplimit>
+			      <m:ci>N</m:ci>
+			    </m:uplimit>
+			    <m:apply>
+			      <m:power/>
+			      <m:apply>
+				<m:minus/>
+				<m:ci><m:msub>
+				    <m:mi>x</m:mi>
+				    <m:mi>n</m:mi>
+				  </m:msub></m:ci>
+				<m:ci>A</m:ci>
+			      </m:apply>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>A</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>A</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>A</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+		       	      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:pi/>
+			      <m:apply>
+				<m:power/>
+				<m:ci>σ</m:ci>
+				<m:cn>2</m:cn>
+			      </m:apply>
+			    </m:apply>
+			    <m:apply>
+			      <m:divide/>
+			      <m:ci>N</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>1</m:ci>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>σ</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:sum/>
+			  <m:bvar>
+			    <m:ci>n</m:ci>
+			  </m:bvar>
+			  <m:lowlimit>
+			    <m:cn>1</m:cn>
+			  </m:lowlimit>
+			  <m:uplimit>
+			    <m:ci>N</m:ci>
+			  </m:uplimit>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci><m:msub>
+				  <m:mi>x</m:mi>
+				  <m:mi>n</m:mi>
+				</m:msub></m:ci>
+			      <m:ci>A</m:ci>
+			    </m:apply>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>n</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>1</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>N</m:ci>
+		      </m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub></m:ci>
+			<m:ci>A</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>A</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci>A</m:ci>
+			  </m:condition>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>A</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>A</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>N</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      Therefore, the variance of any unbiased estimator satisfies:
+	      <m:math display="block">
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>A</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>  The sample-mean estimator 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>A</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:ci>N</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>n</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>1</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>N</m:ci>
+		      </m:uplimit>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> attains this bound and therefore is MVUB.
+	    </para>
+	  </example>
+	</rule>
+	<rule id="rule2" type="Corollary"><label>Corollary</label>
+	  <statement id="idp6735984">
+	    <para id="para18">
+	      When the CRLB is attained 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:ci type="fn">I</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> where 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			  <m:degree>
+			    <m:cn>2</m:cn>
+			  </m:degree>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      The quantity 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:math> is called <term>Fisher Information</term> that
+	      <m:math><m:ci>x</m:ci></m:math> contains about
+	      <m:math><m:ci>θ</m:ci></m:math>.
+	    </para>
+	  </statement>
+	  <proof id="idm5897920">
+	    <para id="para19">
+	      By CRLB Theorem,
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+			<m:apply>
+			  <m:partialdiff/>
+			  <m:bvar>
+			    <m:ci>θ</m:ci>
+			    <m:degree>
+			      <m:cn>2</m:cn>
+			    </m:degree>
+			  </m:bvar>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			      <m:condition>
+				<m:ci>θ</m:ci>
+			      </m:condition>
+			      <m:ci>x</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> and 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">I</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      This yields 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:ci type="fn">I</m:ci>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">I</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      which in turn yields
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			  <m:degree>
+			    <m:cn>2</m:cn>
+			  </m:degree>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci>θ</m:ci>
+			    </m:condition>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">I</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      So, 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:ci type="fn">I</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </para>
+	  </proof>
+	</rule>
+      </para>
+      <para id="para20">
+	The CRLB is not always attained.
+      </para>
+      <example id="ex5">
+	<title>Phase Estimation</title>
+	<para id="para21">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>n</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>n</m:ci>
+		  <m:set>
+		    <m:cn>1</m:cn>
+		    <m:ci>…</m:ci>
+		    <m:ci>N</m:ci>
+		  </m:set>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:cos/>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			  <m:ci><m:msub>
+			      <m:mi>f</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			  <m:ci>n</m:ci>
+			</m:apply>
+			<m:ci>φ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:ci>w</m:ci>
+		      <m:ci>n</m:ci>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  The amplitude and frequency are assumed known 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> <term target-id="idd">idd</term>.  
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:condition>
+		  <m:ci>φ</m:ci>
+		</m:condition>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>N</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>n</m:ci>
+			</m:bvar>
+			<m:lowlimit>
+			  <m:cn>1</m:cn>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:ci>N</m:ci>
+			</m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci><m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub></m:ci>
+			  <m:apply>
+			    <m:times/>
+			    <m:ci>A</m:ci>
+			    <m:apply>
+			      <m:cos/>
+			      <m:apply>
+				<m:plus/>
+				<m:apply>
+				  <m:times/>
+				  <m:cn>2</m:cn>
+				  <m:pi/>
+				  <m:ci><m:msub>
+				      <m:mi>f</m:mi>
+				      <m:mn>0</m:mn>
+				    </m:msub></m:ci>
+				  <m:ci>n</m:ci>
+				</m:apply>
+				<m:ci>φ</m:ci>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>φ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>φ</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:sin/>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:pi/>
+			    <m:ci><m:msub>
+				<m:mi>f</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub></m:ci>
+			    <m:ci>n</m:ci>
+			  </m:apply>
+			  <m:ci>φ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>A</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:sin/>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>4</m:cn>
+			    <m:pi/>
+			    <m:ci><m:msub>
+				<m:mi>f</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub></m:ci>
+			    <m:ci>n</m:ci>
+			  </m:apply>
+			  <m:ci>φ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>φ</m:ci>
+		  <m:degree>
+		    <m:cn>2</m:cn>
+		  </m:degree>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>φ</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:cos/>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:pi/>
+			    <m:ci><m:msub>
+				<m:mi>f</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub></m:ci>
+			    <m:ci>n</m:ci>
+			  </m:apply>
+			  <m:ci>φ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>A</m:ci>
+		      <m:apply>
+			<m:cos/>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:pi/>
+			    <m:ci><m:msub>
+				<m:mi>f</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub></m:ci>
+			    <m:ci>n</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:ci>φ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>φ</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>φ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>A</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>1</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>N</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:cn type="rational">1<m:sep/>2</m:cn>
+		      <m:apply>
+			<m:times/>
+			<m:cn type="rational">1<m:sep/>2</m:cn>
+			<m:apply>
+			  <m:cos/>
+			  <m:apply>
+			    <m:plus/>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>4</m:cn>
+			      <m:pi/>
+			      <m:ci><m:msub>
+				  <m:mi>f</m:mi>
+				  <m:mn>0</m:mn>
+				</m:msub></m:ci>
+			      <m:ci>n</m:ci>
+			    </m:apply>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:ci>φ</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:cos/>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>4</m:cn>
+			  <m:pi/>
+			  <m:ci><m:msub>
+			      <m:mi>f</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			  <m:ci>n</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:ci>φ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Since 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci>φ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>φ</m:ci>
+		      <m:degree>
+			<m:cn>2</m:cn>
+		      </m:degree>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>φ</m:ci>
+			</m:condition>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:approx/>
+	      <m:apply>
+		<m:ci type="fn">I</m:ci>
+		<m:ci>φ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>N</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>A</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  because 
+	  <m:math>
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci><m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:lt/>
+		  <m:cn>0</m:cn>
+		  <m:apply>
+		    <m:lt/>
+		    <m:ci><m:msub>
+			<m:mi>f</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <!--not sure about this next variable-->
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:approx/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:apply>
+		      <m:cos/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>4</m:cn>
+			<m:pi/>
+			<m:ci><m:msub>
+			    <m:mi>f</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Therefore, 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:geq/>
+	      <m:apply>
+		<m:variance/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>φ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>N</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>A</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+	<para id="para22">
+	  In this case, it can be shown that there does not exist a
+	  <m:math><m:ci>g</m:ci></m:math> such that 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:neq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>φ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>φ</m:ci>
+		    </m:condition>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:ci>φ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:ci>φ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Therefore, an unbiased phase estimator that attains the CRLB
+	  does not exist.
+	</para>
+	<para id="para23">
+	  However, a MVUB estimator may still exist--only its
+	  variance will be larger than the CRLB.
+	</para>
+      </example>
+    </section>
+
+    <section id="eff">
+      <title>Efficiency</title>
+      <para id="para24">
+	An estimator which is unbiased and attains the CRLB is said to
+	be <term>efficient</term>.  
+      </para>
+      <example id="ex6">
+	<para id="para25">
+	  Sample-mean estimator is efficient.
+	</para>
+      </example>
+      <example id="ex7">
+	<para id="para26">
+	  Supposed three unbiased estimators exist for a param
+	  <m:math><m:ci>θ</m:ci></m:math>.
+	  <figure id="fig5">
+	    <media id="idp2572912" alt=""><image src="" mime-type="image/png"/></media>
+	  </figure>
+	  <figure id="fig6">
+	    <media id="idp2383120" alt=""><image src="" mime-type="image/png"/></media>
+	  </figure>
+	</para>
+      </example>
+      <example id="ex8">
+	<title>Sinusoidal Frequency Estimation</title>
+	<para id="para27">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci><m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:lt/>
+		  <m:cn>0</m:cn>
+		  <m:apply>
+		    <m:lt/>
+		    <m:ci><m:msub>
+			<m:mi>f</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:cn type="rational">1<m:sep/>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>f</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:apply>
+		    <m:cos/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci><m:msub>
+			    <m:mi>f</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		      <m:ci>φ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>n</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>n</m:ci>
+		  <m:set>
+		    <m:cn>1</m:cn>
+		    <m:ci>…</m:ci>
+		    <m:ci>N</m:ci>
+		  </m:set>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci><m:msub>
+			<m:mi>s</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>f</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math><m:ci>A</m:ci></m:math> and
+	  <m:math><m:ci>φ</m:ci></m:math> are known, while
+	  <m:math><m:ci><m:msub><m:mi>f</m:mi><m:mn>0</m:mn>
+	      </m:msub></m:ci></m:math> is unknown.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:geq/>
+	      <m:apply>
+		<m:variance/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>f</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>A</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>N</m:ci>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci>n</m:ci>
+			<m:apply>
+			  <m:sin/>
+			  <m:apply>
+			    <m:plus/>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:pi/>
+			      <m:ci><m:msub>
+				  <m:mi>f</m:mi>
+				  <m:mn>0</m:mn>
+				</m:msub></m:ci>
+			      <m:ci>n</m:ci>
+			    </m:apply>
+			    <m:ci>φ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Suppose 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>A</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math> (SNR), where 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>N</m:ci>
+	      <m:cn>10</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>φ</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>.
+	  <figure id="fig7">
+	    <media id="idp2235776" alt=""><image src="" mime-type="image/png"/></media> 
+	    <caption>Some frequencies are easier to estimator (lower
+	      CRLB, but not necessarily just lower bound) than
+	      others.</caption>
+	  </figure>
+	</para>
+      </example>
+    </section>
+    
+    <section id="vectorparam">
+      <title>CRLB for Vector Parameter</title>
+      <para id="para28">
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">θ</m:ci>
+	    <m:vector>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>⋮</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>p</m:mi>
+		</m:msub></m:ci>
+	    </m:vector>
+	  </m:apply>
+	</m:math>
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="vector">θ</m:ci>
+	  </m:apply>
+	</m:math> is unbiased, <foreign>i.e.</foreign>,
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci>i</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>p</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+    </section>
+
+    <section id="crlb">
+      <title>CRLB</title>
+      <para id="para29">
+	<m:math display="block">
+	  <m:apply>
+	    <m:geq/>
+	    <m:apply>
+	      <m:variance/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:selector/>
+	      <m:apply>
+		<m:inverse/>
+		<m:apply>
+		  <m:ci type="matrix">I</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>i</m:ci>
+	      <m:ci>i</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	where
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:apply>
+		<m:and/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:bvar>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:selector/>
+		<m:apply>
+		  <m:ci type="matrix">I</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:bvar>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci type="vector">θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math>
+	  <m:apply>
+	    <m:ci type="matrix">I</m:ci>
+	    <m:ci>θ</m:ci>
+	  </m:apply>
+	</m:math> is the <term>Fisher Information Matrix</term>.
+      </para>
+      <para id="para30">
+	<rule id="rule3" type="theorem">
+	  <title>Cramer-Rao Lower Bound - Vector Parameter</title>
+	  <statement id="idp4073664">
+	    <para id="para31">
+	      Assume the pdf
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">φ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:math> satisfies the "regularity" condition
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci type="vector">θ</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci type="vector">θ</m:ci>
+			    </m:condition>
+			    <m:ci type="vector">x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math> Then the convariance matrix of any unbiased
+	      estimator
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:math> satisfies
+	      <m:math display="block">
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:minus/>
+		    <!--covariance matrix-->
+		    <m:ci type="matrix"><m:msub>
+			<m:mi>C</m:mi>
+			<m:mover>
+			  <m:mi>θ</m:mi>
+			  <m:mo>^</m:mo>
+			</m:mover>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:apply>
+			<m:ci type="matrix">I</m:ci>
+			<m:ci type="vector">θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      (meaning
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <!--covariance matrix-->
+		  <m:ci type="matrix"><m:msub>
+		      <m:mi>C</m:mi>
+		      <m:mover>
+			<m:mi>θ</m:mi>
+			<m:mo>^</m:mo>
+		      </m:mover>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> is p.s.d.)  The Fisher Information matrix is
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:selector/>
+		    <m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		    <m:ci>i</m:ci>
+		    <m:ci>j</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci>θ</m:ci>
+			  <m:degree>
+			    <m:cn>2</m:cn>
+			  </m:degree>
+			</m:bvar>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:condition>
+			      <m:ci type="vector">θ</m:ci>
+			    </m:condition>
+			    <m:ci type="vector">x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>  Furthermore,
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:math> attains the CRLB (
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <!--covariance matrix-->
+		  <m:ci type="matrix"><m:msub>
+		      <m:mi>C</m:mi>
+		      <m:mover>
+			<m:mi>θ</m:mi>
+			<m:mo>^</m:mo>
+		      </m:mover>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>) iff
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci type="vector">θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:ci type="vector">g</m:ci>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> and
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="vector">g</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </para>
+	  </statement>
+	  <example id="ex9">
+	    <title>DC Level in White Guassian Noise</title>
+	    <para id="para32">
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:in/>
+		      <m:ci>n</m:ci>
+		      <m:set>
+			<m:cn>1</m:cn>
+			<m:ci>…</m:ci>
+			<m:ci>N</m:ci>
+		      </m:set>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>A</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math><m:ci>A</m:ci></m:math> is unknown and
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		    <m:cn>0</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, where
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:math> is unknown.
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci type="vector">θ</m:ci>
+		  <m:vector>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:vector>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:log/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci type="vector">θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:ci>N</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:apply>
+			    <m:log/>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:pi/>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>N</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:log/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>n</m:ci>
+			</m:bvar>
+			<m:lowlimit>
+			  <m:cn>2</m:cn>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:ci>N</m:ci>
+			</m:uplimit>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci><m:msub>
+				<m:mi>x</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>A</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>A</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci type="vector">θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>n</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>1</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>N</m:ci>
+		      </m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>x</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub></m:ci>
+			<m:ci>A</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:bvar>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci type="vector">θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>N</m:ci>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>4</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>n</m:ci>
+			</m:bvar>
+			<m:lowlimit>
+			  <m:cn>1</m:cn>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:ci>N</m:ci>
+			</m:uplimit>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci><m:msub>
+				<m:mi>x</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>A</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <!--tendsto has E above it-->
+		  <m:tendsto/>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>A</m:ci>
+			<m:degree>
+			  <m:cn>2</m:cn>
+			</m:degree>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci type="vector">θ</m:ci>
+			  </m:condition>
+			  <m:ci type="vector">x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>N</m:ci>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>N</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <!--tendsto has E above it-->
+		  <m:tendsto/>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>A</m:ci>
+		      </m:bvar>
+		      <m:bvar>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci type="vector">θ</m:ci>
+			  </m:condition>
+			  <m:ci type="vector">x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>4</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:sum/>
+			  <m:bvar>
+			    <m:ci>n</m:ci>
+			  </m:bvar>
+			  <m:lowlimit>
+			    <m:cn>1</m:cn>
+			  </m:lowlimit>
+			  <m:uplimit>
+			    <m:ci>N</m:ci>
+			  </m:uplimit>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci><m:msub>
+				<m:mi>x</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>A</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <!--tendsto has E above it-->
+		  <m:tendsto/>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:degree>
+			  <m:cn>2</m:cn>
+			</m:degree>
+		      </m:bvar>
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:condition>
+			    <m:ci type="vector">θ</m:ci>
+			  </m:condition>
+			  <m:ci type="vector">x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>N</m:ci>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>4</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>6</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:sum/>
+			  <m:bvar>
+			    <m:ci>n</m:ci>
+			  </m:bvar>
+			  <m:lowlimit>
+			    <m:cn>1</m:cn>
+			  </m:lowlimit>
+			  <m:uplimit>
+			    <m:ci>N</m:ci>
+			  </m:uplimit>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci><m:msub>
+				  <m:mi>x</m:mi>
+				  <m:mi>n</m:mi>
+				</m:msub></m:ci>
+			      <m:ci>A</m:ci>
+			    </m:apply>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>N</m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>4</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      Which leads to
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="matrix">I</m:ci>
+		    <m:ci type="vector">θ</m:ci>
+		  </m:apply>
+		  <m:matrix>
+		    <m:matrixrow>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>N</m:ci>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>0</m:cn>
+		    </m:matrixrow>
+		    <m:matrixrow>
+		      <m:cn>0</m:cn>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>N</m:ci>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>4</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:matrixrow>
+		  </m:matrix>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>A</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      <m:math display="block">
+		<m:apply>
+		  <m:geq/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>4</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>  Note that the CRLB for
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>A</m:ci>
+		</m:apply>
+	      </m:math> is the same whether or not
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:math> is known.  This happens in this case due to
+	      the diagonal nature of the Fisher Information Matrix.
+	    </para>
+	    <para id="para33">
+	      In general the Fisher Information Matrix is not diagonal
+	      and consequently the CRLBs will depend on other unknown
+	      parameters.
+	    </para>
+	  </example>
+	</rule>
+      </para>
+    </section>
+  </content>
+
+
+  <glossary>
+    <definition id="idd">
+      <term>idd</term>
+      <meaning id="idp7176704">independent and identically distributed</meaning>
+    </definition>
+  </glossary>
+</document>
