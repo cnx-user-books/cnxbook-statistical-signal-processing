@@ -1,0 +1,1596 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Constrained Optimization</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9f8435e1-b2b3-4a88-8cb5-ac5654100feb</md:uuid>
+</metadata>
+
+  <content>
+    <para id="constrain">
+      <term>Constrained optimization</term> is the minimization of an
+      objective function subject to constraints on the possible values
+      of the independent variable.  Constraints can be either
+      <term>equality constraints</term> or <term>inequality
+      constraints</term>.  Because the scalar-variable case follows
+      easily from the vector one, only the latter is discussed in
+      detail here.
+    </para>
+    <section id="equality">
+      <title>Equality Constraints</title>
+      <para id="typical">
+	The typical constrained optimization problem has the form
+	<m:math display="block">
+	  <m:mrow>
+	    <m:apply>
+	      <m:min/>
+	      <m:bvar>
+		<m:ci type="vector">x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:mtext>  subject to  </m:mtext>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="vector">g</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:mrow>
+	</m:math>
+	where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> is the scalar-valued objective function and
+	<m:math>
+	  <m:apply>
+	    <m:ci type="vector">g</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> is the vector-valued <term>constraint
+	function</term>.  Strict convexity of the objective function
+	is <emphasis>not</emphasis> sufficient to guarantee a unique
+	minimum; in addition, each component of the constraint must be
+	strictly convex to guarantee that the problem has a unique
+	solution.  Because of the constraint, stationary points of
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> alone may not be solutions to the constrained
+	problem: they may not satisfy the constraints.  In fact,
+	solutions to the constrained problem are often
+	<emphasis>not</emphasis> stationary points of the objective
+	function.  Consequently, the <foreign>ad hoc</foreign>
+	technique of searching for all stationary points of the
+	objective function that also satisfy the constraint do not
+	work.
+      </para>
+      <para id="lagrange">
+	The classical approach to solving constrained optimization
+	problems is the method of <term>Lagrange multipliers</term>.
+	This approach converts the constrained optimization problem
+	into an unconstrained one, thereby allowing use of the
+	techniques described in the previous section.  The
+	<term>Lagrangian</term> of a constrained optimization problem
+	is defined to be the scalar-valued function 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">L</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">λ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">λ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="vector">g</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Essentially, the following theorem states that stationary
+	points of the Lagrangian are <emphasis>potential</emphasis>
+	solutions of the constrained optimization problem: as always,
+	each candidate solution must be tested to determine which
+	minimizes the objective function.  
+	<rule type="theorem" id="Lagrangetheorem">
+	  <statement id="idp9966112">
+	    <para id="theorem1">
+	      Let <m:math><m:ci type="vector"><m:msub><m:mi>x</m:mi><m:mi>⋄</m:mi>
+              </m:msub></m:ci> </m:math> denote a local solution to
+              the constrained optimization problem given above where
+              the gradients 
+	      <m:math>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>g</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, …,
+	      <m:math>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>g</m:mi>
+			<m:mi>M</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> of the constraint function's components are
+              linearly independent.  There then exists a unique vector
+              <m:math><m:ci type="vector"><m:msub><m:mi>λ</m:mi><m:mi>⋄</m:mi>
+              </m:msub></m:ci> </m:math> such that 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">L</m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>λ</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      Furthermore, the quadratic form 
+	      <m:math>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		    <m:degree>
+		      <m:cn>2</m:cn>
+		    </m:degree>
+		    <m:apply>
+		      <m:ci type="fn">L</m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>λ</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:math> is non-negative for all <m:math><m:ci type="vector">y</m:ci> </m:math> satisfying
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+			<m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+			<m:apply>
+			  <m:ci type="vector">g</m:ci>
+			  <m:ci type="vector">x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>.
+	    </para>
+	  </statement>
+	</rule>
+	The latter result in the theorem says that the Hessian of the
+	Lagrangian evaluated at its stationary points is non-negative
+	definite with respect to all vectors
+	<emphasis>orthogonal</emphasis> to the gradient of the
+	constraint.  This result generalizes the notion of a positive
+	definite Hessian in unconstrained problems.
+      </para>
+      <para id="abstract">
+	The rather abstract result of the preceding theorem has a
+	simple geometric interpretation.  As shown in <link target-id="lafig"/>, the constraint corresponds to a contour in
+	the <m:math><m:ci type="vector">x</m:ci> </m:math> plane.
+	<figure id="lafig">
+	  <title>
+	    Geometric interpretation of Lagrange multipliers.  
+	  </title>
+	  <media id="idp6560144" alt=""><image src="../../media/conopt.jpg" mime-type="image/jpeg"/></media>
+	  <caption>
+	    The thick line corresponds to the contour of the values of
+	    <m:math><m:ci type="vector">x</m:ci></m:math> satisfying
+	    the constraint equation 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="vector">g</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>.  The thinner lines are contours of constant
+	    values of the objective function 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:math>.  The contour corresponding to the smallest
+	    value of the objective function just tangent to the
+	    constraint contour is the solution to the optimization
+	    problem with equality constraints.
+	  </caption>
+	</figure>
+	A <term>contour map</term> of the objective function indicates
+	those values of <m:math><m:ci type="vector">x</m:ci>
+	</m:math> for which 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:ci>c</m:ci>
+	  </m:apply>
+	</m:math>.  In this figure, as <m:math><m:ci>c</m:ci>
+	</m:math> becomes smaller, the contours shrink to a small
+	circle in the center of the figure.  The solution to the
+	constrained optimization problem occurs when the smallest
+	value of <m:math><m:ci>c</m:ci></m:math> is chosen for which
+	the contour just touches the constraint contour.  At that
+	point, the gradient of the objective function and of the
+	constraint contour are proportional to each other.  This
+	proportionality vector is <m:math><m:ci type="vector"><m:msub><m:mi>λ</m:mi><m:mi>⋄</m:mi>
+	</m:msub></m:ci> </m:math>, the so-called <term>Lagrange
+	multiplier</term>.  The Lagrange multiplier's exact value must
+	be such that the constraint is exactly satisfied.  Note that
+	the constraint can be tangent to the objective function's
+	contour map for larger values of <m:math><m:ci>c</m:ci>
+	</m:math>.  These potential, but erroneous, solutions can be
+	discarded only by evaluating the objective function.
+      </para>
+      <example id="typicalexample">
+	<para id="typical1">
+	  A typical problem arising in signal processing is to
+	  minimize 
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:math> subject to the linear constraint
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>.  
+	  <m:math><m:ci type="matrix">A</m:ci></m:math> is a positive
+	  definite, symmetric matrix (a correlation matrix) in most
+	  problems.  Clearly, the minimum of the objective function
+	  occurs at 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>, but his solution cannot satisfy the constraint.
+	  The constraint 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">g</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">c</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is a scalar-valued one; hence the theorem of
+	  Lagrange applies as there are no multiple components in the
+	  constraint forcing a check of linear independence.  The
+	  Lagrangian is 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">L</m:ci>
+		<m:ci type="vector">x</m:ci>
+		<m:ci>λ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">c</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Its gradient is 
+	  <m:math>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:ci type="matrix">A</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> with a solution 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>λ</m:mi>
+			<m:mi>⋄</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">A</m:ci>
+		    </m:apply>
+		    <m:ci type="vector">c</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  To find the value of the Lagrange multiplier,
+	  this solution must satisfy the constraint.  Imposing the
+	  constraint,
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mi>⋄</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">A</m:ci>
+		</m:apply>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	      <m:cn>-2</m:cn>
+	    </m:apply>
+	  </m:math>; thus, 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>λ</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>-2</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">c</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">A</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and the total solution is 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">A</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">c</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">A</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+      </example>
+      <para id="complex">
+	When the independent variable is complex-valued, the Lagrange
+	multiplier technique can be used <emphasis>if</emphasis> care
+	is taken to make the Lagrangian real.  If it is not real, we
+	cannot use the <link target-id="Lagrangetheorem">theorem</link>
+	that permits computation of stationary points by computing the
+	gradient with respect to
+	<m:math>
+	  <m:apply>
+	    <m:conjugate/>
+	    <m:ci type="vector">z</m:ci>
+	  </m:apply>
+	</m:math> alone.  The Lagrangian may not be real-valued even
+	when the constraint is real.  Once insured real, the gradient
+	of the Lagrangian with respect to the conjugate of the
+	independent vector can be evaluated and the minimization
+	procedure remains as before.
+      </para>
+      <example id="variations">
+	<para id="var1">
+	  Consider slight variations to the previous example: let the
+	  vector <m:math><m:ci type="vector">z</m:ci> </m:math> be
+	  complex so that the objective function is
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		<m:ci type="vector">z</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:ci type="vector">z</m:ci>
+	    </m:apply>
+	  </m:math> where <m:math><m:ci type="matrix">A</m:ci>
+	  </m:math> is a positive definite, Hermitian matrix and let
+	  the constraint be linear, but vector-valued (
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">C</m:ci>
+		<m:ci type="vector">z</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">c</m:ci>
+	    </m:apply>
+	  </m:math>).  The Lagrangian is formed from the objective
+	  function and the real part of the usual constraint term.  
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">L</m:ci>
+		<m:ci type="vector">z</m:ci>
+		<m:ci type="vector">λ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		    <m:ci type="vector">λ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci type="matrix">C</m:ci>
+		      <m:ci type="vector">z</m:ci>
+		    </m:apply>
+		    <m:ci type="vector">c</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">λ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:conjugate/>
+			<m:ci type="matrix">C</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:conjugate/>
+			<m:ci type="vector">z</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:conjugate/>
+		      <m:ci type="vector">c</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  For the Lagrange multiplier theorem to hold, the gradients
+	  of each component of the constraint must be linearly
+	  independent.  As these gradients are the columns of
+	  <m:math><m:ci type="matrix">C</m:ci> </m:math>, their mutual
+	  linear independence means that each constraint vector must
+	  not be expressible as a linear combination of the others.
+	  We shall assume this portion of the problem statement true.
+	  Evaluating the gradient with respect to 
+	  <m:math>
+	    <m:apply>
+	      <m:conjugate/>
+	      <m:ci type="vector">z</m:ci>
+	    </m:apply>
+	  </m:math>, keeping <m:math><m:ci type="vector">z</m:ci>
+	  </m:math> a constant, and setting the result equal to zero
+	  yields 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>z</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		    <m:ci type="matrix">C</m:ci>
+		  </m:apply>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>λ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>
+	  The solution is <m:math><m:ci type="vector"><m:msub><m:mi>z</m:mi><m:mi>⋄</m:mi>
+          </m:msub></m:ci> </m:math> is
+          <m:math>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">A</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		  <m:ci type="matrix">C</m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mi>⋄</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  Applying the constraint, we find that
+          <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">C</m:ci>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">A</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		  <m:ci type="matrix">C</m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mi>⋄</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  Solving for the Lagrange multiplier and
+          substituting the result into the solution, we find that the
+          solution to the constrained optimization problem is 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>z</m:mi>
+		  <m:mo>⋄</m:mo>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">A</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		  <m:ci type="matrix">C</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">C</m:ci>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">A</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		      <m:ci type="matrix">C</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  The indicated matrix inverses always exist: <m:math><m:ci type="matrix">A</m:ci> </m:math> is assumed invertible and
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">C</m:ci>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">A</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		<m:ci type="matrix">C</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is invertible because of the linear independence
+	  of the constraints.
+	</para>
+      </example>
+    </section>
+    <section id="ineqconstraints">
+      <title>Inequality Constraints</title>
+      <para id="inequality">
+	When some of the constraints are inequalities, the Lagrange
+	multiplier technique can be used, but the solution must be
+	checked carefully in its details.  But first, the optimization
+	problem with equality and inequality constraints is formulated
+	as 
+	<m:math display="block">
+	  <m:mrow>
+	    <m:apply>
+	      <m:min/>
+	      <m:bvar>
+		<m:ci type="vector">x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:mtext>  subject to  </m:mtext>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="vector">g</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	    <m:mtext>  and  </m:mtext>
+	    <m:apply>
+	      <m:leq/>
+	      <m:apply>
+		<m:ci type="vector">h</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:mrow>
+	</m:math>
+	As before, 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> is the scalar-valued objective function and
+	<m:math>
+	  <m:apply>
+	    <m:ci type="vector">g</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> is the equality constraint function;
+	<m:math>
+	  <m:apply>
+	    <m:ci type="vector">h</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> is the <term>inequality constraint function</term>.
+      </para>
+      <para id="keyresult">
+	The key result which can be used to find the analytic solution
+	to this problem is to first form the Lagrangian in the usual
+	way as 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">L</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">λ</m:ci>
+	      <m:ci type="vector">μ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">λ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="vector">g</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">μ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="vector">h</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The following theorem is the general statement of
+	the Lagrange multiplier technique for constrained optimization
+	problems.
+	<rule type="theorem" id="localmin">
+	  <statement id="idp10343728">
+	    <para id="local1">
+	      Let <m:math><m:ci type="vector"><m:msup><m:mi>x</m:mi><m:mi>⋄</m:mi>
+	      </m:msup></m:ci> </m:math> be a local minimum for the
+	      constrained optimization problem.  If the gradients of
+	      <m:math><m:ci type="vector">g</m:ci></m:math>'s
+	      components and the gradients of those components of
+	      <m:math>
+		<m:apply>
+		  <m:ci type="vector">h</m:ci>
+		  <m:ci>·</m:ci>
+		</m:apply>
+	      </m:math> for which 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>h</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector"><m:msup>
+			<m:mi>x</m:mi>
+			<m:mi>⋄</m:mi>
+		      </m:msup></m:ci>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math> are linearly independent, then 
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">L</m:ci>
+		      <m:ci type="vector"><m:msup>
+			  <m:mi>x</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msup></m:ci>
+		      <m:ci type="vector"><m:msup>
+			  <m:mi>λ</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msup></m:ci>
+		      <m:ci type="vector"><m:msup>
+			  <m:mi>μ</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	      where
+	      <m:math>
+		<m:apply>
+		  <m:geq/>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>μ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math> and 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="vector">
+		      <m:msubsup>
+			<m:mi>μ</m:mi>
+			<m:mi>i</m:mi>
+			<m:mi>⋄</m:mi>
+		      </m:msubsup></m:ci>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>h</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msup>
+			  <m:mi>x</m:mi>
+			  <m:mi>⋄</m:mi>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:math>
+	    </para>
+	  </statement>
+	</rule>
+	The portion of this result dealing with the inequality
+	constraint differs substantially from that concerned with the
+	equality constraint.  Either a component of the constraint
+	equals its maximum value (zero in this case) and the
+	corresponding component of its Lagrange multiplier is
+	non-negative (and is usually positive) <emphasis>or</emphasis>
+	a component is less than the constraint and its component of
+	the Lagrange multiplier is zero.  This latter result means
+	that some components of the inequality constraint are not as
+	stringent as others and these lax ones do not affect the
+	solution.
+      </para>
+      <para id="rationale">
+	The rationale behind this theorem is a technique for
+	converting the inequality constraint into an equality
+	constraint: 
+	<m:math>
+	  <m:apply>
+	    <m:leq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>h</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> is equivalent to 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>h</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>.  Since the new term, called a <term>slack
+	variable</term>, is non-negative, the constraint must be
+	non-positive.  With the inclusion of slack variables, the
+	equality constraint theorem can be used and the above theorem
+	results.  To prove the theorem, not only does the gradient
+	with respect to <m:math><m:ci type="vector">x</m:ci> </m:math>
+	need to be considered, but also with respect to the vector
+	<m:math><m:ci type="vector">s</m:ci> </m:math> of slack
+	variables.  The
+	<m:math><m:ci><m:msup><m:mi>i</m:mi><m:mi>th</m:mi>
+	</m:msup></m:ci> </m:math> component of the gradient of the
+	Lagrangian with respect to <m:math><m:ci type="vector">s</m:ci> </m:math> at the stationary point is
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:ci><m:msubsup>
+		  <m:mi>μ</m:mi>
+		  <m:mi>i</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msubsup></m:ci>
+	      <m:ci><m:msubsup>
+		  <m:mi>s</m:mi>
+		  <m:mi>i</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>.  If in solving the optimization problem,
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msubsup>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+		<m:mi>⋄</m:mi>
+	      </m:msubsup></m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>, the inequality constraint was in reality an
+	equality constraint and that component of the constraint
+	behaves accordingly.  As 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>h</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> implies that that component of the inequality
+	constraint must equal zero.  On the other hand, if 
+	<m:math>
+	  <m:apply>
+	    <m:neq/>
+	    <m:ci><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>, the corresponding Lagrange multiplier must be zero.
+      </para>
+      <example id="quadratic">
+	<para id="miniquad">
+	  Consider the problem of minimizing a quadratic form subject
+	  to a linear equality constraint and an inequality constraint
+	  on the norm of the linear constraint vector's variation.
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:apply>
+		<m:min/>
+		<m:bvar>
+		  <m:ci type="vector">x</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:mtext>  subject to  </m:mtext>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci type="vector">c</m:ci>
+		      <m:ci type="vector">δ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:mtext>  and  </m:mtext>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci>δ</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  This kind of problem arises in robust estimation.  One seeks
+	  a solution where one of the "knowns" of the problem,
+	  <m:math><m:ci type="vector">c</m:ci> </m:math> in this case,
+	  is, in reality, only approximately specified.  The
+	  independent variables are <m:math><m:ci type="vector">x</m:ci> </m:math> and
+	  <m:math>
+	    <m:ci type="vector">δ</m:ci>
+	  </m:math>.  The Lagrangian for this problem is 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">L</m:ci>
+		<m:set>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">δ</m:ci>
+		</m:set>
+		<m:ci>λ</m:ci>
+		<m:ci>μ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci type="vector">c</m:ci>
+			  <m:ci type="vector">δ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>μ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+			<m:ci type="vector">δ</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>ε</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Evaluating the gradients with respect to the independent
+	  variables yields 
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci type="matrix">A</m:ci>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>x</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msup>
+		      <m:mi>λ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci type="vector">c</m:ci>
+		    <m:ci type="vector"><m:msup>
+			<m:mi>δ</m:mi>
+			<m:mi>⋄</m:mi>
+		      </m:msup></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msup>
+		      <m:mi>λ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>x</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci><m:msup>
+		      <m:mi>μ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>δ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>
+	  The latter equation is key.  Recall that either
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msup>
+		  <m:mi>μ</m:mi>
+		  <m:mi>⋄</m:mi>
+		</m:msup></m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math> or the inequality constraint is satisfied with
+	  equality.  If <m:math><m:ci><m:msup> <m:mi>μ</m:mi>
+	  <m:mi>⋄</m:mi> </m:msup></m:ci> </m:math> is zero, that
+	  implies that <m:math><m:ci type="vector"><m:msup>
+	  <m:mi>x</m:mi> <m:mi>⋄</m:mi> </m:msup></m:ci>
+	  </m:math> must be zero which will not allow the equality
+	  constraint to be satisfied.  The inescapable conclusion is
+	  that 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>δ</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:math> and that <m:math><m:ci type="vector"><m:msup>
+	  <m:mi>δ</m:mi> <m:mi>⋄</m:mi> </m:msup></m:ci>
+	  </m:math> is parallel to <m:math><m:ci type="vector"><m:msup>
+	  <m:mi>x</m:mi> <m:mi>⋄</m:mi> </m:msup></m:ci>
+	  </m:math>:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector"><m:msup>
+		  <m:mi>δ</m:mi> 
+		  <m:mi>⋄</m:mi> 
+		</m:msup></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msup>
+			<m:mi>λ</m:mi> 
+			<m:mi>⋄</m:mi> 
+		      </m:msup></m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:ci><m:msup>
+			  <m:mi>μ</m:mi> 
+			  <m:mi>⋄</m:mi> 
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>x</m:mi> 
+		      <m:mi>⋄</m:mi> 
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  Using the first equation, <m:math><m:ci type="vector"><m:msup> <m:mi>x</m:mi> <m:mi>⋄</m:mi>
+	  </m:msup></m:ci> </m:math> is found to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector"><m:msup>
+		  <m:mi>x</m:mi> 
+		  <m:mi>⋄</m:mi> 
+		</m:msup></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msup>
+			<m:mi>λ</m:mi> 
+			<m:mi>⋄</m:mi> 
+		      </m:msup></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="matrix">A</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci><m:msup>
+			      <m:mi>λ</m:mi> 
+			      <m:mi>⋄</m:mi> 
+			    </m:msup></m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>4</m:cn>
+			  <m:ci type="vector"><m:msup>
+			      <m:mi>μ</m:mi> 
+			      <m:mi>⋄</m:mi> 
+			    </m:msup></m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Imposing the constraints on this solution results in a pair
+	  of equations for the Lagrange multipliers.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn type="rational">1<m:sep/>4</m:cn>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msup>
+			    <m:mi>λ</m:mi> 
+			    <m:mi>⋄</m:mi> 
+			  </m:msup></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci><m:msup>
+			  <m:mi>μ</m:mi> 
+			  <m:mi>⋄</m:mi> 
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="matrix">A</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn type="rational">1<m:sep/>4</m:cn>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci><m:msup>
+			      <m:mi>λ</m:mi> 
+			      <m:mi>⋄</m:mi> 
+			    </m:msup></m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci><m:msup>
+			    <m:mi>μ</m:mi> 
+			    <m:mi>⋄</m:mi> 
+			  </m:msup></m:ci>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>-2</m:cn>
+		</m:apply>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">c</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="matrix">A</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn type="rational">1<m:sep/>4</m:cn>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci><m:msup>
+			      <m:mi>λ</m:mi> 
+			      <m:mi>⋄</m:mi> 
+			    </m:msup></m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci><m:msup>
+			    <m:mi>μ</m:mi> 
+			    <m:mi>⋄</m:mi> 
+			  </m:msup></m:ci>
+		      </m:apply>
+		      <m:ci type="matrix">I</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci type="vector">c</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>2</m:cn>
+		    <m:ci><m:msup>
+			<m:mi>λ</m:mi> 
+			<m:mi>⋄</m:mi> 
+		      </m:msup></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci>ε</m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msup>
+			<m:mi>μ</m:mi> 
+			<m:mi>⋄</m:mi> 
+		      </m:msup></m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci><m:msup>
+			  <m:mi>λ</m:mi> 
+			  <m:mi>⋄</m:mi> 
+			</m:msup></m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Multiple solutions are possible and each must be checked.
+	  The rather complicated completion of this example is left to
+	  the (numerically oriented) reader.
+	</para>
+      </example>
+    </section>
+  </content>
+  
+</document>

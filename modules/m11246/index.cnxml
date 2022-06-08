@@ -1,0 +1,251 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Random Variables and Probability Density Functions</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>214044a7-9a46-47c5-a0a6-155a4bf7fa1c</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      A <term>random variable</term> <m:math><m:ci>X</m:ci></m:math>
+      is the assignment of a number - real or complex - to each sample
+      point in sample space.  Thus, a random variable can be
+      considered a function whose range is a set and whose ranges are,
+      most commonly, a subset of the real line. The <term>probability
+      distribution function</term> or <term>cumulative</term> is
+      defined to be
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:leq/>
+		<m:ci>X</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Note that <m:math><m:ci>X</m:ci></m:math> denotes the random
+      variable and <m:math><m:ci>x</m:ci></m:math> denotes the
+      argument of the distribution function.  Probability distribution
+      functions are increasing functions: if <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>A</m:ci>
+	  <m:set>
+	    <m:bvar><m:ci>ω</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:ci type="fn">X</m:ci>
+		  <m:ci>ω</m:ci>
+		</m:apply>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:condition>
+	  </m:set>
+	</m:apply>
+      </m:math> and <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>B</m:ci>
+	  <m:set>
+	    <m:bvar><m:ci>ω</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:lt/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:leq/>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>ω</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:condition>
+	  </m:set>
+	</m:apply>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:implies/>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:union/>
+		<m:ci>A</m:ci>
+		<m:ci>B</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:ci>A</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:ci>B</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		<m:bvar>
+		  <m:ci>X</m:ci>
+		</m:bvar>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>X</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>, which means that <m:math>
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:ci><m:msub>
+		<m:mi>x</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:ci><m:msub>
+		<m:mi>x</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:leq/>
+	  <m:ci><m:msub>
+	      <m:mi>x</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>x</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.
+    </para>
+
+    <para id="para2">
+      The <term>probability density function</term> 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:ci>X</m:ci>
+	  </m:bvar>
+	  <m:ci>x</m:ci>
+	</m:apply>
+      </m:math> is defined to be that function when integrated yields
+      the distribution function.
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>α</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci>x</m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>X</m:ci>
+		</m:bvar>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      As distribution functions may be discontinuous, we allow density
+      functions to contain impulses.  Furthermore, density functions
+      must be non-negative since their integrals are increasing.
+    </para>
+  </content>
+</document>

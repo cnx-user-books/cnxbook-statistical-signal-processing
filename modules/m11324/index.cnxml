@@ -1,0 +1,456 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+  <title>Robust Small-Signal Detection</title>
+  
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>49ac4779-efdb-473d-aa57-fa7b9cfbd056</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      These results can be modified to derive a robust detector that
+      accommodates small signals. To make this detector insensitive to
+      deviations from the nominal noise probability density, the
+      density should be replaced by the worst-case density consistent
+      with the maximum allowed deviations. For unimodal, symmetric
+      densities, the worst-case density equals that of the nominal
+      within a region centered about the origin while being
+      proportional to an exponential for values outside that region.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	      <m:msup>
+		<m:mi>p</m:mi>
+		<m:mi>ω</m:mi>
+	      </m:msup>
+	    </m:csymbol>
+	    <m:bvar><m:ci>n</m:ci></m:bvar>
+	    <m:ci>n</m:ci>
+	  </m:apply>
+	  <m:piecewise>
+	    <m:piece>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>ε</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		    <m:msup>
+		      <m:mi>p</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>n</m:ci>
+		</m:apply>
+		<m:ci><m:msup>
+		    <m:mi>n</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	    </m:piece>
+	    <m:piece>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>ε</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		    <m:msup>
+		      <m:mi>p</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:ci><m:msup>
+		      <m:mi>n</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>a</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:abs/>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		      <m:ci><m:msup>
+			  <m:mi>n</m:mi>
+			  <m:mo>′</m:mo>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:gt/>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>n</m:ci>
+		</m:apply>
+		<m:ci><m:msup>
+		    <m:mi>n</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	    </m:piece>
+	  </m:piecewise>
+	</m:apply>
+      </m:math>
+      The parameter <m:math><m:ci>a</m:ci></m:math> controls the rate
+      of decrease of the exponential tail; it is specifies by requiring
+      that the derivative of the density's logarithm be continuous at
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>n</m:ci>
+	  <m:ci><m:msup>
+	      <m:mi>n</m:mi>
+	      <m:mo>′</m:mo>
+	    </m:msup></m:ci>
+	</m:apply>
+      </m:math>. Thus,
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>a</m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar><m:ci>n</m:ci></m:bvar>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		    <m:msup>
+		      <m:mi>p</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> for
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>n</m:ci>
+	  <m:ci><m:msup>
+	      <m:mi>n</m:mi>
+	      <m:mo>′</m:mo>
+	    </m:msup></m:ci>
+	</m:apply>
+      </m:math>. For the worst-case density to be a probability
+      density, the boundary value
+      <m:math>
+	<m:ci><m:msup>
+	    <m:mi>n</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msup></m:ci>
+      </m:math>
+      and the deviation parameter <m:math><m:ci>ε</m:ci></m:math>
+      must be such that its integral is unity. As
+      <m:math><m:ci>ε</m:ci></m:math> is fixed, this requirement
+      reduces to a specification of
+      <m:math>
+	<m:ci><m:msup>
+	    <m:mi>n</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msup></m:ci>
+      </m:math>.
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci>n</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msup>
+		      <m:mi>n</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci><m:msup>
+		    <m:mi>n</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>o</m:mi>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar><m:ci>n</m:ci></m:bvar>
+		<m:ci>n</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>2</m:cn>
+		<m:ci>a</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>o</m:mi>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar><m:ci>n</m:ci></m:bvar>
+		<m:ci><m:msup>
+		    <m:mi>n</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> For the case where the nominal density
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>a</m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci><m:msup>
+		<m:mi>n</m:mi>
+		<m:mo>′</m:mo>
+	      </m:msup></m:ci>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> and this equation becomes 
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:plus/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci><m:msup>
+		      <m:mi>n</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>σ</m:ci>
+	      <m:ci><m:msup>
+		  <m:mi>n</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>2</m:cn>
+		<m:pi/>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msup>
+			<m:mi>n</m:mi>
+			<m:mo>′</m:mo>
+		      </m:msup></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The non-linearity required by the small-signal detection
+      strategy thus equals the negative derivative of the logarithm of
+      the worst-case density within the boundaries while equaling a
+      constant outside that region.
+      
+      <equation id="onlyeq">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn" class="discrete">f</m:ci>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>	    
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>n</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ln/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+			    <m:msup>
+			      <m:mi>p</m:mi>
+			      <m:mi>o</m:mi>
+			    </m:msup>
+			  </m:csymbol>
+			  <m:bvar><m:ci>n</m:ci></m:bvar>
+			  <m:ci>n</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci><m:msup>
+		      <m:mi>n</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:apply>
+		    <m:ci type="fn" class="discrete">sign</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:gt/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci><m:msup>
+		      <m:mi>n</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The robust detector for small signals thus consists of a clipper
+      followed by a matched filter for each signal, the results of
+      which are compared with a threshold.
+    </para>
+
+  </content>
+</document>

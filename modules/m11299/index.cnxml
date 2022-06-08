@@ -1,0 +1,2340 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Robust Hypothesis Testing</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f96ccb26-9303-4263-b173-acce5699f5c6</md:uuid>
+</metadata>
+
+  <content>
+    <para id="one">
+      "Robust" is a technical word that implies insensitivity to
+      modeling assumptions. As we have seen, some algorithms are
+      robust while others are not. The intent of <term>robust signal
+      processing</term> is to derive algorithms that are
+      <emphasis>explicitly</emphasis> insensitive to the underlying
+      signal and/or noise models. The way in which modeling
+      incertainties are described is typified by the approach we shall
+      use in the following discussion of robust model evaluation.
+    </para>
+
+    <para id="two">
+      We assume that two <emphasis>nominal</emphasis> models of the
+      generation of the statistically independent observations are
+      known; the "actual" conditional probability density that
+      describes the data under the assumptions of each model is not
+      known exactly, but is "close" to the nominal. Letting
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">p</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> be the actual probability density for each observation
+      and
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">
+	    <m:msup>
+	      <m:mi>p</m:mi>
+	      <m:mi>o</m:mi>
+	    </m:msup>
+	  </m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math>the nominal, we say that (<cite target-id="Huber2"><cite-title>Huber; 1981</cite-title></cite>)
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">p</m:ci>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>o</m:mi>
+		  </m:msup>
+		</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>d</m:mi>
+		  </m:msup>
+		</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> where 
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>p</m:mi>
+	    <m:mi>d</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> is the unknown disturbance density and
+      <m:math><m:ci>ε</m:ci></m:math> is the uncertainty variable
+      (<m:math>
+	<m:apply>
+	  <m:leq/>
+	  <m:cn>0</m:cn>
+	  <m:apply>
+	    <m:lt/>
+	    <m:ci>ε</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>). The uncertainty variable specifies how accurate the
+      nominal model is through to be: the smaller
+      <m:math><m:ci>ε</m:ci></m:math>, the smaller the
+      contribution of the disturbance. It is assumed that some value
+      for <m:math><m:ci>ε</m:ci></m:math> can be rationally
+      assigned. The disturbance density is entirely unknown and is
+      assumed to be <emphasis>any</emphasis> value probability density
+      function. The expression given above is normalized so that
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">p</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> has unit density ranging about it. An example of
+      densities described this way are shown in <link target-id="figure1"/>.
+    </para>
+
+    <figure id="figure1">
+      <media id="idp2217072" alt=""><image src="../../media/contam.jpg" mime-type="image/jpeg"/></media> 
+      <caption>
+	The nominal density, a Gaussian, is shown as a dashed line
+	along with example densities derived from it having an
+	uncertainty of 10% (<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>ε</m:ci>
+	    <m:cn>0.1</m:cn>
+	  </m:apply>
+	</m:math>). The left plot illustrates a symmetric
+	contamination and the right an asymmetric one.
+      </caption>
+    </figure>
+
+    <para id="three">
+      The robust model evaluation problem is formally stated as
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:product/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci>ε</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>ε</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>d</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:product/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci>ε</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>ε</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>d</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      The nominal densities under each model correspond to the
+      conditional densities that we have been using until now. The
+      disturbance densities are intended to model imprecision of both
+      descriptions; hence, they are assumed to be different in the
+      context of each model. Note that the measure of imprecision
+      <m:math><m:ci>ε</m:ci></m:math> is assumed to be the same
+      under either model.
+    </para>
+
+    <para id="four">
+      To solve this problem, we take what is known as a
+      <term><emphasis>minimax</emphasis> approach</term>: find the
+      worst-case combinations of <foreign>a priori</foreign> densities
+      (max), then minimize the consequences of this situation (mini)
+      according to some criterion. In this way, bad situations are
+      handles as well as can be expected while the more tolerable ones
+      are (hopefully) processed well also. The "mini" phase of the
+      minimax solution corresponds to the likelihood ratio for many
+      criteria. Thus, the "max" phase amounts to finding the
+      worst-case probability distributions for the likelihood ratio
+      test as described in the previous section: find the disturbance
+      densities that can result in a constant value for the ratio over
+      large domains of functions. When the two nominal distributions
+      scaled by
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:cn>1</m:cn>
+	  <m:ci>ε</m:ci>
+	</m:apply>
+      </m:math> can be brought together so that they are equal for
+      some disturbance, then the likelihood ratio will be constant in
+      that domain. Of most interest here is the case where the models
+      differ only in the value of the mean, as shown in <link target-id="figure2"/>. "Bringing the distributions together" means,
+      in this case, scaling the distribution for
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> by
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:cn>1</m:cn>
+	  <m:ci>ε</m:ci>
+	</m:apply>
+      </m:math> while adding the constant
+      <m:math><m:ci>ε</m:ci></m:math> to the scaled distribution
+      for
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>. One can shown in general that if the ratio of the
+      nominal densities is monotonic, this procedure finds the
+      worst-case distribution (<cite target-id="Huber1"><cite-title>Huber;
+      1965</cite-title></cite>). The distributions overlap for small and for large
+      values of the data with no overlap in a central region. As we
+      shall see, the size of this central region depends greatly on
+      the choice of <m:math><m:ci>ε</m:ci></m:math>. The
+      <emphasis>tails</emphasis> of the worst-case distributions under
+      each model are equal; conceptually, we consider that the
+      worst-case densities have exponential tails in the model
+      evaluation problem.
+    </para>
+
+    <figure id="figure2">
+      <media id="idp1601712" alt=""><image src="../../media/worstcase.jpg" mime-type="image/jpeg"/></media> 
+      <caption>
+	Nominal probability distributions for each model are
+	shown. The worst-case distributions corresponding to these are
+	also shown for the uncertainty variable
+	<m:math><m:ci>ε</m:ci></m:math> equaling
+	<m:math><m:cn>0.1</m:cn></m:math>
+      </caption>
+    </figure>
+
+    <para id="five">
+      Letting 
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>p</m:mi>
+	    <m:mi>ω</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> denote the worst-case density, out minimax procedure
+      results in the following densities for each model in the
+      likelihood ratio test.
+      <m:math display="block">
+      	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	      <m:msup>
+		<m:mi>p</m:mi>
+		<m:mi>ω</m:mi>
+	      </m:msup>
+	    </m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:piecewise>
+	    <m:piece>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		    <m:msup>
+		      <m:mi>p</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:csymbol>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msubsup>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+			<m:mo>′</m:mo>
+		      </m:msubsup>
+		    </m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:condition>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		</m:apply>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>C</m:mi>
+		    <m:mi>i</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msup>
+			  <m:mi>K</m:mi>
+			  <m:mo>′</m:mo>
+			</m:msup></m:ci>
+		      <m:apply>
+			<m:abs/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>
+			    <m:msubsup>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			      <m:mo>′</m:mo>
+			    </m:msubsup>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+	       	    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+	      </m:apply>
+	    </m:piece>
+	    <m:piece>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>o</m:mi>
+		    </m:msup>
+		</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+	      </m:apply>
+	    </m:piece>
+	    <m:piece>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		    <m:msup>
+		      <m:mi>p</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:csymbol>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msubsup>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+			<m:mo>′′</m:mo>
+		      </m:msubsup>
+		    </m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:condition>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		</m:apply>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>C</m:mi>
+		    <m:mi>i</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msup>
+			  <m:mi>K</m:mi>
+			  <m:mo>′′</m:mo>
+			</m:msup></m:ci>
+		      <m:apply>
+			<m:abs/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>
+			    <m:msubsup>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			      <m:mo>′′</m:mo>
+			    </m:msubsup>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+	       	    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:gt/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+	      </m:apply>
+	    </m:piece> 
+	  </m:piecewise>
+	</m:apply>
+      </m:math>
+
+      The constants 
+      <m:math>
+	<m:ci><m:msup>
+	    <m:mi>K</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msup></m:ci>
+      </m:math> and
+      <m:math>
+	<m:ci><m:msup>
+	    <m:mi>K</m:mi>
+	    <m:mo>′′</m:mo>
+	  </m:msup></m:ci>
+      </m:math> determine the rate of decay of the exponential tails
+      of these worst-case distributions. Their specific values have
+      not yet been determined, but since they are not needed to
+      compute the likelihood ratio, we don't need them. The constants
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>C</m:mi>
+	    <m:mi>i</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math> and
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>C</m:mi>
+	    <m:mi>i</m:mi>
+	    <m:mo>′′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math>
+      are required so that a unit-area density results. The likelihood
+      ratio for each observation in the robust model evaluation
+      problem becomes
+      <equation id="first">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">Λ</m:ci>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>C</m:mi>
+		      <m:mn>1</m:mn>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>C</m:mi>
+		      <m:mn>0</m:mn>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		</m:apply>  
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:lt/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci>
+		      <m:msubsup>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+			<m:mo>′′</m:mo>
+		      </m:msubsup>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>C</m:mi>
+		      <m:mn>1</m:mn>
+		      <m:mo>′′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>C</m:mi>
+		      <m:mn>0</m:mn>
+		      <m:mo>′′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′′</m:mo>
+		    </m:msubsup>
+		  </m:ci>	  
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="next">
+      The evaluation of the likelihood ratio depends entirely on
+      determining values for
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>r</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math> and
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>r</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math>. The ratios
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>
+	      <m:msubsup>
+		<m:mi>C</m:mi>
+		<m:mn>1</m:mn>
+		<m:mo>′</m:mo>
+	      </m:msubsup>
+	    </m:ci>
+	    <m:ci>
+	      <m:msubsup>
+		<m:mi>C</m:mi>
+		<m:mn>0</m:mn>
+		<m:mo>′</m:mo>
+	      </m:msubsup>
+	    </m:ci>
+	  </m:apply>
+	  <m:ci><m:msup>
+	      <m:mi>c</m:mi>
+	      <m:mo>′</m:mo>
+	    </m:msup></m:ci>
+	</m:apply>
+      </m:math>and
+
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>
+	      <m:msubsup>
+		<m:mi>C</m:mi>
+		<m:mn>1</m:mn>
+		<m:mo>′′</m:mo>
+	      </m:msubsup>
+	    </m:ci>
+	    <m:ci>		
+	      <m:msubsup>
+		<m:mi>C</m:mi>
+		<m:mn>0</m:mn>
+		<m:mo>′′</m:mo>
+	      </m:msubsup>
+	    </m:ci>
+	  </m:apply>
+	  <m:ci><m:msup>
+	      <m:mi>c</m:mi>
+	      <m:mo>′′</m:mo>
+	    </m:msup></m:ci>
+	</m:apply>
+      </m:math> are easily found; in the tails, the value of the
+      likelihood ration equals that at the edges of the central region
+      for continuous densities.
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msup>
+	      <m:mi>c</m:mi>
+	      <m:mo>′</m:mo>
+	    </m:msup></m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		<m:msup>
+		  <m:mi>p</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+	   	    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		<m:msup>
+		  <m:mi>p</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msup>
+	      <m:mi>c</m:mi>
+	      <m:mo>′′</m:mo>
+	    </m:msup></m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		<m:msup>
+		  <m:mi>p</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>		
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+	   	    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		<m:msup>
+		  <m:mi>p</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:csymbol>
+	       <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>	
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      At the left boundary, for example, the distribution functions
+      must satisfy
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>	
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+	   	    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msubsup>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msubsup>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>ε</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  In terms of the nominal densities, we have
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:ci>
+		<m:msubsup>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msubsup>
+	      </m:ci>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>ε</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      This equation also applies the value right edge
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>r</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math>. Thus, for a given value of
+      <m:math><m:ci>ε</m:ci></m:math>, the integral of the
+      difference between the nominal densities should equal the ratio
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:ci>ε</m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:ci>ε</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> for two values. <link target-id="figure3"/> illustrates
+      this effect for a Gaussian example. The bi-valued nature of this
+      integral may not be valid for some values of
+      <m:math><m:ci>ε</m:ci></m:math>; the value chosen for
+      <m:math><m:ci>ε</m:ci></m:math> can be too large, making it
+      impossible to distinguish the models! This unfortunate
+      circumstance means that the uncertainties, as described by the
+      value of <m:math><m:ci>ε</m:ci></m:math>, swamp the
+      characteristics that distinguish the models. Thus, the models
+      must be made more precise (more must be known about the data) so
+      that smaller deviations from the nominal models can describe the
+      observations.
+    </para>
+
+    <figure id="figure3">
+      <media id="idp1245632" alt=""><image src="../../media/robthresh.png" mime-type="image/png"/></media> <caption>The
+      quantity used to determine the thresholds in the robust decision
+      rule is shown when
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>m</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:cn>5</m:cn>
+	  </m:apply>
+	</m:math>. Given a value of
+	<m:math><m:ci>ε</m:ci></m:math>, a value on the vertical
+	axis is selected and the corresponding values on the
+	horizontal axis yield the thresholds.</caption>
+    </figure>
+
+    <para id="afternext">
+      Returning to the likelihood ratio, the "robust" decision rule
+      consists of computing a <emphasis>clipped</emphasis> function of
+      each observed value, multiplying them together, and comparing
+      the product computed over the observations with a threshold
+      value. We assume that the nominal distributions of each of the
+      <m:math><m:ci>L</m:ci></m:math> observations are equal; the
+      values of the boundaries
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>r</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math> and
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>r</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math> then do not depend on the observation index
+      <m:math><m:ci>l</m:ci></m:math> in this case. More simply,
+      evaluating the logarithm of the quantities involved results in
+      the decision rule
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>l</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      where the function
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is the clipping function given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:piecewise>
+	    <m:piece>
+	      <m:apply>
+		<m:ln/>
+		<m:ci><m:msup>
+		    <m:mi>c</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>
+		  <m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup>
+		</m:ci>
+	      </m:apply>  
+	    </m:piece>
+	    <m:piece>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		      <m:msup>
+			<m:mi>p</m:mi>
+			<m:mi>o</m:mi>
+		      </m:msup>
+		    </m:csymbol>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup>
+		</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>	  
+		<m:ci>
+		  <m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msup>
+		</m:ci>
+	      </m:apply>
+	    </m:piece>
+	    <m:piece>
+	      <m:apply>
+		<m:ln/>
+		<m:ci><m:msup>
+		    <m:mi>c</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msup>
+		</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:piece>
+	  </m:piecewise>
+	</m:apply>
+      </m:math>
+      If the observations were not identically distributed, then the
+      clipping function would depend on the observation index. <footnote id="idm6602592">Note that we only need to require that the
+      <emphasis>nominal</emphasis> density remain constant throughout
+      the observations. The disturbance density, and through it the
+      density of each observation, could vary without disturbing the
+      validity of this result! Such generality is typical when one
+      loosens modeling restrictions, but, as we have said, this
+      generality is bought with diminished performance.</footnote>
+    </para>
+
+    <para id="more">
+      Determining the threshold <m:math><m:ci>γ</m:ci></m:math>
+      that meets a specific performance criterion is difficult in the
+      context of robust model evaluation. By the very nature of the
+      problem formulation, some degree of uncertainty in the
+      <foreign>a priori</foreign> densities exists. A specific
+      false-alarm probability can be guaranteed by using the
+      worst-case distribution under
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>. This density has the disturbance term begin an impulse at infinity. Thus, the expected value
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>m</m:mi>
+	    <m:mi>c</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> of a clipped observation 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math> with respect to the worst-case density is 
+      <m:math>
+	<m:apply>
+	  <m:plus/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>ε</m:ci>
+	    <m:apply>
+	      <m:ln/>
+	      <m:ci><m:msup>
+		  <m:mi>c</m:mi>
+		  <m:mo>′′</m:mo>
+		</m:msup></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> where the expected value in this expression is
+      evaluated with respect to the nominal density under
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>. Similarly, an expression for the variance 
+      <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>σ</m:mi>
+	      <m:mi>c</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> of the clipped observation can be derived. As the
+      decision rule computes the sum of the clipped, statistically
+      independent observations, the Central Limit Theorem can be
+      applied to the sum, with the result that the worst-case
+      false-alarm probability will approximately equal
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">Q</m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>γ</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mi>c</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>c</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. The threshold <m:math><m:ci>γ</m:ci></m:math>
+      can then be found which will guarantee a specified performance
+      level. Usually, the worst-case situation does not occur and the
+      threshold set by this method is conservative. We can assess the
+      degree of conservatism by evaluating these quantities under the
+      nominal density rather than the worst-case density.
+    </para>
+
+    <example id="exone">
+      <para id="exparaone">
+	Let's consider the Gaussian model evaluation problem we have
+	been using so extensively. The individual observations are
+	statistically independent and identically distributed with
+	variance five:
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:cn>5</m:cn>
+	  </m:apply>
+	</m:math>. For model 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>, the mean is zero; for
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>, the mean is one. These nominal densities describe
+	our best models for the observations, but we seek to allow
+	slight deviations (10%) from them. The equation to be solved
+	for the boundaries is the implicit equation
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>z</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>z</m:ci>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The quantity on the left side of the equation is shown in
+	<link target-id="figure3"/>. If the uncertainty in the Gaussian
+	model, as expressed by the parameter
+	<m:math><m:ci>ε</m:ci></m:math>, is larger than 0.15 (for
+	the example values of <m:math><m:ci>m</m:ci></m:math> and
+	<m:math><m:ci>σ</m:ci></m:math>), no solution
+	exists. Assuming that <m:math><m:ci>ε</m:ci></m:math>
+	equals 0.1, the quantity
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0.11</m:cn>
+	  </m:apply>
+	</m:math> and the clipping thresholds are
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msup>
+		<m:mi>r</m:mi>
+		<m:mo>′</m:mo>
+	      </m:msup></m:ci>
+	    <m:cn>-1.675</m:cn>
+	  </m:apply>
+	</m:math> and
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msup>
+		<m:mi>r</m:mi>
+		<m:mo>′′</m:mo>
+	      </m:msup></m:ci>
+	    <m:cn>2.675</m:cn>
+	  </m:apply>
+	</m:math>. Between these values, the clipping function is
+	given by the logarithm of the likelihood ratio, which is given
+	by
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:ci>m</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>m</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.
+      </para>
+
+      <para id="exparatwo">
+	We can decompose the clipping operation into a cascade of two
+	operations: a linear scaling and shifting (as described by the
+	previous expression) followed by a clipper having unit slope
+	(see <link target-id="figure4"/>).
+
+	<figure id="figure4">
+	  <media id="idp3803312" alt=""><image src="../../media/robdet1.png" mime-type="image/png"/></media> 
+	  <caption>The
+	    robust decision rule for the case of a Gaussian nominal
+	    density is shown. The observations are first scaled and
+	    shifted by quantities that depend on the mean
+	    <m:math><m:ci>m</m:ci></m:math> and the variance
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math>. The resulting quantity is then passed through a
+	    symmetric unit-slope clipping function whose clipping
+	    thresholds also depend on the parameters of the
+	    distributions.</caption>
+	</figure>
+
+	Let
+	<m:math>
+	  <m:ci>
+	    <m:mover accent="true">
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	      <m:mo>˜</m:mo>
+	    </m:mover>
+	  </m:ci>
+	</m:math> denote the result of the scaling and shifting
+	operation. This quantity has mean
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>m</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and variance
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>m</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math> under
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math> and the opposite signed mean and the same variance
+	under
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>. The threshold values of the unit-clipping function
+	are thus given by the solution of the equation
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>
+		      <m:mover accent="true">
+			<m:mi>z</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>m</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>m</m:ci>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>
+		      <m:mover accent="true">
+			<m:mi>z</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>m</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>m</m:ci>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	By substituting 
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>
+	      <m:mover accent="true">
+		<m:mi>z</m:mi>
+		<m:mo>˜</m:mo>
+	      </m:mover>
+	    </m:ci>
+	  </m:apply>
+	</m:math> for 
+	<m:math>
+	  <m:ci>
+	    <m:mover accent="true">
+	      <m:mi>z</m:mi>
+	      <m:mo>˜</m:mo>
+	    </m:mover>
+	  </m:ci>
+	</m:math> in this equation, we find that the two solutions are
+	negatives of each other. We have now placed the unit-clipper's
+	threshold values symmetrically about the origin; however, they
+	do depend on the value of the mean
+	<m:math><m:ci>m</m:ci></m:math>. In this example, the
+	threshold is numerically given by
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>
+	      <m:mover accent="true">
+		<m:mi>z</m:mi>
+		<m:mo>˜</m:mo>
+	      </m:mover>
+	    </m:ci>
+	    <m:cn>0.435</m:cn>
+	  </m:apply>
+	</m:math>. The expected value of the result of the clipping
+	function with respect to the worst-case density is given by the
+	complicated expression
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>ε</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msup>
+			<m:mi>r</m:mi>
+			<m:mo>′</m:mo>
+		      </m:msup></m:ci>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:diff/>
+			    <m:ci>r</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:ci>σ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msup>
+			<m:mi>r</m:mi>
+			<m:mo>′′</m:mo>
+		      </m:msup></m:ci>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:apply>
+			<m:divide/>
+			<m:ci><m:msup>
+			    <m:mi>r</m:mi>
+			    <m:mo>′′</m:mo>
+			  </m:msup></m:ci>
+			<m:ci>σ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:divide/>
+	   		    <m:apply>
+			      <m:power/>
+			      <m:ci><m:msup>
+				  <m:mi>r</m:mi>
+				  <m:mo>′</m:mo>
+				</m:msup></m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:apply>
+				<m:power/>
+				<m:ci>σ</m:ci>
+				<m:cn>2</m:cn>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci><m:msup>
+				  <m:mi>r</m:mi>
+				  <m:mo>′′</m:mo>
+				</m:msup></m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:apply>
+			      <m:times/>
+			      <m:cn>2</m:cn>
+			      <m:apply>
+				<m:power/>
+				<m:ci>σ</m:ci>
+				<m:cn>2</m:cn>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>ε</m:ci>
+		<m:ci><m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′′</m:mo>
+		  </m:msup></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> The variance is found in a similar fashion and can
+	be used to find the threshold
+	<m:math><m:ci>γ</m:ci></m:math> on the sum of clipped
+	observation values.
+      </para>
+    </example>
+
+  </content>
+
+  <bib:file>
+     <bib:entry id="Huber1">
+      <bib:article>
+   	<bib:author>P.J. Huber</bib:author>
+    	<bib:title>A robust version of the probability ratio test</bib:title>
+    	<bib:journal>Ann. Math. Stat.</bib:journal>
+    	<bib:year>1965</bib:year>
+    	<bib:volume>36</bib:volume>
+    	<bib:pages>1753-1758</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="Huber2">
+      <bib:book>
+   	<bib:author>P.J. Huber</bib:author>
+    	<bib:title>Robust Statistics</bib:title>
+    	<bib:publisher>John Wiley and Sons</bib:publisher>
+    	<bib:year>1981</bib:year>
+    	<bib:address>New York</bib:address>
+      </bib:book>   
+    </bib:entry>    
+  </bib:file>
+</document>

@@ -1,0 +1,546 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Model Consistency Testing</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>bd392e1f-a8ca-4a79-b1be-1c58df0fef72</md:uuid>
+</metadata>
+
+  <content>
+    <para id="model">
+      In many situations, we seek to check consistency of the
+      observations with some preconceived model.  Alternative models
+      are usually difficult to describe parametrically since
+      inconsistency may be beyond our modeling capabilities.  We need
+      a test that accepts consistency of observations with a model or
+      rejects the model without pronouncing a more favored
+      alternative.  Assuming we know (or presume to know) the
+      probability distribution of the observations under 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>, the models are 
+      <list id="list1">
+	<item>
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>:  
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci type="vector">r</m:ci>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</item>
+	<item>
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>:  
+	  <m:math>
+	    <m:apply>
+	      <!--not distributed in-->
+	      <m:mo>≁</m:mo>
+	      <m:ci type="vector">r</m:ci>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</item>
+      </list> <term>Null hypothesis testing</term> seeks to determine
+      if the observations are consistent with this description.  The
+      best procedure for consistency testing amounts to determining
+      whether the observations lie in a highly probable region as
+      defined by the null probability distribution.  However, no one
+      region defines a probability that is less than unity.  We must
+      restrict the size of the region so that it best represents those
+      observations maximally consistent with the model while
+      satisfying a performance criterion.  Letting
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> be a false-alarm probability established by us, we
+      define the decision region
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math> to satisfy
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci type="vector">r</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>ℜ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:domainofapplication>
+	      <m:ci><m:msub>
+		  <m:mi>ℜ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:domainofapplication>
+	    <m:apply>
+	      <!--pdf-->
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> and
+      <m:math display="block">
+	<m:apply>
+	  <m:min/>
+	  <m:bvar>
+	    <m:ci><m:msub>
+		<m:mi>ℜ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:bvar>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:domainofapplication>
+	      <m:ci><m:msub>
+		  <m:mi>ℜ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:domainofapplication>
+	  </m:apply>
+	</m:apply>
+      </m:math> Usually, this region is located about the mean, but
+      may not be symmetrically centered if the probability density is
+      skewed.  Our null hypothesis test for model consistency becomes
+      <m:math display="block">
+	<m:apply>
+	  <m:implies/>
+	  <m:apply>
+	    <m:in/>
+	    <m:ci type="vector">r</m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℜ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:mtext>"say observations are consistent"</m:mtext>
+	</m:apply>
+      </m:math>
+      <m:math display="block">
+	<m:apply>
+	  <m:implies/>
+	  <m:apply>
+	    <m:notin/>
+	    <m:ci type="vector">r</m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℜ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:mtext>"say observations are not consistent"</m:mtext>
+	</m:apply>
+      </m:math>
+    </para>
+    <example id="whitegaussian">
+      <para id="question">
+	Consider the problem of determining whether the sequence
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub></m:ci>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:in/>
+	    <m:ci>l</m:ci>
+	    <m:set>
+	      <m:cn>1</m:cn>
+	      <m:ci>…</m:ci>
+	      <m:ci>L</m:ci>
+	    </m:set>
+	  </m:apply>
+	</m:math>, is white and Gaussian with zero mean and unit
+	variance.  Stated this way, the alternative model is not
+	provided: is this model correct or not?  We could estimate the
+	probability density function of the observations and test the
+	estimate for consistency.  Here we take the null-hypothesis
+	testing approach of converting this problem into a
+	one-dimensional one by considering the statistic
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>r</m:ci>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci>l</m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, which has a 
+	<m:math>
+	  <m:ci><m:msubsup>
+	      <m:mi>χ</m:mi>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msubsup></m:ci>
+	</m:math>.  Because this probability distribution is unimodal,
+	the decision region can be safely assumed to be an interval
+	<m:math>
+	  <m:interval>
+	    <m:ci> 
+	      <m:msup>
+		<m:mi>r</m:mi>
+		<m:mo>′</m:mo>
+	      </m:msup>
+	    </m:ci>
+	    <m:ci> 
+	      <m:msup>
+		<m:mi>r</m:mi>
+		<m:mo>′′</m:mo>
+	      </m:msup>
+	    </m:ci>
+	  </m:interval>
+	</m:math>.<footnote id="idm6987440">This one-dimensional result for
+	the consistency test may extend to the multi-dimensional case
+	in the obvious way.</footnote> In this case, we can find an analytic
+	solution to the problem of determining the decision region.
+	Letting 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>R</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci> 
+		<m:msup>
+		  <m:mi>r</m:mi>
+		  <m:mo>′′</m:mo>
+		</m:msup>
+	      </m:ci>
+	      <m:ci> 
+		<m:msup>
+		  <m:mi>r</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> denote the width of the interval, we seek the
+	solution of the constrained optimization problem 
+	<m:math display="block">
+	  <m:mrow>
+	    <m:apply>
+	      <m:min/>
+	      <m:bvar>
+		<m:ci><m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mi>′</m:mi>
+		  </m:msup></m:ci>
+	      </m:bvar>
+	      <m:ci>R</m:ci>
+	    </m:apply>
+	    <m:mtext>  subject to  </m:mtext>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>r</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci><m:msup>
+			<m:mi>r</m:mi>
+			<m:mi>′</m:mi>
+		      </m:msup></m:ci>
+		    <m:ci>R</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>r</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msup>
+		      <m:mi>r</m:mi>
+		      <m:mi>′</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:mrow>
+	</m:math> We convert the constrained problem into an
+	unconstrained one using Lagrange multipliers.
+	<m:math display="block">
+	  <m:apply>
+	    <m:min/>
+	    <m:bvar>
+	      <m:ci><m:msup>
+		  <m:mi>r</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup></m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci>R</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:plus/>
+			<m:ci><m:msup>
+			    <m:mi>r</m:mi>
+			    <m:mo>′</m:mo>
+			  </m:msup></m:ci>
+			<m:ci>R</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msup>
+			  <m:mi>r</m:mi>
+			  <m:mo>′</m:mo>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>F</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Evaluation of the derivative of this quantity with respect to
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>r</m:mi>
+	      <m:mo>′</m:mo>
+	    </m:msup></m:ci>
+	</m:math> yields the result 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mi>r</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci><m:msup>
+		    <m:mi>r</m:mi>
+		    <m:mo>′</m:mo>
+		  </m:msup></m:ci>
+		<m:ci>R</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mi>r</m:mi>
+		</m:msub></m:ci>
+	      <m:ci><m:msup>
+		  <m:mi>r</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>: to minimize the interval's width, the probability
+	density function's values at the interval's endpoints must be
+	equal.  Finding these endpoints to satisfy the constraints
+	amounts to searching the probability distribution at such
+	points for increasing values of 
+	<m:math>
+	  <m:ci>R</m:ci>
+	</m:math> until the required probability is contained within.
+	For 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>L</m:ci>
+	    <m:cn>100</m:cn>
+	  </m:apply>
+	</m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub> 
+		<m:mi>P</m:mi> 
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>0.05</m:cn>
+	  </m:apply>
+	</m:math>, the optimal decision region for the
+	<m:math>
+	  <m:ci><m:msubsup>
+	      <m:mi>χ</m:mi>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msubsup></m:ci>
+	</m:math> distribution is 
+	<m:math>
+	  <m:interval>
+	    <m:cn>78.82</m:cn>
+	    <m:cn>128.5</m:cn>
+	  </m:interval>
+	</m:math>.  <link target-id="consistencyfig"/> demonstrates ten
+	testing trials for observations that fit the model and for
+	observations that don't.
+	<figure id="consistencyfig">
+	  <media id="idp3725248" alt=""><image src="../../media/consistency.jpg" mime-type="image/jpeg"/></media>
+	  <caption>
+	    Ten trials of testing a 100-element sequence for
+	    consistency with a white, Gaussian model -  
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		  <m:cn>0</m:cn>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math> - for three situations.  In the first (shown by
+	    the circles), the observations do conform to the model.
+	    In the second (boxes), the observations are zero-mean
+	    Gaussian but with variance two.  Finally, the third
+	    example (crosses) has white observations with a density
+	    closely resembling the Gaussian: a hyperbolic secant
+	    density having zero mean and unit variance.  The sum of
+	    squared observations for each example are shown with the
+	    optimal
+	    <m:math>
+	      <m:ci><m:msubsup>
+		  <m:mi>χ</m:mi>
+		  <m:mn>100</m:mn>
+		  <m:mn>2</m:mn>
+		</m:msubsup></m:ci>
+	    </m:math> interval displayed.  Note how dramatically the
+	    test statistic departs from the decision interval when
+	    parameters disagree.
+	  </caption>
+	</figure>
+      </para>
+    </example>
+  </content>
+  
+</document>

@@ -1,0 +1,1194 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Maximum Likelihood Estimators of Signal Parameters</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a43c3425-df43-48b2-816d-2ab8e9c8b49c</md:uuid>
+</metadata>
+
+  <content>
+    <para id="situation">
+      Many situations are either not well suited to linear estimation
+      procedures, or the parameter is not well described as a random
+      variable.  For example, signal delay is observed nonlinearly and
+      usually no <foreign>a priori</foreign> density can be assigned.
+      In such cases, maximum likelihood estimators are more frequently
+      used.  Because of the <link document="m11266">Cramér-Rao
+      bound</link>, fundamental limits on parameter estimation
+      performance can be derived for <emphasis>any</emphasis> signal
+      parameter estimation problem where the parameter is not random.
+    </para>
+    <para id="mle">
+      Assume that the data are expressed as a signal observed in the
+      presence of additive Gaussian noise.
+      <equation id="eqn1a">
+	<m:math display="block">
+	  <m:apply>
+	  <m:forall/>
+	    <m:bvar>
+	      <m:ci>l</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+	      <m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		  <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci>n</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The vector of observations <m:math><m:ci type="vector">r</m:ci></m:math> is formed from the data in the
+      obvious way.  Evaluating the logarithm of the observation
+      vector's joint density,
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ln/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>θ</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn type="rational">-1<m:sep/>2</m:cn>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:determinant/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:ci type="matrix">
+		      <m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn type="rational">1<m:sep/>2</m:cn>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:apply>
+		    <m:ci type="vector">s</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="vector">s</m:ci>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math> is the signal vector having 
+      <m:math>
+	<m:ci>P</m:ci>
+      </m:math> unknown parameters, and 
+      <m:math>
+	<m:ci type="matrix">
+	  <m:msub>
+	    <m:mi>K</m:mi>
+	    <m:mi>n</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> is the covariance matrix of the noise.  The partial
+      derivative of this likelihood function with respect to the
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>i</m:mi>
+	    <m:mi>th</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> parameter 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>θ</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math>, for real-valued signals,
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:partialdiff/>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">
+		<m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="vector">s</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> and, for complex-valued ones,
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:partialdiff/>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:real/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:apply>
+		    <m:ci type="vector">s</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      If the maximum of the likelihood function can be found by
+      setting its gradient to 
+      <m:math>
+	<m:cn type="vector">0</m:cn> 
+      </m:math>, the maximum likelihood estimate of the parameter
+      vector is the solution of the set of equations
+      <equation id="setofeq">
+	<m:math>
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci>i</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>P</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		<m:bvar>
+		  <m:ci>θ</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>ML</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">r</m:ci>
+		      <m:apply>
+			<m:ci type="vector">s</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">
+		      <m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ci type="vector">s</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+    <para id="Fisher">
+      The Cramér-Rao bound depends on the evaluation of the Fisher
+      information matrix 
+      <m:math>
+	<m:ci type="matrix">F</m:ci>
+      </m:math>.  The elements of this matrix are found to be
+      <equation id="Fishereq">
+	<m:math>
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci>i</m:ci>
+	    </m:bvar>
+	    <m:bvar>
+	      <m:ci>j</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:and/>
+		  <m:ci>i</m:ci>
+		  <m:ci>j</m:ci>
+		</m:apply>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>P</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="matrix">F</m:ci>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:ci type="vector">s</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>j</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ci type="vector">s</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Further computation of the Cramér-Rao bound's components
+      is problem dependent if more than one parameter is involved, and
+      the off-diagonal terms of 
+      <m:math>
+	<m:ci type="matrix">F</m:ci>
+      </m:math> are nonzero.  If only one parameter is unknown, the
+      Cramér-Rao bound is given by
+      <equation id="cramerraoeq">
+	<m:math>
+	  <m:apply>
+	    <m:geq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">b</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ci type="fn">b</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:ci type="vector">s</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">
+		      <m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ci type="vector">s</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      When the signal depends on the parameter nonlinearly (which
+      constitute the interesting cases), the maximum likelihood
+      estimate is usually biased.  Thus, the numerator of the
+      expression for the bound cannot be ignored.  One interesting
+      special case occurs when the noise is white.  The
+      Cramér-Rao bound becomes
+      <m:math display="block">
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>ε</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:ci type="fn">b</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ci type="fn">b</m:ci>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ci type="vector">s</m:ci>
+		      <m:ci>l</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The derivative of the signal with respect to the parameter can
+      be interpreted as the sensitivity of the signal to the
+      parameter.  The mean-squared estimation error depends on the
+      "integrated" squared sensitivity: The greater this
+      sensitivity, the smaller the bound.
+    </para>
+    <para id="effest">
+      For an efficient estimate of a signal parameter to exist, the
+      estimate must satisfy the condition we derived <link document="m11266" target-id="hereyougoliz">earlier</link>. 
+
+      <m:math display="block">
+	<m:apply>
+	  <m:mo>≟</m:mo>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar>
+		  <m:ci>θ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix"><m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci type="vector">r</m:ci>
+	      <m:apply>
+		<m:ci type="vector">s</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="matrix">I</m:ci>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:ci type="vector">b</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar>
+		  <m:ci>θ</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="vector">s</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix"><m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar>
+		<m:ci>θ</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="vector">s</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:apply>
+		    <m:ci type="fn">θ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">b</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> Because of the complexity of this requirement, we
+      quite rightly question the existence of any efficient estimator,
+      especially when the signal depends nonlinearly on the parameter
+      (see <link document="m11221" target-id="problem10">this
+      problem</link>).
+    </para>
+    <example id="exampler">
+      <para id="maxest">
+	Let the unknown parameter be the signal's amplitude; the
+	signal is expressed as 
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>θ</m:ci>
+	    <m:apply>
+	      <m:ci type="fn">s</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and is observed in an array's output in the presence
+	of additive noise.  The maximum likelihood estimate of the
+	amplitude is the solution of the equation
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>ML</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> The form of this equation suggests that the maximum
+	likelihood estimate is efficient.  The amplitude estimate is
+	given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> The form of this estimator is precisely that of the
+	matched filter derived in the colored-noise situation (see
+	<link document="m11260" target-id="eq1">equation</link>).  The
+	expected value of the estimate equals the actual amplitude.
+	Thus the bias is zero and the Cramér-Rao bound is given
+	by
+	<m:math display="block">
+	  <m:apply>
+	    <m:geq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The condition for an efficient estimate becomes
+	<m:math display="block">
+	  <m:apply>
+	    <m:mo>≟</m:mo>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>θ</m:ci>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>ML</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> whose veracity we can easily verify.
+      </para>
+      <para id="whitenoisecase">
+	In the special case where the noise is white, the estimator
+	has the form 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, and the Cramér-Rao bound equals 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math> (the nominal signal is assumed to have unit energy).
+	The maximum likelihood estimate of the amplitude has
+	<emphasis>fixed</emphasis> error characteristics that do not
+	depend on the actual signal amplitude.  A signal-to-noise
+	ratio for the estimate, defined to be
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>θ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, equals the signal-to-noise ratio of the observed
+	signal.
+      </para>
+      <para id="randomvar">
+	When the amplitude is well described as a random variable, its
+	linear minimum mean-squared error estimator has the form
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>LIN</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">
+		      <m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> which we found in the white-noise case becomes a
+	weighted version of the maximum likelihood estimate (see <link document="m11264" target-id="sleepy">example</link>).
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>LIN</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply> 
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply> 
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> Seemingly, these two estimators are being used to
+	solve the same problem: Estimating the amplitude of a signal
+	whose waveform is known.  They make very different
+	assumptions, however, about the nature of the unknown
+	parameter; in one it is a random variable (and thus it has a
+	variance), whereas in the other it is not (and variance makes
+	no sense).  Despite this fundamental difference, the
+	computations for each estimator are equivalent.  It is
+	reassuring that different approaches to solving similar
+	problems yield similar procedures.
+      </para>
+    </example>
+  </content>
+  
+</document>

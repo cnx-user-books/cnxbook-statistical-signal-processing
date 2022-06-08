@@ -1,0 +1,783 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Vector Space L Squared</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d2d4ef4c-8eac-4dbf-a5f6-212ab94ae261</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Special attention needs to be paid to the vector space 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>: the collection of functions <m:math>
+	<m:apply>
+	  <m:ci type="fn">x</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> which are square-integrable over the interval <m:math>
+	<m:interval closure="open">
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>f</m:mi>
+	    </m:msub></m:ci>
+	</m:interval>
+      </m:math>:
+      <m:math display="block">
+	<m:apply>
+	  <m:lt/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:lowlimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci></m:lowlimit>
+	    <m:uplimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>f</m:mi>
+		</m:msub></m:ci></m:uplimit>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:ci type="fn">x</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:infinity/>
+	</m:apply>
+      </m:math>
+      An inner product can be defined for this space as:
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>t</m:ci></m:bvar>
+	      <m:lowlimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci></m:lowlimit>
+	      <m:uplimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>f</m:mi>
+		  </m:msub></m:ci></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">x</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">y</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Consistent with this definition, the length of the vector <m:math>
+	<m:apply>
+	  <m:ci type="fn">x</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> is given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:root/>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>t</m:ci></m:bvar>
+	      <m:lowlimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci></m:lowlimit>
+	      <m:uplimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>f</m:mi>
+		  </m:msub></m:ci></m:uplimit>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">x</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Physically, <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> can be related to the energy contained in the signal over 
+      <m:math>
+	<m:interval closure="open">
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>f</m:mi>
+	    </m:msub></m:ci>
+	</m:interval>
+      </m:math>.  This space is a Hilbert space.  If <m:math>
+	<m:ci><m:msub> <m:mi>T</m:mi> <m:mi>i</m:mi> </m:msub></m:ci>
+	</m:math> and <m:math> <m:ci><m:msub> <m:mi>T</m:mi>
+	<m:mi>f</m:mi> </m:msub></m:ci> </m:math> are both finite, an
+	orthonormal basis is easily found which spans it.  For
+	simplicity of notation, let <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math> and <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>f</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math>.  The set of functions defined by:
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mrow>
+		    <m:mn>2</m:mn>
+		    <m:mi>i</m:mi>
+		    <m:mo>-</m:mo>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>2</m:cn>
+		  <m:ci>T</m:ci>
+		</m:apply>
+		<m:cn>1/2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:cos/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>i</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:ci>T</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mrow>
+		  <m:mn>2</m:mn>
+		  <m:mi>i</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>2</m:cn>
+		<m:ci>T</m:ci>
+	      </m:apply>
+	      <m:cn>1/2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:sin/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:pi/>
+		  <m:ci>i</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:ci>T</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      is complete over the interval <m:math>
+	<m:interval closure="open">
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:interval>
+      </m:math> and therefore constitutes a basis for 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math>.  By demonstrating a basis, we conclude that
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math> is a separable vector space.  The representations of
+      functions with respect to this basis corresponds to the
+      well-known Fourier series expansion of a function.  As most
+      functions require an infinite number of terms in their Fourier
+      series representation, this space is infinite dimensional.
+    </para>
+
+    <para id="para2">
+      There also exist orthonormal sets of functions that do
+      <emphasis>not</emphasis> constitute a basis.  For example, the
+      set <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math> defined by:
+      <equation id="eqn1a">
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:eq/>
+	      <m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:cn>1</m:cn>
+		  <m:mo>…</m:mo>
+		</m:set>
+	      </m:apply>
+	  </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		</m:msub></m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:apply>
+		    <m:divide/>
+		  <m:cn>1</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:leq/>
+		    <m:apply>
+		    <m:times/>
+		      <m:ci>i</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		    <m:apply>
+		    <m:lt/>
+		      <m:ci>t</m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:plus/>
+			<m:ci>i</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+			<m:ci>T</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+	      </m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      over 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:infinity/>
+	</m:apply>
+      </m:math>.  The members of this set are normal (unit
+      norm) and are mutually orthogonal (no member overlaps with any
+      other).  Consequently, this set is an orthonormal set.  However,
+      it does not constitute a basis for 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:infinity/>
+	</m:apply>
+      </m:math>.
+      Functions piecewise constant over intervals of length
+      <m:math><m:ci>T</m:ci></m:math> are the only members of
+       <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:infinity/>
+	</m:apply>
+      </m:math> 
+      which can be represented by this set.  Other
+      functions such as <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:exp/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn">u</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> cannot be represented by the <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math> defined above.  Consequently, <emphasis>orthonormality
+      of a set of functions does not guarantee
+      completeness</emphasis>.
+    </para>
+
+    <para id="para3">
+      While 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math>
+      is a separable space, examples can be given in which the
+      representation of a vector in this space is not precisely equal
+      to the vector.  More precisely, let 
+      <m:math>
+	<m:apply>
+	  <m:in/>
+	  <m:apply>
+	    <m:ci type="fn">x</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn"><m:msup>
+		<m:mi>L</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msup></m:ci>
+	    <m:cn>0</m:cn>
+	    <m:ci>T</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> and the set <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math> be defined by <link target-id="eqn2"/>.  The fact that <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math> constitutes a basis for the space implies:
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ci type="fn">x</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>
+      where
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>x</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:interval>
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">x</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      In particular, let <m:math>
+	<m:apply>
+	  <m:ci type="fn">x</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> be:
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">x</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:piecewise>
+	    <m:piece>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:leq/>
+		<m:cn>0</m:cn>
+		<m:ci>t</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>T</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:piece>
+	    <m:piece>
+	      <m:cn>0</m:cn>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>T</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>t</m:ci>
+		<m:ci>T</m:ci>
+	      </m:apply>
+	    </m:piece>
+	  </m:piecewise>
+	</m:apply>
+      </m:math>
+      Obviously, this function is an element of 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math>.
+      However, the representation of this function is not equal to 1
+      at <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>t</m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>T</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  In fact, the peak error never decreases as more
+      terms are taken in the representation.  In the special case of
+      the Fourier series, the existence of this "error" is termed the
+      <term>Gibbs phenomenon</term>.  However, this "error" has zero
+      norm in 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math>; consequently, the Fourier series expansion of this
+      function is equal to the function in the sense that the function
+      and its expansion have zero distance between them.  However, one
+      of the axioms of a valid inner product is that if <m:math>
+	<m:apply>
+	  <m:implies/>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:ci>e</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>e</m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  The condition is satisfied, but the conclusion does
+      not seem to be valid.  Apparently, valid elements of
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math> can be defined which are nonzero but have zero
+      norm.  An example is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>e</m:ci>
+	  <m:piecewise>
+	    <m:piece>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>t</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>T</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:piece>
+	    <m:otherwise>
+	      <m:cn>0</m:cn>
+	    </m:otherwise>
+	  </m:piecewise>
+	</m:apply>
+      </m:math>
+      So as not to destroy the theory, the most common method of
+      resolving the conflict is to weaken the definition of equality.
+      The essence of the problem is that while two vectors
+      <m:math><m:ci type="vector">x</m:ci></m:math> and <m:math><m:ci type="vector">y</m:ci></m:math> can differ from each other and
+      be zero distance apart, the difference between them is
+      "trivial."  This difference has zero norm which, in 
+      <m:math>
+	<m:ci type="fn"><m:msup>
+	    <m:mi>L</m:mi>
+	    <m:mn>2</m:mn>
+	  </m:msup></m:ci>
+      </m:math>, implies that the magnitude of (<m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci type="vector">x</m:ci>
+	  <m:ci type="vector">y</m:ci>
+	</m:apply>
+      </m:math>) integrates to zero.  Consequently, the vectors are
+      essentially equal.  This notion of equality is usually written
+      as <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="vector">x</m:ci>
+	  <m:ci type="vector">y</m:ci>
+	</m:apply>
+	<m:mtext>a.e.</m:mtext>
+      </m:math> (<m:math><m:ci type="vector">x</m:ci></m:math> equals
+      <m:math><m:ci type="vector">y</m:ci></m:math> <emphasis>almost
+      everywhere</emphasis>).  With this convention, we have:
+      <m:math display="block">
+      <m:apply>
+	<m:implies/>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:ci>e</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>e</m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:apply>
+	<m:mtext>a.e.</m:mtext> </m:math> Consequently, the error
+      between a vector and its representation is zero almost
+      everywhere.
+    </para>
+
+    <para id="para4">
+      Weakening the notion of equality in this fashion might seem to
+      compromise the utility of the theory.  However, if one suspects
+      that two vectors in an inner product are equal
+      (<foreign>e.g.</foreign>, a vector and its representation), it
+      is quite difficult to prove that they are strictly equal (and as
+      has been seen, this conclusion may not be valid).  Usually,
+      proving they are equal almost everywhere is much easier.  While
+      this weaker notion of equality does not imply strict equality,
+      one can be assured that any difference between them is
+      insignificant.  The measure of "significance" for a vector space
+      is expressed by the definition of the norm for the space.
+    </para>
+  </content>
+  
+</document>

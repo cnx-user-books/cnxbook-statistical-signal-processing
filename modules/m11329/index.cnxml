@@ -1,0 +1,1364 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Type-Based Detection</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>2fe23be7-81d8-4698-a2ff-30b76e593a75</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Perhaps the ultimate non-parametric detector makes
+      <emphasis>no</emphasis> assumptions about the observations'
+      probability distribution under either model. Here, we assume
+      that data representative of each model are available to train
+      the detection algorithm. One approach uses artificial neural
+      networks, which are difficult to analyze in terms of both
+      optimality and performance. When the observations are
+      discrete-valued, a provable optimal detection algorithm (<cite target-id="Gutman"><cite-title>Gutman</cite-title></cite>) can be derived using the <link document="m11291" target-id="Types">theory of types</link>.
+    </para>
+    
+    <para id="para2">
+      For a two-model evaluation problem, let
+      <m:math>
+	<m:ci>
+	  <m:mover accent="true">
+	    <m:mi>r</m:mi>
+	    <m:mo>˜</m:mo>
+	  </m:mover>
+	</m:ci>
+      </m:math> (length
+      <m:math>
+	<m:ci>
+	  <m:mover accent="true">
+	    <m:mi>L</m:mi>
+	    <m:mo>˜</m:mo>
+	  </m:mover>
+	</m:ci>
+      </m:math>) denote training data representative of some unknown
+      probability distribution <m:math><m:ci>P</m:ci></m:math>. We
+      assume that the data have statistically independent
+      components. To derive a non-parametric detector, form a
+      generalized likelihood ratio to distinguish whether a set of
+      observations <m:math><m:ci type="vector">r</m:ci></m:math>
+      (length <m:math><m:ci>L</m:ci></m:math>) has the same
+      distribution as the training data or a different one
+      <m:math><m:ci>Q</m:ci></m:math>.
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:ci type="fn">Λ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:max/>
+		<m:bvar>
+		  <m:ci>P</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>Q</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">P</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">Q</m:ci>
+		    <m:ci type="vector">
+		      <m:mover accent="true">
+			<m:mi>r</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:max/>
+		<m:bvar>
+		  <m:ci>P</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">P</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">P</m:ci>
+		    <m:ci type="vector">
+		      <m:mover accent="true">
+			<m:mi>r</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> Because a type is the maximum likelihood estimate of
+      the probability distribution (see <link document="m11291" target-id="anumberedequation">Histogram Estimators</link>), we
+      simply substitute types for the training data and observations
+      probability distributions into the likelihood ratio. The
+      probability of a set of observations having a probability
+      distribution identical to its type equals
+     
+      <m:math>
+	<m:apply>
+	  <m:exp/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>L</m:ci>
+	      <m:apply>
+		<m:ci type="fn">ℋ</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>P</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. Thus, the log likelihood ratio becomes
+     
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:ci type="fn">Λ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:ci type="fn">ℋ</m:ci>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>P</m:mi>
+			      <m:mi>r</m:mi>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>
+			<m:mover accent="true">
+			  <m:mi>L</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:ci>
+		      <m:apply>
+			<m:ci type="fn">ℋ</m:ci>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>P</m:mi>
+			      <m:mover accent="true">
+				<m:mi>r</m:mi>
+				<m:mo>˜</m:mo>
+			      </m:mover>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply> 
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>	  
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>L</m:ci>
+		      <m:ci>
+			<m:mover accent="true">
+			  <m:mi>L</m:mi>
+		      	  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">ℋ</m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mrow>
+			      <m:mi>r</m:mi>
+			      <m:mo>,</m:mo>
+			      <m:mover accent="true">
+				<m:mi>r</m:mi>
+				<m:mo>˜</m:mo>
+			      </m:mover>
+			    </m:mrow>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The denominator term means that the training and observed data
+      are lumped together to form a type. This type equals the linear
+      combination of the types for the training and observed data
+      weighted by their relative lengths.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>P</m:mi>
+		<m:mrow>
+		  <m:mi>r</m:mi>
+		  <m:mo>,</m:mo>
+		  <m:mover accent="true">
+		    <m:mi>r</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		</m:mrow>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>r</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:mover accent="true">
+		    <m:mi>L</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mover accent="true">
+			<m:mi>r</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci>L</m:ci>
+	      <m:ci>
+		<m:mover accent="true">
+		  <m:mi>L</m:mi>
+		  <m:mo>˜</m:mo>
+		</m:mover>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Returning to the log likelihood ratio, we have that
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:log/>
+	    <m:apply>
+	      <m:ci type="fn">Λ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">ℋ</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>
+		  <m:mover accent="true">
+		    <m:mi>L</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		</m:ci>
+		<m:apply>
+		  <m:ci type="fn">ℋ</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mover accent="true">
+			  <m:mi>r</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>	       
+	      <m:times/>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>L</m:ci>
+		<m:ci>
+		  <m:mover accent="true">
+		    <m:mi>L</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">ℋ</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>	
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>
+			  <m:msub>
+		    	    <m:mi>P</m:mi>
+			    <m:mi>r</m:mi>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>
+			<m:mover accent="true">
+			  <m:mi>L</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mover accent="true">
+			      <m:mi>r</m:mi>
+			      <m:mo>˜</m:mo>
+			    </m:mover>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>L</m:ci>
+		    <m:ci> 
+		      <m:mover accent="true">
+			<m:mi>L</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Note that the last term equals
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci>L</m:ci>
+	      <m:ci>
+		<m:mover accent="true">
+		  <m:mi>L</m:mi>
+		  <m:mo>˜</m:mo>
+		</m:mover>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">ℋ</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>
+		      <m:mover accent="true">
+			<m:mi>L</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mover accent="true">
+			    <m:mi>r</m:mi>
+			    <m:mo>˜</m:mo>
+			  </m:mover>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci>L</m:ci>
+		  <m:ci>
+		    <m:mover accent="true">
+		      <m:mi>L</m:mi>
+		      <m:mo>˜</m:mo>
+		    </m:mover>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>a</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci>a</m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mi>r</m:mi>
+			  </m:msub>
+			</m:ci>	      
+			<m:ci>a</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>
+		      <m:mover accent="true">	    
+			<m:mi>L</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:apply>  
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mover accent="true">
+			      <m:mi>r</m:mi>
+			      <m:mo>˜</m:mo>
+			    </m:mover>
+			  </m:msub>
+		   	</m:ci>
+			<m:ci>a</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>L</m:ci>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:apply>
+			    <m:ci type="fn">
+			      <m:msub>
+				<m:mi>P</m:mi>
+				<m:mi>r</m:mi>
+			      </m:msub>
+			    </m:ci>
+			    <m:ci>a</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:ci>
+			  <m:mover accent="true">
+			    <m:mi>L</m:mi>
+			    <m:mo>˜</m:mo>
+			  </m:mover>
+			</m:ci>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:apply>
+			    <m:ci type="fn">
+			      <m:msub>
+				<m:mi>P</m:mi>
+				<m:mover accent="true">
+				  <m:mi>r</m:mi>
+				  <m:mo>˜</m:mo>
+				</m:mover>
+			      </m:msub>
+			    </m:ci>
+			    <m:ci>a</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>L</m:ci>
+		      <m:ci>
+			<m:mover accent="true">
+			  <m:mi>L</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      which means it can be combined with the other terms to yield the
+      simple expression for the log likelihood ratio.
+      <equation id="eq1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:log/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>	    
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>r</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>,</m:mo>
+			  <m:mover accent="true">
+			    <m:mi>r</m:mi>
+			    <m:mo>˜</m:mo>
+			  </m:mover>
+			</m:mrow>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>
+		  <m:mover accent="true">
+		    <m:mi>L</m:mi>	  
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mover accent="true">
+			  <m:mi>r</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>,</m:mo>
+			  <m:mover accent="true">
+			    <m:mi>r</m:mi>
+			    <m:mo>˜</m:mo>
+			  </m:mover>
+			</m:mrow>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>	    
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>	 
+    </para>
+
+    <para id="para3">
+      When the training data and the observed data are drawn from the
+      same distribution, the Kullback-Leibler distances will be
+      small. When the distributions differ, the distances will be
+      larger. Defining
+      <m:math>
+	<m:msub>	   
+	  <m:mi>ℳ</m:mi>
+	  <m:mn>0</m:mn>
+	</m:msub>
+      </m:math> to be the model that the training data and
+      observations have the same distribution and
+      <m:math>
+	<m:msub>
+	  <m:mi>ℳ</m:mi>
+	  <m:mn>1</m:mn>
+	</m:msub>
+      </m:math> that they don't, <cite target-id="Gutman"><cite-title>Gutman</cite-title></cite>
+      showed that when we use the decision rule
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:log/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo> 
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:ci>γ</m:ci>
+	  </m:apply>
+	</m:mrow>
+      </m:math> its false-alarm probability has an exponential rate at
+      least as large as the threshold and the miss probability is the
+      smallest among <emphasis>all</emphasis> decision rules based on
+      training data.
+
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar>
+	      <m:ci>L</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:infinity/>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>γ</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> and 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>M</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> minimum.
+    </para>
+
+    <para id="para4">
+      We can extend these results to the
+      <m:math><m:ci>K</m:ci></m:math>-model case if we have training
+      data
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mover accent="true">
+	      <m:mi>r</m:mi>
+	      <m:mo>˜</m:mo>
+	    </m:mover>
+	    <m:mi>i</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> (each of length 
+      <m:math>
+	<m:ci>
+	  <m:mover accent="true">
+	    <m:mi>L</m:mi>
+	    <m:mo>˜</m:mo>
+	  </m:mover>
+	</m:ci>
+      </m:math>) that represent model 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:in/>
+	  <m:ci>i</m:ci>
+	  <m:set>
+	    <m:cn>0</m:cn>
+	    <m:ci>…</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>K</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:set>
+	</m:apply>
+      </m:math>.       
+      Given observed data <m:math><m:ci type="vector">r</m:ci>
+      </m:math> (length <m:math><m:ci>L</m:ci></m:math>), we calculate
+      the log likelihood function given above for each model to
+      determine whether the observations closely resemble the tested
+      training data or not. More precisely, define the sufficient
+      statistics
+      <m:math>
+	<m:ci>
+	  <m:msub>  
+	    <m:mi>ϒ</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub>  
+	</m:ci>
+      </m:math> according to
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ϒ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>r</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mover accent="true">
+			    <m:mi>r</m:mi>
+			    <m:mo>˜</m:mo>
+			  </m:mover>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>
+		    <m:mover accent="true">
+		      <m:mi>L</m:mi>
+		      <m:mo>˜</m:mo>
+		    </m:mover>
+		  </m:ci>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mover accent="true">
+			  <m:mi>r</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+		      <m:mi>P</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mover accent="true">
+			      <m:mi>r</m:mi>
+			      <m:mo>˜</m:mo>
+			    </m:mover>
+			    <m:mi>i</m:mi>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>γ</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Ideally, this statistic would be negative for one of the
+      training sets (matching it) and positive for all of the others
+      (not matching them). However, we could also have the observation
+      matching more than one training set. In all such cases, we
+      define a <term>rejection region</term> 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mi>?</m:mi>
+	  </m:msub>
+	</m:ci>	  
+      </m:math>
+      similar to what we defined in <link document="m11242">sequential
+	model evaluation</link>. Thus, we define the
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>i</m:mi>
+	    <m:mi>th</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> decision region
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> according to
+      <m:math>
+	<m:apply>		  
+	  <m:lt/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ϒ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>      
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math> and    
+      <m:math>
+	<m:apply>
+	  <m:gt/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ϒ</m:mi>
+	      <m:mi>j</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>,
+      <m:math>
+	<m:apply>
+	  <m:neq/>
+	  <m:ci>j</m:ci>
+	  <m:ci>i</m:ci>
+	</m:apply>
+      </m:math> and the rejection region as the complement of
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci>
+	    <m:msubsup>
+	      <m:mi>⋃</m:mi>
+	      <m:mrow>
+		<m:mi>i</m:mi>
+		<m:mo>=</m:mo>
+		<m:mn>0</m:mn>
+	      </m:mrow>
+	      <m:mrow>
+		<m:mi>K</m:mi>
+		<m:mo>−</m:mo>
+		<m:mn>1</m:mn>
+	      </m:mrow>
+	    </m:msubsup>
+	  </m:ci>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math>. Note that all decision regions depend on the value of
+      <m:math><m:ci>γ</m:ci></m:math>, a number we must
+      choose. Regardless of the value chosen, the probability of
+      confusing models - choosing some model other than the true one
+      - has an exponential rate that is at least
+      <m:math><m:ci>γ</m:ci></m:math> for all models. Because of
+      the presence of a rejection region, another kind of "error" is
+      to not choose any model. This decision rule is optimal in the
+      sense that no other training-data-based decision rule has a
+      smaller rejection region than the type-based one.
+    </para>
+    
+    <para id="lastpara">
+      Because it controls the exponential rate of confusing models, we
+      would like <m:math><m:ci>γ</m:ci></m:math> to be as large
+      as possible. However, the rejection region grows as
+      <m:math><m:ci>γ</m:ci></m:math> increases; choosing too
+      large a value could make virtually all decisions
+      rejections. What we want to ensure is that
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar>
+	      <m:ci>L</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:infinity/>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℜ</m:mi>
+		  <m:mi>?</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>.  Obtaining this behavior requires that
+      <m:math>
+	<m:apply>
+	  <m:gt/>	   
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar>
+	      <m:ci>L</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:infinity/>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:divide/>	   
+	      <m:ci>
+		<m:mover accent="true">
+		  <m:mi>L</m:mi>
+		  <m:mo>˜</m:mo>
+		</m:mover>
+	      </m:ci>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>:  As the length of the observations increases, so must
+      the size of the training set. In summary, 
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:mrow>
+	    <m:mtext>for some </m:mtext>
+	    <m:mi>i</m:mi>
+	  </m:mrow>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:implies/>
+	    <m:apply>
+	      <m:or/>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:limit/>
+		  <m:bvar>
+		    <m:ci>L</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:infinity/>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>
+		      <m:mover accent="true">
+			<m:mi>L</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:gt/>
+		<m:ci>γ</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>γ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:limit/>
+		<m:bvar>
+		  <m:ci>L</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:infinity/>
+		</m:lowlimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℜ</m:mi>
+		      <m:mi>?</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:forall/>
+	  <m:bvar><m:ci>i</m:ci></m:bvar>
+	  <m:apply>
+	    <m:implies/>
+	    <m:apply>
+	      <m:and/>
+	      <m:apply>
+		<m:gt/>
+		<m:apply>
+		  <m:limit/>
+		  <m:bvar>
+		    <m:ci>L</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:infinity/>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>
+		      <m:mover accent="true">
+			<m:mi>L</m:mi>
+			<m:mo>˜</m:mo>
+		      </m:mover>
+		    </m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>γ</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>γ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    
+	    <m:apply>
+	      <m:leq/>
+	      <m:apply>
+		<m:limit/>
+		<m:bvar>
+		  <m:ci>L</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:infinity/>
+		</m:lowlimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℜ</m:mi>
+			<m:mi>?</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>β</m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The critical value
+      <m:math>
+	<m:msub>
+	  <m:mi>γ</m:mi>
+	  <m:mn>0</m:mn>
+	</m:msub>
+      </m:math> depends on the true distributions underlying the
+      models. The exponential rate of the rejection probability
+      <m:math><m:ci>β</m:ci></m:math> also depends on the true
+      distributions. These results mean that if sufficient training
+      data are available and the decision threshold is not too large,
+      then we can perform optimal detection based entirely on data! As
+      the number of observations increases (and the amount of training
+      data as well), the critical threshold
+      <m:math>
+	<m:msub>
+	  <m:mi>γ</m:mi>
+	  <m:mn>0</m:mn>
+	</m:msub>
+      </m:math> becomes the Kullback-Liebler distance between the
+      unknown models. In other words, the type-based detector becomes
+      optimal!
+    </para>
+  </content>
+
+  <bib:file>
+    <bib:entry id="Gutman">
+      <bib:article>
+	<bib:author>M. Gutman</bib:author> 
+	<bib:title>Asymptotically optimal classification for multiple
+	test with empirically observed statistics</bib:title> 
+	<bib:journal>IEEE Trans. Info. Theory</bib:journal>
+	<bib:year>1989</bib:year>
+	<bib:volume>35</bib:volume>
+	<bib:pages>401-408</bib:pages>
+      </bib:article>
+    </bib:entry>
+  </bib:file>				    
+  
+</document>

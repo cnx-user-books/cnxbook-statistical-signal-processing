@@ -1,0 +1,825 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Detection in the Presence of Uncertainties</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>3e7ead7e-6ed2-49be-9bd4-a48af5d23335</md:uuid>
+</metadata>
+
+  <content>
+    <section id="sect1">
+      <title>Unknown Signal Parameters</title>
+      <para id="para1">
+	Applying the techniques described in the previous section may
+	be difficult to justify when the signal and/or noise models
+	are uncertain.  For example, we must "know" a signal down to
+	the precise value of every sample.  In other cases, we may
+	know the signal's waveform, but not the waveform's
+	<term>amplitude</term> as measured by a sensor.  A ubiquitous
+	example of this uncertainty is propagation loss: the range of a
+	far-field signal can only be lower-bounded, which leads to the
+	known waveform, unknown amplitude detection problem.  Another
+	uncertainty is the signal's <term>time origin</term>: Without
+	this information, we do not know when to start the matched
+	filtering operation!  In other circumstances, the noise may
+	have a white power spectrum but its variance is unknown.  Much
+	worse situations (from the point of view of detection theory)
+	can be imagined: the signal may not be known at all and one
+	may want to detect the presence of <emphasis>any</emphasis>
+	disturbance in the observations other than that of
+	well-specified noise.  These problems are very realistic, but
+	the detection schemes as presented are inadequate to attack
+	them.  The detection results we have derived to date need to
+	be extended to incorporate the presence of unknowns just as we
+	did in hypothesis testing (<link document="m11229">Detection
+	in the Presence of Unknowns</link>).
+      </para>
+
+      <section id="sect1a">
+	<title>Unknown Signal Amplitude</title>
+	<para id="para2">
+	  Assume that a signal's waveform is known exactly, but the
+	  amplitude is not.  We need an algorithm to detect the
+	  presence or absence of this signal observed in additive
+	  noise at an array's output.  The models can be formally
+	  stated as
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">n</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:mi>,</m:mi><m:mi> </m:mi>
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:mo>:</m:mo>
+
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:mi>,</m:mi><m:mi> </m:mi>
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	      <m:mo>,</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>A</m:ci>
+		<m:ci>?</m:ci>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  As usual, <m:math><m:ci>L</m:ci></m:math> observations are
+	  available and the noise is Gaussian.  This problem is
+	  equivalent to an unknown parameter problem described in
+	  <link document="m11229">Detection in the Presence of
+	  Unknowns</link>.  We learned there that the first step is to
+	  ascertain the existence of a uniformly most powerful test.
+	  For each value of the unknown parameter
+	  <m:math><m:ci>A</m:ci></m:math>, the logarithm of the
+	  likelihood ratio is written
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>A</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:apply>
+
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+
+	      <m:apply>
+		<m:ln/>
+		<m:ci>η</m:ci>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  <emphasis>Assuming</emphasis> that <m:math>
+	    <m:apply>
+	      <m:gt/>
+	      <m:ci>A</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>, a typical assumption in array processing
+	  problems, we write this comparison as
+	  <m:math display="block">
+	    <m:mrow>		
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">K</m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:ci>A</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ln/>
+		      <m:ci>η</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector">s</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">K</m:ci>
+		    </m:apply>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>γ</m:ci>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  As the sufficient statistic does not depend on the unknown
+	  parameter and one of the models (<m:math> <m:ci><m:msub>
+	  <m:mi>ℳ</m:mi> <m:mn>0</m:mn> </m:msub></m:ci>
+	  </m:math>) does not depend on this parameter, a uniformly
+	  most powerful test exists: the threshold term, despite its
+	  explicit dependence on a variety of factors, can be
+	  determined by specifying a false-alarm probability.  If the
+	  noise is not white, the whitening filter or a spectral
+	  transformation may be used to simplify the computation of
+	  the sufficient statistic.
+	</para>
+
+	<example id="ex1">
+	  <para id="para2a">
+	    Assume that the waveform, but not the amplitude, of a signal
+	    is known.  The Gaussian noise is white with a variance of
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math>.  The decision rule expressed in terms of a
+	    sufficient statistic becomes
+	    <m:math display="block">
+	      <m:mrow>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+		<m:munderover>
+		  <m:mo>≷</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:munderover>
+		<m:ci>γ</m:ci>
+	      </m:mrow>
+	    </m:math>
+
+	  The false-alarm probability is given by
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>γ</m:ci>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>E</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where <m:math><m:ci>E</m:ci></m:math> is the
+	  <emphasis>assumed</emphasis> signal energy which equals
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci>s</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>.  The threshold
+	  <m:math><m:ci>γ</m:ci></m:math> is thus found to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>γ</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:root/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>E</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>F</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    The probability of detection for the matched filter detector
+	    is given by
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>γ</m:ci>
+		      <m:apply>
+			<m:times/>
+			<m:ci>A</m:ci>
+			<m:ci>E</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>E</m:ci>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:apply>
+			<m:ci type="fn">Q</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mi>F</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>A</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:ci>E</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where <m:math><m:ci>A</m:ci></m:math> is the signal's
+	  <emphasis>actual</emphasis> amplitude relative to the
+	  assumed signal having energy
+	  <m:math><m:ci>E</m:ci></m:math>.  Thus, the observed signal,
+	  when it is present, has energe <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>A</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci>E</m:ci>
+	    </m:apply>
+	  </m:math>.  The probability of detection is shown in <link target-id="fig1"/> as a function of the observed
+	  signal-to-noise ratio.  For any false-alarm probability, the
+	  signal must be sufficiently energetic for its presence to be
+	  reliably determined.
+	  </para>
+
+	  <figure id="fig1">
+	    <media id="idm6486608" alt=""><image src="../../media/signsqlawpd.png" mime-type="image/png"/></media> 
+	    <caption> The false-alarm probability of the detector was
+	    fixed at
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:cn>10</m:cn>
+		  <m:cn>-2</m:cn>
+		</m:apply>
+	      </m:math>.  The signal equaled 
+	      <m:math>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:apply>
+		    <m:sin/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>ω</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>, 
+	      <m:math>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>l</m:ci>
+		  <m:set>
+		    <m:cn>0</m:cn>
+		    <m:ci>…</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:set>
+		</m:apply>
+	      </m:math>, where 
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ω</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math> was 
+	      <m:math>
+		<m:apply>
+		  <m:mo>×</m:mo>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		  </m:apply>
+		  <m:cn>0.1</m:cn>
+		</m:apply>
+	      </m:math> and 
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>L</m:ci>
+		  <m:cn>100</m:cn>
+		</m:apply>
+	      </m:math>; the noise was white and Gaussian.  The detection
+	      probabilities that result from a matched filter detector, a
+	      sign detector, and a square-law detector are shown.  These
+	      detectors make progressively fewer assumptions about the
+	      signal, consequently yielding progressively smaller
+	      detection probabilities.
+	    </caption>
+	  </figure>
+	</example>
+
+	<para id="para3">
+	  All too many interesting problems exist where a uniformly
+	  most powerful decision rule cannot be found.  Suppose in the
+	  problem just described that the amplitude is known (<m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>A</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>, for example), but the variance of the noise is
+	  not.  Writing the covariance matrix as <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci type="matrix"><m:mover>
+		  <m:mi>K</m:mi>
+		  <m:mo>∼</m:mo>
+		</m:mover></m:ci>
+	    </m:apply>
+	  </m:math>, where we normalize the covariance matrix to have
+	  unit variance entries by requiring 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">tr</m:ci>
+		<m:ci type="matrix"><m:mover>
+		    <m:mi>K</m:mi>
+		    <m:mo>∼</m:mo>
+		  </m:mover></m:ci>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:math>, unknown values of <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math> express the known correlation structure, unknown
+	  noise power problem.  From the results just given, the
+	  decision rule can be written so that sufficient statistic
+	  does not depend on the unknown variance.
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix"><m:mover>
+		      <m:mi>K</m:mi>
+		      <m:mo>∼</m:mo>
+		    </m:mover></m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:ln/>
+		      <m:ci>η</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector">s</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix"><m:mover>
+			  <m:mi>K</m:mi>
+			  <m:mo>∼</m:mo>
+			</m:mover></m:ci>
+		    </m:apply>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>γ</m:ci>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  However, as <emphasis>both</emphasis> models depend on the
+	  unknown parameter, performance probabilities cannot be
+	  computed and we cannot design a detection threshold.
+	</para>
+
+	<para id="para4">
+	  Hypothesis testing ideas show the way out; estimate the
+	  unknown parameter(s) under each model separately and then
+	  use these estimates in the likelihood ratio (<link document="m11238" target-id="glr">Non-Random
+	  Parameters</link>).  Using the maximum likelihood estimates
+	  for the parameters results in the generalized likelihood
+	  ratio test for the detection problem (<cite target-id="kelly1"><cite-title>Kelly, <foreign>et al</foreign></cite-title></cite>, <cite target-id="kelly2"><cite-title>Kelly, <foreign>et al</foreign></cite-title></cite>, <cite target-id="trees"><cite-title>van Trees</cite-title></cite>).  Letting <m:math><m:ci type="vector">θ</m:ci></m:math> denote the vector of
+	  unknown parameters, be they for the signal or the noise, the
+	  generalized likelihood ratio test for detection problems is
+	  expressed by
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:max/>
+		    <m:bvar>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">n</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci type="vector">θ</m:ci>
+		      </m:condition>
+		      <m:apply>
+			<m:minus/>
+			<m:ci type="vector">r</m:ci>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci type="vector">θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+
+		  <m:apply>
+		    <m:max/>
+		    <m:bvar>
+		      <m:ci type="vector">θ</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">n</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci type="vector">θ</m:ci>
+		      </m:condition>
+		      <m:apply>
+			<m:minus/>
+			<m:ci type="vector">r</m:ci>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci type="vector">θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      
+	      <m:mi>η</m:mi>
+	    </m:mrow>
+	  </m:math>
+	  Again, the use of <emphasis>separate</emphasis> estimates
+	  for each model (rather than for the likelihood ratio as a
+	  whole) must be stressed.  Unknown signal-related parameter
+	  problems and unknown noise-parameter problems have different
+	  characteristics; the signal may not be present in one of the
+	  observation models.  This simplification allows a threshold
+	  to be established objectively.  In contrast, the noise is
+	  present in each model; establishing a threshold value
+	  objectively will force new techniques to be developed.  We
+	  first continue our adventure in unknown-signal-parameter
+	  problems, deferring the more challenging
+	  unknown-noise-parameter ones to <link document="m11285">later</link>.
+	</para>
+      </section>
+    </section>
+  </content>
+
+  <bib:file>
+    <bib:entry id="kelly1">
+      <bib:article>
+	<bib:author>E. J. Kelly; I. S. Reed; W. L. Root</bib:author>
+	<bib:title>The detection of radar echoes in
+	noise. I</bib:title>
+	<bib:journal>J. Soc. Indust. Appl. Math.</bib:journal>
+	<bib:year>1960</bib:year>
+	<bib:volume>8</bib:volume>
+	<bib:pages>309-341</bib:pages>
+	<bib:month>June</bib:month>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="kelly2">
+      <bib:article>
+	<bib:author>E. J. Kelly; I. S. Reed; W. L. Root</bib:author>
+	<bib:title>The detection of radar echoes in
+	noise. II</bib:title>
+	<bib:journal>J. Soc. Indust. Appl. Math.</bib:journal>
+	<bib:year>1960</bib:year>
+	<bib:volume>8</bib:volume>
+	<bib:pages>481-507</bib:pages>
+	<bib:month>September</bib:month>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="trees">
+      <bib:book>
+	<bib:author>H. L. van Trees</bib:author>
+	<bib:title>Detection, Estimation, and Modulation Theory, 
+	  Part I</bib:title>
+	<bib:publisher>John Wiley &amp; Sons</bib:publisher>
+	<bib:year>1968</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file> 
+
+</document>

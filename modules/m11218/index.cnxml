@@ -1,0 +1,924 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Ali-Silvey Distances</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e9c0d6eb-4487-40d0-9ac1-189fb1420078</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Ali-Silvey distances comprise a family of quantities that depend
+      on the likelihood ratio
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">Λ</m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> and on the model-describing densities
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>, 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci>
+      </m:math> in the following way.
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">d</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:bvar>
+		  <m:cn>0</m:cn>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="fn">c</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">Λ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Here, 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is an increasing function, 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">c</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is a convex function, and
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:bvar>
+	    <m:cn>0</m:cn>
+	  </m:bvar>   
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> means expectation with respect to
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>. Where applicable, 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>π</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>, 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>π</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci>
+      </m:math> denote the <foreign>a priori</foreign> probabilities
+      of the models. <cite target-id="basseville"><cite-title>Basseville</cite-title></cite> is a
+      good reference on distances in this class and many others. In
+      all cases, the observations consist of
+      <m:math><m:ci>L</m:ci></m:math> IID random variables.  
+    </para>
+
+    <table frame="all" id="table1" summary="">
+      <title>Ali-Silvey Distances and Relation to Detection Performance</title>
+      <tgroup cols="4" align="left" colsep="1" rowsep="1">
+	<thead valign="top">
+	  <row>
+	    <entry>Name</entry>
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">c</m:ci>
+		  <m:ci>·</m:ci>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	    <entry>Performance</entry>
+	    <entry>Comment</entry>
+	  </row>
+	</thead>
+	<tbody valign="middle">
+	  <row>
+	    <entry>Kullback-Leibler
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:mfenced>
+		      <m:mi>·</m:mi>
+		    </m:mfenced></m:ci>
+		  <m:apply>
+		    <m:log/>
+		    <m:ci><m:mfenced>
+			<m:mi>·</m:mi>
+		      </m:mfenced></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:limit/>
+		    <m:bvar>
+		      <m:ci>L</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:infinity/>
+		    </m:lowlimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:ci>L</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:log/>
+			  <m:ci><m:msub>
+			      <m:mi>P</m:mi>
+			      <m:mi>F</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">d</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry morerows="1">Neyman-Pearson error rate under both
+	    fixed and exponentially decaying constraints on
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>M</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> (<m:math>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	      </m:math>)
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>Kullback-Leibler
+	      <m:math>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:log/>
+		    <m:ci><m:mfenced>
+			<m:mi>·</m:mi>
+		      </m:mfenced></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:limit/>
+		    <m:bvar>
+		      <m:ci>L</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:infinity/>
+		    </m:lowlimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:ci>L</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:log/>
+			  <m:ci><m:msub>
+			      <m:mi>P</m:mi>
+			      <m:mi>M</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">d</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>
+	      <m:math>
+		<m:ci>J</m:ci>
+	      </m:math>-Divergence
+	    </entry>
+	    
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:mfenced>
+			<m:mi>·</m:mi>
+		      </m:mfenced></m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:log/>
+		    <m:ci><m:mfenced>
+			<m:mi>·</m:mi>
+		      </m:mfenced></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:leq/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>π</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>π</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:ci type="fn">d</m:ci>
+			    <m:ci><m:msub>
+				<m:mi>p</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub></m:ci>
+			    <m:ci><m:msub>
+				<m:mi>p</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub></m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>e</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">J</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>Chernoff</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:mfenced>
+		      <m:mi>·</m:mi>
+		    </m:mfenced></m:ci>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:math>, 
+		
+	      <m:math>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>s</m:ci>
+		  <m:interval closure="open">
+		    <m:cn>0</m:cn>
+		    <m:cn>1</m:cn>
+		  </m:interval>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <!-- max of one element?? -->
+		    <m:max/>
+		    <m:apply>
+		      <m:limit/>
+		      <m:bvar>
+			<m:ci>L</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:infinity/>
+		      </m:lowlimit>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:ci>L</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:log/>
+			    <m:ci><m:msub>
+				<m:mi>P</m:mi>
+				<m:mi>e</m:mi>
+			      </m:msub></m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#infimum"/>
+		    <m:bvar>
+		      <m:ci>s</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:apply>
+			<m:in/>
+			<m:ci>s</m:ci>
+			<m:interval closure="open">
+			  <m:cn>0</m:cn>
+			  <m:cn>1</m:cn>
+			</m:interval>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:ci type="fn">d</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>Independent of <foreign>a priori</foreign>
+	    probabilities</entry>
+	  </row>
+
+	  <row>
+	    <entry>
+	      <m:math>
+		<m:ci>M</m:ci>
+	      </m:math>-Hypothesis Chernoff</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:mfenced>
+		      <m:mi>·</m:mi>
+		    </m:mfenced></m:ci>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:math>, 
+		
+	      <m:math>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>s</m:ci>
+		  <m:interval closure="open">
+		    <m:cn>0</m:cn>
+		    <m:cn>1</m:cn>
+		  </m:interval>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <!-- max of one element?? -->
+		    <m:max/>
+		    <m:apply>
+		      <m:limit/>
+		      <m:bvar>
+			<m:ci>L</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:infinity/>
+		      </m:lowlimit>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:ci>L</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:log/>
+			    <m:ci><m:msub>
+				<m:mi>P</m:mi>
+				<m:mi>e</m:mi>
+			      </m:msub></m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:min/>
+		    <!-- needs bvar-->
+		    <m:condition>
+		      <m:apply>
+			<m:neq/>
+			<m:ci>i</m:ci>
+			<m:ci>j</m:ci>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#infimum"/>
+		      <m:bvar>
+			<m:ci>s</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:apply>
+			  <m:in/>
+			  <m:ci>s</m:ci>
+			  <m:interval closure="open">
+			    <m:cn>0</m:cn>
+			    <m:cn>1</m:cn>
+			  </m:interval>
+			</m:apply>
+		      </m:condition>
+		      <m:apply>
+			<m:ci type="fn">d</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mi>j</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>Bhattacharyya</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:mfenced>
+		      <m:mi>·</m:mi>
+		    </m:mfenced></m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:leq/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>π</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>π</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:ci type="fn">d</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>e</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:ci><m:msub>
+			    <m:mi>π</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>π</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">d</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>Minimizing 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">d</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math> will tend to minimize
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>e</m:mi>
+		  </m:msub></m:ci>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>Orsak</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>π</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>·</m:ci>
+		    </m:apply>
+		    <m:ci><m:msub>
+			<m:mi>π</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>e</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">d</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>Exact formula for average error probability</entry>
+	  </row>
+
+	  <row>
+	    <entry>Kolmogorov</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:mfenced>
+			  <m:mi>·</m:mi>
+			</m:mfenced></m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+
+	    <entry>If
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>,
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>e</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">d</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	  <row>
+	    <entry>Hellinger</entry>
+
+	    <entry>
+	      <m:math>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci><m:mfenced>
+			  <m:mi>·</m:mi>
+			</m:mfenced></m:ci>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:math>
+	    </entry>
+	  </row>
+
+	</tbody>
+      </tgroup>
+    </table>
+
+  </content>
+  
+  <bib:file>
+    <bib:entry id="basseville">
+      <bib:article>
+	<bib:author>M. Basseville</bib:author> 
+	<bib:title>Distance measures for signal processing and pattern
+	recognition</bib:title>
+	<bib:journal>Signal Processing</bib:journal>
+	<bib:year>1989</bib:year>
+	<bib:volume>18</bib:volume>
+	<bib:pages>349-369</bib:pages>
+      </bib:article>
+    </bib:entry>
+  </bib:file>
+</document>

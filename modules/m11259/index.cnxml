@@ -1,0 +1,1625 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Karhunen-Loeve Expansion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ccdf5e40-cc28-47ea-a52b-93f0eadb1e99</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The representation of the process, <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>, is the sequence of random variables <m:math>
+	<m:ci><m:msub>
+	    <m:mi>X</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub></m:ci>
+      </m:math>.  The choice basis of <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math> is unrestricted.  Of particular interest is to
+      restrict the basis functions to those which make the <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math> <emphasis>uncorrelated</emphasis> random variables.
+      When this requirement is satisfied, the resulting representation
+      of
+      <m:math>
+	<m:apply>
+	  <m:ci>X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> is termed the <term>Karhunen-Loève</term>
+      expansion.  Mathematically, we require <m:math>
+	<m:apply>
+	  <m:forall/>
+	  <m:bvar><m:ci>i</m:ci></m:bvar>
+	  <m:bvar><m:ci>j</m:ci></m:bvar>
+	  <m:condition>
+	    <m:apply>
+	      <m:neq/>
+	      <m:ci>i</m:ci>
+	      <m:ci>j</m:ci>
+	    </m:apply>
+	  </m:condition>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  This requirement can be expressed in terms of the
+      correlation function of <m:math>
+	<m:apply>
+	  <m:ci>X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>j</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>α</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>β</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>β</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>j</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>β</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>β</m:ci></m:bvar>
+	    <m:interval>
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>α</m:ci></m:bvar>
+	      <m:interval>
+		<m:cn>0</m:cn>
+		<m:ci>T</m:ci>
+	      </m:interval>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>α</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>j</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>β</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>α</m:ci>
+		  <m:ci>β</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      As <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> is given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>α</m:ci></m:bvar>
+	    <m:interval>
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      our requirement becomes
+      <equation id="eqn1">
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:bvar><m:ci>j</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:neq/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>β</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+	      <m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>α</m:ci></m:bvar>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		    <m:apply>
+		    <m:ci type="fn"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>β</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>α</m:ci>
+		      <m:ci>β</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>α</m:ci></m:bvar>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>m</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>β</m:ci></m:bvar>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>m</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>β</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>β</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Simple manipulations result in the expression
+      <equation id="eqn2">
+      <m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:bvar><m:ci>j</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:neq/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>α</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar><m:ci>β</m:ci></m:bvar>
+		    <m:interval>
+		      <m:cn>0</m:cn>
+		      <m:ci>T</m:ci>
+		    </m:interval>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn"><m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>X</m:mi>
+			  </m:msub></m:ci>
+			<m:ci>α</m:ci>
+			<m:ci>β</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn"><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>j</m:mi>
+			  </m:msub></m:ci>
+			<m:ci>β</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      When <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>i</m:ci>
+	  <m:ci>j</m:ci>
+	</m:apply>
+      </m:math>, the quantity <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math> is just the variance of <m:math>
+	<m:ci><m:msub>
+	    <m:mi>X</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub></m:ci>
+      </m:math>.  Our requirement is obtained by satisfying
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>α</m:ci></m:bvar>
+	    <m:interval>
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>β</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>X</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>α</m:ci>
+		    <m:ci>β</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>j</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>β</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>λ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>δ</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>j</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      or
+      <equation id="eqn3">
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:bvar><m:ci>j</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:neq/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>α</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>g</m:mi>
+			<m:mi>j</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      where
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>g</m:mi>
+		<m:mi>j</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>β</m:ci></m:bvar>
+	    <m:interval>
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Furthermore, this requirement must hold for each
+      <m:math><m:ci>j</m:ci></m:math> which differs from the choice of
+      <m:math><m:ci>i</m:ci></m:math>.  A choice of a function
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>g</m:mi>
+	      <m:mi>j</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>α</m:ci>
+	</m:apply>
+      </m:math> satisfying this requirement is a function which is
+      proportional to <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>φ</m:mi>
+	      <m:mi>j</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>α</m:ci>
+	</m:apply>
+      </m:math>: <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>g</m:mi>
+		<m:mi>j</m:mi>
+	      </m:msub></m:ci>
+	    <m:mi>α</m:mi>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>λ</m:mi>
+		<m:mi>j</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mi>j</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Therefore,
+      <equation id="eqn1a">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>β</m:ci></m:bvar>
+	      <m:interval>
+		<m:cn>0</m:cn>
+		<m:ci>T</m:ci>
+	      </m:interval>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>α</m:ci>
+		  <m:ci>β</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>j</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>β</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>λ</m:mi>
+		  <m:mi>j</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>φ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math> which allow the representation of <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> to be a sequence of uncorrelated random variables must
+      satisfy this integral equation.  This type of equation occurs
+      often in applied mathematics; it is termed the
+      <term>eigenequation</term>.  The sequences <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>φ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math> and <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>λ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math> are the eigenfunctions and eigenvalues of <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>X</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>α</m:ci>
+	  <m:ci>β</m:ci>
+	</m:apply>
+      </m:math>, the covariance function of <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>.  It is easily verified that:
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>K</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	    <m:ci>u</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:cn>1</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:infinity/>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>λ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      This result is termed <term>Mercer's Theorem</term>.
+    </para>
+
+    <para id="para2">
+      The approach to solving for the eigenfunction and eigenvalues of <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>X</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>t</m:ci>
+	  <m:ci>u</m:ci>
+	</m:apply>
+      </m:math> is to convert the integral equation into an ordinary
+      differential equation which can be solved.  This approach is
+      best illustrated by an example.
+    </para>
+
+    <example id="ex1">
+      <para id="paraex1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	      <m:ci>u</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:min/>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The eigenequation can be written in this case as
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>u</m:ci></m:bvar>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>t</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>u</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">φ</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>t</m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar><m:ci>u</m:ci></m:bvar>
+		    <m:interval>
+		      <m:ci>t</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:interval>
+		    <m:apply>
+		      <m:ci type="fn">φ</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:ci type="fn">φ</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Evaluating the first derivative of this expression,
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>t</m:ci>
+		<m:apply>
+		  <m:ci type="fn">φ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar><m:ci>u</m:ci></m:bvar>
+		    <m:interval>
+		      <m:ci>t</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:interval>
+		    <m:apply>
+		      <m:ci type="fn">φ</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:ci>t</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">φ</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:diff/>
+		<m:bvar><m:ci>t</m:ci></m:bvar>
+		<m:apply>
+		  <m:ci type="fn">φ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	or
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>u</m:ci></m:bvar>
+		<m:interval>
+		  <m:ci>t</m:ci>
+		  <m:ci>T</m:ci>
+		</m:interval>
+		<m:apply>
+		  <m:ci>φ</m:ci>
+		  <m:ci>u</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:diff/>
+		<m:bvar><m:ci>t</m:ci></m:bvar>
+		<m:ci>φ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Evaluating the derivative of the last expression yields the
+	simple equation
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">φ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:diff/>
+		<m:bvar>
+		  <m:degree><m:cn>2</m:cn></m:degree>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:ci>φ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	This equation has a general solution of the form <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">φ</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:sin/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>σ</m:ci>
+		      <m:apply>
+			<m:root/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>B</m:ci>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>σ</m:ci>
+		      <m:apply>
+			<m:root/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  It is easily seen that
+	<m:math><m:ci>B</m:ci></m:math> must be zero.  The amplitude
+	<m:math><m:ci>A</m:ci></m:math> is found by requiring <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:ci>φ</m:ci>
+	    </m:apply>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>.  To find <m:math><m:ci>λ</m:ci></m:math>, one
+	must return to the original integral equation.  Substituting, we
+	have
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>u</m:ci></m:bvar>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>t</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>u</m:ci>
+		    <m:apply>
+		      <m:sin/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>σ</m:ci>
+			  <m:apply>
+			    <m:root/>
+			    <m:ci>λ</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>t</m:ci>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>u</m:ci></m:bvar>
+		  <m:interval>
+		    <m:ci>t</m:ci>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		  <m:apply>
+		    <m:sin/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>σ</m:ci>
+			<m:apply>
+			  <m:root/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:ci>A</m:ci>
+	      <m:apply>
+		<m:sin/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>σ</m:ci>
+		    <m:apply>
+		      <m:root/>
+		      <m:ci>λ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	After some manipulation, we find that
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:ci>t</m:ci>
+		<m:interval closure="closed-open">
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:sin/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>σ</m:ci>
+			<m:apply>
+			  <m:root/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:ci>σ</m:ci>
+		  <m:ci>t</m:ci>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>λ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:cos/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:ci>σ</m:ci>
+			<m:apply>
+			  <m:root/>
+			  <m:ci>λ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:sin/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>σ</m:ci>
+		      <m:apply>
+			<m:root/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	or
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:ci>t</m:ci>
+		<m:interval closure="closed-open">
+		  <m:cn>0</m:cn>
+		  <m:ci>T</m:ci>
+		</m:interval>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>A</m:ci>
+		<m:ci>σ</m:ci>
+		<m:ci>t</m:ci>
+		<m:apply>
+		  <m:root/>
+		  <m:ci>λ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:ci>σ</m:ci>
+		      <m:apply>
+			<m:root/>
+			<m:ci>λ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>T</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Therefore,
+	<m:math>
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>n</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>n</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:cn>2</m:cn>
+		  <m:mo>…</m:mo>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>σ</m:ci>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>λ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>T</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>n</m:ci>
+		  <m:cn>1/2</m:cn>
+		</m:apply>
+		<m:pi/>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and we have
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>λ</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>T</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>n</m:ci>
+		    <m:cn>1/2</m:cn>
+		  </m:apply>
+		  <m:ci>2</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:pi/>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>2</m:cn>
+		  <m:ci>T</m:ci>
+		</m:apply>
+		<m:ci>1/2</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sin/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci>n</m:ci>
+		      <m:cn>1/2</m:cn>
+		    </m:apply>
+		    <m:pi/>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:ci>T</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+    </example>
+
+    <para id="para3">
+      The Karhunen-Loève expansion has several important properties.
+      <list id="list1">
+	<item>The eigenfunctions of a positive-definite covariance
+	  function constitute a complete set.  One can easily show that
+	  these eigenfunctions are also mutually orthogonal with respect
+	  to both the usual inner product and with respect to the inner
+	  product derived from the covariance function.</item>
+	<item>If <m:math>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math> Gaussian, <m:math> <m:ci><m:msub> <m:mi>X</m:mi>
+		<m:mi>i</m:mi> </m:msub></m:ci> </m:math> are Gaussian
+	  random variables.  As the random variables <m:math>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math> are uncorrelated and Gaussian, the <m:math>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math> comprise a sequence of statistically independent
+	  random variables.</item>
+	<item>Assume <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">δ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>t</m:ci>
+		    <m:ci>u</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>: the stochastic process <m:math>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math> is white.  Then
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>u</m:ci></m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msub>
+			<m:mi>N</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">δ</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">φ</m:ci>
+		    <m:ci>u</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:apply>
+		  <m:ci type="fn">φ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  for all <m:math>
+	    <m:apply>
+	      <m:ci type="fn">φ</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math>.  Consequently, if <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>λ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, this constraint equation is satisfied <emphasis>no matter what choice is made for the orthonormal set</emphasis> <m:math>
+	    <m:set>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:set>
+	  </m:math>.  Therefore, the representation of white, Gaussian
+	  processes consists of a sequence of statistically
+	  independent, identically-distributed (mean zero and variance
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>) Gaussian random variables.  This example
+	  constitutes the simplest case of the Karhunen-Loève
+	  expansion.
+	</item>
+      </list>
+    </para>
+
+  </content>
+  
+</document>

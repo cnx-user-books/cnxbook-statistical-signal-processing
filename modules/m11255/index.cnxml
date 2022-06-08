@@ -1,0 +1,2991 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>The Poisson Process</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>6606cdd4-45dd-4ad6-b678-015013148e69</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Some signals have no waveform.  Consider the measurement of when
+      lightning strikes occur within some region; the random process
+      is the sequence of event times, which has no intrinsic waveform.
+      Such processes are termed <term>point processes</term>, and have
+      been shown (see <cite target-id="snyder"><cite-title>Snyder</cite-title></cite>) to have
+      simple mathematical structure.  Define some quantities first.
+      Let <m:math> <m:ci><m:msub> <m:mi>N</m:mi> <m:mi>t</m:mi>
+      </m:msub></m:ci> </m:math> be the number of events that have
+      occurred up to time <m:math><m:ci>t</m:ci> </m:math>
+      (observations are by convention assumed to start at <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>t</m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>).  This quantity is termed the counting process, and
+      has the shape of a staircase function: The counting function
+      consists of a series of plateaus always equal to an integer,
+      with jumps between plateaus occuring when events occur.
+      The increment <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> corresponds to the number of events in the
+	  interval <m:math>
+	    <m:interval closure="closed-open">
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	    </m:interval>
+	  </m:math>. 
+      Consequently,
+        <m:math>
+           <m:apply> <m:eq/>
+             <m:ci><m:msub>
+	      <m:mi>N</m:mi>
+	      <m:mi>t</m:mi>
+	    </m:msub></m:ci>
+            <m:ci><m:msub>
+                <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:mn>0</m:mn>
+		    <m:mo>,</m:mo>
+		    <m:mi>t</m:mi>
+		  </m:mrow>
+		</m:msub></m:ci>
+           </m:apply>
+         </m:math>.
+      The
+      event times comprise the random vector <m:math><m:ci type="vector">W</m:ci></m:math>; the dimension of this vector is
+      <m:math> <m:ci><m:msub> <m:mi>N</m:mi> <m:mi>t</m:mi>
+      </m:msub></m:ci> </m:math>, the number of events that have
+      occured.  The occurrence of events is governed by a quantity
+      known as the <term>intensity</term> 
+      <m:math>
+	<m:mrow>
+	  <m:mi>λ</m:mi>
+	  <m:mo>(</m:mo>
+	  <m:mrow>
+	    <m:mi>t</m:mi>
+	    <m:mo>;</m:mo>
+	    <m:msub>
+	      <m:mi>N</m:mi>
+	      <m:mi>t</m:mi>
+	    </m:msub>
+	    <m:mo>;</m:mo>
+	    <m:mi mathvariant="bold">W</m:mi>
+	  </m:mrow>
+	  <m:mo>)</m:mo>
+	</m:mrow>
+      </m:math> of the point process through the probability law
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:condition>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub>
+		<m:mo>;</m:mo>
+		<m:mi mathvariant="bold">W</m:mi>
+	      </m:mrow>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:mi>t</m:mi>
+		    <m:mo>,</m:mo>
+		    <m:mrow>
+		      <m:mi>t</m:mi>
+		      <m:mo>+</m:mo>
+		      <m:mrow>
+			<m:mo>Δ</m:mo>
+			<m:mi>t</m:mi>
+		      </m:mrow>
+		    </m:mrow>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:mrow>
+		<m:mi>λ</m:mi>
+		<m:mo>(</m:mo>
+		<m:mrow>
+		  <m:mi>t</m:mi>
+		  <m:mo>;</m:mo>
+		  <m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub>
+		  <m:mo>;</m:mo>
+		  <m:mi mathvariant="bold">W</m:mi>
+		</m:mrow>
+		<m:mo>)</m:mo>
+	      </m:mrow></m:ci>
+	    <m:apply>
+	      <m:mo>Δ</m:mo>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      for sufficiently small 
+      <m:math>
+	<m:apply>
+	  <m:mo>Δ</m:mo>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>.  Note that this probability is a conditional
+      probability; it can depend on how many events occurred
+      previously and when they occurred.  The intensity can also vary
+      with time to describe non-stationary point processes.  The
+      intensity has units of events, and it can be viewed as the
+      instantaneous rate at which events occur.
+    </para>
+
+    <para id="para2">
+      The simplest point process from a structural viewpoint, the
+      Poisson process, has no dependence on process history.  A
+      stationary Poisson process results when the intensity equals a
+      constant: <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:mrow>
+	      <m:mi>λ</m:mi>
+	      <m:mo>(</m:mo>
+	      <m:mrow>
+		<m:mi>t</m:mi>
+		<m:mo>;</m:mo>
+		<m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub>
+		<m:mo>;</m:mo>
+		<m:mi mathvariant="bold">W</m:mi>
+	      </m:mrow>
+	      <m:mo>)</m:mo>
+	    </m:mrow></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>λ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  Thus, in a Poisson process, a coin is flipped every 
+      <m:math>
+	<m:apply>
+	  <m:mo>Δ</m:mo>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> seconds, with a constant probability of heads (an
+      event) occuring that equals <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci><m:msub>
+	      <m:mi>λ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:mo>Δ</m:mo>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> and is independent of the occurrence of past (and
+      future) events.  When this probability varies with time, the
+      intensity equals <m:math>
+	<m:apply>
+	  <m:ci type="fn">λ</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>, a non-negative signal, and a nonstationary Poison
+      process results.  <footnote id="idm6918368">In the literature,
+      stationary Poisson processes are sometimes termed homogeneous,
+      nonstationary ones inhomogeneous.</footnote>
+    </para>
+
+    <para id="para3">
+      From the Poisson process's definition, we can derive the
+      probability laws that govern event occurrence.  These fall into
+      two categories: the <term>count</term> statistics <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>N</m:mi>
+		<m:mrow>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		  <m:mo>,</m:mo>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:ci>n</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, the probability of obtaining
+      <m:math><m:ci>n</m:ci></m:math> events in an interval 
+      <m:math>
+	<m:interval closure="closed-open">
+	  <m:ci><m:msub>
+	      <m:mi>t</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>t</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msub></m:ci>
+	</m:interval>
+      </m:math>, and the <term>time of occurrence</term> statistics 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:ci><m:msup>
+		<m:mi mathvariant="bold">W</m:mi>
+		<m:mfenced>
+		  <m:mi>n</m:mi>
+		</m:mfenced>
+	      </m:msup></m:ci>
+	  </m:bvar>
+	  <m:ci type="vector">w</m:ci>
+	</m:apply>
+      </m:math>, the joint distribution of the first
+      <m:math><m:ci>n</m:ci></m:math> event times in the observation
+      interval.  These times form the vector 
+      <m:math>
+	<m:ci type="vector"><m:msup> 
+	    <m:mi>W</m:mi> 
+	    <m:mfenced>
+	      <m:mi>n</m:mi>
+	    </m:mfenced>
+	  </m:msup></m:ci>
+      </m:math>
+      , the occurrence time vector of dimension
+      <m:math><m:ci>n</m:ci></m:math>.  From these two probability
+      distributions, we can derive the sample function density.
+    </para>
+
+    <section id="sect1">
+      <title>Count Statistics</title>
+      <para id="para4">
+	We derive a differentio-difference equation that 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:ci>n</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:lt/>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>, must satisfy for event occurrence in an interval to
+	be regular and independent of event occurrences in disjoint
+	intervals.  Let <m:math> <m:ci><m:msub> <m:mi>t</m:mi>
+	      <m:mn>1</m:mn> </m:msub></m:ci> </m:math> be fixed and
+	consider event occurrence in the intervals <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:interval>
+	</m:math> and <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>δ</m:ci>
+	    </m:apply>
+	  </m:interval>
+	</m:math>, and how these contribute to the occurrence of
+	<m:math><m:ci>n</m:ci></m:math> events in the union of the two
+	intervals.  If <m:math><m:ci>k</m:ci></m:math> events occur in
+	<m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:interval>
+	</m:math>, then <m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>n</m:ci>
+	    <m:ci>k</m:ci>
+	  </m:apply>
+	</m:math> must occur in <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>δ</m:ci>
+	    </m:apply>
+	  </m:interval>
+	</m:math>.  Furthermore, the scenarios for different values of
+	<m:math><m:ci>k</m:ci></m:math> are mutually exclusive.
+	Consequently,
+
+	<equation id="eqn1">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+			<m:mo>+</m:mo>
+			<m:mi>δ</m:mi>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>k</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci>n</m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci><m:msub>
+			<m:mi>N</m:mi>
+			<m:mrow>
+			<m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci><m:msub>
+			<m:mi>N</m:mi>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			  <m:mo>+</m:mo>
+			  <m:mi>δ</m:mi>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>n</m:ci>
+		      <m:mi>k</m:mi>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:condition>
+		      <m:apply>
+			<m:eq/>
+			<m:ci><m:msub>
+			    <m:mi>N</m:mi>
+			    <m:mrow>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub>
+			      <m:mo>,</m:mo>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			    <m:mo>+</m:mo>
+			    <m:mi>δ</m:mi>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:condition>
+		      <m:apply>
+			<m:eq/>
+			<m:ci><m:msub>
+			    <m:mi>N</m:mi>
+			    <m:mrow>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub>
+			      <m:mo>,</m:mo>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>n</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			    <m:mo>+</m:mo>
+			    <m:mi>δ</m:mi>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>n</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar><m:ci>k</m:ci></m:bvar>
+		    <m:lowlimit>
+		      <m:cn>2</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>n</m:ci>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		      <m:condition>
+			<m:apply>
+			  <m:eq/>
+			  <m:ci><m:msub>
+			      <m:mi>N</m:mi>
+			      <m:mrow>
+				<m:msub>
+				  <m:mi>t</m:mi>
+				  <m:mn>1</m:mn>
+				</m:msub>
+				<m:mo>,</m:mo>
+				<m:msub>
+				  <m:mi>t</m:mi>
+				  <m:mn>2</m:mn>
+				</m:msub>
+			      </m:mrow>
+			    </m:msub></m:ci>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>n</m:ci>
+			    <m:ci>k</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:condition>
+		      <m:apply>
+			<m:eq/>
+			<m:ci><m:msub>
+			    <m:mi>N</m:mi>
+			    <m:mrow>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub>
+			      <m:mo>,</m:mo>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub>
+			      <m:mo>+</m:mo>
+			      <m:mi>δ</m:mi>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<m:cn>k</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>n</m:ci>
+			<m:ci>k</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	Because of the independence of event occurrence in disjoint
+	intervals, the conditional probabilities in this expression
+	equal the unconditional ones.  When
+	<m:math><m:ci>δ</m:ci></m:math> is small, only the first
+	two will be significant to the first order in
+	<m:math><m:ci>δ</m:ci></m:math>.  Rearranging and taking
+	the obvious limit, we have the equation defining the count
+	statistics.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar><m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci></m:bvar>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">λ</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">λ</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci><m:msub>
+			<m:mi>N</m:mi>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>n</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	To solve this equation, we apply a
+	<m:math><m:ci>z</m:ci></m:math>-transform to both sides.
+	Defining the transform of 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:ci>n</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> to be <m:math>
+	  <m:apply>
+	    <m:ci type="fn">P</m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math>,  
+	<footnote id="idp1659520">Remember, <m:math> <m:ci><m:msub> <m:mi>t</m:mi>
+		<m:mn>1</m:mn> </m:msub></m:ci> </m:math> is fixed and can
+	  be suppressed notationally.</footnote>  we have
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">P</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>z</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">λ</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>z</m:ci>
+		    <m:cn>-1</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">P</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Applying the boundary condition that <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">P</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>, this simple first-order differential equation has
+	the solution
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">P</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>z</m:ci>
+		      <m:cn>-1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar><m:ci>α</m:ci></m:bvar>
+		    <m:lowlimit><m:ci><m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci></m:lowlimit>
+		    <m:uplimit><m:ci><m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci></m:uplimit>
+		    <m:apply>
+		      <m:ci type="fn">λ</m:ci>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	To evaluate the inverse
+	<m:math><m:ci>z</m:ci></m:math>-transform, we simply exploit
+	the Taylor series expression for the exponential, and we find
+	that a Poisson probability mass function governs the count
+	statistics for a Poisson process.
+	<equation id="eqn1a">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar><m:ci>α</m:ci></m:bvar>
+		      <m:lowlimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci></m:lowlimit>
+		      <m:uplimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci></m:uplimit>
+		      <m:apply>
+			<m:ci type="fn">λ</m:ci>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar><m:ci>α</m:ci></m:bvar>
+		      <m:lowlimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci></m:lowlimit>
+		      <m:uplimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci></m:uplimit>
+		      <m:apply>
+			<m:ci type="fn">λ</m:ci>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	The integral of the intensity occurs frequently, and we
+	succinctly denote it by <m:math>
+	  <m:ci><m:msubsup>
+	      <m:mi>Λ</m:mi>
+	      <m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	    </m:msubsup></m:ci>
+	</m:math>.  When the Poisson process is
+	stationary, the intensity equals a constant, and the count
+	statistics depend only on the difference <m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>.
+      </para>
+    </section>
+
+    <section id="sect2">
+      <title>Time of occurrence statistics</title>
+      <para id="para5">
+	To derive the multivariate distribution of <m:math><m:ci type="vector">W</m:ci></m:math>, we use the count statistics
+	and the independence properties of the Poisson process.  The
+	density we seek satisfies
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>v</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:ci><m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>v</m:ci></m:bvar>
+		  <m:lowlimit>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci><m:msup>
+			  <m:mi mathvariant="bold">W</m:mi>
+			  <m:mfenced>
+			    <m:mi>n</m:mi>
+			  </m:mfenced>
+			</m:msup></m:ci>
+		    </m:bvar>
+		    <m:ci>v</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:in/>
+		<m:ci><m:msub>
+		    <m:mi>W</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:interval closure="closed-open">
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>δ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:interval>
+	      </m:apply>
+	      <m:ci>…</m:ci>
+	      <m:apply>
+		<m:in/>
+		<m:ci><m:msub>
+		    <m:mi>W</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+		<m:interval closure="closed-open">
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>δ</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:interval>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> 
+	The expression on the right equals the probability that no
+	events occur in <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:interval>
+	</m:math>, one event in <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:interval>
+	</m:math>, no event in <m:math>
+	  <m:interval closure="closed-open">
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>w</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:ci><m:msub>
+		<m:mi>w</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:interval>
+	</m:math>, etc.  Because of the independence of event
+	occurrence in these disjoint intervals, we can multiply
+	together the probability of these event occurrences, each of
+	which is given by the count statistics.
+	<m:math display="block">
+	  <m:apply>
+	    <m:approx/>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:in/>
+		  <m:ci><m:msub>
+		      <m:mi>W</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:interval closure="closed-open">
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:cn>1</m:cn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:interval>
+		</m:apply>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:in/>
+		  <m:ci><m:msub>
+		      <m:mi>W</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:interval closure="closed-open">
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:interval>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msubsup>
+			<m:mi>Λ</m:mi>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:mo>+</m:mo>
+		      <m:msub>
+			<m:mi>δ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msubsup></m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msubsup>
+			<m:mi>Λ</m:mi>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			  <m:mo>+</m:mo>
+			  <m:msub>
+			    <m:mi>δ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msubsup>
+			<m:mi>Λ</m:mi>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			  <m:mo>+</m:mo>
+			  <m:msub>
+			    <m:mi>δ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:mrow>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		      <m:mo>+</m:mo>
+		      <m:msub>
+			<m:mi>δ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msubsup></m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msubsup>
+			<m:mi>Λ</m:mi>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			  <m:mo>+</m:mo>
+			  <m:msub>
+			    <m:mi>δ</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:mo>…</m:mo>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		      <m:mo>+</m:mo>
+		      <m:msub>
+			<m:mi>δ</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msubsup></m:ci>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msubsup>
+			<m:mi>Λ</m:mi>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			  <m:mo>+</m:mo>
+			  <m:msub>
+			    <m:mi>δ</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:mrow>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:product/>
+		<m:bvar><m:ci>k</m:ci></m:bvar>
+		<m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+		<m:uplimit><m:ci>n</m:ci></m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">λ</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	for small <m:math><m:ci><m:msub> <m:mi>δ</m:mi>
+	      <m:mi>k</m:mi> </m:msub></m:ci> </m:math>.  From this
+	approximation, we find that the joint distribution of
+	the first <m:math><m:ci>n</m:ci></m:math> event times
+	equals
+	<equation id="eqn2">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>W</m:mi>
+		      <m:mfenced>
+		      <m:mi>n</m:mi>
+		      </m:mfenced>
+		    </m:msup></m:ci>
+		</m:bvar>
+		<m:ci type="vector">w</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:product/>
+		      <m:bvar><m:ci>k</m:ci></m:bvar>
+		      <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+		      <m:uplimit><m:ci>n</m:ci></m:uplimit>
+		      <m:apply>
+			<m:ci type="fn">λ</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:int/>
+			  <m:bvar><m:ci>α</m:ci></m:bvar>
+			  <m:lowlimit><m:ci><m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub></m:ci></m:lowlimit>
+			  <m:uplimit><m:ci><m:msub>
+				<m:mi>w</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci></m:uplimit>
+			  <m:apply>
+			    <m:ci type="fn">λ</m:ci>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		    <m:mo>…</m:mo>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+	</equation>
+      </para>
+    </section>
+
+    <section id="sect3">
+      <title>Sample function density</title>
+      <para id="para6">
+	For Poisson processes, the sample function density describes
+	the joint distribution of counts and event times within a
+	specified time interval.  Thus, it can be written as
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:condition>
+		<m:apply>
+		  <m:leq/>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:lt/>
+		    <m:ci>t</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:condition>
+		  <m:set>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>W</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>…</m:ci>
+		    <m:apply>
+		      <m:eq/>
+		      <m:ci><m:msub>
+			  <m:mi>W</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:set>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector"><m:msup>
+		      <m:mi>W</m:mi>
+		      <m:mfenced>
+			<m:mi>n</m:mi>
+		      </m:mfenced>
+		    </m:msup></m:ci>
+		</m:bvar>
+		<m:ci type="vector">w</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	The second term in the product equals the distribution derived
+	previously for the time of occurrence statistics.  The
+	conditional probability equals the probability that no events
+	occur between <m:math> <m:ci><m:msub> <m:mi>w</m:mi>
+	      <m:mi>n</m:mi> </m:msub></m:ci> </m:math> and <m:math>
+	  <m:ci><m:msub> <m:mi>t</m:mi> <m:mn>2</m:mn> </m:msub></m:ci>
+	</m:math>; from the Poisson process's count statistics, this
+	probability equals <m:math>
+	  <m:apply>
+	    <m:exp/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci><m:msubsup>
+		  <m:mi>Λ</m:mi>
+		  <m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Consequently, the sample function density for the
+	Poisson process, be it stationary or not, equals
+	<equation id="eqn3">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:condition>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:lt/>
+		      <m:ci>t</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:condition>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:product/>
+		  <m:bvar><m:ci>k</m:ci></m:bvar>
+		  <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+		  <m:uplimit><m:ci>n</m:ci></m:uplimit>
+		  <m:apply>
+		    <m:ci type="fn">λ</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar><m:ci>α</m:ci></m:bvar>
+		      <m:lowlimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci></m:lowlimit>
+		      <m:uplimit><m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci></m:uplimit>
+		      <m:apply>
+			<m:ci type="fn">λ</m:ci>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+      </para>
+    </section>
+
+    <section id="sect4">
+      <title>Properties</title>
+      <para id="para7">
+	From the probability distributions derived on the previous
+	pages, we can discern many structural properties of the
+	Poisson process.  These properties set the stage for
+	delineating other point processes from the Poisson.  They, as
+	described subsequently, have much more structure and are much
+	more difficult to handle analytically.
+      </para>
+
+      <section id="sect4a">
+	<title>The Counting Process</title>
+	<para id="para4a">
+	  <emphasis>The counting process <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is an independent increment process.</emphasis>
+	  For a Poisson process, the number of events in
+	  disjoint intervals are statistically independent of each
+	  other, meaning that we have an independent increment
+	  process.  When the Poisson process is stationary, increments
+	  taken over equi-duration intervals are identically
+	  distributed as well as being statistically independent.  Two
+	  important results obtain from this property.  First, the
+	  counting process's covariance function <m:math>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>N</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	      <m:ci>u</m:ci>
+	    </m:apply>
+	  </m:math> equals <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:min/>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  This close relation to the Wiener waveform
+	  process indicates the fundamental nature of the Poisson
+	  process in the world of point processes.  Note, however,
+	  that the Poisson counting process is
+	  <emphasis>not</emphasis> continuous almost surely.  Second,
+	  the sequence of counts forms an ergodic process, meaning we
+	  can estimate the intensity parameter from observations.
+	</para>
+
+	<para id="para9">
+	  The mean and variance of the number of events in an interval
+	  can be easily calculated from the Poisson distribution.
+	  Alternatively, we can calculate the characteristic function
+	  and evaluate its derivatives.  The characteristic function
+	  of an increment equals
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>Φ</m:mi>
+		    <m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub>
+		  </m:msub></m:ci>
+		<m:ci>v</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:times/>
+			<m:imaginaryi/>
+			<m:ci>v</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  The first two moments and variance of an increment of the
+	  Poisson process, be it stationary or not, equal
+	  <equation id="eqn4">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msubsup></m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:variance/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:mo>,</m:mo>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:ci><m:msubsup>
+		  <m:mi>Λ</m:mi>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	  </m:math>
+	  Note that the mean equals the variance here, a trademark of
+	  the Poisson process.
+	</para>
+      </section>
+
+      <section id="sect4b">
+	<title>Poisson process event times from a Markov process</title>
+	<para id="para10">
+	  Consider the conditional density 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		<m:mi>p</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>W</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		    <m:mo>|</m:mo>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>W</m:mi>
+			<m:mrow>
+			  <m:mi>n</m:mi>
+			  <m:mo>-</m:mo>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub>
+		      <m:mo>,</m:mo>
+		      <m:mi>…</m:mi>
+		      <m:mo>,</m:mo>
+		      <m:msub>
+			<m:mi>W</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:ci>
+		<m:mrow>
+		  <m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		  <m:mo>|</m:mo>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mrow>
+			<m:mi>n</m:mi>
+			<m:mo>-</m:mo>
+			<m:mn>1</m:mn>
+		      </m:mrow>
+		    </m:msub>
+		      <m:mo>,</m:mo>
+		    <m:mi>…</m:mi>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:mrow></m:ci>
+	    </m:apply>
+	  </m:math>.
+	  This density equals the ratio of the event time densities
+	  for the <m:math><m:ci>n</m:ci></m:math>- and (<m:math>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>n</m:ci>
+	      <m:mn>1</m:mn>
+	    </m:apply>
+	  </m:math>)-dimensional event time vectors.  Simple
+	  substitution yields
+
+	  <equation id="eqn5b">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:geq/>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>w</m:mi>
+			<m:mrow>
+			  <m:mi>n</m:mi>
+			  <m:mo>-</m:mo>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>W</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			  <m:mo>|</m:mo>
+			  <m:mrow>
+			    <m:msub>
+			      <m:mi>W</m:mi>
+			      <m:mrow>
+				<m:mi>n</m:mi>
+				<m:mo>-</m:mo>
+				<m:mn>1</m:mn>
+			      </m:mrow>
+			    </m:msub>
+			    <m:mo>,</m:mo>
+			    <m:mi>…</m:mi>
+			    <m:mo>,</m:mo>
+			    <m:msub>
+			      <m:mi>W</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:ci>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mrow>
+			      <m:mi>n</m:mi>
+			      <m:mo>-</m:mo>
+			      <m:mn>1</m:mn>
+			    </m:mrow>
+			  </m:msub>
+			  <m:mo>,</m:mo>
+			  <m:mi>…</m:mi>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mi>w</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:mrow></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">λ</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>w</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:int/>
+			  <m:bvar>
+			    <m:ci>α</m:ci>
+			  </m:bvar>
+			  <m:lowlimit>
+			    <m:ci><m:msub>
+				<m:mi>w</m:mi>
+				<m:mrow>
+				  <m:mi>n</m:mi>
+				  <m:mo>-</m:mo>
+				  <m:mn>1</m:mn>
+				</m:mrow>
+			      </m:msub></m:ci>
+			  </m:lowlimit>
+			  <m:uplimit>
+			    <m:ci><m:msub>
+				<m:mi>w</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci>
+			  </m:uplimit>
+			  <m:apply>
+			    <m:ci type="fn">λ</m:ci>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+
+	  Thus the <m:math>
+	    <m:ci><m:msup>
+		<m:mi>n</m:mi>
+		<m:mi>th</m:mi>
+	      </m:msup></m:ci>
+	  </m:math> event time depends only on when the <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>n</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:mtext>th</m:mtext>
+	    </m:apply>
+	  </m:math> event occurs, meaning that we have a Markov
+	    process.  Note that event times are ordered: the <m:math>
+	    <m:ci><m:msup> <m:mi>n</m:mi> <m:mi>th</m:mi>
+	    </m:msup></m:ci> </m:math> event must occur after the
+	    <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>n</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:mtext>th</m:mtext>
+	    </m:apply>
+	  </m:math>, etc.  Thus, the values of this Markov process
+	  keep increasing, meaning that from this viewpoint, the event
+	  times form a <term>nonstationary</term> Markovian sequence.
+	  When the process is stationary, the evolutionary density is
+	  exponential.  It is this special form of event occurence
+	  time density that defines a Poisson process.
+	</para>
+      </section>
+
+      <section id="sect4c">
+	<title>Interevent intervals in a Poisson process form a white
+	  sequence.</title>
+	<para id="para11">
+	  Exploiting the previous property, the duration of the <m:math>
+	    <m:ci><m:msup>
+		<m:mi>n</m:mi>
+		<m:mi>th</m:mi>
+	      </m:msup></m:ci>
+	  </m:math> interval <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>τ</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>w</m:mi>
+		    <m:mrow>
+		      <m:mi>n</m:mi>
+		      <m:mo>-</m:mo>
+		      <m:mi>1</m:mi>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> does not depend on the lengths of previous (or
+	  future) intervals.  Consequently, the sequence of interevent
+	  intervals forms a "white" sequence.  The sequence may not be
+	  identically distributed unless the process is stationary.
+	  In the stationary case, interevent intervals are truly
+	  white - they form an IID sequence - and have an exponential
+	  distribution.
+	  <equation id="eqn5c">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar><m:ci>τ</m:ci></m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:geq/>
+		    <m:ci>τ</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		<m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			  <m:mi>τ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:bvar>
+		    <m:ci>τ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>λ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci><m:msub>
+			      <m:mi>λ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			  <m:ci>τ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  To show that the exponential density for a white sequence
+	  corresponds to the most "random" distribution, <cite target-id="parzen"><cite-title>Parzen</cite-title></cite> proved that the
+	  <emphasis>ordered</emphasis> times of
+	  <m:math><m:ci>n</m:ci></m:math> events sprinkled
+	  independently and uniformly over a given interval form a
+	  stationary Poisson process.  If the density of event
+	  sprinkling is not uniform, the resulting ordered times
+	  constitute a nonstationary Poisson process with an intensity
+	  proportional to the sprinkling density.
+	</para>
+      </section>
+    </section>
+
+    <section id="sect5">
+      <title>Doubly stochastic Poisson processes</title>
+      <para id="para12">
+	Here, the intensity <m:math>
+	  <m:apply>
+	    <m:ci type="fn">λ</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:math> equals a sample function drawn from some waveform
+	process.  In waveform processes, the analogous concept does
+	not have nearly the impact it does here.  Because intensity
+	waveforms must be non-negative, the intensity process
+	<emphasis>must</emphasis> be nonzero mean and non-Gaussian.
+	The authors shall assume throughout that the intensity
+	process is stationary for simplicity.  This model arises in
+	those situations in which the event occurrence rate clearly
+	varies unpredictably with time.  Such processes have the
+	property that the variance-to-mean ratio of the number of
+	events in any interval exceeds one.  In the process of
+	deriving this last property, we illustrate the typical way
+	of analyzing doubly stochastic processes: Condition on the
+	intensity equaling a particular sample function, use the
+	statistical characteristics of nonstationary Poisson
+	processes, then "average" with respect to the intensity
+	process.  To calculate the expected number 
+	<m:math>
+	  <m:ci><m:msub> 
+	      <m:mi>N</m:mi>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+		<m:mo>,</m:mo>
+		<m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci> </m:math> of events in an interval, we
+	use conditional expected values:
+	<equation id="eqn7b">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:mo>,</m:mo>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:condition>
+		    <m:apply>
+		      <m:forall/>
+		      <m:bvar>
+			<m:apply>
+			  <m:ci type="fn">λ</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+		      </m:bvar>
+		      <m:condition>
+			<m:apply>
+			  <m:leq/>
+			  <m:ci><m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			  <m:apply>
+			    <m:lt/>
+			    <m:ci>t</m:ci>
+			    <m:ci><m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub></m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:condition>
+		    </m:apply>
+		  </m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>α</m:ci></m:bvar>
+		  <m:lowlimit><m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci></m:lowlimit>
+		  <m:uplimit><m:ci><m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci></m:uplimit>
+		  <m:apply>
+		    <m:ci type="fn">λ</m:ci>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:ci type="fn">λ</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	This result can also be written as the expected value of the
+	integrated intensity: <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci><m:msubsup>
+		  <m:mi>Λ</m:mi>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Similar calculations yield the increment's second
+	moment and variance.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:mo>,</m:mo>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:variance/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>,</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:variance/>
+		<m:ci><m:msubsup>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Using the last result, we find that the variance-to-mean ratio
+	in a doubly stochastic process always exceeds unity, equaling
+	one plus the variance-to-mean ratio of the intensity process.
+      </para>
+
+      <para id="para13">
+	The approach of sample-function conditioning can also be used
+	to derive the density of the number of events occurring in an
+	interval for a doubly stochastic Poisson process.  Conditioned
+	on the occurrence of a sample function, the probability of
+	<m:math><m:ci>n</m:ci></m:math> events occurring in the
+	interval <m:math>
+	  <m:interval closure="closed-open">
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:interval>
+	</m:math> equals (<link target-id="eqn1"/>)
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:condition>
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">λ</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:leq/>
+		      <m:ci><m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:lt/>
+			<m:ci>t</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:condition>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:mo>,</m:mo>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci>n</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:factorial/>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msubsup>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Because <m:math>
+	  <m:ci><m:msubsup>
+	      <m:mi>Λ</m:mi>
+	      <m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	    </m:msubsup></m:ci>
+	</m:math> is a random variable, the unconditional
+	distribution equals this conditional probability averaged
+	with respect to this random variable's density.  This
+	average is known as the Poisson Transform of the random
+	variable's density.
+	<equation id="eqn5">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>N</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>n</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>α</m:ci></m:bvar>
+		<m:interval>
+		  <m:cn>0</m:cn>
+		  <m:infinity/>
+		</m:interval>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>α</m:ci>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:factorial/>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>α</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci><m:msubsup>
+			  <m:mi>Λ</m:mi>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:msubsup></m:ci>
+		    </m:bvar>
+		    <m:ci>α</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+      </para>
+    </section>
+  </content>
+	 
+  <bib:file>
+    <bib:entry id="snyder">
+      <bib:book>
+	<bib:author>D. L. Snyder</bib:author>
+	<bib:title>Random Point Processes</bib:title>
+	<bib:publisher>Wiley</bib:publisher>
+	<bib:year>1975</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="parzen">
+      <bib:book>
+	<bib:author>E. Parzen</bib:author>
+	<bib:title>Stochastic Processes</bib:title>
+	<bib:publisher>Holden-Day</bib:publisher>
+	<bib:year>1962</bib:year>
+	<bib:address>San Francisco</bib:address>
+      </bib:book>
+    </bib:entry>
+
+  </bib:file>
+</document>

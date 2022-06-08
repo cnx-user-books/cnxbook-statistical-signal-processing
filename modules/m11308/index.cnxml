@@ -1,0 +1,586 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+
+  <title>Partially Known Signal Waveform</title>
+  
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d8300f60-e3ff-4a4c-b57f-d113e380aab3</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The nominal signal waveform is known, but the actual signal
+      present in the observed data can be corrupted slightly. Using
+      the <link document="m11299" target-id="four">minimax approach</link>, we
+      seek the worst possible signal that could be present consistent
+      with constraints on the corruption. Once we know what signal
+      that is, our detector should consist of a filter matched to that
+      worst-case signal. Let the observed signal be of the form
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">s</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mi>s</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">c</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>: 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">
+	    <m:msup>
+	      <m:mi>s</m:mi>
+	      <m:mi>o</m:mi>
+	    </m:msup>
+	  </m:ci>
+	  <m:ci>l</m:ci>
+	</m:apply>
+      </m:math> is the nominal signal and
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">c</m:ci> 
+	  <m:ci>l</m:ci> 
+	</m:apply> 
+      </m:math>
+      the corruption in the observed signal. The nominal-signal energy is
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>E</m:mi>
+	    <m:mi>o</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> and the signal corruption is assumed to have an energy
+      that is less than
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>E</m:mi>
+	    <m:mi>c</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math>. Spectral techniques are assumed to be applicable so
+      that the covariance matrix of the Fourier transformed noise is
+      diagonal. The signal-to-noise ratio is given by
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:domainofapplication><m:ci>k</m:ci></m:domainofapplication>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:ci type="fn">S</m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. What corruption yields the smallest signal-to-noise
+      ratio? The worst-case signal will have the largest amount of
+      corruption possible. This constrained minimization problem -
+      minimize the signal-to-noise ratio while forcing the energy of
+      the corruption to be less than
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>E</m:mi>
+	    <m:mi>c</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> - can then be solved using Lagrange multipliers.
+      <m:math display="block">
+	<m:apply>
+	  <m:min/>
+	  <m:domainofapplication>
+	    <m:set>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>S</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:set>
+	  </m:domainofapplication>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:domainofapplication><m:ci>k</m:ci></m:domainofapplication>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">S</m:ci>
+		      <m:ci>k</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:sum/>
+		  <m:domainofapplication><m:ci>k</m:ci></m:domainofapplication>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:apply>
+			<m:ci type="fn">C</m:ci>
+			<m:ci>k</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:ci>
+		  <m:msup>
+		    <m:mi>E</m:mi>
+		    <m:mi>c</m:mi>
+		  </m:msup>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      By evaluating the appropriate derivatives, we find the spectrum
+      of the worst-case signal to be a frequency-weighted version of
+      the nominal signal's spectrum.
+
+      <m:math display="block">
+	<m:apply>      
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">
+	      <m:msup>
+		<m:mi>S</m:mi>
+		<m:mi>w</m:mi>
+	      </m:msup>
+	    </m:ci>
+	    <m:ci>k</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>k</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mi>S</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:ci>k</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> where
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:domainofapplication><m:ci>k</m:ci></m:domainofapplication>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		  <m:plus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>λ</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msup>
+		      <m:mi>S</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:ci>
+	    <m:msup>
+	      <m:mi>E</m:mi>
+	      <m:mi>c</m:mi>
+	    </m:msup>
+	  </m:ci>
+	</m:apply>
+      </m:math>
+      The only unspecifies parameter is the Lagrange multiplier
+      <m:math><m:ci>λ</m:ci></m:math>, with the latter equation
+      providing an implicit solution in most cases.
+    </para>
+
+    <para id="para2">
+      If the noise is white, the 
+      <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>σ</m:mi>
+	      <m:mi>k</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> equal a constant, implying that the worst-case signal
+      is a scaled version of the nominal, equaling
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">
+	      <m:msup>
+		<m:mi>S</m:mi>
+		<m:mi>w</m:mi>
+	      </m:msup>
+	    </m:ci>
+	    <m:ci>k</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>
+		    <m:msup>
+		      <m:mi>E</m:mi>
+		      <m:mi>c</m:mi>
+		    </m:msup>
+		  </m:ci>
+		  <m:ci>
+		    <m:msup>
+		      <m:mi>E</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mi>S</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:ci>k</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. The robust decision rule derived from the likelihood
+      ratio is given by
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:real/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>k</m:ci></m:bvar>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:apply>
+		    <m:ci type="fn">R</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msup>
+		      <m:mi>S</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      By incorporating the scaling constant
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:cn>1</m:cn>
+	  <m:apply>
+	    <m:root/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>
+		<m:msup>
+		  <m:mi>E</m:mi>
+		  <m:mi>c</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:ci>
+		<m:msup>
+		  <m:mi>E</m:mi>
+		  <m:mi>o</m:mi>
+		</m:msup>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> into the threshold
+      <m:math><m:ci>γ</m:ci></m:math>, we find that
+      <emphasis>the matched filter used in the white noise,
+      known-signal case is robust with respect to signal
+      uncertainties</emphasis>. The threshold value is identical to
+      that derived using the nominal signal as model
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math> does not depend on the uncertainties in the signal
+      model. Thus, the detector used in the known-signal, white noise
+      case can also be used when the signal is partially
+      corrupted. Note that in solving the general signal corruption
+      case, the imprecise signal amplitude situation was also solved.
+    </para>
+
+    <para id="para3">
+      If the noise is not white, the proportion between the nominal
+      and worst-case signal spectral components is not a constant. The
+      decision rule expressed in term of the frequency-domain
+      sufficient statistic becomes
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:real/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>k</m:ci></m:bvar>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:apply>			
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>λ</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>λ</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:apply>
+		    <m:ci type="fn">R</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msup>
+		      <m:mi>S</m:mi>
+		      <m:mi>o</m:mi>
+		    </m:msup>
+		  </m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply> 
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>  
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      Thus, the detector derived for colored noise problems is
+      <emphasis>not</emphasis> robust. The threshold depends on the
+      noise spectrum and the energy of the corruption. Furthermore,
+      calculating the value of the Lagrange multiplier in the colored
+      noise problem is quite difficult, with multiple solutions to its
+      constraint equation quite possible. Only one of these solutions
+      will correspond to the worst-case signal.
+    </para>
+  </content>
+  
+</document>

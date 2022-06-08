@@ -1,0 +1,685 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Small-Signal Detection</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>35630239-eb13-4901-8ad1-d71f4ab400c6</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Before we introduce truly non-Gaussian detection strategies, we
+      need to discuss the structure of the detector when the noise
+      amplitude distribution is known. From the results presented while
+      solving the general model evaluation problem, we find that the
+      likelihood ratio test for statistically independent noise values is
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar>
+	      <m:ci>l</m:ci>
+	    </m:bvar>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+		<m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply> 
+	    </m:apply>
+	  </m:apply>
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      The term in braces is 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ϒ</m:mi>
+	    <m:mi>l</m:mi>
+	  </m:msub></m:ci>
+      </m:math>, the sufficient statistic at the 
+      <m:math>
+	<m:msup>
+	  <m:mi>l</m:mi>
+	  <m:mi>th</m:mi>
+	</m:msup>
+      </m:math>
+      sample. As <m:math><m:ci>L</m:ci></m:math> is usually large and
+      each term in the summation is statistically independent of the
+      others, the threshold <m:math><m:ci>γ</m:ci></m:math> is
+      found by approximating the distribution of the sufficient
+      statistic by a Gaussian (the <link document="m11251">Central
+      Limit Theorem</link> again). Computing the mean and variance of
+      each term, the false-alarm probability is found to be
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:ln/>
+		  <m:ci>η</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ϒ</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:sum/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:ci>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>ϒ</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      This general result applies to any assumed noise density,
+      including the Gaussian. The matched filter answer derived
+      earlier is contained in the decision rule given above.
+    </para>
+
+    <para id="newpara">
+      A matched-filter-like answer also results when small
+      signal-to-noise ratio problems are considered for
+      <emphasis>any</emphasis> amplitude distribution <cite target-id="Kassam"><cite-title>Kassam pp. 5-8</cite-title></cite>, <cite target-id="Spaulding"><cite-title>Spaulding</cite-title></cite>, <cite target-id="SpauldingandMiddleton"><cite-title>Spaulding and
+      Middleton</cite-title></cite>). Assume that
+      <m:math>
+	<m:apply>
+	  <m:ln/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar><m:ci>n</m:ci></m:bvar>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>, considered as a function of the signal value
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">s</m:ci>
+	  <m:ci>l</m:ci>
+	</m:apply>
+      </m:math>, can be expressed in a Taylor series centered at
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">r</m:ci>
+	  <m:ci>l</m:ci>
+	</m:apply>
+      </m:math>.
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ln/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar><m:ci>n</m:ci></m:bvar>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:diff/>
+		    <m:bvar><m:ci>n</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ln/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar><m:ci>n</m:ci></m:bvar>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		<m:bvar>
+		  <m:ci>n</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:lowlimit>
+		<m:apply>
+		  <m:diff/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		    <m:degree><m:cn>2</m:cn></m:degree>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar><m:ci>n</m:ci></m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>…</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      In the <emphasis>small</emphasis> signal-to-noise ratio case,
+      second and higher order terms are neglected, leaving the
+      decision rule
+
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar>
+	      <m:ci>l</m:ci>
+	    </m:bvar>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		    <m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		    </m:lowlimit>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>n</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ln/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:bvar><m:ci>n</m:ci></m:bvar>
+			  <m:ci>n</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:diff/>
+		    <m:bvar>
+		      <m:ci>n</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:ln/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar><m:ci>n</m:ci></m:bvar>
+			<m:ci>n</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      This rule says that in the small signal case, the sufficient
+      statistic for each signal is the result of the match-filtering
+      the result of passing the observations through a front-end
+      memoryless non-linearity
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:diff/>	    
+	    <m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar><m:ci>n</m:ci></m:bvar>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>, which depends <emphasis>only</emphasis> on noise
+      amplitude characteristics (see <link target-id="figure7"/>).
+
+      <figure id="figure7">
+	<media id="idm9304784" alt=""><image src="../../media/locopt.png" mime-type="image/png"/></media> 
+	<caption>The decision rule for the non-Gaussian case when the
+	signal is small can be expressed as a matched filter where the
+	observations are first passes through a memoryless
+	nonlinearity.</caption>
+      </figure>
+	    
+    </para>
+    <para id="nextpara">
+      Because of the presence of the matched filter and the
+      relationship of the matched filter to Gaussian noise problems,
+      one might presume that the nonlinearity serves to transform each
+      observation into a Gaussian random variable. In the case of the
+      zero-mean Gaussian noise,
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>x</m:ci>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. Interestingly, this Gaussian case is the
+      <emphasis>only</emphasis> instance where the "non-linearity" is
+      indeed linear and yields a Gaussian output. Now consider the
+      case where the noise is Laplacian (
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar><m:ci>n</m:ci></m:bvar>
+	    <m:ci>n</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:root/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>). The detector's front-end transformations is 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>					      
+	      <m:diff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar><m:ci>n</m:ci></m:bvar>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:ci type="fn" class="discrete">sign</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. This non-linearity is known as an <term>infinite
+      clipper</term> and the output consists <emphasis>only</emphasis>
+      of the values
+      <m:math>
+	<m:apply>
+	  <m:mo>±</m:mo>
+	  <m:apply>
+	    <m:divide/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>, not a very Gaussian quantity.
+    </para>
+
+  </content>
+  <bib:file>
+    <bib:entry id="Kassam">
+      <bib:book>
+	<bib:author>S.A. Kassam</bib:author> <bib:title>Signal
+	Detection in Non-Gaussian Noise</bib:title>
+	<bib:publisher>Springer-Verlag</bib:publisher>
+	<bib:year>1988</bib:year> <bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="Spaulding">
+      <bib:article>
+	<bib:author>A.D. Spaulding</bib:author>
+ 	<bib:title>Locally optimum and suboptimum detector performance
+	in a non-Gaussian interference environment</bib:title>
+	<bib:journal>IEEE Trans. Comm.</bib:journal>
+	<bib:year>1985</bib:year>
+	<bib:volume>COM-33</bib:volume>
+	<bib:pages>509-517</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="SpauldindandMiddleton">
+      <bib:article>
+	<bib:author>A.D. Spaulding and D. Middleton</bib:author>
+ 	<bib:title>Optimum reception in an impulsive interference
+ 	environment--Part I: Coherent detection</bib:title>
+ 	<bib:journal>IEEE Trans. Comm.</bib:journal>
+ 	<bib:year>1977</bib:year> 
+	<bib:volume>COM-25</bib:volume>
+ 	<bib:pages>910-923</bib:pages>
+      </bib:article>
+    </bib:entry>
+  </bib:file>
+  
+</document>

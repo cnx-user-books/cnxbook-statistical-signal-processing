@@ -1,0 +1,453 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Basic Definitions in Stochastic Processes</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e3f28637-d2b4-4247-ae8d-ea3f2621a4d4</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      A <term>random</term> or <term>stochastic</term> process is the
+      assignment of a function of a real variable to each sample point
+      <m:math><m:ci>ω</m:ci></m:math> in a sample space.  Thus,
+      the process <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>ω</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> can be considered a function of two variables.  For
+      each <m:math><m:ci>ω</m:ci></m:math>, the time function
+      must be well-behaved and may or may not look random to the eye.
+      Each time function of the process is called a <term>sample
+      function</term> and must be defined over the entire domain of
+      interest.  For each <m:math><m:ci>t</m:ci></m:math>, we have a
+      function of <m:math><m:ci>ω</m:ci></m:math>, which is
+      precisely the definition of a random variable.  Hence the
+      <term>amplitude</term> of a random process is a random variable.
+      The <term>amplitude distribution</term> of a process refers to
+      the probability density function of the amplitude: <m:math>
+	<m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:bvar>
+	  <m:ci>x</m:ci>
+	</m:apply>
+      </m:math>.  By examining the process's amplitude at several
+      instants, the joint amplitude distribution can also be defined.
+      For the purposes of this module, a process is said to be
+      <term>stationary</term> when the joint amplitude distribution
+      depends on the differences between the selected time instants.
+    </para>
+
+    <para id="para2">
+      The <term>expected value</term> or <term>mean</term> of a
+      process is the expected value of the amplitude at each
+      <m:math><m:ci>t</m:ci></m:math>.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>m</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>x</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:infinity/>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>x</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:bvar>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      For the most part, we take the mean to be zero.  The
+      <term>correlation function</term> is the first-order joint
+      moment between the process's amplitudes at two times.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>R</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit><m:infinity/></m:uplimit>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">X</m:ci>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:apply>
+		      <m:ci type="fn">X</m:ci>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Since the joint distribution for stationary processes depends
+      only on the time difference, correlation functions of stationary
+      processes depend only on <m:math>
+	<m:apply>
+	  <m:abs/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mi>2</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  In this case, correlation functions are really
+      functions of a single variable (the time difference) and are
+      usually written as <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>R</m:mi>
+	      <m:mi>X</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>τ</m:ci>
+	</m:apply>
+      </m:math> where <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>τ</m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>t</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Related to the correlation function is the
+      <term>covariance function</term> <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>X</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci>τ</m:ci>
+	</m:apply>
+      </m:math>, which equals the correlation function minus the
+      square of the mean.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>K</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>τ</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>R</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>τ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		  <m:mi>m</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The variance of the process equals the covariance function
+      evaluated as the origin.  The <term>power spectrum</term> of a
+      stationary process is the Fourier Transform of the correlation
+      function.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>𝒮</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>ω</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>τ</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit><m:infinity/></m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>τ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:ci>τ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      A particularly important example of a random process is
+      <term>white noise</term>.  The process 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">X</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:math> is said to be white if it has zero mean and a
+      correlation function proportional to an impulse.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>R</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>τ</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">δ</m:ci>
+	      <m:ci>τ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The power spectrum of white noise is constant for all
+      frequencies, equaling <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:ci><m:msub>
+	      <m:mi>N</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> which is known as the <term>spectral height</term>.
+      <footnote id="idp2454656">The curious reader can track down why the
+      spectral height of white noise has the fraction one-half in
+      it. This definition is the convention.</footnote>
+    </para>
+
+    <para id="para3">
+      When a stationary process 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">X</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:math> is passed through a stable linear, time-invariant
+      filter, the resulting output 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">Y</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:math> is also a stationary process
+      having power density spectrum
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>𝒮</m:mi>
+		<m:mi>Y</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>ω</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:ci type="fn">H</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>𝒮</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>ω</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      where <m:math>
+	<m:apply>
+	  <m:ci type="fn">H</m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:imaginaryi/>
+	    <m:ci>ω</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> is the filter's transfer function.
+
+    </para>
+  </content>
+  
+</document>

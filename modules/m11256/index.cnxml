@@ -1,0 +1,1072 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Hilbert Spaces and Separable Vector Spaces</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>39e41de0-7f1d-4e6f-b960-c02e2203c7fa</md:uuid>
+</metadata>
+
+  <content>
+    <section id="sect1">
+      <title>Hilbert Spaces</title>
+      <definition id="def1">
+	<term>Hilbert Spaces</term> <meaning id="idm7251136">A Hilbert space
+	  <m:math><m:ci>ℋ</m:ci></m:math> is a closed,
+	  normed linear vector space which contains all of its limit
+	  points: if <m:math>
+	    <m:set>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math> is any sequence of elements in
+	  <m:math><m:ci>ℋ</m:ci></m:math> that converges
+	  to <m:math><m:ci type="vector">x</m:ci></m:math>, then
+	  <m:math><m:ci type="vector">x</m:ci></m:math> is also
+	  contained in <m:math><m:ci>ℋ</m:ci></m:math>.
+	  <m:math><m:ci type="vector">x</m:ci></m:math> is termed the
+	  <term>limit point</term> of the sequence.
+	</meaning>
+      </definition>
+      <example id="ex1">
+	<para id="paraex1">
+	  Let the space consist of all rational numbers.  Let the inner
+	  product be simple multiplication: <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>x</m:ci>
+		<m:ci>y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  However, the limit point of the sequence <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>x</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:cn>1</m:cn>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:mo>…</m:mo>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is not a rational number.  Consequently, this space
+	  is <emphasis>not</emphasis> a Hilbert space.  However, if we
+	  define the space to consist of all finite numbers, we have a
+	  Hilbert space.
+	</para>
+      </example>
+      <definition id="defn2">
+	<term>orthogonal</term>
+	<meaning id="idm7376992">
+	If <m:math><m:ci>𝒴</m:ci></m:math> is a subspace of
+	<m:math><m:ci>ℋ</m:ci></m:math>, the vector
+	<m:math><m:ci type="vector">x</m:ci></m:math> is orthogonal to
+	the subspace <m:math><m:ci>𝒴</m:ci></m:math> for every 
+	  <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci type="vector">y</m:ci>
+	      <m:ci>𝒴</m:ci>
+	    </m:apply>
+	  </m:math>, 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	      <m:cn type="vector">0</m:cn>
+	    </m:apply>
+	  </m:math>.
+	</meaning>
+      </definition>
+      <para id="anotherpara">
+	We now arrive at a fundamental theorem.
+      </para>
+
+      <rule type="theorem" id="thm">
+	<statement id="idm8034656">
+	<para id="para2">
+	  Let <m:math><m:ci>ℋ</m:ci></m:math> be a
+	  Hilbert space and <m:math><m:ci>𝒴</m:ci></m:math> a
+	  subspace of it.  Any element <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci>ℋ</m:ci>
+	    </m:apply>
+	  </m:math> has the unique decomposition <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="vector">y</m:ci>
+		<m:ci type="vector">z</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, where <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci type="vector">y</m:ci>
+	      <m:ci>𝒴</m:ci>
+	    </m:apply>
+	  </m:math> and <m:math><m:ci type="vector">z</m:ci></m:math>
+	  is orthogonal to <m:math><m:ci>𝒴</m:ci></m:math>.
+	  Furthermore,
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:min/>
+		  <m:bvar>
+		    <m:ci type="vector">ν</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:in/>
+		      <m:ci type="vector">ν</m:ci>
+		      <m:ci>𝒴</m:ci>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">ν</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>: the distance between <m:math><m:ci type="vector">x</m:ci></m:math> and all elements of
+	  <m:math><m:ci>𝒴</m:ci></m:math> is minimized by the
+	  vector <m:math><m:ci type="vector">y</m:ci></m:math>.  This
+	  element <m:math><m:ci type="vector">y</m:ci></m:math> is
+	  termed the projection of <m:math><m:ci type="vector">x</m:ci></m:math> onto
+	  <m:math><m:ci>𝒴</m:ci></m:math>.
+	</para>
+      </statement>
+      </rule>
+
+      <para id="para3">
+	Geometrically, <m:math><m:ci>𝒴</m:ci></m:math> is a line
+	or a plane passing through the origin.  Any vector
+	<m:math><m:ci type="vector">x</m:ci></m:math> can be expressed
+	as the linear combination of a vector lying in
+	<m:math><m:ci>𝒴</m:ci></m:math> and a vector orthogonal
+	to <m:math><m:ci type="vector">y</m:ci></m:math>.  This
+	theorem is of extreme importance in linear estimation theory
+	and plays a fundamental role in detection theory.
+      </para>
+    </section>
+
+    <section id="sect2">
+      <title>Separable Vector Spaces</title>
+      <para id="para4">
+	<definition id="nextdefn">
+	  <term>separable</term>
+	  <meaning id="idm7542976">
+	    A Hilbert space
+	    <m:math><m:ci>ℋ</m:ci></m:math> is said to be
+	    separable if there exists a set of vectors
+	    <m:math>
+	      <m:set>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>φ</m:mi> 
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:set>
+	    </m:math>, 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>elements   of  ℋ</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:math>, that express every element <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci>ℋ</m:ci>
+	      </m:apply>
+	    </m:math> as 
+	    <equation id="eqn1">
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+		    <m:uplimit><m:infinity/></m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </equation>
+	    where <m:math> <m:ci><m:msub> <m:mi>x</m:mi>
+		<m:mi>i</m:mi> </m:msub></m:ci> </m:math> are scalar
+		constants associated with <m:math> <m:ci type="vector"><m:msub> <m:mi>φ</m:mi>
+		<m:mi>i</m:mi> </m:msub></m:ci> </m:math> and
+		<m:math><m:ci type="vector">x</m:ci></m:math> and
+		where "equality" is taken to mean that the distance
+		between each side becomes zero as more terms are taken
+		in the right.
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:limit/>
+		  <m:bvar><m:ci>m</m:ci></m:bvar>
+		  <m:lowlimit><m:infinity/></m:lowlimit>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar><m:ci>i</m:ci></m:bvar>
+			<m:lowlimit>
+			  <m:ci>1</m:ci>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:cn>m</m:cn>
+			</m:uplimit>
+			<m:apply>
+			  <m:times/>
+			  <m:ci><m:msub>
+			      <m:mi>x</m:mi>
+			      <m:mi>i</m:mi>
+			    </m:msub></m:ci>
+			  <m:ci type="vector"><m:msub>
+			      <m:mi>φ</m:mi>
+			      <m:mi>i</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>
+	  </meaning>
+	</definition>
+      </para>
+
+      <para id="para5">
+	The set of vectors <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> are said to form a <term>complete set</term> if the
+	above relationship is valid.  A complete set is said to form a
+	<term>basis</term> for the space
+	<m:math><m:ci>ℋ</m:ci></m:math>.  Usually the
+	elements of the basis for a space are taken to be linearly
+	independent.  <term>Linear independence</term> implies that
+	the expression fo the zero vector by a basis can only be made
+	by zero coefficients.
+	<equation id="eqn1a">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar><m:ci>i</m:ci></m:bvar>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		</m:set>
+	      </m:apply>
+	      <m:apply>
+		<m:mo>⇔</m:mo>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:infinity/>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	The <term>representation theorem</term> states simply that
+	separable vector spaces exist.  The representation of the
+	vector <m:math><m:ci type="vector">x</m:ci></m:math> is the
+	sequence of coefficients <m:math>
+	  <m:set>
+	    <m:ci><m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math>.
+      </para>
+
+      <example id="ex2">
+	<para id="paraex2">
+	  The space consisting of column matrices of length
+	  <m:math><m:ci>N</m:ci></m:math> is easily shown to be
+	  separable.  Let the vector <m:math> <m:ci type="vector"><m:msub> <m:mi>φ</m:mi> <m:mi>i</m:mi>
+	  </m:msub></m:ci> </m:math> be given a column matrix having a
+	  one in the <m:math> <m:ci><m:msup> <m:mi>i</m:mi>
+	  <m:mi>th</m:mi> </m:msup></m:ci> </m:math> row and zeros in
+	  the remaining rows:
+	  <m:math display="inline">
+	    <m:apply>
+	      <m:eq/> 
+	      <m:ci type="vector"><m:msub> 
+		  <m:mi>φ</m:mi>
+		  <m:mi>i</m:mi> 
+		</m:msub></m:ci> 
+	      <m:vector>
+		<m:cn>0</m:cn>
+		<m:ci>…</m:ci>
+		<m:cn>0</m:cn>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:ci>…</m:ci>
+		<m:cn>0</m:cn>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>.  This set of vectors
+	  <m:math>
+	    <m:set>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math>, 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>i</m:ci>
+	      <m:set>
+		<m:cn>1</m:cn>
+		<m:ci>…</m:ci>
+		<m:ci>N</m:ci>
+	      </m:set>
+	    </m:apply>
+	  </m:math> constitutes a basis for the space.  Obviously if
+	  the vector <m:math><m:ci type="vector">x</m:ci></m:math> is
+	  given by 
+	  <m:math display="inline">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:vector>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>…</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>, it may be expressed as:
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci>N</m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  using the basis vectors just defined.
+	</para>
+      </example>
+
+	<para id="para6">
+	  In general, the upper limit on the sum in <link target-id="eqn1"/> is infinite.  For the <link target-id="ex1">
+	    previous example</link>, the upper limit is finite.  The
+	    number of basis vectors that is
+	    <emphasis>required</emphasis> to express every element of
+	    a separable space in terms of <link target-id="eqn1"/> is
+	    said to be the <term>dimension</term> of the space.  In
+	    <link target-id="ex2">this example</link>, the dimension of
+	    the space is <m:math><m:ci>N</m:ci></m:math>.  There exist
+	    separable vector spaces for which the dimension is
+	    infinite.
+	</para>
+
+	<definition id="orthodefn">
+	  <term>orthonormal</term>
+	  <meaning id="idm438896">
+	    The basis for a separable vector space is said to be an
+	    orthonormal basis if the elements of the basis satisfy the
+	    following two properties:
+	    <list id="list1">
+	      <item>The inner product between distinct elements of the
+		basis is zero (i.e., the elements of the basis are mutually
+		orthogonal).
+	      <equation id="eqn2a">
+		<m:math display="block">
+		  <m:apply>
+		    <m:forall/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:bvar><m:ci>j</m:ci></m:bvar>
+		    <m:condition>
+		      <m:apply>
+			<m:neq/>
+			<m:ci>i</m:ci>
+			<m:ci>j</m:ci>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:eq/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		      </m:apply>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation>
+	    </item>
+	    <item>The norm of each element of a basis is one (normality).
+	      <equation id="eqn2b">
+		<m:math display="block">
+		  <m:apply>
+		    <m:forall/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:condition>
+		      <m:apply>
+			<m:eq/>
+			<m:ci>i</m:ci>
+			<m:set>
+			  <m:cn>1</m:cn>
+			  <m:mo>…</m:mo>
+			</m:set>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:eq/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </equation>
+	    </item>
+	  </list>
+	</meaning>
+      </definition>
+
+      <para id="para8">
+	For example, the basis given above for the space of
+	<m:math><m:ci>N</m:ci></m:math>-dimensional column matrices is
+	orthonormal.  For clarity, two facts must be explicitly
+	stated.  First, not every basis is orthonormal.  If the vector
+	space is separable, a complete set of vectors can be found;
+	however, this set does not have to be orthonormal to be a
+	basis.  Secondly, not every set of orthonormal vectors can
+	constitute a basis.  When the vector space 
+        <m:math>
+	    <m:ci><m:msup>
+              <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	  </m:msup></m:ci>
+	</m:math> is discussed in detail, this point will be illustrated.
+      </para>
+
+      <para id="para9">
+	Despite these qualifications, an orthonormal basis exists for
+	every separable vector space.  There is an explicit
+	algorithm - the <term>Gram-Schmidt procedure</term> - for
+	deriving an orthonormal set of functions from a complete set.
+	Let <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> denote a basis; the orthonormal basis <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>ψ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> is sought.  The Gram-Schmidt procedure is:
+	<list id="list2" list-type="labeled-item">
+	  <item><label>1.</label>
+	    
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>ψ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  This step makes <m:math>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>ψ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:math> have unit length.
+	  </item>
+	  <item><label>2.</label>
+	    
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">
+		  <m:msubsup>
+		    <m:mi>ψ</m:mi>
+		    <m:mn>2</m:mn>
+		    <m:mi>′</m:mi>
+		  </m:msubsup>
+		</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>ψ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>φ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>ψ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  Consequently, the inner product between
+	    <m:math>
+	      <m:ci type="vector">
+		<m:msubsup>
+		  <m:mi>ψ</m:mi>
+		  <m:mn>2</m:mn>
+		  <m:mi>′</m:mi>
+		</m:msubsup>
+	      </m:ci>
+	    </m:math>and <m:math> <m:ci type="vector"><m:msub>
+		  <m:mi>ψ</m:mi> <m:mn>1</m:mn> </m:msub></m:ci>
+		  </m:math> is zero.  We obtain <m:math> <m:ci type="vector"><m:msub> <m:mi>ψ</m:mi>
+		  <m:mn>2</m:mn> </m:msub></m:ci> </m:math> from
+	    <m:math>
+	      <m:ci type="vector">
+		<m:msubsup>
+		  <m:mi>ψ</m:mi>
+		  <m:mn>2</m:mn>
+		  <m:mi>′</m:mi>
+		</m:msubsup>
+	      </m:ci>
+	    </m:math> forcing the vector to have unit length.
+	  </item>
+	 
+	  <item><label>2'.</label>
+	    
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>ψ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci type="vector">
+		    <m:msubsup>
+		      <m:mi>ψ</m:mi>
+		      <m:mn>2</m:mn>
+		      <m:mi>′</m:mi>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">
+		      <m:msubsup>
+			<m:mi>ψ</m:mi>
+			<m:mn>2</m:mn>
+			<m:mi>′</m:mi>
+		      </m:msubsup>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </item>
+	</list>
+      </para>
+      <para id="para9a">The algorithm now generalizes.
+	<list id="list2a" list-type="labeled-item">
+	  <item><label>k.</label>
+	    
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">
+		  <m:msubsup>
+		    <m:mi>ψ</m:mi>
+		    <m:mi>k</m:mi>
+		    <m:mi>′</m:mi>
+		  </m:msubsup>
+		</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>i</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>k</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>ψ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>ψ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </item>
+	  
+	  <item><label>k'.</label>
+	    
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>ψ</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci type="vector">
+		    <m:msubsup>
+		      <m:mi>ψ</m:mi>
+		      <m:mi>k</m:mi>
+		      <m:mi>′</m:mi>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">
+		      <m:msubsup>
+			<m:mi>ψ</m:mi>
+			<m:mi>k</m:mi>
+			<m:mi>′</m:mi>
+		      </m:msubsup>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </item>
+	</list>
+      </para>
+
+      <para id="para9d">
+	By construction, this new set of vectors is an orthonormal
+	set.  As the original set of vectors 
+	<m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> is a complete set, and, as each <m:math>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>ψ</m:mi>
+	      <m:mi>k</m:mi>
+	    </m:msub></m:ci>
+	</m:math> is just a linear combination of 
+	<m:math>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>φ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>i</m:ci>
+	    <m:set>
+	      <m:cn>1</m:cn>
+	      <m:ci>…</m:ci>
+	      <m:ci>k</m:ci>
+	    </m:set>
+	  </m:apply>
+	</m:math>, the derived set <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>ψ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> is also complete.  Because of the existence of this
+	algorithm, a basis for a vector space is usually assumed to be
+	orthonormal.
+      </para>
+
+      <para id="para10">
+	A vector's representation with respect to an orthonormal basis 
+	<m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> is easily computed.  The vector
+	<m:math><m:ci type="vector">x</m:ci></m:math> may be expressed by:
+	<equation id="eqn2">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	  <equation id="eqn3">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	This formula is easily confirmed by substituting <link target-id="eqn2"/> into <link target-id="eqn3"/> and using the
+	properties of an inner product.  Note that the exact element
+	values of a given vector's representation depends upon both
+	the vector <emphasis>and</emphasis> the choice of basis.
+	Consequently, a meaningful specification of the representation
+	of a vector must include the definition of the basis.
+      </para>
+
+      <para id="para11">
+	The mathematical representation of a vector (expressed by
+	equations <link target-id="eqn2"/> and <link target-id="eqn3"/> can
+	be expressed geometrically.  This expression is a
+	generalization of the Cartesian representation of numbers.
+	Perpendicular axes are drawn; these axes correspond to the
+	orthonormal basis vector used in the representation.  A given
+	vector is representation as a point in the "plane" with the
+	value of the component along the <m:math> <m:ci type="vector"><m:msub> <m:mi>φ</m:mi> <m:mi>i</m:mi>
+	</m:msub></m:ci> </m:math> axis being <m:math> <m:ci><m:msub>
+	<m:mi>x</m:mi> <m:mi>i</m:mi> </m:msub></m:ci> </m:math>.
+      </para>
+
+      <para id="para12">
+	An important relationship follows from this mathematical
+	representation of vectors.  Let
+	<m:math><m:ci type="vector">x</m:ci></m:math> and
+	<m:math><m:ci type="vector">y</m:ci></m:math> by any two vectors in a
+	separable space.  These vectors are represented with respect
+	to an orthonormal basis by <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math> and <m:math>
+	  <m:set>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>y</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math>, respectively.  The inner product <m:math>
+	  <m:apply>
+	    <m:scalarproduct/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:ci type="vector">y</m:ci>
+	  </m:apply>
+	</m:math> is related to these representations by:
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>i</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>1</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:infinity/>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	This result is termed <term>Parseval's Theorem</term>.
+	Consequently, the inner product between any two vectors can be
+	computed from their representations.  A special case of this
+	result corresponds to the Cartesian notion of the length of a
+	vector; when <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:ci type="vector">y</m:ci>
+	  </m:apply>
+	</m:math>, Parseval's relationship becomes:
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	These two relationships are key results of the representation
+	theorem.  The implication is that any inner product computed
+	from vectors can also be computed from their representations.
+	There are circumstances in which the latter computation is
+	more manageable than the former and, furthermore, of greater
+	theoretical significance.
+      </para>
+    </section>
+  </content>
+  
+</document>

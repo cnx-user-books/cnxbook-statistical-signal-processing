@@ -1,0 +1,511 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Partial Knowledge of Probability Distributions</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0a08069d-35da-483f-8e00-68dae1678c06</md:uuid>
+</metadata>
+
+  <content>
+    <para id="numeroone">
+      In previous chapters, we assumed we knew the mathematical form
+      of the probability distribution for the observations under each
+      model; some of these distribution's parameters were not known
+      and we developed decision rules to deal with this uncertainty. A
+      more difficult problem occurs when the mathematical form is not
+      known precisely. For example, the data may be approximately
+      Gaussian, containing slight departures from the ideal. More
+      radically, so little may be known about an
+      <emphasis>accurate</emphasis> model for the data that we are
+      only willing to assume that they are distributed symmetrically
+      about some value. We develop model evaluation algorithms in this
+      section that tackle both kinds of problems. However, be
+      forewarned that solutions to such general models come at a
+      price: the more specific a model can be that accurately
+      describes a given problem, the better the performance. In other
+      words, the more specific the model, the more the signal
+      processing algorithms can be tailored to fit it with the obvious
+      result that we enhance the performance. However, if our specific
+      model is in error, our neatly tailored algorithms can lead us
+      drastically astray. Thus, the best approach is to relax those
+      aspects of the model which seem doubtful and to develop
+      algorithms that will cope well with worst-case situations should
+      they arise ("And they usually do," echoes every person
+      experienced in the vagaries of data). These considerations lead
+      us to consider nonparametric variations in the probability
+      densities <emphasis>compatible</emphasis> with out assessment of
+      model accuracy and to derive decision rules that
+      <emphasis>minimize</emphasis> the impact of the worse-case
+      situation.
+    </para>
+
+    <section id="sevenoneone">
+      <title>Worst-Case Probability Distributions</title>
+      <para id="numerotwo">
+	In model evaluation problems, there are "optimally" hard
+	problems, those where the models are the most difficult to
+	distinguish. The impossible problem is to distinguish models that
+	are identical. In this situation, the conditional densities of the
+	observed data are equal and the likelihood ratio is constant for
+	all possible values of the observations. It is obvious that
+	identical models are indistinguishable; this elaboration suggest
+	that in terms of the likelihood ratio, <emphasis>hard problems are
+	  those in which the likelihood ratio is constant</emphasis>. Thus,
+	"hard problems" are those in which the class of conditional
+	probability densities has a constant ratio for wide ranges of
+	observed data values.  
+      </para>
+
+      <para id="numerothree">The most relevant model evaluation
+	problem for us is the discrimination between two models that
+	differ only in the means of statistically independent
+	observations: the conditional densities of each observation are
+	related as
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>							       
+	</m:math>. Densities that would make this model evaluation
+	problem hard would satisfy the functional equation
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>x</m:ci></m:bvar>
+	    <m:bvar><m:ci>m</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>x</m:ci>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">p</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>x</m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>		     
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">C</m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">p</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">C</m:ci>
+	    <m:ci>m</m:ci>
+	  </m:apply>
+	</m:math> is quantity depending on the mean
+	<m:math><m:ci>m</m:ci></m:math>, but not the variable
+	<m:math><m:ci>x</m:ci></m:math>.<footnote id="idm6799440">The
+	  uniform density does not satisfy this equation as the domain
+	  of the function
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">p</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math> is assumed to be infinite. </footnote> For the
+	probability densities satisfying this equation, any value of
+	the observed datum which has a value greater than
+	<m:math><m:ci>m</m:ci></m:math> cannot be used to
+	distinguish the two models. If one considers only those
+	zero-mean densities
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">p</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> which are symmetric about the origin, then by
+	symmetry the likelihood ratio would also be constant for
+	<m:math>
+	  <m:apply>
+	    <m:leq/>
+	    <m:ci>x</m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>. Hypotheses having these densities could only be
+	distinguished when the oberservations lay in the interval
+	<m:math>
+	  <m:interval closure="open">
+	    <m:cn>0</m:cn>
+	    <m:ci>m</m:ci>
+	  </m:interval>
+	</m:math>; such model evaluation problems are hard!
+      </para>
+
+      <para id="numerofour">
+	From the functional equation, we see that the quantity
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">C</m:ci>
+	    <m:ci>m</m:ci>
+	  </m:apply>
+	</m:math> must be inversely proportional to 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">p</m:ci>
+	    <m:ci>m</m:ci>
+	  </m:apply>
+	</m:math> (substitute 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>	    
+	    <m:ci>x</m:ci>
+	    <m:ci>m</m:ci>
+	  </m:apply>
+	</m:math> into the equation). Incorporating this fact into
+	our functional equation, we find that the
+	<emphasis>only</emphasis> solution is the exponential
+	function.
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>z</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>z</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:implies/>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">p</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>z</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">C</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">p</m:ci>
+		    <m:ci>z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:mo>∝</m:mo>
+		<m:apply>
+		  <m:ci type="fn">p</m:ci>
+		  <m:ci>z</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	If we insist that the density satisfying the functional
+	equation by symmetric, the solution is the so-called
+	Laplacian (or double-exponential) density.
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar><m:ci>z</m:ci></m:bvar>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:root/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:ci>z</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> When this density serves as the underlying density
+	for our hard model-testing problem, the likelihood ratio has
+	the form 
+	(<cite target-id="Huber1"><cite-title>Huber; 1965</cite-title></cite>,
+	  <cite target-id="Huber2"><cite-title>Huber; 1981</cite-title></cite>,
+	  <cite target-id="Poor"><cite-title>Poor pp.175-187</cite-title></cite>)
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>m</m:ci>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>	 
+		  </m:apply>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:cn>0</m:cn>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>m</m:ci>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>m</m:ci>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>
+	Indeed, the likelihood ratio is constant over much of the
+	range of values of
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>, implying that the two models are very similar
+	over those ranges. This worst-case result will appear
+	repeatedly as we embark on searching for the model
+	evaluation rules that minimize the effect of modeling errors
+	on performance.
+      </para>
+    </section>
+  </content>
+  
+  <bib:file>
+    <bib:entry id="Huber1">
+      <bib:article>
+   	<bib:author>P.J. Huber</bib:author>
+    	<bib:title>A robust version of the probability ratio test</bib:title>
+    	<bib:journal>Ann. Math. Stat.</bib:journal>
+    	<bib:year>1965</bib:year>
+    	<bib:volume>36</bib:volume>
+    	<bib:pages>1753-1758</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="Huber2">
+      <bib:book>
+   	<bib:author>P.J. Huber</bib:author>
+    	<bib:title>Robust Statistics</bib:title>
+    	<bib:publisher>John Wiley and Sons</bib:publisher>
+    	<bib:year>1981</bib:year>
+    	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="Poor">
+      <bib:book>
+   	<bib:author>H.V. Poor</bib:author>
+    	<bib:title>An Introduction to Signal Detection and Estimation</bib:title>
+    	<bib:publisher>Springer-Verlag</bib:publisher>
+    	<bib:year>1988</bib:year>
+    	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

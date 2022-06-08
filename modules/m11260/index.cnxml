@@ -1,0 +1,1725 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Colored Gaussian Noise</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>75e7920d-d4ff-4c24-abfb-92648c92ae93</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      When the additive Gaussian noise in the sensors' outputs is
+      colored (<foreign>i.e.</foreign>, the noise values are
+      correlated in some fashion), the linearity of beamforming
+      algorithms means that the array processing output
+      <m:math><m:ci>r</m:ci></m:math> also contains colored noise.
+      The solution to the colored-noise, binary detection problem
+      remains the likelihood ratio, but differs in the form of the
+      <foreign>a priori</foreign> densities.  The noise will again be
+      assumed zero mean, but the noise vector has non-trivial
+      covariance matrix <m:math><m:ci type="matrix">K</m:ci></m:math>:
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	  <m:ci>n</m:ci>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+	    <m:cn type="vector">0</m:cn>
+	    <m:ci type="matrix">K</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">n</m:ci>
+	    </m:bvar>
+	    <m:ci type="vector">n</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:determinant/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply><m:divide/><m:cn>1</m:cn><m:cn>2</m:cn></m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">n</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">n</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      In this case, the logarithm of the likelihood ratio is
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:apply>
+	    <m:times/>
+	    <m:cn>2</m:cn>
+	    <m:apply>
+	      <m:ln/>
+	      <m:ci>η</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      which, after the usual simplifications, is written
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">K</m:ci>
+		    </m:apply>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">K</m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:apply>
+	    <m:ln/>
+	    <m:ci>η</m:ci>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      The sufficient statistic for the colored Gaussian noise
+      detection problem is 
+      <equation id="eq1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="matrix"><m:msub>
+		  <m:mi>ϒ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The quantities computed for each signal have a similar, but
+      more complicated interpretation than in the white noise case.
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:transpose/>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">K</m:ci>
+	  </m:apply>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> is a dot product, but with respect to the so-called
+      <term>kernel</term> <m:math>
+	<m:apply>
+	  <m:inverse/>
+	  <m:ci type="matrix">K</m:ci>
+	</m:apply>
+      </m:math>.  The effect of the kernel is to weight certain
+      components more heavily than others.  A positive-definite
+      symmetric matrix (the covariance matrix is one such example) can
+      be expressed in terms of its eigenvectors and eigenvalues.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="vector">K</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>k</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:cn>1</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:ci>L</m:ci>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>v</m:mi>
+		  <m:mi>k</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>v</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The sufficient statistic can thus be written as the complicated
+      summation
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:apply>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>k</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:cn>1</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:ci>L</m:ci>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>v</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>v</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      where <m:math> <m:ci><m:msub> <m:mi>λ</m:mi>
+      <m:mi>k</m:mi> </m:msub></m:ci> </m:math> and <m:math> <m:ci type="vector"><m:msub> <m:mi>v</m:mi> <m:mi>k</m:mi>
+      </m:msub></m:ci> </m:math> denote the <m:math> <m:ci><m:msup>
+      <m:mi>k</m:mi> <m:mtext>th</m:mtext> </m:msup></m:ci> </m:math>
+      eigenvalue and eigenvector of the covariance matrix
+      <m:math><m:ci type="matrix">K</m:ci></m:math>.  Each of the
+      constituent dot products is largest when the signal and the
+      observation vectors have strong components parallel to <m:math>
+      <m:ci type="vector"><m:msub> <m:mi>v</m:mi> <m:mi>k</m:mi>
+      </m:msub></m:ci> </m:math>.  However, the product of these dot
+      products is weighted by the reciprocal of the associated
+      eigenvalue.  Thus, components in the observation vector parallel
+      to the signal will tend to be accentuated; those components
+      parallel to the eigenvectors having the
+      <emphasis>smaller</emphasis> eigenvalues will receive greater
+      accentuation than others.  The usual notions of parallelism and
+      orthogonality become "skewed" because of the presence of the
+      kernel.  A covariance matrix's eigenvalue has "units" of
+      variance; these accentuated directions thus correspond to small
+      noise variance.  We can therefore view the weighted dot product
+      as a computation that is simultaneously trying to select
+      components in the observations similar to the signal, but
+      concentrating on those where the noise variance is small.
+    </para>
+
+    <para id="para2">
+      The second term in the expressions consistuting the optimal
+      detector are of the form <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:transpose/>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">K</m:ci>
+	  </m:apply>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  This quantity is a special case of the dot product
+      just discussed.  The two vectors involved in this dot product
+      are identical; they are parallel by definition.  The weighting
+      of the signal components by the reciprocal eigenvalues remains.
+      Recalling the units of the eigenvectors of <m:math><m:ci type="matrix">K</m:ci></m:math>, <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:transpose/>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">K</m:ci>
+	  </m:apply>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> has the units of a signal-to-noise ratio, which is
+      computed in a way that enhances the contribution of those signal
+      components parallel to the "low noise" directions.
+    </para>
+
+    <para id="para3">
+      To compute the performance probabilities, we express the
+      detection rule in terms of the sufficient statistic.
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:ln/>
+	      <m:ci>η</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply><m:divide/><m:cn>1</m:cn><m:cn>2</m:cn></m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      The distribution of the sufficient statistic on the left side of
+      this equation is Gaussian because it consists as a linear
+      transformation of the Gaussian random vector <m:math><m:ci type="vector">r</m:ci></m:math>.  Assuming the <m:math>
+	<m:ci><m:msup>
+	    <m:mi>i</m:mi>
+	    <m:mtext>th</m:mtext>
+	  </m:msup></m:ci>
+      </m:math> model to be true, 
+      <m:math display="block">
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The false-alarm probability for the optimal Gaussian colored
+      noise detector is given by
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ln/>
+		    <m:ci>η</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply><m:divide/><m:cn>1</m:cn><m:cn>2</m:cn></m:apply>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">K</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">K</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply><m:divide/><m:cn>1</m:cn><m:cn>2</m:cn></m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      As in the white noise case, the important signal-related
+      quantity in this expression is the signal-to-noise ratio of the
+      difference signal.  The distance interpretation of this quantity
+      remains, but the distance is now warped by the kernel's presence
+      in the dot product.
+    </para>
+
+    <para id="para4">
+      The sufficient statistic computed for each signal can be given
+      two signal processing interpretations in the colored noise case.
+      Both of these rest on considering the quantity <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:transpose/>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">K</m:ci>
+	  </m:apply>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> as a simple dot product, but with different ideas on
+      grouping terms.  The simplest is to group the kernel with the
+      signal so that the sufficient statistic is the dot product
+      between the observations and a <emphasis>modified</emphasis>
+      version of the signal <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:mover>
+	      <m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	      <m:mo>∼</m:mo>
+	    </m:mover></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:apply>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  This modified signal thus becomes the equivalent to
+      the unit-sample response of the matched filter.  In this form,
+      the observed data are unaltered and passed through a matched
+      filter whose unit-sample response depends on both the signal and
+      the noise characteristics.  The size of the noise covariance
+      matrix, equal to the number of observations used by the
+      detector, is usually large: hundreds if not thousands of samples
+      are possible.  Thus, computation of the inverse of the noise
+      covariance matrix becomes an issue.  This problem needs to be
+      solved only once if the noise characteristics are static; the
+      inverse can be precomputed on a general purpose computer using
+      well-established numerical algorithms.  The signal-to-noise
+      ratio term of the sufficient statistic is the dot product of the
+      signal with the modified signal <m:math>
+	<m:ci><m:mover>
+	    <m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	    <m:mo>∼</m:mo> 
+	  </m:mover></m:ci> 
+      </m:math>.  This view of
+      the receiver structure is shown in <link target-id="fig1"/>.
+
+      <figure id="fig1">
+	<media id="idm7508224" alt=""><image src="../../media/coloredmf.png" mime-type="image/png"/></media> 
+	<caption>These diagrams depict the signal processing
+	operations involved in the optimum detector when the additive
+	noise is not white.  The upper diagram shows a matched filter
+	whose unit-sample response depends both on the signal and the
+	noise characteristics.  The lower diagram is often termed the
+	whitening filter structure, where the noise components of the
+	observed data are first whitened, then passed through a
+	matched filter whose unit-sample response is related to the
+	"whitened" signal.</caption>
+      </figure>
+    </para>
+
+    <para id="para5">
+      A second and more theoretically powerful view of the
+      computations involved in the colored noise detector emerges when
+      we <emphasis>factor</emphasis> covariance matrix.  The
+      <term>Cholesky factorization</term> of a positive-definite,
+      symmetric matrix (such as a covariance matrix or its inverse)
+      has the form <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">K</m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">L</m:ci>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  With this factorization, the sufficient statistic
+      can be written as
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:apply>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci type="matrix">D</m:ci>
+		  <m:cn type="rational">-1<m:sep/>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">L</m:ci>
+		</m:apply>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci type="matrix">D</m:ci>
+		<m:cn type="rational">-1<m:sep/>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">L</m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The components of the dot product are multiplied by the same
+      matrix (<m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:cn type="rational">-1<m:sep/>2</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">L</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>), which is lower-triangular.  <emphasis>If</emphasis>
+      this matrix were also Toeplitz, the product of this kind between
+      a Toeplitz matrix and a vector would be equivalent to the
+      convolution of the components of the vector with the first
+      column of the matrix.  If the matrix is not Toeplitz (which,
+      inconveniently, is the typical case), a convolution also
+      results, but with a unit-sample response that varies with the
+      index of the output--a time-varying, linear filtering operation.
+      The variation of the unit-sample response corresponds to the
+      different rows of the matrix <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:cn type="rational">-1<m:sep/>2</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">L</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> running <emphasis>backwards</emphasis> from the
+      main-diagonal entry.  What is the physical interpretation of the
+      action of this filter?  The covariance of the random vector
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="vector">x</m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> is given by <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>x</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="matrix"><m:msub>
+		<m:mi>K</m:mi>
+		<m:mi>r</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">A</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Applying this result to the current situation, we
+      set <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">A</m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci type="matrix">D</m:ci>
+	      <m:cn type="rational">-1<m:sep/>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> and <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>r</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci type="matrix">K</m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">L</m:ci>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> with the result that the covariance matrix <m:math>
+	<m:ci type="matrix"><m:msub>
+	    <m:mi>K</m:mi>
+	    <m:mi>x</m:mi>
+	  </m:msub></m:ci>
+      </m:math> is the identity matrix!  Thus, the matrix <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:cn type="rational">-1<m:sep/>2</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:inverse/>
+	    <m:ci type="matrix">L</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> corresponds to a (possibly time-varying)
+      <term>whitening filter</term>: we have converted the
+      colored-noise component of the observed data to white noise!  As
+      the filter is always linear, the Gaussian observation noise
+      remains Gaussian at the output.  Thus, the colored noise problem
+      is converted into a simpler one with the whitening filter: the
+      whitened observations are first match-filtered with the
+      "whitened" signal <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="vector"><m:msubsup>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	      <m:mo>+</m:mo>
+	    </m:msubsup></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci type="matrix">D</m:ci>
+	      <m:cn type="rational">-1<m:sep/>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	    <m:ci type="vector"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> (whitened with respect to noise characteristics only)
+      then half the energy of the whitened signal is subtracted
+      (<link target-id="fig1"/>).
+    </para>
+
+    <example id="e1">
+      <para id="pe1">
+	To demonstrate the interpretation of the Cholesky
+	factorization of the covariance unit matrix as a time-varying
+	whitening filter, consider the covariance matrix
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">K</m:ci>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>3</m:cn>
+		</m:apply>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+		<m:ci>a</m:ci>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>3</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	This covariance matrix indicates that the nosie was produced
+	by passing white Gaussian noise through a first-order filter
+	having coefficient <m:math><m:ci>a</m:ci></m:math>: <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">n</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:ci type="fn">n</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>l</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">w</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where <m:math>
+	  <m:apply>
+	    <m:ci type="fn">w</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> is unit-variance white noise.  Thus, we would expect
+	that if a whitening filter emerged from the matrix
+	manipulations (derived just below), it would be a first-order
+	FIR filter having a unit-sample response proportional to
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">h</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>l</m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>a</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>l</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:piece>
+	      <m:otherwise>
+		<m:cn>0</m:cn>
+	      </m:otherwise>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>
+	Simple arithmetic calculations of the Cholesky decomposition
+	suffice to show that the matrices <m:math><m:ci type="matrix">L</m:ci></m:math> and <m:math><m:ci type="matrix">D</m:ci></m:math> are given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">L</m:ci>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>3</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>a</m:ci>
+		<m:cn>1</m:cn>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>a</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>a</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>a</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	and that their inverses are
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>a</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>a</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>a</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">D</m:ci>
+	    </m:apply>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>a</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>a</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>a</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	Because <m:math><m:ci type="matrix">D</m:ci></m:math> is
+	diagonal, the matrix <m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci type="matrix">D</m:ci>
+	    <m:cn type="rational">-1<m:sep/>2</m:cn>
+	  </m:apply>
+	</m:math> equals the term-by-term square root of the inverse
+	of <m:math><m:ci type="matrix">D</m:ci></m:math>.  The product
+	of interest here is therefore given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci type="matrix">D</m:ci>
+		<m:cn type="rational">-1<m:sep/>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:cn>1</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>a</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>a</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>a</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	Let <m:math>
+	  <m:ci type="vector"><m:mover>
+	      <m:mi>r</m:mi>
+	      <m:mo>∼</m:mo>
+	    </m:mover></m:ci>
+	</m:math> express the product <m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci type="matrix">D</m:ci>
+	      <m:cn type="rational">-1<m:sep/>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">L</m:ci>
+	    </m:apply>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>.  This vector's elements are given by
+	<m:math display="block">
+	  <m:set>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:mover>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		  <m:mo>∼</m:mo>
+		</m:mover></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:mover>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		  <m:mo>∼</m:mo>
+		</m:mover></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>a</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>a</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>…</m:ci>
+	  </m:set>
+	</m:math>
+	Thus, the expected FIR whitening filter emerges after the
+	first term.  The expression could <emphasis>not</emphasis> be
+	of this form as no observations were assumed to precede
+	<m:math> <m:ci><m:msub> <m:mi>r</m:mi> <m:mn>0</m:mn>
+	</m:msub></m:ci> </m:math>.  This edge effect is the source of
+	the time-varying aspect of the whitening filter.  If the
+	system modeling the noise generation process has only poles,
+	this whitening filter will always stabilize - not vary with
+	time - once sufficient data are present within the memory of
+	the FIR inverse filter.  In contrast, the presence of zeros in
+	the generation system would imply an IIR whitening filter.
+	With finite data, the unit-sample response would then change
+	on each output sample.
+      </para>
+    </example>
+
+  </content>
+  
+</document>

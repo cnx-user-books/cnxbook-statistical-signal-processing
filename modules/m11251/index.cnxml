@@ -1,0 +1,504 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>The Central Limit Theorem</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a4ca62b9-b688-46b7-8127-eec766bd97ef</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Let <m:math> <m:set><m:ci><m:msub> <m:mi>X</m:mi> <m:mi>l</m:mi>
+	  </m:msub></m:ci> </m:set></m:math> denote a sequence of independent,
+      identically distributed, random variables.  Assuming they have
+      zero means and finite variances (equaling <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>σ</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math>), the Central Limit Theorem states that the sum 
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:bvar><m:ci>l</m:ci></m:bvar>
+	  <m:lowlimit>
+	    <m:cn>1</m:cn>
+	  </m:lowlimit>
+	  <m:uplimit>
+	    <m:ci>L</m:ci>
+	  </m:uplimit>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:root/>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> converges in distribution to a Gaussian random variable.
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>1</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci>L</m:ci>
+	      </m:uplimit>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:mover>
+	    <m:mo>→</m:mo>
+	    <m:mrow>
+	      <m:mi>L</m:mi>
+	      <m:mo>→</m:mo>
+	      <m:mi>∞</m:mi>
+	    </m:mrow>
+	  </m:mover>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+	    <m:cn>0</m:cn>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      Because of its generality, this theorem is often used to
+      simplify calculations involving <emphasis>finite</emphasis> sums
+      of non-Gaussian random variables.  However, attention is seldom
+      paid to the <term>convergence rate</term> of the Central Limit
+      Theorem.  Kolmogorov, the famous twentieth century
+      mathematician, is reputed to have said, "The Central Limit
+      Theorem is a dangerous tool in the hands of amateurs."  Let's
+      see what he meant.
+    </para>
+
+    <para id="para2">
+      Taking <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>σ</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math>, the key result is that the magnitude of the
+      difference between <m:math>
+	<m:apply>
+	  <m:ci type="fn">P</m:ci>
+	  <m:ci>x</m:ci>
+	</m:apply>
+      </m:math>, defined to be the probability that the sum given
+      above exceeds <m:math><m:ci>x</m:ci></m:math>, and <m:math>
+	<m:apply>
+	  <m:ci type="fn">Q</m:ci>
+	  <m:ci>x</m:ci>
+	</m:apply>
+      </m:math>, the probability that a unit-variance Gaussian random
+      variable exceeds <m:math><m:ci>x</m:ci></m:math>, is bounded by
+      a quantity inversely related to the square root of
+      <m:math><m:ci>L</m:ci></m:math> (<cite target-id="cramer"><cite-title>Cramer: Theorem
+      24</cite-title></cite>).
+
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <m:apply>
+	    <m:abs/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:ci type="fn">P</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>c</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:ci>X</m:ci>
+		  </m:apply>
+		  <m:cn>3</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>3</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The constant of proportionality <m:math><m:ci>c</m:ci>
+      </m:math> is a number known to be about 0.8 (<cite target-id="hall"><cite-title>Hall: p6</cite-title></cite>).  The ratio of absolute third moment of
+      <m:math> <m:ci><m:msub> <m:mi>X</m:mi> <m:mi>l</m:mi>
+      </m:msub></m:ci> </m:math> to the cube of its standard
+      deviation, known as the skew and denoted by <m:math>
+      <m:ci><m:msub> <m:mi>γ</m:mi> <m:mi>X</m:mi>
+      </m:msub></m:ci> </m:math>, depends only on the distribution of
+      <m:math> <m:ci><m:msub> <m:mi>X</m:mi> <m:mi>l</m:mi>
+      </m:msub></m:ci> </m:math> and is independent of scale. This
+      bound on the absolute error has been shown to be tight (<cite target-id="cramer"><cite-title>Cramer: pp. 79ff</cite-title></cite>).  Using our lower bound for
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">Q</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> (see <link document="m11250" target-id="eqn3"/>), we find
+      that the relative error in the Central Limit Theorem
+      approximation to the distribution of finite sums is bounded for
+      <m:math>
+	<m:apply>
+	  <m:gt/>
+	  <m:ci>x</m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math> as
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:leq/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">P</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">Q</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>c</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>γ</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		  </m:apply>
+		  <m:ci>L</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>x</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>x</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:piece>
+		<m:piece>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>x</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:gt/>
+		    <m:ci>x</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:piece>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Suppose we require that the relative error not exceed some
+      specific value <m:math><m:ci>ε</m:ci></m:math>.  The
+      normalized (by the standard deviation) boundary
+      <m:math><m:ci>x</m:ci></m:math> at which the approximation is
+      evaluated must not violate
+      <m:math display="block">
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>L</m:ci>
+	      <m:apply>
+		<m:power/>
+		<m:ci type="vector">ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:pi/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>c</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>γ</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>x</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:cn>4</m:cn>
+		<m:apply>
+		  <m:leq/>
+		  <m:ci>x</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>x</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:gt/>
+		  <m:ci>x</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      As shown in <link target-id="fig1"/>, the right side of this equation is
+      a monotonically increasing function.
+
+    <figure id="fig1">
+      <media id="idp242944" alt=""><image src="../../media/clt.png" mime-type="image/png"/></media> 
+      <caption>The quantity which governs the limits of validity for
+      numerically applying the Central Limit Theorem on finite numbers
+      of data is shown over a portion of its range.  To judge these
+      limits, we must compute the quantity
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>L</m:ci>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:pi/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>c</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>γ</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where <m:math><m:ci>ε</m:ci></m:math> denotes
+	the desired percentage error in the Central Limit Theorem
+	approximation and <m:math><m:ci>L</m:ci></m:math> the number
+	of observations.  Selecting this value on the vertical axis
+	and determining the value of <m:math><m:ci>x</m:ci></m:math>
+	yielding it, we find the normalized (<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>x</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math> implies unit variance) upper limit on an
+	<m:math><m:ci>L</m:ci></m:math>-term sum to which the Central
+	Limit Theorem is guaranteed to apply.  Note how rapidly the
+	curve increases, suggesting that large amounts of data are
+	needed for accurate approximation.
+	</caption>
+    </figure>
+
+    </para>
+    <example id="ex1">
+      <para id="paraex1">
+	If <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>ε</m:ci>
+	    <m:cn>0.1</m:cn>
+	  </m:apply>
+	</m:math> and taking <m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>c</m:ci>
+	    <m:ci><m:msub>
+		<m:mi>γ</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math> arbitrarily to be unity (a reasonable value), the
+	upper limit of the preceding equation becomes 
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:cn type="e-notation">1.6<m:sep/>-3</m:cn>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>.  Examining <link target-id="fig1"/>, we find that for <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>L</m:ci>
+	    <m:cn>10000</m:cn>
+	  </m:apply>
+	</m:math>, <m:math><m:ci>x</m:ci></m:math> must not exceed
+	1.17.  Because we have normalized to unit variance, this
+	example suggests that the Gaussian approximates the
+	distribution of a ten-thousand term sum only over a range
+	corresponding to a 76% area about the mean.  Consequently, the
+	Central Limit Theorem, as a finite-sample distributional
+	approximation, is only guaranteed to hold near the mode of the
+	Gaussian, with <emphasis>huge</emphasis> numbers of
+	observations needed to specify the tail behavior.  Realizing
+	this fact will keep us from being ignorant amateurs.
+      </para>
+    </example>
+    
+  </content>
+
+  <bib:file>
+    <bib:entry id="cramer">
+      <bib:book>
+	<bib:author>H. Cramér</bib:author> 
+	<bib:title>Random Variables and Probability Distributions</bib:title>
+	<bib:publisher>Cambridge University Press</bib:publisher>
+	<bib:year>1970</bib:year> 
+	<bib:edition>Third Edition</bib:edition>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="hall">
+      <bib:incollection>
+	<bib:author>P. Hall</bib:author> 
+	<bib:title>Rates of Convergence in the Central Limit Theorem</bib:title>
+	<bib:booktitle>Research Notes in Mathematics</bib:booktitle>
+	<bib:publisher>Pitman Advanced Publishing Program</bib:publisher>
+	<bib:year>1982</bib:year> 
+	<bib:volume>62</bib:volume>
+	<bib:pages>6</bib:pages>
+      </bib:incollection>
+    </bib:entry>
+  </bib:file>  
+</document>
