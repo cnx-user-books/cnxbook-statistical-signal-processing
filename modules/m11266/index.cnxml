@@ -1,0 +1,2661 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Cramer-Rao Bound</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>27b18852-5d10-4607-a8da-af2bffed4b55</md:uuid>
+</metadata>
+
+  <content>
+    <para id="one">
+      The mean-squared error for <emphasis>any</emphasis> estimate of
+      a nonrandom parameter has a lower bound, the
+      <term>Cramér-Rao Bound</term> <cite target-id="Cramer"><cite-title>(Cramér (1946) pp. 474-477)</cite-title></cite>, which
+      defines the ultimate accuracy of <emphasis>any</emphasis>
+      estimation procedure.  This lower bound, as shown later, is
+      intimately related to the maximum likelihood estimator.
+    </para>
+    
+    <para id="two">
+      We seek a "bound" on the mean-squared error matrix <m:math><m:ci type="matrix">M</m:ci></m:math> defined to be
+      
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">M</m:ci>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      A matrix is "lower bounded" by a second matrix if the difference
+      between the two is a non-negative definite matrix. Define the
+      column matrix <m:math><m:ci type="matrix">x</m:ci></m:math> to be
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">x</m:ci>
+	  <m:matrix>
+	    <m:matrixrow>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">b</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:matrixrow>
+	    <m:matrixrow>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply> 
+		</m:apply>
+	      </m:apply>
+	    </m:matrixrow>
+	  </m:matrix>
+	</m:apply>
+      </m:math>
+      where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">b</m:ci>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math>
+      denotes the column matrix of estimator biases. To derive the
+      Cramér-Rao bound, evaluate
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">x</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">x</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:matrix>
+	    <m:matrixrow>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="matrix">M</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">b</m:ci>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="matrix">b</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="matrix">I</m:ci>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:ci type="matrix">b</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:matrixrow>
+	    <m:matrixrow>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="matrix">I</m:ci>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci>θ</m:ci></m:bvar>
+		    <m:ci type="matrix">b</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:ci type="matrix">F</m:ci>
+	    </m:matrixrow>
+	  </m:matrix>
+	</m:apply>
+      </m:math>
+      where 
+      <m:math>
+	<m:apply>
+	  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	  <m:bvar><m:ci>θ</m:ci></m:bvar>
+	  <m:ci type="matrix">b</m:ci>
+	</m:apply>
+      </m:math>
+      represents the matrix of partial derivatives of the bias
+      <m:math>
+	<m:apply>
+	  <m:partialdiff/>
+	  <m:bvar>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mi>j</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:bvar>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>b</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math>
+      and the matrix <m:math><m:ci type="matrix">F</m:ci></m:math> is
+      the <term>Fisher information matrix</term> 
+      <equation id="uno">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">F</m:ci>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci>θ</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ln/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci type="vector">r</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Note that this matrix can alternatively be expressed as 
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">F</m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<!--Hessian notation-->
+		<m:ci><m:mrow>
+		    <m:msub>
+		      <m:mi>∇</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		    <m:msubsup>
+		      <m:mi>∇</m:mi>
+		      <m:mi>θ</m:mi>
+		      <m:mi>T</m:mi>
+		    </m:msubsup>
+		  </m:mrow></m:ci>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+		
+      The notation
+      <m:math>
+	<!--Hessian notation-->
+	<m:ci><m:mrow>
+	    <m:msub>
+	      <m:mi>∇</m:mi>
+	      <m:mi>θ</m:mi>
+	    </m:msub>
+	    <m:msubsup>
+	      <m:mi>∇</m:mi>
+	      <m:mi>θ</m:mi>
+	      <m:mi>T</m:mi>
+	    </m:msubsup>
+	  </m:mrow></m:ci>
+      </m:math>
+      means the matrix of all second partials of the quantity it
+      operates on (the gradient of the gradient). The matrix is known
+      as the <term>Hessian</term>. Demonstrating the equivalence of
+      these two forms for the Fisher information is quite
+      easy. Because
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>θ</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math>
+      for all choices of the parameter vector, the gradient of the
+      expression equals zero. Furthermore, 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	    <m:bvar><m:ci>θ</m:ci></m:bvar>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>θ</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. Combining these results yields 
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn type="vector">0</m:cn>
+	</m:apply>
+      </m:math>
+      Evaluating the gradient for this quantity (using the chain rule)
+      also yields zero.  
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <!--Hessian notation-->
+		  <m:ci><m:mrow>
+		      <m:msub>
+			<m:mi>∇</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		      <m:msubsup>
+			<m:mi>∇</m:mi>
+			<m:mi>θ</m:mi>
+			<m:mi>T</m:mi>
+		      </m:msubsup>
+		    </m:mrow></m:ci>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci>θ</m:ci></m:bvar>
+		    <m:apply>
+		      <m:ln/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci type="vector">r</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>
+      or
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<!--Hessian notation-->
+		<m:ci><m:mrow>
+		    <m:msub>
+		      <m:mi>∇</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		    <m:msubsup>
+		      <m:mi>∇</m:mi>
+		      <m:mi>θ</m:mi>
+		      <m:mi>T</m:mi>
+		    </m:msubsup>
+		  </m:mrow></m:ci>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Calculating the expected value for the Hessian for is somewhat
+      easier than finding the expected value of the outer product of
+      the gradient with itself. In the scalar case, we have
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:apply>
+		<m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>θ</m:ci>
+		  <m:degree>
+		    <m:cn>2</m:cn>
+		  </m:degree>
+		</m:bvar>
+		<m:degree>
+		  <m:cn>2</m:cn>
+		</m:degree>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+    </para>
+
+    <para id="three">
+      Returning to the derivation, the matrix
+      <m:math>	  
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">x</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      is non-negative definite because it is a correlation
+      matrix. Thus, for any column matrix,
+      <m:math><m:ci>α</m:ci></m:math>, the quadratic form
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:transpose/>
+	    <m:ci type="matrix">α</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">x</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:ci>α</m:ci>
+	</m:apply>
+      </m:math>
+      is non-negative. Choose a form for
+      <m:math><m:ci>α</m:ci></m:math> that simplifies the
+      quadratic form. A convenient choice is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>α</m:ci>
+	  <m:matrix>
+	    <m:matrixrow>
+	      <m:ci>β</m:ci>
+	    </m:matrixrow>
+	    <m:matrixrow>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:inverse/>      
+	       	    <m:ci type="matrix">F</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:apply>
+			<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+			<m:bvar><m:ci>θ</m:ci></m:bvar>
+			<m:ci type="matrix">b</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>β</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:matrixrow>
+	  </m:matrix>
+	</m:apply>
+      </m:math>
+      where <m:math><m:ci>β</m:ci></m:math> is an arbitrary
+      column matrix. The quadratic form becomes in this case 
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">x</m:ci>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="matrix">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci>β</m:ci>
+	    </m:apply>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="matrix">M</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci type="matrix">b</m:ci>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="matrix">b</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:ci type="matrix">I</m:ci>
+		      <m:apply>
+			<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+			<m:bvar><m:ci>θ</m:ci></m:bvar>
+			<m:ci type="matrix">b</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:inverse/>
+		      <m:ci type="matrix">F</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:plus/>
+			<m:ci type="matrix">I</m:ci>
+			<m:apply>
+			  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+			  <m:bvar><m:ci>θ</m:ci></m:bvar>
+			  <m:ci type="matrix">b</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	    <m:ci>β</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> As this quadratic form must be non-negative, the
+      matrix expression enclosed in brackets must be non-negative
+      definite. We thus obtain the well-known Cramér-Rao bound
+      on the mean-square error matrix.
+    </para>
+    
+    <equation id="eqn2">
+      <m:math>
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="matrix">b</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:ci type="matrix">b</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="matrix">I</m:ci>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:ci type="matrix">b</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="martix">F</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="matrix">I</m:ci>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci>θ</m:ci></m:bvar>
+		    <m:ci type="matrix">b</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+    </equation>
+    
+    <para id="four">
+      This form for the Cramér-Rao Bound does
+      <emphasis>not</emphasis> mean that each term in the matrix of
+      squared errors is greater than the corresponding term in the
+      bounding matrix. As stated earlier, this expression means that
+      the difference between these matrices is non-negative
+      definite. For a matrix to be non-negative definite, each term on
+      the main diagonal must be non-negative. The elements of the main
+      diagonal of   
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>ε</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>	  
+      are the squared errors of the estimate of the individual
+      parameters. Thus, for each parameter, the mean-squared
+      estimation error can be no smaller than
+      <m:math display="block">
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>b</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+      	       	<m:ci>θ</m:ci>
+      	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:selector/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="matrix">I</m:ci>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci>θ</m:ci></m:bvar>
+		    <m:ci type="matrix">b</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="martix">F</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci type="matrix">I</m:ci>
+		    <m:apply>
+		      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		      <m:bvar><m:ci>θ</m:ci></m:bvar>
+		      <m:ci type="matrix">b</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>i</m:ci>
+	      <m:ci>i</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+    </para>
+
+    <para id="five">
+      This bound simplifies greatly if the estimator is unbiased (
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix">b</m:ci>
+	  <m:cn type="vector">0</m:cn>
+	</m:apply>
+      </m:math>). 
+      In this case, the Cramér-Rao bound becomes
+      <m:math display="block">
+	<m:apply>
+	  <m:geq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:selector/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">F</m:ci>
+	    </m:apply>
+	    <m:ci>i</m:ci>
+	    <m:ci>i</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Thus, the mean-squared error for each parameter in a
+      multiple-parameter, unbiased-estimator problem can be no smaller
+      than the corresponding diagonal term in the
+      <emphasis>inverse</emphasis> for the Fisher information
+      matrix. In such problems, the estimate's error characteristics
+      of any parameter become intertwined with the other parameters in
+      a complicated way. Any estimator satisfying the Cramér-Rao
+      bound with equality is said to be
+      <emphasis>efficient</emphasis>.
+    </para>
+
+    <example id="Lizisasuperdork">
+      <para id="six">
+	Let's evaluate the Cramér-Rao bound for the example we
+	have been discussing: the estimation of the mean and variance
+	of a length <m:math><m:ci>L</m:ci></m:math> sequence of
+	statistically independent Gaussian random variables. Let the
+	estimate of the mean
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>
+	be the sample average
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>; as shown in the last example, this estimate is
+	unbiased. Let the estimate of the variance
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>
+	be the unbiased estimate 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:sum/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>				       
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Each term in the Fisher information matrix
+	<m:math> <m:ci type="matrix">F</m:ci></m:math> is given by the
+	expected value of the paired products of derivatives of the
+	logarithm of the likelihood function.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:selector/>
+	      <m:ci type="matrix">F</m:ci>
+	      <m:ci>i</m:ci>
+	      <m:ci>j</m:ci>
+	    </m:apply>
+	    <m:apply>	 
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:partialdiff/>
+		  <m:bvar>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>j</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">r</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The logarithm of the likelihood function is
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>L</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci>	 
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	its partial derivatives are
+	<equation id="righthere">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>	       
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	<equation id="foo">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>			   
+		<m:plus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>l</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	
+	and its second partials are
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:degree>
+		  <m:cn>2</m:cn>
+		</m:degree>
+	      </m:bvar>
+	      <m:degree>
+		<m:cn>2</m:cn>
+	      </m:degree>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>L</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:degree>
+		<m:cn>2</m:cn>
+	      </m:degree>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:bvar>
+	      <m:degree>
+		<m:cn>2</m:cn>
+	      </m:degree>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:degree>
+		  <m:cn>2</m:cn>
+		</m:degree>
+	      </m:bvar>
+	      <m:degree>
+		<m:cn>2</m:cn>
+	      </m:degree>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:mn>2</m:mn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>3</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The Fisher information matrix has the surprisingly simple form
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">F</m:ci>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:matrixrow>
+	      <m:matrixrow>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>L</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	its inverse is also a diagonal matrix with the elements on the
+	main diagonal equalling the reciprocal of those in the
+	original matrix. Because of the zero-values off-diagonal
+	entries in the Fisher information matrix, the errors between
+	the corresponding estimates are not inter-dependent. In this
+	problem, the mean-square estimation error can be no smaller
+	than
+	<m:math display="block">
+	  <m:apply>
+	    <m:geq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		    <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:geq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+    </example>
+
+    <para id="seven">
+      Note that <emphasis>nowhere</emphasis> in the preceding example
+      did the form of the estimator enter into the computation of the
+      bound. The only quantity used in the computation of the
+      Cramér-Rao bound is the logarithm of the likelihood
+      function, which is a consequence of the problem statement, not
+      how it is solved. <emphasis>Only in the case of unbiased
+      estimators is the bound independent of the estimators
+      used.</emphasis><footnote id="idm7016912">That's why we assumed in
+      the example that we used an unbiased estimator for the
+      variance.</footnote> Because of this property, the Cramér-Rao
+      bound is frequently used to assess the performance limits that
+      can be obtained with an unbiased estimator in a particular
+      problem. When bias is present, the exact form of the estimator's
+      bias explicitly enters the computation of the bound. All too
+      frequently, the unbiased form is used in situations where the
+      <emphasis>existence</emphasis> of an unbiased estimator can be
+      questioned. As we shall see, one such problem is time delay
+      estimation, presumably of some importance to the reader. This
+      misapplication of the unbiased Cramér-Rao arises from
+      desperation: the estimator is so complicated and nonlinear that
+      computing the bias is nearly impossible. As shown in <link document="m11221" target-id="problem6">this problem</link>, biased
+      estimators can yield mean-squared error smaller as well as
+      larger than the unbiased version of the Cramér-Rao
+      bound. Consequently, desperation can yield misinterpretation
+      when a general result is misapplied.
+    </para>
+    <para id="eight">
+      In the single-parameter estimation problem, the
+      Cramér-Rao bound incorporating bias has the well-known
+      form <footnote id="idm7013728">Note that this bound differs somewhat
+      from that originally given by <cite target-id="Cramer"><cite-title>Cramér
+      (1946) p.480</cite-title></cite>; his derivation ignores the additive bias
+      term
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">b</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">b</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.
+	</footnote>	       	  
+      <equation id="eqn5">
+	<m:math>
+	  <m:apply>			
+	    <m:geq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>b</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:ci>b</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>θ</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci type="vector">r</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Note that the sign of the bias's derivative determines whether
+      this bound is larger or potentially smaller than the unbiased
+      version, which is obtained by setting the bias term to zero.
+    </para>
+
+    <section id="efficiency">
+      <title>Efficiency</title> 
+      <para id="nine">
+	An interesting question arises: when, if ever, is the bound
+	satisfied with equality? Recalling the details of the
+	derivation of the bound, equality results when the quantity
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>	       
+		<m:transpose/>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">x</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">x</m:ci>
+	      </m:apply>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	equals zero. As this quantity is the expected value of the
+	square of
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math>, it can only equal zero if 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>.  Substituting in the form of the column matrices
+	<m:math><m:ci>α</m:ci></m:math> and <m:math><m:ci type="vector">x</m:ci></m:math>, equality in the
+	Cramér-Rao bound results whenever 
+	<equation id="hereyougoliz">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci type="matrix">I</m:ci>
+		    <m:apply>
+		      <m:transpose/>
+		      <m:apply>
+			<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+			<m:bvar><m:ci>θ</m:ci></m:bvar>
+			<m:ci type="matrix">b</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci type="matrix">F</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci type="fn">θ</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:ci type="matrix">b</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	
+	This complicated expression means that only if estimation
+	problems (as expressed by the <foreign>a priori</foreign>
+	density have the form of the right side of this equation can
+	the mean-squared error equal the Cramér-Rao bound. In
+	particular, the gradient of the log likelihood function can
+	<emphasis>only</emphasis> depend on the observations through
+	the estimator. In all other problems, the Cramér-Rao
+	bound is a lower bound but not a tight one
+	<emphasis>no</emphasis> estimator can have error
+	characteristics that equal it. In such cases, we have limited
+	insight into ultimate limitations on estimation error size
+	with the Cramér-Rao bound. However, consider the case
+	where the estimator is unbiased (
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">b</m:ci>
+	    <m:cn type="vector">0</m:cn>
+	  </m:apply>
+	</m:math>).  In addition, note the maximum likelihood estimate
+	occurs when the gradient of the logarithm of the likelihood
+	function equals zero: 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	when
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>θ</m:ci>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  In this case, the condition for equality in the
+	Cramér-Rao bound becomes
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">F</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>ML</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn type="vector">0</m:cn>
+	  </m:apply>
+	</m:math>
+	As the Fisher information matrix is positive-definite, we
+	conclude that if the estimator equals the maximum likelihood
+	estimator, equality in the Cramér-Rao bound
+	<emphasis>can</emphasis> be satisfied with equality,
+	<emphasis>only</emphasis> the maximum likelihood estimate will
+	achieve it. To use estimation theoretic terminology,
+	<emphasis>if an efficient estimate exists, it is the maximum
+	likelihood estimate.</emphasis> This result stresses the
+	importance of maximum likelihood estimates, despite the
+	seemingly <foreign>ad hoc</foreign> manner by which they are
+	defined.
+	</para>
+	
+      <example id="goodexample">
+	<para id="ten">
+	  Consider the Gaussian example being examined so frequently
+	  in this section. The components of the gradient of the
+	  logarithm of the likelihood function were given earlier by
+	  <link target-id="righthere"/> and <link target-id="foo"/>. These
+	  expressions can be rearranged to reveal
+
+	  <equation id="fur">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:matrix>
+		  <m:matrixrow>
+		    <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ln/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:bvar>
+			    <m:ci type="vector">r</m:ci>
+			  </m:bvar>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci type="vector">r</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:matrixrow>
+		  <m:matrixrow>
+		     <m:apply>
+		      <m:partialdiff/>
+		      <m:bvar>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:bvar>
+		      <m:apply>
+			<m:ln/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			  <m:bvar>
+			    <m:ci type="vector">r</m:ci>
+			  </m:bvar>
+			  <m:condition>
+			    <m:ci>θ</m:ci>
+			  </m:condition>
+			  <m:ci type="vector">r</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:matrixrow>
+		</m:matrix>
+		<m:matrix>
+		  <m:matrixrow>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+		      	<m:ci>L</m:ci> 
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:ci>L</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:sum/>
+			    <m:bvar>
+			      <m:ci>l</m:ci>
+			    </m:bvar>
+			    <m:domainofapplication>
+			      <m:ci>l</m:ci>
+			    </m:domainofapplication>
+			    <m:apply>
+			      <m:ci type="fn">r</m:ci>
+			      <m:ci>l</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:matrixrow>
+		  <m:matrixrow>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>L</m:ci>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:ci>
+			      <m:msub>
+				<m:mi>θ</m:mi>
+				<m:mi>2</m:mi>
+			      </m:msub>
+			    </m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>θ</m:mi>
+				  <m:mn>2</m:mn>
+				</m:msub>
+			      </m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:sum/>
+			  <m:bvar>
+			    <m:ci>l</m:ci>
+			  </m:bvar>
+			  <m:domainofapplication>
+			    <m:ci>l</m:ci>
+			  </m:domainofapplication>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:apply>
+				<m:ci type="fn">r</m:ci>
+				<m:ci>l</m:ci>
+			      </m:apply>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>θ</m:mi>
+				  <m:mn>1</m:mn>
+				</m:msub>
+			      </m:ci>
+			    </m:apply>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:matrixrow>
+		</m:matrix>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  The first component, which corresponds to the estimate of
+	  the mean, <emphasis>is</emphasis> expressed in the form
+	  required for the existence of an efficient estimate. The
+	  second component--the partial with respect to the variance
+	  <m:math>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>--<emphasis>cannot</emphasis> be rewritten in a
+	  similar fashion. No unbiased, efficient estimate of the
+	  variance exits in this problem. The mean-squared error of
+	  the variance's unbiased estimate, but not the maximum
+	  likelihood estimate, is lower-bounded by
+	  <m:math>
+	    <m:apply>	 
+	      <m:divide/>
+	      <m:apply>	 
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>      
+		</m:apply>
+		<m:cn>2</m:cn>	  
+	      </m:apply>
+	    </m:apply>
+	  </m:math>. This error is strictly greater than the
+	  Cramér-Rao bound of
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub> 
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>L</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>. As no unbiased estimate of the variance can have
+	  a mean-squared error equal to the Cramér-Rao bound
+	  (no efficient estimate exists for the variance in the
+	  Gaussian problem), one presumes that the closeness of the
+	  error of our unbiased estimator to the bound implies that it
+	  possesses the smallest squared-error of any estimate. This
+	  presumption may, of course, be incorrect.
+	</para>
+      </example>
+    </section>
+    <section id="properties">
+      <title>Properties of the Maximum Likelihood Estimator</title>
+      <para id="eleven">
+	The maximum likelihood estimate is the most used estimation
+	technique for nonrandom parameters. Not only because of its
+	close linkage to the Cramér-Rao bound, but also because
+	it has desirable asymptotic properties in the context of
+	<emphasis>any</emphasis> problem <cite target-id="Cramer"><cite-title>(Cramér (1946) pp. 500-506)</cite-title></cite>.
+
+	<list id="list1" list-type="enumerated">
+	  <item>
+	    <emphasis>The maximum likelihood estimate is at least
+	      asymptotically unbiased.</emphasis> It may be unbiased for any
+	    number of observations (as in the estimation of the mean of a
+	    sequence of independent random variable) for some
+	    problems.
+	  </item>
+	  <item>
+	    <emphasis>The maximum likelihood estimate is
+	      consistent.</emphasis>
+	  </item>
+	  <item>
+	    <emphasis>The maximum likelihood estimates is
+	      asymptotically efficient.</emphasis> As more and more
+	      data are incorporated into an estimate, the
+	      Cramér-Rao bound accurately projects the best
+	      attainable error and the maximum likelihood estimate has
+	      those optimal characteristics.
+	  </item>
+	  <item>
+	    <emphasis>Asymptotically, the maximum likelihood estimate
+	      is distributed as a Gaussian random variable.</emphasis>
+	      Because of the previous properties, the mean
+	      asymptotically equals the parameter and the covariance
+	      matrix is
+	  <m:math>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:ci type="fn">F</m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	  </item>
+	</list>
+
+	Most would agree that a "good" estimator should have these
+	properties. What these results do not provide is assessment of
+	how many observations are needed for the asymptotic results to
+	apply to some specified degree of precision. Consequently,
+	they should be used with caution; for instance, some other
+	estimator may have a smaller mean-square error than the
+	maximum likelihood for a modest number of observations.
+      </para>
+    </section>
+		  
+  </content>
+  
+  <bib:file>
+    <bib:entry id="Cramer">
+      <bib:book>
+    	<bib:author>H. Cramér</bib:author>
+    	<bib:title>Mathematical Methods of Statistics</bib:title>
+   	<bib:publisher>Princeton University Press</bib:publisher>
+   	<bib:year>1946</bib:year>
+   	<bib:address>Princeton, NJ</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

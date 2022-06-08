@@ -1,0 +1,3460 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Stein's Lemma</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>32e5f1f1-31d7-4a53-b628-6ebb359cc903</md:uuid>
+</metadata>
+
+  <content>
+    <para id="general">
+      As important as understanding the false-alarm, miss and error
+      probabilities of the likelihood ratio test might be, no general
+      expression exists for them.  In analyzing the Gaussian problem,
+      we find these in terms of 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">Q</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math>, which has no closed form expression.  In the general
+      problem, the situation is much worse: No expression of any kind
+      can be found!  The reason is that we don't have the probability
+      distribution of the sufficient statistic in the likelihood ratio
+      test, which is needed in <link document="m11274" target-id="detection">these expressions</link>.  We are faced with
+      the curious situation that while knowing the decision rule that
+      optimizes the performance probabilities, we usually don't know
+      what the resulting performance probabilities will be.
+    </para>
+    <para id="asymp">
+      Some general expressions are known for the
+      <emphasis>asymptotic</emphasis> form of these error
+      probabilities: limiting expressions as the number of
+      observations 
+      <m:math>
+	<m:ci>L</m:ci>    
+      </m:math> becomes large.  These results go by the generic name
+      of <term>Stein's Lemma</term> <cite target-id="CoverThomas"><cite-title>Cover and
+      Thomas, §12.8</cite-title></cite>.<footnote id="idp357680">The attribution
+      to statistician Charles Stein is probably incorrect.  Herman
+      Chernoff wrote a paper (<cite target-id="Chernoff"><cite-title>Chernoff</cite-title></cite>)
+      providing a derivation of this result.  A reviewer stated that
+      he thought Stein had derived the result in a technical report,
+      which Chernoff had not seen.  Chernoff modified his paper to
+      include the reference without checking it.  Chernoff's paper
+      provided the link to Stein.  However, Stein later denied he had
+      proved the result; so much for not questioning reviewers!
+      Stein's Lemma should be known as Chernoff's Lemma.</footnote> To
+      develop these, we need to define the
+      <term>Kullback-Leibler</term> and <term>Chernoff</term>
+      distances.  Respectively,
+      <equation id="kulleib">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	      <!--pdf -->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <!--pdf -->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <!--pdf -->
+		      <m:mi>p</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <!--pdf -->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <!--pdf -->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      
+      <equation id="chernoff">
+	<m:math>
+	  <m:apply>
+	      <m:eq/>
+	      <m:apply>
+	      <m:ci type="fn">𝒞</m:ci>
+	      <!--pdf -->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <!--pdf -->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:min/>
+		<m:condition>
+		  <m:apply>
+		    <m:leq/>
+		    <m:cn>0</m:cn>
+		    <m:ci>s</m:ci>
+		    <m:ci>1</m:ci>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>x</m:ci>
+		    </m:bvar>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<!--weird stuff goin' on here in the style and print-->
+			<m:power/>
+			<m:apply>
+			  <!--pdf -->
+			  <m:ci type="fn"><m:msub>
+			      <m:mi>p</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:minus/>
+			  <m:cn>1</m:cn>
+			  <m:ci>s</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <!--pdf -->
+			  <m:ci type="fn"><m:msub>
+			      <m:mi>p</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:ci>s</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      These distances are important special cases of the <link document="m11218">Ali-Silvey distances</link> and have the
+      following properties.
+      <list id="alisilvey" list-type="enumerated">
+	<item>
+	  <m:math>
+	    <m:apply>
+	      <m:geq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf -->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:geq/>
+	      <m:apply>
+		<m:ci type="fn">𝒞</m:ci>
+		<!--pdf -->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf -->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>. Furthermore, these distances equal zero only when
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  The Kullback-Leibler and Chernoff distances are
+	  always non-negative, with zero distance occurring only when
+	  the probability distributions are the same.
+	</item>
+	<item>
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf -->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf -->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:infinity/>
+	    </m:apply>
+	  </m:math> whenever, for some <m:math><m:ci>r</m:ci>
+	  </m:math>, 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:neq/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>.  If 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>, the value of
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <!--pdf -->
+		    <m:ci type="fn"><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <!--pdf -->
+		    <m:ci type="fn"><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> is defined to be zero.
+	</item>
+	<item>When the underlying stochastic quantities are random
+	  vectors having statistically independent components with
+	  respect to both 
+	  <m:math>
+	    <!--pdf -->
+	    <m:ci type="fn"><m:msub> 
+		<m:mi>p</m:mi> 
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci> 
+	  </m:math> and 
+	  <m:math>
+	    <!--pdf --> 
+	    <m:ci type="fn"><m:msub> 
+		<m:mi>p</m:mi> 
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>, the Kullback-Leibler distance equals the sum of
+	  the component distances.  Stated mathematically, if
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<!--pdf -->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <!--pdf -->
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<!--pdf-->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <!--pdf -->
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, 
+	  <equation id="property">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <m:apply>
+		    <!--pdf -->
+		    <m:ci type="fn"><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <!--pdf -->
+		    <m:ci type="fn"><m:msub>
+			<m:mi>p</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci>l</m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		    <m:apply>
+		      <!--pdf-->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <!--pdf-->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  The Chernoff distance does <emphasis>not</emphasis> have
+	  this property unless the components are identically
+	  distributed.
+	</item>
+	<item>
+	  <m:math>
+	    <m:apply>
+	      <m:neq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf-->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf-->
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>; 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">𝒞</m:ci>
+		<!-- pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">𝒞</m:ci>
+		<!-- pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  The Kullback-Leibler distance is usually not a
+	  symmetric quantity.  In some special cases, it can be
+	  symmetric (like the just described Gaussian example), but
+	  symmetry cannot, and should not, be expected.  The Chernoff
+	  distance is always symmetric.
+	</item>
+	<item>
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<m:apply>
+		  <!--pdf-->
+		  <m:ci type="fn">p</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <!--pdf-->
+		    <m:ci type="fn">p</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">p</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#mutualinformation"/>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.  The Kullback-Leibler distance between a joint
+	  probability density and the product of the marginal
+	  distributions equals what is known in information theory as
+	  the <term>mutual information</term> between the random
+	  variables 
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>r</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci> 
+	  </m:math>,
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>r</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci> 
+	  </m:math>.  From the properties of the Kullback-Leibler
+	  distance, we see that the mutual information equals zero
+	  only when the random variables are statistically
+	  independent.
+	</item>
+      </list>
+      These quantities are not actually distances.  The
+      Kullback-Leibler distance 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	  <m:ci>·</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is not symmetric in its arguments and the Chernoff
+      distance 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">𝒞</m:ci>
+	  <m:ci>·</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> does not obey the triangle inequality.  Nonetheless,
+      the name "distance" is frequently attached to them for reasons
+      that will become clear later.
+    </para>
+    <para id="falseform">
+      In the case that the 
+      <m:math>
+	<m:ci>L</m:ci> 
+      </m:math>
+      observations are statistically independent according to both
+      models, Stein's Lemma states that the false-alarm probability
+      resulting from using the Neyman-Pearson hypothesis test has the
+      form 
+      <cite target-id="JohnsonOrsak"><cite-title>(Johnson and Orsak)</cite-title></cite>
+      <equation id="form1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:limit/>
+	      <m:bvar>
+		<m:ci>L</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:infinity/>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:log/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:mi>r</m:mi>
+		      <m:mo>|</m:mo>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:mi>r</m:mi>
+		      <m:mo>|</m:mo>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> or
+      <equation id="form2">
+	<m:math>
+	  <m:mrow>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:mover>
+	      <m:mo>→</m:mo>
+	      <m:mrow>
+		<m:mi>L</m:mi>
+		<m:mo>→</m:mo>
+		<m:mi>∞</m:mi>
+	      </m:mrow>
+	    </m:mover>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <!--pdf-->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:mrow>
+	</m:math>
+      </equation>
+      where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>L</m:ci>
+	</m:apply>
+      </m:math> is a slowly varying function compared to the
+      exponential: 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar>
+	      <m:ci>L</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:infinity/>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci>L</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>.  This function is problem- and
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>M</m:mi>
+	  </m:msub></m:ci> 
+      </m:math>-dependent, and thus usually not
+      known.  What this asymptotic formula says is that as the number
+      of observations increases, the false-alarm probability of a
+      Neyman-Pearson hypothesis test plotted on semilogarithmic
+      coordinates will eventually become a straight line, the slope of
+      which is 
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  <link target-id="asymPF"/> demonstrates this effect.
+      <figure id="asymPF">
+	<media id="idm909264" alt=""><image src="../../media/stein.jpg" mime-type="image/jpeg"/></media> 
+	<caption>Using the Gaussian and Poisson classification
+	  problems as examples, we plot the false-alarm probability
+	  (left panels) and average probability of error (right
+	  panels) for each as a function of the amount of
+	  statistically independent data used by the optimal
+	  classifier.  The miss-probability criterion was that it be
+	  less than or equal to 0.1.  The <foreign>a priori</foreign>
+	  probabilities are 1/2 in the right-column examples.  As
+	  shown here, the average error probability produced by the
+	  minimum
+	  <m:math>
+	    <m:ci><m:msub> 
+		<m:mi>P</m:mi> 
+		<m:mi>e</m:mi>
+	      </m:msub></m:ci> 
+	  </m:math> classifier typically decays more slowly than the
+	  false-alarm probability for the classifier that fixes the
+	  miss probability.  The dashed lines depict the behavior of
+	  the error probabilities as predicted by asymptotic theory
+	  <link target-id="form1"/>.  In each case, these theoretical
+	  lines have been shifted vertically for ease of
+	  comparison.
+	</caption>
+      </figure>
+      A similar result holds for the miss probability if it is
+      optimized and the false-alarm probability is constrained.  Thus,
+      in <emphasis>all</emphasis> model evaluation problems solved
+      using the Neyman-Pearson approach, the optimized probability
+      will always (eventually) decay exponentially in the number of
+      observations.  For this reason, 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> is known as the <term>exponential rate</term>.
+    </para>
+    <para id="largenumbers">
+      Showing this result relies on, believe it or not, the law of
+      large numbers.  Define the decision region 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:cn>L</m:cn>
+	</m:apply>
+      </m:math> according to
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>ℜ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	  <m:set>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+			<!--pdf-->
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mrow>
+			      <m:mi>r</m:mi>
+			      <m:mo>|</m:mo>
+			      <m:msub>
+				<m:mi>ℳ</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<!--pdf-->
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mrow>
+			      <m:mi>r</m:mi>
+			      <m:mo>|</m:mo>
+			      <m:msub>
+				<m:mi>ℳ</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci>δ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <!--pdf-->
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <!--pdf-->
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+			<!--pdf-->
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mrow>
+			      <m:mi>r</m:mi>
+			      <m:mo>|</m:mo>
+			      <m:msub>
+				<m:mi>ℳ</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<!--pdf-->
+			<m:ci><m:msub>
+			    <m:mi>p</m:mi>
+			    <m:mrow>
+			      <m:mi>r</m:mi>
+			      <m:mo>|</m:mo>
+			      <m:msub>
+				<m:mi>ℳ</m:mi>
+				<m:mn>0</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci>δ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:condition>
+	  </m:set>
+	</m:apply>
+      </m:math> This decision region will vary with the number of
+      observations as is typical of Neyman-Pearson decision rules.
+      First of all, we must show that the decision rule this region
+      yields does indeed satisfy a criterion on the miss probability.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>M</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:apply>
+	      <m:in/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/> 
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci>l</m:ci>
+		  </m:domainofapplication>
+		  <m:apply><m:log/>
+		    <m:apply><m:divide/>
+		    <m:apply>
+		      <!--pdf-->
+		      <m:ci type="fn">p</m:ci>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:apply>
+		    <m:apply>
+		      <!--pdf-->
+		      <m:ci type="fn">p</m:ci>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+               </m:apply>
+	      </m:apply>
+	      <m:interval closure="open">
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>δ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>δ</m:ci>
+		</m:apply>
+	      </m:interval>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> This sum is the average of the likelihood ratios
+      computed at each observation assuming that
+      <m:math>
+	<m:ci>
+	  <m:msub> 
+	    <m:mi>ℳ</m:mi> 
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci> 
+      </m:math> is true.  Because of the strong law of large numbers,
+      as the number of observations increases, this sum converges to
+      its expected value, which is
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  Therefore, 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar>
+	      <m:ci>L</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:infinity/>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>M</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> for any <m:math><m:ci>δ</m:ci> </m:math>, which
+      means 
+      <m:math>
+	<m:apply>
+	  <m:tendsto/>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>M</m:mi>
+	    </m:msub></m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>.  Thus, this decision region guarantees not only that
+      the miss probability is less than some specified number, but
+      also that it decreases systematically as the number of
+      observations increases.
+    </para>
+    <para id="analyze">
+      To analyze how the false-alarm probability varies with
+      <m:math>
+	<m:ci>L</m:ci> 
+      </m:math>, we note that in this decision
+      region
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi>r</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>δ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      <m:math display="block">
+	<m:apply>
+	  <m:geq/>
+	  <!--pdf-->
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>r</m:mi>
+		<m:mo>|</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi>r</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>δ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Integrating these over 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:ci>L</m:ci>
+	</m:apply>
+      </m:math> yields upper and lower bounds on
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi>
+	  </m:msub></m:ci> 
+      </m:math>.
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>δ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>M</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:ci><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>r</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>δ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>M</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      or
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		  <!--pdf-->
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <!--pdf-->
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>δ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>M</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:log/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:mi>r</m:mi>
+		      <m:mo>|</m:mo>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:mi>r</m:mi>
+		      <m:mo>|</m:mo>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>δ</m:ci>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>M</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Because 
+      <m:math>
+	<m:ci>δ</m:ci>    
+      </m:math> can be made arbitrarily small as the number of
+      observations increases, we obtain Stein's Lemma.
+    </para>
+    <para id="exprate">
+      For the average probability of error, the Chernoff distance is
+      its exponential rate.
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>e</m:mi>
+	    </m:msub></m:ci>
+	  <m:mover>
+	    <m:mo>→</m:mo>
+	    <m:mrow>
+	      <m:mi>L</m:mi>
+	      <m:mo>→</m:mo>
+	      <m:mi>∞</m:mi>
+	    </m:mrow>
+	  </m:mover>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">𝒞</m:ci>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+		  	  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <!--pdf-->
+		    <m:ci><m:msub>
+			<m:mi>p</m:mi>
+			<m:mrow>
+			  <m:mi>r</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math> Showing this result leads to more interesting results.
+      For the minimum-probability-of-error detector, the decision
+      region
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci> 
+      </m:math> is defined according to
+      <m:math>
+	<m:apply>
+	  <m:gt/>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>π</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi>r</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:mrow>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/> 
+	    <m:ci><m:msub> 
+		<m:mi>π</m:mi> 
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci> 
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi>r</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:mrow>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Using this fact, we can write the expression for
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>e</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> as
+      <equation id="eq1">
+      <m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>e</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci><m:msub>
+			<m:mi>ℜ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci><m:msub>
+			<m:mi>ℜ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:min/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:mi>r</m:mi>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>  The minimum function has the property 
+      <m:math>
+	<m:apply>
+	  <m:leq/>
+	  <m:apply>
+	    <m:min/>
+	    <m:ci>a</m:ci>
+	    <m:ci>b</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>a</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>b</m:ci>
+	      <m:ci>s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:leq/>
+	  <m:cn>0</m:cn>
+	  <m:ci>s</m:ci>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> for non-negative quantities 
+      <m:math>
+	<m:ci>a</m:ci>
+      </m:math> and 
+      <m:math>
+	<m:ci>b</m:ci>
+      </m:math>.<footnote id="idp134432">To see this, simply plot the
+	minimum function versus one of its argument with the other one
+	fixed.  Plotting 
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>a</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+	 	<m:ci>s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>b</m:ci>
+	      <m:ci>s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> the same way shows that it indeed is an upper
+      bound.</footnote> With this bound, we can find an upper bound for
+      the average error probability.
+      <m:math display="block">
+	<m:apply>
+	  <m:leq/>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>e</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>  When 
+      <m:math>
+	<m:ci type="vector">r</m:ci> 
+      </m:math> has statistically independent and identically
+      distributed components,
+      <equation id="eq2">
+	<m:math display="block">
+	  <m:apply>
+	    <m:leq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>e</m:mi>
+	      </m:msub></m:ci>    
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:product/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:domainofapplication>
+			<m:ci>l</m:ci>
+		      </m:domainofapplication>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>s</m:ci>
+		    </m:apply>
+		  </m:apply>
+	      	  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:product/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:domainofapplication>
+			<m:ci>l</m:ci>
+		      </m:domainofapplication>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>s</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>	
+			<m:cn>1</m:cn>
+			<m:ci>s</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>1</m:cn>
+			<m:ci>s</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:times/>	
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>1</m:cn>
+			<m:ci>s</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>r</m:mi>
+			      <m:mi>l</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:cn>1</m:cn>
+			<m:ci>s</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>  Consequently, we have that
+      <m:math display="block">
+	<m:apply>
+	  <m:forall/>
+	  <m:bvar>
+	    <m:ci>s</m:ci>
+	  </m:bvar>
+	  <m:apply>
+	    <m:leq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:log/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>e</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:log/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>r</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>s</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>s</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Asymptotically, this bound is tight (Gaussian example shows this
+      to be true).  Thus, the exponential rate for the average
+      probability of error is the minimum of this bound with respect
+      to 
+      <m:math>
+	<m:ci>s</m:ci> 
+      </m:math>.  This quantity is the negative of the Chernoff
+      distance <link target-id="chernoff"/> and we arrive at the
+      expression for the average probability of error.
+    </para>
+    <para id="relation">
+      The Kullback-Leibler and Chernoff distances are related in an
+      important way.  Define 
+      <!--pdf-->
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mi>s</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> to be 
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn">J</m:ci>
+	    <m:ci>s</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">J</m:ci>
+	  <m:ci>s</m:ci>
+	</m:apply>
+      </m:math> is the normalization constant and the quantity
+      optimized in the definition of the Chernoff distance.  The
+      Chernoff distance equals the Kullback-Leibler distance between
+      the 
+      <m:math>
+	<!--pdf-->
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mi>s</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> equi-distant from
+      <m:math>
+	<!--pdf-->
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci> 
+      </m:math> and
+      <m:math>
+	<!--pdf-->
+	<m:ci><m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci> 
+      </m:math>.  Call the value of 
+      <m:math>
+	<m:ci>s</m:ci>
+      </m:math> corresponding to this equi-distant distribution
+      <m:math>
+	<m:ci><m:msup>
+	    <m:mi>s</m:mi>
+	    <m:mo>*</m:mo>
+	  </m:msup></m:ci> 
+      </m:math>; this value corresponds to the result of the
+      optimization and
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">𝒞</m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:msup>
+		  <m:mi>s</m:mi>
+		  <m:mo>*</m:mo>
+		</m:msup>
+	      </m:msub></m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:msup>
+		  <m:mi>s</m:mi>
+		  <m:mo>*</m:mo>
+		</m:msup>
+	      </m:msub></m:ci>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      <link target-id="asymPF"/> shows that the exponential rates of
+      minimum 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>e</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> and Neyman-Pearson hypothesis tests are not
+      necessarily the same.  In other words, the distance to the
+      equi-distant distribution need not equal the total distance,
+      which seems to make sense.
+    </para>
+    <para id="precision">
+      The larger the distance, the greater the rate at which the error
+      probability decreases, which corresponds to an easier problem
+      (smaller error probabilities).  However, Stein's Lemma does not
+      allow a precise calculation of error probabilities.  The
+      quantity 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> depends heavily on the underlying probability
+      distributions in ways that are problem dependent.  All a
+      distance calculation gives us is the exponential rate.
+    </para>
+    <example id="Guassian">
+      <para id="setalpha">
+	For the Gaussian example we have been considering, set the
+	miss probability's criterion value to be
+	<m:math>
+	  <m:ci>α</m:ci> 
+	</m:math>.  Because
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>M</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:ci>γ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, we find the threshold value
+	<m:math>
+	  <m:ci>γ</m:ci> 
+	</m:math> to be 
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>L</m:ci>
+	      <m:ci>m</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>σ</m:ci>
+	      <m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="fn">Q</m:ci>
+		</m:apply>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, which yields a false-alarm probability of
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:ci>m</m:ci>
+		</m:apply>
+		<m:ci>σ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="fn">Q</m:ci>
+		</m:apply>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> The Kullback-Leibler distance between two Gaussians
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+	      <m:cn>0</m:cn>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <!--pdf-->
+	    <m:ci><m:msub>
+		<m:mi>p</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+	      <m:ci>m</m:ci>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> equals 
+	<equation id="eq3">
+	<m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<!--pdf-->
+		<m:ci><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>x</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>x</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>x</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>x</m:ci>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>x</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>x</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>-2</m:cn>
+			<m:ci>m</m:ci>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:power/>
+			<m:ci>m</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>m</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	In this Gaussian case the Kullback-Leibler distance is
+	symmetric: 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <!--pdf-->
+	      <m:ci><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Verify this atypical (most cases are asymmetric)
+	result for yourself.  The Chernoff distance equals
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>m</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>8</m:cn>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> (the value of
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>s</m:mi>
+	      <m:mo>*</m:mo>
+	    </m:msup></m:ci> 
+	</m:math> is 
+	<m:math>
+	  <m:cn type="rational">1<m:sep/>2</m:cn> 
+	</m:math>).  Stein's Lemma predicts that the false-alarm
+	probability has the asymptotic form
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>m</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Thus, does
+	<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="fn">Q</m:ci>
+		  </m:apply>
+		  <m:ci>α</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>m</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math> is slowly varying compare to the exponential?
+      </para>
+      <para id="formula">
+	An <link document="m11250" target-id="eqn1">asymptotic
+	formula</link> for
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math> is 
+	<m:math display="block">
+	  <m:mrow>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:mover>
+	      <m:mo>→</m:mo>
+	      <m:mrow>
+		<m:mi>x</m:mi>
+		<m:mo>→</m:mo>
+		<m:mi>∞</m:mi>
+	      </m:mrow>
+	    </m:mover>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:root/>
+		      <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>x</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:mrow>
+	</m:math> 
+	As 
+	<m:math>
+	  <m:ci>L</m:ci> 
+	</m:math> increases, so does the argument of 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> in the expression for the false-alarm probability.
+	Thus
+	<equation id="eq4">
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:mover>
+		<m:mo>→</m:mo>
+		<m:mrow>
+		  <m:mi>L</m:mi>
+		  <m:mo>→</m:mo>
+		  <m:mi>∞</m:mi>
+		</m:mrow>
+	      </m:mover>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:root/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:times/>
+			    <m:apply>
+			      <m:root/>
+			      <m:ci>L</m:ci>
+			    </m:apply>
+			    <m:ci>m</m:ci>
+			  </m:apply>
+			  <m:ci>σ</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:apply>
+			    <m:inverse/>
+			    <m:ci type="fn">Q</m:ci>
+			  </m:apply>
+			  <m:ci>α</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:apply>
+			      <m:divide/>
+			      <m:apply>
+				<m:times/>
+				<m:apply>
+				  <m:root/>
+				  <m:ci>L</m:ci>
+				</m:apply>
+				<m:ci>m</m:ci>
+			      </m:apply>
+			      <m:ci>σ</m:ci>
+			    </m:apply>
+			    <m:apply>
+			      <m:apply>
+				<m:inverse/>
+				<m:ci type="fn">Q</m:ci>
+			      </m:apply>
+			      <m:ci>α</m:ci>
+			    </m:apply>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>      
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:root/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:times/>
+			    <m:apply>
+			      <m:root/>
+			      <m:ci>L</m:ci>
+			    </m:apply>
+			    <m:ci>m</m:ci>
+			  </m:apply>
+			  <m:ci>σ</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:apply>
+			    <m:inverse/>
+			    <m:ci type="fn">Q</m:ci>
+			  </m:apply>
+			  <m:ci>α</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:times/>
+			    <m:apply>
+			      <m:root/>
+			      <m:ci>L</m:ci>
+			    </m:apply>
+			    <m:ci>m</m:ci>
+			  </m:apply>
+			  <m:ci>σ</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:apply>
+			    <m:inverse/>
+			    <m:ci type="fn">Q</m:ci>
+			  </m:apply>
+			  <m:ci>α</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:apply>
+			      <m:inverse/>
+			      <m:ci type="fn">Q</m:ci>
+			    </m:apply>
+			    <m:ci>α</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>L</m:ci>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>m</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	</equation>
+	The quantity multiplying the final exponential corresponds to
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>, which satisfies the slowly varying property.  We
+	have verified Stein's Lemma prediction for the asymptotic
+	behavior of the false-alarm probability in the Gaussian case.
+	Note how the criterion value
+	<m:math>
+	  <m:ci>α</m:ci>
+	</m:math> occurs only in the expression for 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>, and hence does <emphasis>not</emphasis> affect the
+	exponential rate; Stein's Lemma says this situation always
+	occurs.
+      </para>
+    </example>
+  </content>
+  <bib:file>
+    
+    <bib:entry id="Chernoff">
+      <bib:article>
+	<bib:author>H. Chernoff</bib:author> 
+	<bib:title>Measure of
+	asymptotic effiency tests of a hypothesis based on the sum of
+	observations</bib:title>
+	<bib:journal>Ann. Math. Stat.</bib:journal>
+	<bib:year>1952</bib:year> 
+	<bib:volume>23</bib:volume>
+	<bib:pages>493-507</bib:pages>
+      </bib:article>
+    </bib:entry>
+    
+    <bib:entry id="CoverThomas">
+      <bib:book>
+	<bib:author>T.M.Cover, J.A.Thomas</bib:author>
+	<bib:title>Elements of Information Theory</bib:title>
+	<bib:publisher>John Wiley and Sons, Inc.</bib:publisher>
+	<bib:year>1991</bib:year>
+      </bib:book>
+    </bib:entry>
+    
+    <bib:entry id="JohnsonOrsak">
+      <bib:article>
+	<bib:author>D.H. Johnson and G.C. Orsak</bib:author>
+	<bib:title>Relation of signal set choice to the performance of
+	optimal non-Gaussian detectors</bib:title>
+	<bib:journal>IEEE Trans. Comm.</bib:journal>
+	<bib:year>1993</bib:year>
+	<bib:volume>41</bib:volume>
+	<bib:pages>1319-1328</bib:pages>
+      </bib:article>
+    </bib:entry>
+
+  </bib:file>
+</document>

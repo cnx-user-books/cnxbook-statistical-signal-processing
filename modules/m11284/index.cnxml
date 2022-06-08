@@ -1,0 +1,539 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Unknown Signal Waveform</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>17f92c6c-99b1-4658-a49e-7a6e547d4bc6</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The most general unknown signal parameter problem occurs when
+      the signal itself is unknown.  This phrasing of the detection
+      problem can be applied to two different sorts of situations.
+      The signal's waveform may not be known precisely because of
+      propagation effects (rapid multipath, for example) or because of
+      source uncertainty.  Another situation is the "Hello, is anyone
+      out there?" problem: you want to determine if any non-noise-like
+      quantity is present in the observations.  These problems impose
+      severe demands on the detector, which must function with little
+      <foreign>a priori</foreign> knowledge of the signal's structure.
+      Consequently, we cannot expect superlative performance.
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">n</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">n</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:mo>,</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">s</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:ci>?</m:ci>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      The noise is assumed to be Gaussian with a covariance matrix
+      <m:math><m:ci type="matrix">K</m:ci></m:math>.  The conditional
+      density under <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci>
+      </m:math> is given by 
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:condition>
+	      <m:mi>s</m:mi>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:determinant/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">r</m:ci>
+		      <m:ci type="vector">s</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">K</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="vector">r</m:ci>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Using the generalized likelihood ratio test, the maximum value
+      of this density with respect to the unknown "parameters" - the
+      signal values - occurs when <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="vector">r</m:ci>
+	  <m:ci type="vector">s</m:ci>
+	</m:apply>
+      </m:math>.
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:max/>
+	    <m:bvar>
+	      <m:ci>s</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">r</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:condition>
+		<m:mi>s</m:mi>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:root/>
+	      <m:apply>
+		<m:determinant/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:pi/>
+		  <m:ci type="matrix">K</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The other model does not depend on the signal and the
+      generalized likelihood ratio test for the unknown signal
+      problem, often termed the <term><emphasis>square-law</emphasis>
+      detector</term>, is
+    
+      <equation id="eqn1">
+	<m:math>
+	  <m:mrow>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">K</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+
+	    <m:ci>γ</m:ci>
+	  </m:mrow>
+	</m:math>
+      </equation>
+
+      For example, if the noise were white, the sufficient statistic
+      is the sum of the squares of the observations.
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar>
+	      <m:ci>l</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+
+      If the noise is not white, the detection problem can be
+      formulated in the frequency domain, as shown <link document="m11282">here</link>, where the decision rule becomes
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar>
+	      <m:ci>k</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">R</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>k</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+
+      Computation of the false-alarm probability in, for example, the
+      white noise case is relatively straightforward.  The probability
+      density of the sum of the squares of
+      <m:math><m:ci>L</m:ci></m:math> statistically independent
+      zero-mean unit-variance, Gaussian random variables is termed
+      chi-squared with <m:math><m:ci>L</m:ci></m:math> degrees of
+      freedom (see <link document="m11241" target-id="table2">Probability
+      Distributions</link>):
+      <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:apply>
+	    <m:ci type="fn">χ</m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math>.  The percentiles of this density are tabulated in
+      many standard statistical references (<cite target-id="bib1"><cite-title>Abramowitz and Stegun</cite-title></cite>).
+    </para>
+
+    <example id="ex1">
+      <para id="para2">
+	Assume that the additive noise is white and Gaussian, having a
+	variance <m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>σ</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>.  The sufficient statistic <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>ϒ</m:ci>
+	    <m:apply>
+	      <m:sum/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> of the square-law detector has the probability
+	density
+	<m:math display="block">
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>ϒ</m:ci>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:ci type="fn">χ</m:ci>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	when no signal is present.  The threshold
+	<m:math><m:ci>γ</m:ci></m:math> for this statistic is
+	established by <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:gt/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:ci type="fn">χ</m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>γ</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>.  The probability of detection is found from the
+	density of a non-central chi-squared random variable having
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mi>χ</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup>
+	      </m:ci>
+	      <m:ci>L</m:ci>
+	      <m:ci>λ</m:ci>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>
+	having
+	<m:math><m:ci>L</m:ci></m:math> degrees of freedom and
+	"centrality" parameter <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>λ</m:ci>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  In this example, <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>λ</m:ci>
+	    <m:ci>E</m:ci>
+	  </m:apply>
+	</m:math>, the energy of the observed signal.  In <link document="m11262" target-id="fig1">this figure</link>, the
+	false-alarm probability was set to <m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:cn>10</m:cn>
+	    <m:cn>-2</m:cn>
+	  </m:apply>
+	</m:math> and the resulting probability of detection shown as
+	a function of signal-to-noise ratio.  Clearly, the inability
+	to specify the signal waveform leads to a significant
+	reduction in performance.  In this example, roughly 10 dB more
+	signal-to-noise ratio is required by the square-law detector
+	than the matched-filter detector, which assumes knowledge of
+	the waveform but not of the amplitude, to yield the same
+	performance.
+      </para>
+    </example>
+  </content>
+
+
+  <bib:file>
+    <bib:entry id="bib1">
+      <bib:book>
+	<bib:editor>M. Abramowitz and I. A. Stegun</bib:editor>
+	<bib:title>Handbook of Mathematical Functions</bib:title>
+	<bib:publisher>U. S. Government Printing Office</bib:publisher>
+	<bib:year>1968</bib:year>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+
+</document>

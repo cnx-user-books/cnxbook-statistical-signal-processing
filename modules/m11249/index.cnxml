@@ -1,0 +1,416 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Random Vectors</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e55135d5-8856-4750-8008-018c3f22910c</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      A <term>random vector</term> <m:math><m:ci type="vector">X</m:ci></m:math> is an ordered sequence of random
+      variables <m:math display="inline">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="vector">X</m:ci>
+	  <m:vector>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:mo>…</m:mo>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>L</m:mi>
+	      </m:msub></m:ci>
+	  </m:vector>
+	</m:apply>
+      </m:math>.  The density function of a random vector is defined
+      in a manner similar to that for pairs of random variables
+      considered previously.  The expected value of a random vector is
+      the vector of expected values.
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci type="vector">X</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="vector">x</m:ci>
+		<m:apply>  
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci type="vector">X</m:ci>
+		  </m:bvar>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:vector>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:ci>⋮</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>L</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:vector>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The <term>covariance matrix</term> <m:math> <m:ci type="matrix"><m:msub>
+	<m:mi>K</m:mi> <m:mi>X</m:mi> </m:msub></m:ci> </m:math> is an
+      <m:math>
+	<m:mrow>
+	  <m:mi>L</m:mi>
+	  <m:mo>×</m:mo>
+	  <m:mi>L</m:mi>
+	</m:mrow>
+      </m:math> matrix consisting of all possible covariances among
+      the random vector's components.
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>i</m:ci></m:bvar>
+	    <m:bvar><m:ci>j</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:and/>
+		  <m:ci>i</m:ci>
+		  <m:ci>j</m:ci>
+		</m:apply>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>L</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="matrix">
+		  <m:msup>
+		    <m:mi>K</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msup>
+		</m:ci>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+<!-- covariance -->
+	      <m:apply>
+		<m:ci type="fn">cov</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:conjugate/>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:conjugate/>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Using matrix notation, the covariance matrix can be written as
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci type="matrix"><m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>X</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">X</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci type="vector">X</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">X</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:ci type="vector">X</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Using this expression, the covariance matrix is seen
+      to be a symmetric matrix and, when the random vector has no
+      zero-variance component, its covariance matrix is
+      positive-definite. Note in particular that when the random
+      variables are real-valued, the diagonal elements of a covariance
+      matrix equal the variances of the components: <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:selector/>
+	    <m:ci type="matrix"><m:msup>
+		<m:mi>K</m:mi>
+		<m:mi>X</m:mi>
+	      </m:msup></m:ci>
+	    <m:ci>i</m:ci>
+	    <m:ci>i</m:ci>
+	  </m:apply>
+	  <m:ci><m:msubsup>
+	      <m:mi>σ</m:mi>
+	      <m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	      <m:mn>2</m:mn>
+	    </m:msubsup></m:ci>
+	</m:apply>
+      </m:math>.  <term>Circular random vectors</term> are
+      complex-valued with uncorrelated, identically distributed, real
+      and imaginary parts. In this case, <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:cn>2</m:cn>
+	    <m:ci><m:msubsup>
+		<m:mi>σ</m:mi>
+		<m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+		<m:mn>2</m:mn>
+	      </m:msubsup></m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, and <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>.  By convention, 
+      <m:math>
+	<m:ci><m:msubsup>
+	    <m:mi>σ</m:mi>
+	    <m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	    <m:mn>2</m:mn>
+	  </m:msubsup></m:ci>
+      </m:math>
+      denotes the variance of the real (or imaginary) parts. The
+      characteristic function of a real-valued random vector is
+      defined to be
+      <equation id="eqn3">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>Φ</m:mi>
+		  <m:mi mathvariant="bold">X</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:imaginaryi/>
+		<m:ci>ν</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci>ν</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">X</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="para2">
+      The maximum of a random vector is a random variables whose
+      probability density is usually quite different from the
+      distributions of the vector's components.  The probability that
+      the maximum is less than some number
+      <m:math><m:ci>μ</m:ci></m:math> is equal to the probability
+      that <emphasis>all</emphasis> of the components are less than
+      <m:math><m:ci>μ</m:ci></m:math>.
+      <equation id="eqn4">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:max/>
+		  <m:ci type="vector">X</m:ci>
+		</m:apply>
+		<m:ci>μ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">X</m:ci>
+	      </m:bvar>
+	      <m:ci>μ</m:ci>
+	      <m:ci>…</m:ci>
+	      <m:ci>μ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Assuming that the components of <m:math><m:ci type="vector">X</m:ci></m:math> are statistically independent,
+      this expression becomes
+      <equation id="eqn5">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:max/>
+		  <m:ci type="vector">X</m:ci>
+		</m:apply>
+		<m:ci>μ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:product/>
+	      <m:bvar><m:ci>i</m:ci></m:bvar>
+	      <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:ci type="fn">dim</m:ci>
+		  <m:ci>X</m:ci>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		</m:bvar>
+		<m:ci>μ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+    </para>
+  </content>
+  
+</document>

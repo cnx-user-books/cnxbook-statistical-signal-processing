@@ -1,0 +1,2297 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Probability  Density Estimation</title>
+  <metadata>
+  <md:content-id>m11291</md:content-id><md:title>Probability  Density Estimation</md:title>
+  <md:abstract>This module covers probability density estimation of signals assuming a knowledge of the first order amplitude distribution of observed signals. It describes Type and Histogram Estimators as well as density verification of the estimates.</md:abstract>
+  <md:uuid>219f98c6-60e6-4e85-9e1a-cb589f2358ec</md:uuid>
+</metadata>
+
+<content>
+    <section id="intro">
+      <title>Probability Density Estimation</title>
+      <para id="Introduction">
+	Many signal processing algorithms, implicitly or explicitly,
+	assume that the signal and the observation noise are each well
+	described as Gaussian random sequences. Virtually all linear
+	estimation and prediction filters minimize the mean-squared
+	error while not explicitly assuming any form for the amplitude
+	distribution of the signal or noise.  In many formal waveform
+	estimation theories where probability density is, for better
+	or worse, specified, the mean-squared error arises from
+	Gaussian assumptions. A similar situation occurs explicitly in
+	detection theory.  The matched filter is probably the optimum
+	detection rule <emphasis>only</emphasis> when the observation
+	noise is Gaussian.  When the noise is non-Gaussian, the
+	detector assumes some other form.  Much of what has been
+	presented in this chapter is based
+	<emphasis>implicitly</emphasis> on a Gaussian model for both
+	the signal and the noise.  When non-Gaussian distributions are
+	assumed, the quantities upon which optimal linear filtering
+	theory are based, covariance functions, no longer suffice to
+	characterize the observations.  While the joint amplitude
+	distribution of any zero-mean, stationary Gaussian stochastic
+	process is entirely characterized by its covariance function;
+	non-Gaussian processes require more.  Optimal linear filtering
+	results can be applied in non-Gaussian problems, but we should
+	realize that other informative aspects of the process are
+	being ignored.
+      </para>
+
+      <para id="second">
+	This discussion would seem to be leading to a formulation of
+	optimal filtering in a non-Gaussian setting.  Would that such
+	theories were easy to use; virtually all of them require
+	knowledge of process characteristics that are difficult to
+	measure and the resulting filters are typically nonlinear
+	<cite target-id="LipsterShiryayev"><cite-title>[Lipster and Shiryayev: Chapter
+	8]</cite-title></cite> Rather than present preliminary results, we take the
+	tack that knowledge is better than ignorance: At least the
+	first-order amplitude distribution of the observed signals
+	should be considered during the signal processing design.  If
+	the signal is found to be Gaussian, then linear filtering
+	results can be applied with the knowledge than no other
+	filtering strategy will yield better results.  If
+	non-Gaussian, the linear filtering can still be used and the
+	engineer must be aware that future systems might yield
+	"better" results.  <footnote id="id9932345">Note that linear
+	filtering optimizes the mean-squared error whether the signals
+	involved are Gaussian or not.  Other error criteria might
+	better capture unexpected changes in signal characteristics
+	and non-Gaussian processes contain internal statistical
+	structure beyond that described by the covariance
+	function.</footnote>
+      </para>
+    </section>
+
+    <section id="Types">
+      <title>Types</title>
+      <para id="third">
+	When the observations are discrete-valued or made so by
+	digital-to-analog converters, estimating the probability mass
+	function is straightforward: Count the relative number of
+	times each value occurs. Let
+	<m:math>
+	  <m:list>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:cn>0</m:cn>			  
+	    </m:apply>
+	    <m:ci>…</m:ci>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:list>
+	</m:math>
+	denote a sequence of observations, each of which takes on
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>𝒜</m:ci>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>a</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>…</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>a</m:mi>
+		  <m:mi>N</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:apply>
+	</m:math>
+	. This set is known as an <term>alphabet</term> and each  
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>a</m:mi>
+	      <m:mi>n</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	is a letter in that alphabet.  We estimate the probability
+	that an observation equals one of the letters according to
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>r</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>a</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+		<m:uplimit><m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply></m:uplimit>		
+		<m:apply>
+		  <m:ci type="fn">I</m:ci>
+		  <m:apply>	
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:ci><m:msub>
+			<m:mi>a</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">I</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math>
+	is the indicator function, equaling one if its argument is
+	true and zero otherwise.  This kind of estimate is known in
+	information theory as a <term>type</term> <cite target-id="CoverThomas"><cite-title>[Cover and Thomas: Chapter 12]</cite-title></cite>, and
+	types have remarkable properties.  For example, if the
+	observations are statistically independent, the probability
+	that a given sequence occurs equals 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:eq/>
+		<m:ci type="vector">r</m:ci>
+		<m:set>
+		  <m:apply><m:ci type="fn">r</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		  <m:ci>…</m:ci>
+		  <m:apply><m:ci type="fn">r</m:ci>
+		    <m:apply><m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:apply>
+
+	    <m:apply>
+	      <m:product/>
+	      <m:bvar><m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply><m:minus/>
+		  <m:ci>L</m:ci><m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>r</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Evaluating the logarithm, we find that
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:log/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:log/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>r</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Converting to a sum over letters reveals
+	<equation id="eqn1a">
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:log/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>n</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>N</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>a</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:log/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		    <m:ci><m:msub>
+			  <m:mi>a</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+
+	      <m:apply>	       
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>n</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>N</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>a</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:log/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:apply>
+			    <m:ci type="fn"><m:msub>
+				<m:mi>P</m:mi>
+				<m:mi>r</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci><m:msub>
+				<m:mi>a</m:mi>
+				<m:mn>n</m:mn>
+			      </m:msub></m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>			   
+		      <m:apply>
+			<m:log/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			    <m:apply>
+			      <m:ci type="fn"><m:msub>
+				  <m:mi>P</m:mi>
+				  <m:mi>r</m:mi>
+				</m:msub></m:ci>
+			      <m:ci><m:msub>
+				  <m:mi>a</m:mi>
+				  <m:mi>n</m:mi>
+				</m:msub></m:ci>
+			    </m:apply>
+			  </m:apply>
+			  <m:apply>
+			    <m:ci type="fn"><m:msub>
+				<m:mi>P</m:mi>
+				<m:mi>r</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci><m:msub>
+				<m:mi>a</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub></m:ci>
+			  </m:apply>  
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>   
+		</m:apply>
+	      </m:apply>
+
+	      <m:apply>
+		<m:times/>  
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">ℋ</m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>r</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>  
+	    </m:apply>
+	  </m:math>
+	</equation>
+	which yields
+
+	<equation id="anumberedequation">
+	  <m:math>	    
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:ci type="fn">ℋ</m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci type="fn"><m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mi>r</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci type="fn"><m:msub>
+			    <m:mi>P</m:mi>
+			    <m:mi>r</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>r</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>	    
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	We introduce the <term>entropy</term><cite target-id="CoverThomas"><cite-title>
+	  [Cover and Thomas: §2.1]</cite-title></cite> and
+	  <term>Kullback-Leibler distance</term> [See <link document="m11275" version="versionnumber" target-id="kulleib">Stein's Lemma</link>].
+
+	<m:math display="block">				
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">ℋ</m:ci>
+	      <m:ci>P</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>n</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>N</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">P</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>a</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:log/>
+		    <m:apply>
+		      <m:ci type="fn">P</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>a</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>n</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>N</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>a</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:log/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>a</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>a</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Because the Kullback-Leibler distance is non-negative,
+	equaling zero <emphasis>only</emphasis> when the two
+	probability distributions equal each other, we maximize <link target-id="anumberedequation" strength="3"/> with respect to
+	<m:math>
+	  <m:ci>P</m:ci>
+	</m:math>
+	by choosing 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>P</m:ci>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>P</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>: 
+	The type estimator is the maximum likelihood estimator of
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>r</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>.
+      </para>
+
+      <para id="para3">
+	The number of length-<m:math><m:ci>L</m:ci>
+	</m:math> observation sequences having a given type 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci>P</m:ci>
+	  </m:apply>
+	</m:math> approximately equals 
+	<m:math>
+	  <m:apply>
+	    <m:exp/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">ℋ</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>P</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	. The probability that a given sequence has a given type
+	approximately equals 
+	<m:math>
+	  <m:apply>
+	    <m:exp/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distance"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>P</m:ci>
+		</m:apply>
+		<m:ci>P</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	, which means that the probability a given sequence has a type
+	<emphasis>not</emphasis> equal to the true distribution decays
+	exponentially with the number of observations.  Thus, while
+	the coin flip sequences 
+	<m:math>
+	  <m:set>
+	    <m:ci>H</m:ci>
+	    <m:ci>H</m:ci>
+	    <m:ci>H</m:ci>
+	    <m:ci>H</m:ci>
+	    <m:ci>H</m:ci>
+	  </m:set>
+	</m:math>
+	and 
+	<m:math>    
+	  <m:set>
+	    <m:ci>T</m:ci>
+	    <m:ci>T</m:ci>
+	    <m:ci>H</m:ci>
+	    <m:ci>H</m:ci>
+	    <m:ci>T</m:ci>
+	  </m:set>
+	</m:math>
+	are equally likely (assuming a fair coin), the second is more
+	<emphasis>typical</emphasis> because its type is closer to the
+	true distribution.
+      </para>
+    </section>		     
+    
+    <section id="Histogramestimators">
+      <title> Histogram Estimators</title>
+      <para id="he1">
+	By far the most used technique for estimating the probability
+	distribution of a continuous-valued random variable is the
+	<term>histogram</term>; more sophisticated techniques are
+	discussed in <cite target-id="Silverman"><cite-title>Silverman</cite-title></cite>.  For
+	real-valued data, subdivide the real line into
+	<m:math><m:ci>N</m:ci></m:math> intervals 
+	<m:math>
+	  <m:interval closure="open-closed">
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mo>+</m:mo>
+		  <m:mn>1</m:mn>
+		</m:mrow>
+	      </m:msub>
+	    </m:ci>
+	  </m:interval>
+	</m:math>
+	having widths
+	<m:math>
+	  <m:apply>
+	    <m:eq/>	
+	    <m:ci><m:msub>
+		<m:mi>δ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mrow>
+		    <m:mi>i</m:mi>
+		    <m:mo>+</m:mo>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>,
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>i</m:ci>
+	    <m:set>
+	      <m:cn>1</m:cn>
+	      <m:ci>…</m:ci>
+	      <m:ci>N</m:ci>
+	    </m:set>
+	  </m:apply>
+	</m:math>. 
+	These regions are called <term>bins</term> and they should
+	encompass the range of values assumed by the data. For large
+	values, the "edge bins" can extend to infinity to catch the
+	overflows.  Given <m:math><m:ci>L</m:ci></m:math> observations
+	of a stationary random sequence
+
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">r</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math>
+	,
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>l</m:ci>
+	    <m:set>
+	      <m:cn>0</m:cn>
+	      <m:ci>…</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:set>
+	  </m:apply>
+	</m:math>
+	, the histogram estimate 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">h</m:ci>
+	    <m:ci>i</m:ci>
+	  </m:apply>
+	</m:math>
+	is formed by simply forming a type from the number  
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>L</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>
+	of these observations that fall into the 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>i</m:mi>
+	      <m:mi>th</m:mi>
+	    </m:msup></m:ci>
+	</m:math> bin and dividing by the binwidth 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>δ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>.
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>r</m:ci>
+		</m:bvar>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">h</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>   
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>r</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:piece>
+
+	      <m:piece>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">h</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>r</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mn>3</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:piece>
+	     
+	      <m:piece>
+		<m:ci>⋮</m:ci>
+	      </m:piece>
+	      
+	      <m:piece>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">h</m:ci>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci><m:msub>
+			<m:mi>L</m:mi>
+			<m:mi>N</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mi>N</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply> 
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>r</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mrow>
+			  <m:mi>N</m:mi>
+			  <m:mo>+</m:mo>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>
+	The histogram estimate resembles a rectangular approximation
+	to the density.  Unless the underlying density has the same
+	form (a rare event), the histogram estimate does
+	<emphasis>not</emphasis> converge to the true density as the
+	number <m:math><m:ci>L</m:ci></m:math> of observations grows.
+	Presumably, the value of the histogram at each bin converges
+	to the probability that the observations lie in that bin.
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:limit/>
+	      <m:bvar><m:ci>L</m:ci></m:bvar>
+	      <m:lowlimit><m:infinity/></m:lowlimit>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msub>
+		    <m:mi>L</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mrow>
+		      <m:mi>i</m:mi>
+		      <m:mo>+</m:mo>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>r</m:ci>
+		</m:bvar>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	To demonstrate this intuitive feeling, we compactly denote the
+	histogram estimate by using <term>indicator functions</term>.
+	An indicator function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>I</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	for the 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>i</m:mi>
+	      <m:mi>th</m:mi>
+	    </m:msup></m:ci>
+	</m:math> bin equals one if the observation 
+	
+	<m:math>
+	  <m:apply>
+	    <m:ci>r</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math>
+	lies in the bin and is zero otherwise.  The estimate is simply
+	the average of the indicator functions across the
+	observations.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">h</m:ci>
+	      <m:ci>i</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>l</m:ci></m:bvar>
+		<m:lowlimit><m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>I</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The expected value of 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>I</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	is simply the probability 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>	  
+	that the observation lies in the 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>i</m:mi>
+	      <m:mi>th</m:mi>
+	    </m:msup></m:ci>
+	</m:math>
+	bin.  Thus, the expected value of each histogram value equals
+	the integral of the actual density over the bin, showing that
+	the histogram is an unbiased estimate of this integral.
+	Convergence can be tested by computing the variance of the
+	estimate.  The variance of one bin in the histogram is given
+	by
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:variance/>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:ci>i</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+			<m:mi>δ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+	  	      <m:power/>
+		      <m:ci>L</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci><m:msub>
+			  <m:mi>δ</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>k</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:neq/>
+		      <m:ci>k</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:ci type="fn"><m:msub>
+			      <m:mi>I</m:mi>
+			      <m:mi>i</m:mi>
+			    </m:msub></m:ci>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>k</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn"><m:msub>
+			      <m:mi>I</m:mi>
+			      <m:mi>i</m:mi>
+			    </m:msub></m:ci>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	To simplify this expression, the correlation between the
+	observations must be specified.  If the values are
+	statistically independent (we have white noise), each term in
+	the sum becomes zero and the variance is given by
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:variance/>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:ci>i</m:ci>
+	      </m:apply>
+	    </m:apply> 
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub><m:mi>P</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub><m:mi>P</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	. Thus, the variance tends to zero as 
+	<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:ci>L</m:ci>
+	    <m:infinity/>
+	  </m:apply>
+	</m:math>
+	and the histogram estimate is consistent, converging to
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>δ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	. If the observations are not white, convergence becomes
+	problematical.  Assume, for example, that
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>I</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>k</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> 
+	and 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>I</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	are correlated in a first-order, geometric fashion.
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>I</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>k</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>I</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>					     
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ρ</m:ci>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>k</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The variance does increase with this presumed correlation
+	until, at the extreme (
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>ρ</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>
+	), the variance is a constant independent of
+	<m:math><m:ci>L</m:ci></m:math>!  In summary, if the
+	observations are mutually correlated and the histogram
+	estimate converges, the estimate converges to the proper value
+	but more slowly than if the observations were white.  The
+	estimate may not converge if the observations are heavily
+	dependent from index to index.  This type of dependence
+	structure occurs when the power spectrum of the observations
+	is lowpass with an extremely low cutoff frequency.
+      </para>
+
+      <para id="he2">
+	Convergence to the density rather than its integral over a
+	region can occur if, as the amount of data grows, we reduce
+	the binwidth
+	<m:math>
+	<m:ci><m:msub>
+	    <m:mi>δ</m:mi>
+	    <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	and increase <m:math><m:ci>N</m:ci></m:math>, the number of
+	bins.  However, if we choose the binwidth too small for the
+	amount of available data, few bins contain data and the
+	estimate is inaccurate.  Letting 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>r</m:mi>
+	      <m:mo>′</m:mo>					    
+	    </m:msup></m:ci>
+	</m:math>
+	denote the midpoint of a bin, using a Taylor expansion about
+	this point reveals that the mean-squared error between the
+	histogram and the density at that point is <cite target-id="ThompsonTapia"><cite-title>[Thompson and Tapia:44-59]</cite-title></cite> 
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>r</m:ci>
+		    </m:bvar>
+		    <m:ci><m:msup>
+			<m:mi>r</m:mi>
+			<m:mo>′</m:mo>
+		      </m:msup></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">h</m:ci>
+		    <m:ci>i</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:bvar>
+		  <m:ci><m:msup>
+		      <m:mi>r</m:mi>
+		      <m:mi>′</m:mi>
+		    </m:msup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci>L</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+			<m:mi>δ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:cn>4</m:cn>
+		  </m:apply>
+		  <m:cn>36</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		    <m:condition>
+		      <m:apply>
+			<m:eq/>
+			<m:ci>r</m:ci>
+			<m:ci><m:msup>
+			    <m:mi>r</m:mi>
+			    <m:mo>′</m:mo>
+			  </m:msup></m:ci>
+		      </m:apply>
+		    </m:condition>
+		    <m:apply>
+		      <m:diff/>
+		      <m:bvar>
+			<m:ci>r</m:ci>
+			<m:degree><m:cn>2</m:cn>
+			</m:degree>
+		      </m:bvar>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci>r</m:ci>
+			</m:bvar>
+			<m:ci>r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">O</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>L</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">O</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>5</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	This mean-squared error becomes zero <emphasis>only</emphasis>
+	if 
+	<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:ci>L</m:ci>
+	    <m:infinity/>
+	  </m:apply>
+	</m:math>
+	, 
+	<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>L</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:infinity/>
+	  </m:apply>
+	</m:math>
+	, <emphasis>and</emphasis> 
+	<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>. Thus, the binwidth must decrease <emphasis>more
+	slowly</emphasis> than the rate of increase of the number of
+	observations.  We find the "optimum" compromise between the
+	decreasing binwidth and the increasing amount of data to
+	be <footnote id="id7299131">This result assumes that the second
+	derivative of the density is nonzero.  If it is not, either
+	the Taylor series expansion brings higher order terms into
+	play or, if all the derivatives are zero, no optimum binwidth
+	can be defined for minimizing the mean-squared error.</footnote>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	     <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>9</m:cn>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci>r</m:ci>
+		      </m:bvar>
+		      <m:ci><m:msup>
+			  <m:mi>r</m:mi>
+			  <m:mo>′</m:mo>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+			<m:condition>
+			  <m:apply>
+			    <m:eq/>
+			    <m:ci>r</m:ci>
+			    <m:ci><m:msup>
+				<m:mi>r</m:mi>
+				<m:mo>′</m:mo>
+			      </m:msup></m:ci>
+			  </m:apply>
+			</m:condition>
+			<m:apply>
+			  <m:diff/>
+			  <m:bvar><m:ci>r</m:ci>
+			    <m:degree><m:cn>2</m:cn>
+			    </m:degree>
+			  </m:bvar>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			    <m:bvar>
+			      <m:ci>r</m:ci>
+			    </m:bvar>
+			    <m:ci>r</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:cn>5</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>5</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Using this binwidth, we find the the mean-squared error to be
+	proportional to
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>L</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>4</m:cn>
+		<m:cn>5</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	. We have thus discovered the famous "4/5" rule of density
+	estimation; this is one of the few cases where the variance of
+	a convergent statistic decreases more slowly than the
+	reciprocal of the number of observations.  In practice, this
+	optimal binwidth cannot be used because the proportionality
+	constant depends on the unknown density being estimated.
+	Roughly speaking, wider bins should be employed where the
+	density is changing slowly.  How the optimal binwidth varies
+	with <m:math><m:ci>L</m:ci></m:math> can be used to adjust the
+	histogram estimate as more data becomes available.
+      </para>
+    </section>
+    
+    <section id="densityverification">
+      <title>Density Verification</title>
+      <para id="dv1">
+	Once a density estimate is produced, the class of density that best
+	coincides with the estimate remains an issue:
+	Is the density just estimated statistically similar to a Gaussian?
+	The histogram estimate can be used directly in a hypothesis test to
+	determine similarity with any proposed density.
+	Assume that the observations are obtained from a white,
+	stationary, stochastic sequence.
+	Let 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	denote the hypothesis that the data has an amplitude
+	distribution equal to the presumed density and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>						
+	</m:math>
+	the dissimilarity hypothesis.  If
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	is true, the estimate for each bin should not deviate greatly
+	from the probability of a randomly chosen datum lying in the
+	bin.  We determine this probability from the presumed density
+	by integrating over the bin.  Summing these deviations over
+	the entire estimate, the result should not exceed a threshold.
+	The theory of standard hypothesis testing requires us to
+	produce a specific density for the alternative hypothesis 
+	<m:math>
+	<m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	. We cannot rationally assign such a density; consistency is
+	being tested, not whether either of two densities provides the
+	best fit.  However, taking inspiration from the Neyman-Pearson
+	approach to hypothesis testing [See <link document="m11228" target-id="neypear"> Neyman-Pearson Criterion</link>], we can
+	develop a test statistic and require its statistical
+	characteristics <emphasis>only</emphasis> under
+	<m:math>
+	<m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	. The typically used, but <foreign>ad hoc</foreign> test statistic 
+	
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">S</m:ci>
+	    <m:ci>L</m:ci>
+	     <m:ci>N</m:ci>
+	  </m:apply>
+	</m:math>
+	is related to the histogram estimate's mean-squared error
+	  <cite target-id="Cramer"><cite-title> [Cramer:416-41]</cite-title></cite>.
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">S</m:ci>
+	      <m:ci>L</m:ci>
+	      <m:ci>N</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>i</m:ci>
+	      </m:bvar>
+	      <m:lowlimit><m:cn>1</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit><m:ci>N</m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>L</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>  
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>i</m:ci>
+	      </m:bvar>
+	      <m:lowlimit><m:cn>1</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit><m:ci>N</m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci><m:msub>
+			<m:mi>L</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	This statistic sums over the various bins the squared error of
+	the number of observations relative to the expected number.
+	For large <m:math><m:ci>L</m:ci></m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">S</m:ci>
+	    <m:ci>L</m:ci>
+	     <m:ci>N</m:ci>
+	  </m:apply>
+	</m:math>
+	has a 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>χ</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	</m:math> 
+	probability distribution with 
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>N</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>
+	degrees of freedom <cite target-id="Cramer"><cite-title>[Cramer:417]</cite-title></cite>.
+	Thus, for a given number of observations
+	<m:math><m:ci>L</m:ci></m:math> we establish a threshold 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mi>N</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	by picking a false-alarm probability 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	and using tables to solve 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:gt/>
+		<m:ci><m:msubsup>
+		    <m:mi>χ</m:mi>
+		    <m:mrow>
+		      <m:mi>N</m:mi>
+		      <m:mo>-</m:mo>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>η</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	. To enhance the validity of this approximation, statisticians
+	recommend selecting the binwidth so that each bin contains at
+	least ten observations.  In practice, we fulfill this
+	criterion by merging adjacent bins until a sufficient number
+	of observations occur in the new bin and defining its binwidth
+	as the sum of the merged bins' widths.  Thus, the number of
+	bins is reduced to some number
+	<m:math>
+	  <m:ci><m:msup> 
+	      <m:mi>N</m:mi> 
+	      <m:mi>′</m:mi>
+	    </m:msup></m:ci>
+	</m:math>
+	, which determines the degrees of freedom in the hypothesis
+	test.  The similarity test between the histogram estimate of a
+	probability density function and an assumed ideal form becomes
+
+	<m:math display="block">
+	  <m:mrow>
+	    <m:apply>
+	      <m:ci type="fn">S</m:ci>
+	      <m:ci>L</m:ci>
+	      <m:ci><m:msup>
+		  <m:mi>N</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup></m:ci>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:msup>
+		  <m:mi>N</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup>
+	      </m:msub></m:ci>
+	  </m:mrow>
+	</m:math>
+      </para>
+
+      <para id="dv2">
+	In many circumstances, the formula for the density is known
+	but not some of its parameters.  In the Gaussian case, for
+	example, the mean or variance are usually unknown.  These
+	parameters must be determined from the same data used in the
+	consistency test before the test can be used.  Doesn't the
+	fact that we use estimates rather than actual values affect
+	the similarity test?  The answer is "yes," but in an
+	interesting way: The similarity test changes only in that the
+	number of degrees of freedom of the <m:math>
+	<m:ci><m:msup> <m:mi>χ</m:mi> <m:mn>2</m:mn>
+	</m:msup></m:ci> </m:math> random variable used to establish
+	the threshold is reduced by one for each estimated parameter.
+	If a Gaussian density is being tested, for example, the mean
+	and variance usually need to be found.  The threshold should
+	then be determined according to the distribution of a 
+	<m:math>
+	  <m:ci><m:msubsup>
+	      <m:mi>χ</m:mi>
+	      <m:mrow>
+		<m:msup>
+		  <m:mi>N</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup>
+		<m:mo>-</m:mo>
+		<m:mn>3</m:mn>
+	      </m:mrow>
+	      <m:mn>2</m:mn>
+	    </m:msubsup>
+	  </m:ci>
+	</m:math>
+	random variable.
+      </para>
+    </section>
+
+    <example id="anexample">
+      <para id="example">
+	Three sets of observations are considered: Two are drawn from
+	a Gaussian distribution and the other not.  The first Gaussian
+	example is white noise, a signal whose characteristics match
+	the assumptions of this section.  The second is non-Gaussian,
+	which should not pass the test.  Finally, the last test
+	consists of colored Gaussian noise that, because of dependent
+	samples, does not have as many degrees of freedom as would be
+	expected.  The number of data available in each case is 2000.
+	The histogram estimator uses fixed-width bins and the 
+	<m:math> <m:ci><m:msup> <m:mi>χ</m:mi>
+	<m:mn>2</m:mn> </m:msup></m:ci>
+	</m:math>
+	test demands at least ten observations per merged bin.  The
+	mean and variance estimates are used in constructing the
+	nominal Gaussian density.  The histogram estimates and their
+	approximation by the nominal density whose mean and variance
+	were computed from the data are shown in the <link target-id="densityest"/>.  
+
+	<figure id="densityest">
+	  <media id="id9370158" alt="">
+            <image src="../../media/densityest.png" mime-type="image/png"/>
+            <image for="pdf" src="../../media/densityest.eps" mime-type="application/postscript"/>
+          </media>
+	  <caption>
+	    Three histogram density estimates are shown and compared
+	    with Gaussian densities having the same mean and variance.
+	    The histogram on the top is obtained from Gaussian data
+	    that are presumed to be white.  The middle one is obtained
+	    from a non-Gaussian distribution related to the hyperbolic
+	    secant 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:bvar>
+		  <m:ci>r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		    <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:ci>σ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:sech/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:times/>
+			  <m:pi/>
+			  <m:ci>r</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:ci>σ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  This density resembles a Gaussian about the
+	    origin but decreases exponentially in the tails.  The
+	    bottom histogram is taken from a first-order
+	    autoregressive Gaussian signal.  Thus, these data are
+	    correlated, but yield a histogram resembling the true
+	    amplitude distribution.  In each case, 2000 data points
+	    were used and the histogram contained 100 bins.
+	  </caption>
+	</figure>
+
+	The chi-squared test
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:cn>0.1</m:cn>
+	  </m:apply>
+	</m:math>
+	yielded the following results.
+
+	<table id="examplesec3.4" orient="land" frame="all" summary="">
+	  <tgroup cols="4" align="center" colsep="1" rowsep="1">
+	    <thead valign="middle">
+	      <row>
+		<entry align="center">Density</entry>
+		<entry align="center"><m:math>
+		    <m:ci><m:msup>
+			<m:mi>N</m:mi>
+			<m:mo>′</m:mo>
+		      </m:msup></m:ci>
+		  </m:math></entry>
+		<entry align="center">
+		  <m:math>
+		    <m:ci><m:msubsup>
+			<m:mi>χ</m:mi>
+			<m:mrow>
+			  <m:msup>
+			    <m:mi>N</m:mi>
+			    <m:mo>′</m:mo>
+			  </m:msup>
+			  <m:mo>-</m:mo>
+			  <m:mn>3</m:mn>
+			</m:mrow>
+			<m:mn>2</m:mn>
+		      </m:msubsup></m:ci>
+		  </m:math>
+		</entry>
+		<entry align="center">
+		  <m:math>
+		    <m:apply>
+		      <m:ci type="fn">S</m:ci>
+		      <m:cn>2000</m:cn>
+		      <m:ci><m:msup>
+			  <m:mi>N</m:mi>
+			  <m:mo>′</m:mo>
+			</m:msup></m:ci>
+		    </m:apply>
+		  </m:math>
+		</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry align="left">White Gaussian</entry>
+		<entry align="center">70</entry>
+		<entry align="center">82.2</entry>
+		<entry align="center">78.4</entry>
+	      </row>
+	      <row>
+		<entry align="left">White Sech</entry>
+		<entry align="center">65</entry>
+		<entry align="center">76.6</entry>
+		<entry align="center">232.6</entry>
+	      </row>
+	      <row>
+		<entry align="left">Colored Gaussian</entry>
+		<entry align="center">65</entry>
+		<entry align="center">76.6</entry>
+	      <entry align="center">77.8</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+	
+	The white Gaussian noise example clearly passes the  
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>χ</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	</m:math>
+	test. The test correctly evaluated the non-Gaussian example,
+	but declared the colored Gaussian data to be non-Gaussian,
+	yielding a value near the threshold.  Failing in the latter
+	case to correctly determine the data's Gaussianity, we see
+	that the <m:math> <m:ci><m:msup>
+	<m:mi>χ</m:mi> <m:mn>2</m:mn> </m:msup></m:ci>
+	</m:math>
+	test is sensitive to the statistical independence of the
+	observations.
+      </para>
+    </example>
+
+  </content>
+
+  <bib:file>
+    <bib:entry id="LipsterShiryayev">
+      <bib:book>
+	<bib:author>R.S. Lipster, A.N.Shiryayev</bib:author>
+	<bib:title>Statistics of Random Processes I: General Theory</bib:title>
+	<bib:publisher>Springer-Verlag</bib:publisher>
+	<bib:year>1977</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="CoverThomas">
+    <bib:book>
+	<bib:author>T.M.Cover, J.A.Thomas</bib:author>
+	<bib:title>Elements of Information Theory</bib:title>
+	<bib:publisher>John Wiley and Sons, Inc.</bib:publisher>
+	<bib:year>1991</bib:year>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="Silverman">
+      <bib:book>
+	<bib:author>B.W.Silverman</bib:author>
+	<bib:title>Density Estimation</bib:title>
+	<bib:publisher>Chapman and Hall</bib:publisher>
+	<bib:year>1986</bib:year>
+	<bib:address>London</bib:address>
+	</bib:book>
+    </bib:entry>
+
+    <bib:entry id="ThompsonTapia">
+      <bib:book>
+	<bib:author>J.R.Thompson, R.A.Tapia</bib:author>
+	<bib:title>Nonparametric Function Estimation, Modeling and Simulation</bib:title>
+	<bib:publisher>SIAM</bib:publisher>
+	<bib:year>1990</bib:year>
+	<bib:address>Philadelphia, PA</bib:address>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="Cramer">
+      <bib:book>
+	<bib:author>H.Cramer</bib:author>
+	<bib:title>Mathematical Methods of Statistics</bib:title>
+	<bib:publisher>Princeton University Press</bib:publisher>
+	<bib:year>1946</bib:year>
+	<bib:address>Princeton, NJ</bib:address>
+      </bib:book>
+    </bib:entry>
+    
+  </bib:file>
+
+</document>

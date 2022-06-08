@@ -1,0 +1,453 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Partially Known Noise Amplitude Distribution</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1a0d5b0c-48da-4fe7-9b7b-3cbc127f8cf1</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The previous sections assumed that the probability distribution
+      of the noise was known precisely, and furthermore, that this
+      distribution was Gaussian. Deviations from this assumption occur
+      frequently in applications (<cite target-id="MachellandPenrod"><cite-title>Machell and Penrod</cite-title></cite>, <cite target-id="Middleton"><cite-title>Middleton</cite-title></cite>, <cite target-id="MilneandGanton"><cite-title>Milne and Ganton</cite-title></cite>). We
+      <emphasis>expect</emphasis> Gaussian noise in situations where
+      noise sources are many and of roughly equal strength: the
+      Central Limit Theorem suggests that if these noise sources are
+      independent (or even mildly dependent), their superposition will
+      be Gaussian. As shown in this <link document="m11251">discussion</link>, the Central Limit Theorem
+      converges very slowly and deviations from this model,
+      particularly in the tails of the distribution, are a fact of
+      life. Furthermore, unexpected, deviant noise sources also occur
+      and these distort the noise amplitude distribution. Examples of
+      the phenomenon are lightning (causing momentary, large, skewed
+      changes in the nominal amplitude distribution in electromagnetic
+      sensors) and ice fractures in polar seas (evoking similar
+      distributional changes in accoustic noise). These changes are
+      momentary and their effects on the amplitude distribution are,
+      by and large, unpredictable. For these situations, we invoke
+      ideas from robust model evaluation to design robust detectors,
+      ones insensitive to deviations from the Gaussian model (<cite target-id="El-SawyandVandelinde"><cite-title>El-Sawy and Vandelinde</cite-title></cite>, <cite target-id="KassamandPoor"><cite-title>Kassam and Poor</cite-title></cite>, <cite target-id="Poor"><cite-title>Poor pp.175-187</cite-title></cite>).
+    </para>
+
+    <para id="para3">
+      We assume that the noise component in the observations consists
+      of statistically independent elements, each having a probability
+      amplitude density of the form
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar><m:ci>n</m:ci></m:bvar>
+	    <m:ci>n</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>ε</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>o</m:mi>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar><m:ci>n</m:ci></m:bvar>
+		<m:ci>n</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>ε</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mi>d</m:mi>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar><m:ci>n</m:ci></m:bvar>
+		<m:ci>n</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      where
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	    <m:msup>
+	      <m:mi>p</m:mi>
+	      <m:mi>o</m:mi>
+	    </m:msup>
+	  </m:csymbol>
+	  <m:bvar><m:ci>n</m:ci></m:bvar>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math>
+      is the nominal noise density, taken to be Gaussian, and
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	    <m:msup>
+	      <m:mi>p</m:mi>
+	      <m:mi>d</m:mi>
+	    </m:msup>
+	  </m:csymbol>
+	  <m:bvar><m:ci>n</m:ci></m:bvar>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is the deviation of the actual density from the
+      nominal, also a density. This <term>ε-contamination
+      model</term> (<cite target-id="Huber"><cite-title>Huber; 1981</cite-title></cite>) is
+      parameterized by <m:math><m:ci>ε</m:ci></m:math>, the
+      uncertainty variable, a positive number less than one that
+      defines how large the deviations from the nominal can be. As
+      shown in <link document="m11299">Robust Hypothesis
+      Testing</link>, the decision rule for the robust detector is
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>l</m:ci></m:bvar>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:lowlimit>
+	      <m:cn>0</m:cn>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:ci type="fn" class="discrete">
+		<m:msub>
+		  <m:mi>f</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:ci type="fn">s</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">
+	    <m:msub>
+	      <m:mi>f</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math>
+      is a memoryless nonlinearity having the form of a clipper (see
+      <link document="m11299">Robust Hypothesis Testing</link>). The
+      block diagram of this receiver is shown diagrammatically in
+      <link target-id="figure6"/>.
+      
+      <figure id="figure6">
+	<media id="idp8097248" alt=""><image src="../../media/robdet2.png" mime-type="image/png"/></media> <caption>The
+	robust detector consists of a linear scaling and shifting
+	operation followed by a unit-slope clipper, whose clipping
+	thresholds depends on the value of the signal. The key element
+	is the clipper, which serves to censor large excursions of the
+	observed from the value of the signal.</caption>
+      </figure>
+
+      The clipping function threshold
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>z</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math> is related to the assumed variance
+      <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>σ</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> of the nominal Gaussian density, the deviation
+      parameter <m:math><m:ci>ε</m:ci></m:math>,
+      <emphasis>and</emphasis> the signal value at the
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>l</m:mi>
+	    <m:mi>th</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> sample by the positive-valued solution of
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>z</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:ci type="fn">s</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>z</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:ci type="fn">s</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:ci>ε</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      An example of solving for <m:math><m:ci>ε</m:ci></m:math>
+      is shown in <link document="m11299" target-id="figure3">this
+      figure</link>.
+    </para>
+
+    <para id="para4">
+      The characteristics of the clipper vary with each signal value:
+      the clipper is exquisitely tuned to the proper signal value,
+      ignoring values that deviate from the signal. Furthermore, note
+      that this detector relies on <emphasis>large</emphasis> signal
+      values relative to the noise. If the signal values are small,
+      the above equation for
+      <m:math>
+	<m:ci>
+	  <m:msubsup>
+	    <m:mi>z</m:mi>
+	    <m:mi>l</m:mi>
+	    <m:mo>′</m:mo>
+	  </m:msubsup>
+	</m:ci>
+      </m:math>
+      has <emphasis>no</emphasis> solution. Essentially, the robust
+      detector ignores those values since the signal is too weak to
+      prevent the noise density deviations from entirely confusing the
+      models. <footnote id="idp6906752">In the next section, we present a
+      structure applicable in small signal-to-noise ratio
+      cases.</footnote> The threshold can be established for the signal
+      values used by the detector through the Central Limit Theorem as
+      described in our <link document="m11299">previous
+      discussion</link>.
+    </para>
+	      
+  </content>
+  <bib:file>
+    <bib:entry id="El-SawyandVandelinde">
+      <bib:article>
+	<bib:author>A.H. El-Sawy and V.D. Vandelinde</bib:author>
+	<bib:title>Robust detection of known signals.</bib:title>
+	<bib:journal>IEEE Trans. Info. Th.</bib:journal>
+	<bib:year>1977</bib:year>
+	<bib:volume>IT-23</bib:volume>
+	<bib:pages>722-727</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="KassamandPoor">
+      <bib:article>
+	<bib:author>S.A. Kassam and H.V. Poor</bib:author>
+	<bib:title>Robust techniques for signal processing: A survey</bib:title>
+	<bib:journal>Proc. IEEE</bib:journal>
+	<bib:year>1985</bib:year>
+	<bib:volume>73</bib:volume>
+	<bib:pages>433-481</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="MachellandPenrod">
+      <bib:incollection>
+	<bib:author>F.W. Machell and C.X. Penrod</bib:author>
+	<bib:title>Probability density functions of ocean acoustic
+	noise processes</bib:title>
+	<bib:booktitle>Statistical Signal Processing</bib:booktitle>
+	<bib:publisher>Marcel Dekker</bib:publisher>
+	<bib:year>1984</bib:year>
+	<bib:editor>E.J. Wegman and J.G. Smith</bib:editor>
+	<bib:pages>211-221</bib:pages>
+	<bib:address>New York</bib:address>
+      </bib:incollection>
+    </bib:entry>   
+    <bib:entry id="Middleton">
+      <bib:article>
+	<bib:author>D. Middleton</bib:author>
+	<bib:title>Statistical-physical models of electromagnetic
+	interference</bib:title>
+	<bib:journal>IEEE Trans. Electromag. Compat.</bib:journal>
+	<bib:year>1977</bib:year>
+	<bib:volume>EMC-17</bib:volume>
+	<bib:pages>106-127</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="MilneandGanton">
+      <bib:article>
+	<bib:author>A.R. Milne and J.H. Ganton</bib:author>
+	<bib:title>Ambient noise under Arctic sea ice</bib:title>
+	<bib:journal>J. Acoust. Soc. Am.</bib:journal>
+	<bib:year>1964</bib:year>
+	<bib:volume>36</bib:volume>
+	<bib:pages>855-863</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="Poor">
+      <bib:book>
+	<bib:author>H.V. Poor</bib:author>
+	<bib:title>An Introduction to Signal Detection and Estimation</bib:title>
+	<bib:publisher>Springer-Verlag</bib:publisher>
+	<bib:year>1988</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="Huber">
+      <bib:book>
+	<bib:author>P.J. Huber</bib:author>
+	<bib:title>Robust Statistics</bib:title>
+	<bib:publisher>John Wiley and Sons</bib:publisher>
+	<bib:year>1981</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

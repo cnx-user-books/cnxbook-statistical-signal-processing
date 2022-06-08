@@ -1,0 +1,2411 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Sequential Hypothesis Testing</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>396c8ab8-19ca-4961-8469-3023a834bb3e</md:uuid>
+</metadata>
+
+  <content>
+    <para id="sht1">
+      In many circumstances, the observations to be used in evaluating
+      models arrive sequentially rather than all at once.  For
+      example, passive sonar systems may well "listen" over a period
+      of time to an array's output while the array is steered in a
+      particular direction.  The decision rules we have derived
+      implicitly assume the entire <emphasis>block</emphasis> of
+      data - the array output observed over a long period of time - is
+      available. You might wonder whether a hypothesis test could be
+      developed that takes the sequential arrival of data into
+      account, making decisions as the data arrive, with the
+      possibility of determining <emphasis>early</emphasis> in the
+      data collection procedure the validity of one model, while
+      maintaining the <emphasis>same</emphasis> performance
+      specifications.  Answering this question leads to the
+      formulation of <term>sequential hypothesis testing</term> (<cite target-id="Poor"><cite-title>Poor: 136-156 </cite-title></cite>, <cite target-id="Wald"><cite-title>Wald</cite-title></cite>).  Not only do
+      <emphasis>sequential</emphasis> tests exist, they can provide
+      performance superior to that of block tests in certain cases.
+    </para>
+
+    <para id="sht2">
+      To make decisions as the data become available, we must
+      generalize the decision-making process.  Assume as before that
+      the observed data comprise an observation vector <m:math><m:ci type="vector">r</m:ci></m:math> of length
+      <m:math><m:ci>L</m:ci></m:math>.  The decision rule (in the
+      two-model case) now consists of determining which model is valid
+      <emphasis>or</emphasis> that more data are required.  Thus, the
+      range of values of <m:math><m:ci type="vector">r</m:ci></m:math>
+      is partitioned into three regions 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci>
+      </m:math>, 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub></m:ci>
+      </m:math>, and 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℜ</m:mi>
+	    <m:mi>?</m:mi>
+	  </m:msub></m:ci>
+      </m:math>
+      .  Making the latter decision implies that the data gathered to
+      that point is insufficient to meet the performance requirements.
+      More data must be obtained to achieve the required performance
+      and the test re-applied once these additional data become
+      available.  Thus, a <emphasis>variable</emphasis> number of
+      observations are required to make a decision.  An issue in this
+      kind of procedure is the number of observations required to
+      satisfy the performance criteria: for a common set of
+      performance specifications, does this procedure result in a
+      decision rule requiring, on the average, fewer observations than
+      does a fixed-length block test?
+    </para>
+
+    <section id="Sequentiallikelihoodratiotest">
+      <title>Sequential Likelihood Ratio Test</title>
+      <para id="slrt1">
+	In a manner similar to the Neyman-Pearson criterion, we
+	specify the false-alarm probability
+	<m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	     <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math>; in addition, we need to specify the detection probability 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	.  These constraints over-specify the model evaluation problem
+	where the number of observations is fixed: enforcing one
+	constraint forces violation of the other.  In contrast, both
+	may be specified as the sequential test as we shall see.
+      </para>
+      <para id="slrt2">
+	Assuming a likelihood ratio test, two thresholds are required
+	to define the three decision regions.
+	<m:math display="block">
+	  <m:mtable>		
+	    <m:mtr columnalign="right left">
+	      <m:mtd>
+		<m:apply>
+		  <m:lt/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>Λ</m:mi>
+			<m:mi>L</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say </m:mtext>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:mtd>
+	    </m:mtr>
+	    <m:mtr columnalign="right left">
+	      <m:mtd>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>Λ</m:mi>
+			<m:mi>L</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say "need more data" </m:mtext>
+	      </m:mtd>
+	    </m:mtr>
+	    <m:mtr columnalign="left left">
+	      <m:mtd>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>Λ</m:mi>
+			<m:mi>L</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say </m:mtext>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:mtd>
+	    </m:mtr>
+	  </m:mtable>
+	</m:math>
+	where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>Λ</m:mi>
+		<m:mi>L</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math> is the usual likelihood ratio where the dimension
+	<m:math><m:ci>L</m:ci></m:math> of the vector <m:math><m:ci type="vector">r</m:ci></m:math> is explicitly denoted.  The
+	threshold values
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math> <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> are found from the constraints, which are expressed as
+
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply><m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:condition><m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply>
+		 <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition><m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>   
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>α</m:ci>
+	  </m:apply>
+	</m:math>
+
+	and 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply><m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:condition><m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply>
+		 <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>  
+		<m:bvar><m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition><m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>β</m:ci>
+	  </m:apply>
+	</m:math>
+	
+	Here, <m:math><m:ci>α</m:ci></m:math> and
+	<m:math><m:ci>β</m:ci></m:math> are design constants that
+	you choose according to the application.  Note that the
+	probabilities
+	<m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math>, 
+	<m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	are associated <emphasis>not</emphasis> with what happens on a
+	given trial, but what the sequential test yields in terms of
+	performance when a decision is made.  Thus, 
+	<m:math>
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>M</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply><m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	although the probability of correctly saying 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	on a given trial does not equal one minus the probability of
+	incorrectly saying
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	is true: The "need more data" region must be accounted for on
+	an individual trial but not when considering the sequential
+	test's performance when it terminates.
+      </para>
+
+      <para id="slrt3">
+	Rather explicitly attempting to relate thresholds to
+	performance probabilities, we obtain simpler results by using
+	bounds and approximations.  Note that the expression for
+	<m:math><m:ci><m:msub> <m:mi>P</m:mi> <m:mi>D</m:mi>
+	</m:msub></m:ci> </m:math> may be written as 
+
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply><m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:condition><m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:times/>
+		<m:apply><m:divide/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>  
+		    <m:bvar><m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition><m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:condition> 
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>  			      
+		    <m:bvar><m:ci type="vector">r</m:ci>
+		    </m:bvar>
+		    <m:condition><m:ci><m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:condition> 
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol> 
+		  <m:bvar><m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition><m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>  
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:condition><m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:mi>L</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>  		
+		  <m:bvar><m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition><m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition> 
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	In the decision region 
+	<m:math><m:ci><m:msub>
+	      <m:mi>ℜ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>,  
+	<m:math>
+	  <m:apply><m:geq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>Λ</m:mi>
+		  <m:mi>L</m:mi>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>; thus, a lower bound on the detection probability
+	can be established by substituting this inequality into the
+	integral.
+	<m:math display="block">
+	  <m:apply><m:geq/>
+	     <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	    <m:apply><m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>η</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	       <m:apply><m:int/>
+	      <m:bvar><m:ci>r</m:ci>
+	      </m:bvar>
+	      <m:condition><m:ci><m:msub>
+		    <m:mi>ℜ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>  			       
+		  <m:bvar><m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:condition><m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition> 
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The integral is the false-alarm probability 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	of the test when it terminates.  In this way, we find that
+	<m:math>
+	  <m:apply><m:geq/>
+	    <m:apply><m:divide/>
+	       <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci> 
+	      <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	    </m:apply>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>. Using similar arguments on the miss probability, we
+	obtain a similar bound on the threshold
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>.
+	These inequalities are summarized as
+	<m:math display="block">
+	  <m:apply><m:geq/>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply><m:divide/>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	and
+	<m:math display="block">
+	  <m:apply><m:leq/>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply><m:divide/>
+	      <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	These bounds, which relate the thresholds in the sequential
+	likelihood ratio test with the false-alarm and detection
+	probabilities, are general, applying even when sequential
+	tests are not being used.  In the usual likelihood ratio test,
+	there is a single threshold
+	<m:math><m:ci>η</m:ci></m:math>; these bounds apply to it
+	as well, implying that in a likelihood ratio test the error
+	probabilities will <emphasis>always</emphasis> satisfy 
+	<equation id="srlteq">
+	  <m:math>
+	    <m:apply><m:geq/>
+	      <m:apply><m:divide/>
+		 <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply><m:divide/>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>D</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	This relationship can be manipulated to show 
+	<m:math>
+	<m:apply><m:geq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>, indicating that the likelihood ratio test is, at
+	the very least, a reasonable decision rule and that the <link document="m11274" target-id="roc">ROC curves</link> have the
+	right general form.
+      </para>
+      
+      <para id="slrt4">
+	Only with difficulty can we solve the inequality constraints
+	on the sequential test's thresholds in the general case.
+	Surprisingly, by approximating the inequality constraints by
+	<emphasis>equality</emphasis> constraints we can obtain a
+	result having pragmatically important properties.  As an
+	approximation, we thus turn to solving for
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>  under the conditions
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply><m:divide/>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	and 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>η</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply><m:divide/>
+	      <m:ci>β</m:ci>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	In this way, the threshold values are explicitly specified in
+	terms of the desired performance probabilities.  We use the
+	criterion values for the false-alarm and detection
+	probabilities because when we use these equalities, the test's
+	resulting performance probabilities
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	 and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	usually do <emphasis>not</emphasis> satisfy the design criteria.
+	For example, equating 
+	<m:math> <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	to a value potentially larger than its desired value might
+	result in a smaller detection probability and a larger
+	false-alarm rate.  We will want to understand how much actual
+	performance departs from what we want.
+      </para>
+      
+      <para id="slrt5">
+	The relationships derived above between the performance levels
+	and the thresholds apply no matter how the thresholds are
+	chosen.
+	<m:math display="block">
+	  <m:apply><m:geq/>
+	    <m:apply><m:divide/>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:divide/>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply><m:leq/>
+	    <m:apply><m:divide/>
+	      <m:ci>β</m:ci>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	    <m:apply><m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	From these inequalities, two important results follow:
+
+	<m:math display="block">
+	  <m:apply><m:leq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply><m:divide/>
+		<m:ci>α</m:ci>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply><m:leq/>
+	    <m:apply><m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply><m:divide/>
+		  <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	and 
+	<m:math display="block">
+	  <m:apply><m:leq/>
+	    <m:apply><m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:plus/>
+	      <m:ci>α</m:ci>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The first result follows directly from the threshold bounds.
+	To derive the second result, we must work a little harder.
+	Multiplying the first inequality by 
+	<m:math>
+	  <m:apply><m:times/>
+	    <m:apply><m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	    <m:apply><m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> yields 
+	<m:math>
+	  <m:apply><m:geq/>
+	    <m:apply><m:times/>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	       <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci>α</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> .  Considering the reciprocal of the second
+	inequality and multiplying it by
+	<m:math>
+	  <m:apply><m:times/>
+	    <m:ci>β</m:ci>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	yields 
+	<m:math>
+	  <m:apply><m:geq/>
+	    <m:apply><m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>D</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>α</m:ci>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:ci>β</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. Adding the two inequalities yields the second result.
+      </para>
+		     
+      <para id="slrt6">
+	The first set of inequalities suggest that the false-alarm and
+	miss (which equals
+	<m:math>
+	  <m:apply><m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>) probabilities will increase only slightly from
+	their specified values: the denominators on the right sides
+	are very close to unity in the interesting cases (e.g., small
+	error probabilities like 0.01).  The second inequality
+	suggests that the sum of the false-alarm and miss
+	probabilities obtained in practice will be less than the sum
+	of the specified error probabilities.  Taking these results
+	together, one of two situations will occur when we approximate
+	the inequality criterion by equality: either the false alarm
+	probability will decrease and the detection probability
+	increase (a most pleasing but unlikely circumstance)
+	<emphasis>or</emphasis> one of the error probabilities will
+	increase while the other decreases.  <emphasis>The false-alarm
+	and miss probabilities cannot both increase.</emphasis>
+	Furthermore, whichever one increases, the first inequalities
+	suggest that the incremental change will be small.  Our
+	<foreign>ad hoc</foreign> approximation to the thresholds does
+	indeed yield a level of performance close to that specified
+      </para>
+      <para id="slrt7">
+	Usually, the likelihood is manipulated to derive a sufficient
+	statistic.  The resulting sequential decision rule is 
+
+	<m:math display="block">
+	  <m:mtable>		
+	    <m:mtr columnalign="right left">
+	      <m:mtd>
+		<m:apply><m:lt/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>ϒ</m:mi>
+			<m:mi>L</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>γ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say </m:mtext>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:mtd>
+	    </m:mtr>
+	    <m:mtr columnalign="right left">
+	      <m:mtd>
+		<m:apply><m:lt/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>γ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:apply><m:lt/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>ϒ</m:mi>
+			  <m:mi>L</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>γ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say "need more data" </m:mtext>
+	      </m:mtd>
+	    </m:mtr>
+	    <m:mtr columnalign="left left">
+	      <m:mtd>
+		<m:apply><m:lt/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>γ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>ϒ</m:mi>
+			<m:mi>L</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:mtd>
+	      <m:mtd>
+		<m:mtext> say </m:mtext>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:mtd>
+	    </m:mtr>
+	  </m:mtable>
+	</m:math>
+	
+	Note that the thresholds 
+	<m:math> 
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>γ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>and 
+	<m:math> <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>γ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>, derived
+	from the thresholds 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and <m:math>
+	  <m:ci><m:msub>
+	      <m:mi>η</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, usually depend on the
+	number of observations used in the decision rule.
+      </para>
+
+      <example id="slrtexample">
+	<para id="slrtex1">
+	  Let <m:math><m:ci type="vector">r</m:ci></m:math> be a
+	  Gaussian random vector as in our previous examples with
+	  statistically independent components.
+	  
+	  <m:math display="block">
+	    <m:mrow>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:mo>:</m:mo>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/> 
+		  <m:ci type="vector">0</m:ci>
+		  <m:apply><m:times/>
+		    <m:apply><m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci type="matrix">I</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo> 
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/> 
+		<m:ci type="vector">m</m:ci>
+		  <m:apply><m:times/>
+		    <m:apply><m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci type="matrix">I</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+	  The mean vector <m:math><m:ci type="vector">m</m:ci></m:math> is assumed for simplicity to
+	  consist of equal positive values:
+	  <m:math display="inline">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">M</m:ci>
+	      <m:vector>
+		<m:ci>m</m:ci>
+		<m:ci>…</m:ci>
+		<m:ci>m</m:ci>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>,
+	  <m:math>
+	    <m:apply>
+	      <m:gt/>
+	      <m:ci>m</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>. Using the previous derivations, our sequential
+	  test becomes
+
+	  <m:math display="block">
+	    <m:mtable>		
+	      <m:mtr columnalign="right left">
+		<m:mtd>
+		  <m:apply><m:lt/>
+		    <m:apply><m:sum/>
+		      <m:bvar><m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit><m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply><m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply><m:plus/>
+		      <m:apply><m:times/>
+			<m:apply><m:divide/>
+			  <m:apply><m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:apply><m:log/>
+			  <m:ci><m:msub>
+			      <m:mi>η</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply><m:divide/>
+			<m:apply><m:times/>
+			  <m:ci>L</m:ci>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:mtd>
+		<m:mtd>
+		  <m:mtext> say </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:mtd>
+	      </m:mtr>
+	      <m:mtr columnalign="right left">
+		<m:mtd>
+		  <m:apply><m:lt/>
+		    <m:apply><m:plus/>
+		      <m:apply><m:times/>
+			<m:apply><m:divide/>
+			  <m:apply><m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:apply><m:log/>
+			  <m:ci><m:msub>
+			      <m:mi>η</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply><m:divide/>
+			<m:apply><m:times/>
+			  <m:ci>L</m:ci>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply><m:lt/>
+		      <m:apply><m:sum/>
+			<m:bvar><m:ci>l</m:ci>
+			</m:bvar>
+			<m:lowlimit><m:cn>0</m:cn>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:apply><m:minus/>
+			    <m:ci>L</m:ci>
+			    <m:cn>1</m:cn>
+			  </m:apply>
+			</m:uplimit>
+			<m:ci><m:msub>
+			    <m:mi>r</m:mi>
+			    <m:mi>l</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply><m:plus/>
+			<m:apply><m:times/>
+			  <m:apply><m:divide/>
+			    <m:apply><m:power/>
+			      <m:ci>σ</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:ci>m</m:ci>
+			  </m:apply>
+			  <m:apply><m:log/>
+			    <m:ci><m:msub>
+				<m:mi>η</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub></m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply><m:divide/>
+			  <m:apply><m:times/>
+			    <m:ci>L</m:ci>
+			    <m:ci>m</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:mtd>
+		<m:mtd>
+		  <m:mtext> say "need more data" </m:mtext>
+		</m:mtd>
+	      </m:mtr>
+	      <m:mtr columnalign="left left">
+		<m:mtd>
+		  <m:apply><m:lt/>
+		    <m:apply><m:plus/>
+		      <m:apply><m:times/>
+			<m:apply><m:divide/>
+			  <m:apply><m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:apply><m:log/>
+			  <m:ci><m:msub>
+			      <m:mi>η</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply><m:divide/>
+			<m:apply><m:times/>
+			  <m:ci>L</m:ci>
+			  <m:ci>m</m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply><m:sum/>
+		      <m:bvar><m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit><m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply><m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:mtd>
+		<m:mtd>
+		  <m:mtext> say </m:mtext>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:mtd>
+	      </m:mtr>
+	    </m:mtable>
+	  </m:math>
+	  Starting with 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>L</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>, we gather the data and compute the sum.  The
+	  sufficient statistic will lie in the middle range between
+	  the two thresholds until one of them is exceeded as shown in
+	  <link target-id="seqpng"/>.
+
+	  <figure id="seqpng">
+	    <media id="idm5696368" alt=""><image src="../../media/seq.png" mime-type="image/png"/></media>
+	    <caption>
+	      Example of the sequential likelihood ratio test. The
+	      sufficient statistic wanders between the two thresholds
+	      in a sequential decision rule until one of them is
+	      crossed by the statistic.  The number of observations
+	      used to obtain a decision is
+	      <m:math><m:ci><m:msub><m:mi>L</m:mi><m:mn>0</m:mn>
+	      </m:msub></m:ci> </m:math>.</caption>
+	  </figure>
+	  The model evaluation procedure then terminates and the
+	  chosen model announced.  Note how the thresholds depend on
+	  the amount of data available (as expressed by
+	  <m:math><m:ci>L</m:ci></m:math>).  This variation typifies
+	  the sequential hypothesis tests.
+	</para>
+      </example>      
+ 
+    </section>
+      <section id="avnumofreqobs">
+      <title>Average Number of Required Observations</title>
+      <para id="anro1">
+	The awake reader might wonder whether that the sequential
+	likelihood ratio test just derived has the disturbing property
+	that it may never terminate: can the likelihood ratio wander
+	between the two thresholds forever?  Fortunately, the
+	sequential likelihood ratio test has been shown to terminate
+	with probability one (<cite target-id="Wald"><cite-title>Wald</cite-title></cite>).
+	Confident of eventual termination, we need to explore how many
+	observations are required to meet performance specifications.
+	The number of observations is variable, depending on the
+	observed data and the stringency of the specifications.  The
+	<emphasis>average</emphasis> number of observations required
+	can be determined in the interesting case when the
+	observations are statistically independent.
+      </para>
+      <para id="anro2">
+	Assuming that the observations are statistically independent
+	and identically distributed, the likelihood ratio is equal to
+	the product of the likelihood ratios evaluated at each
+	observation.  Considering
+	<m:math>
+	  <m:apply><m:ln/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>Λ</m:mi>
+		  <m:msub>
+		    <m:mi>L</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, the logarithm of the likelihood ratio
+	when a decision is made on observation 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>L</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, we have 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply><m:ln/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>Λ</m:mi>
+		    <m:msub>
+		      <m:mi>L</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub>
+		  </m:msub></m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:sum/>
+	      <m:bvar><m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:lowlimit><m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply><m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>L</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply><m:ln/>
+		<m:apply><m:ci type="fn">Λ</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>where
+	<m:math>
+	  <m:apply><m:ci type="fn">Λ</m:ci>
+	    <m:ci><m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	is the likelihood ratio corresponding to the
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>l</m:mi>
+	      <m:mi>th</m:mi>
+	    </m:msup></m:ci>
+	</m:math>
+	observation.  We seek an expression for
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:ci><m:msub>
+		<m:mi>L</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>, the expected value of the number of observations
+	required to make the decision.  To derive this quantity, we
+	evaluate the expected value of the likelihood ratio when the
+	decision is made.  This value will usually vary with which
+	model is actually valid; we must consider both models
+	separately.  Using the laws of conditional expectation (see
+	<link document="m11248" target-id="eqn4">Joint
+	Distributions</link>), we find that the expected value of
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>Λ</m:mi>
+		<m:msub>
+		  <m:mi>L</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+	      </m:msub></m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>, assuming that model 
+	<m:math> 
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> was true, is given by
+
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>L</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:apply><m:ln/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>Λ</m:mi>
+			<m:msub>
+			  <m:mi>L</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+<!-- question for Don-->
+	The outer expected value is evaluated with respect to the probability
+	distribution of 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>L</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	; the inner expected value is average value of the
+	log-likelihood assuming that
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>L</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	observations were required to choose model 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>
+	. In the latter case, the log-likelihood is the sum of 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>L</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> component log-likelihood ratios 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>L</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>L</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		</m:condition>
+		<m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Noting that the expected value on the right is a constant with
+	respect to the outer expected value, we find that
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>L</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The average number of observations required to make a
+	decision, correct or incorrect, assuming that
+	 <m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> is true is thus expressed by 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>L</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply><m:divide/>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	       <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Assuming that the other model was true, we have the complementary
+	result 
+	<m:math display="block">
+	  <m:apply><m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>L</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply><m:divide/>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	       <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci><m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+
+      <para id="anro3">
+	The numerator is difficult to calculate exactly but easily
+	approximated; assuming that the likelihood ratio equals its
+	threshold value when the decision is made,
+
+	<m:math display="block">
+	  <m:apply><m:approx/>
+	     <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:plus/>
+	      <m:apply><m:times/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		<m:apply><m:ln/>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:times/>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:ln/>
+		   <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply><m:eq/>
+	    <m:apply><m:plus/>
+	      <m:apply><m:times/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		<m:apply><m:ln/>
+		  <m:apply><m:divide/>
+		    <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		    <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:times/>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:ln/>
+		  <m:apply><m:divide/>
+		    <m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		    <m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply><m:approx/>
+	     <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Λ</m:mi>
+		      <m:msub>
+			<m:mi>L</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:plus/>
+	      <m:apply><m:times/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		<m:apply><m:ln/>
+		  <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:times/>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:ln/>
+		   <m:ci><m:msub>
+		      <m:mi>η</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply><m:eq/>
+	    <m:apply><m:plus/>
+	      <m:apply><m:times/>
+		<m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		<m:apply><m:ln/>
+		  <m:apply><m:divide/>
+		    <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		    <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:times/>
+		<m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:ln/>
+		  <m:apply><m:divide/>
+		    <m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		    <m:apply><m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msub>
+		    <m:mi>P</m:mi>
+		    <m:mi>F</m:mi>
+		  </m:msub></m:ci>
+		</m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Note these expressions are <emphasis>not</emphasis> problem
+	dependent; they depend only on the specified probabilities.
+	The denominator cannot be approximated in a similar way with
+	such generality; it must be evaluated for each problem.
+     </para>
+
+      <example id="anroexample">
+	<para id="anroex1">
+	  In the Gaussian example we have been exploring, the log-likelihood
+	  of each component observation 
+	  <m:math><m:ci><m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is given by
+
+	  <m:math display="block">
+	    <m:apply><m:eq/>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:apply><m:divide/>
+		  <m:apply><m:times/>
+		    <m:ci>m</m:ci>
+		    <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply><m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply><m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply><m:power/>
+		      <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  The conditional expected values required to evaluate the
+	  expression for the average number of required observations
+	  are
+
+	  <m:math display="block">
+	    <m:apply><m:eq/>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:apply><m:ln/>
+		  <m:apply>
+		    <m:ci type="fn">Λ</m:ci>
+		    <m:ci><m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply><m:minus/>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply><m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply><m:power/>
+		      <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+
+	   <m:math display="block">
+	    <m:apply><m:eq/>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:apply><m:ln/>
+		  <m:apply>
+		    <m:ci type="fn">Λ</m:ci>
+		    <m:ci><m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply><m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply><m:power/>
+		      <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  </m:apply>
+		</m:apply>
+	    </m:apply>
+	  </m:math>
+	  For simplicity, let's assume that the false-alarm and
+	  detection probabilities are symmetric (i.e.
+	  <m:math>
+	    <m:apply><m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply><m:minus/>
+		<m:cn>1</m:cn>
+		<m:ci><m:msub>
+		<m:mi>P</m:mi>
+		    <m:mi>D</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>).
+	  The expressions for the average number of observations are equal for
+	  each model and we have
+
+	  <m:math display="block">
+	    <m:apply><m:eq/>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:ci><m:msub>
+		    <m:mi>L</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	       <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	        <m:condition>
+		 <m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+		<m:ci><m:msub>
+		    <m:mi>L</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply><m:times/>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		   <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math> is a function equal to 
+	  <m:math>
+	    <m:apply><m:times/>
+	      <m:apply><m:minus/>
+		<m:cn>2</m:cn>
+		<m:apply><m:times/>
+		  <m:cn>4</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply><m:ln/>
+		<m:apply><m:divide/>
+		  <m:apply><m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>. Thus, the number of observations decreases with
+	  increasing signal-to-noise ratio
+	  <m:math>
+	    <m:apply><m:divide/>
+	      <m:ci>m</m:ci>
+	      <m:ci>σ</m:ci>
+	    </m:apply>
+	  </m:math> and increases as the false-alarm probability is
+	  reduced.
+	</para>
+	<para id="anroex2">
+	  Suppose we used a likelihood ratio test where all data were
+	  considered once and a decision made; how many observations
+	  would be required to achieve a specified level of
+	  performance and how would this fixed number compare with the
+	  average number of observations in a sequential test?  In
+	  this example, we find from our earlier calculations (see
+	  <link document="m11228" target-id="density">equation</link>)
+	  that
+	  <m:math>
+	    <m:apply><m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>F</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:apply><m:divide/>
+		  <m:apply><m:times/>
+		    <m:apply><m:root/>
+			<m:ci>L</m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:apply><m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  so that 
+	  <m:math display="block">
+	    <m:apply><m:eq/>
+	      <m:ci>L</m:ci>
+	      <m:apply><m:times/>
+		<m:cn>4</m:cn>
+		<m:apply><m:power/>
+		<m:apply><m:inverse/>
+		  <m:apply>
+		    <m:ci type="fn">Q</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>F</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>The duration of the sequential and block tests
+	  depend on the signal-to-noise ratio in the same way;
+	  however, the dependence on the false-alarm probability is
+	  quite different. As depicted in the <link target-id="seqblockpng"/>, the disparity between these
+	  quantities increases rapidly as the false alarm probability
+	  decreases, with the sequential test requiring
+	  correspondingly fewer observations <emphasis>on the
+	  average</emphasis>.
+
+	  <figure id="seqblockpng">
+	    <media id="idm6750656" alt=""><image src="../../media/seqblock.png" mime-type="image/png"/></media>
+	    <caption>
+	      The numbers of observations required by the sequential
+	      test (on the average) and by the block test for Gaussian
+	      observations are proportional to 
+	      <m:math>
+		<m:apply><m:divide/>
+		  <m:apply><m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply><m:power/>
+		    <m:ci>m</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>;
+	      the coefficients of these expressions (
+	      <m:math>
+	        <m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math> and 
+	      <m:math>
+		<m:apply><m:times/>
+		  <m:apply><m:times/>
+		    <m:cn>4</m:cn>
+		    <m:apply><m:power/>
+		      <m:apply><m:inverse/>
+			<m:apply>
+			  <m:ci type="fn">Q</m:ci>
+			  <m:ci><m:msub>
+			      <m:mi>P</m:mi>
+			      <m:mi>F</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      respectively) are shown.
+	    </caption>
+	  </figure>
+	</para>
+      </example>
+      
+      <para id="anor3">
+	We must not forget that these results apply to the
+	<emphasis>average</emphasis> number of observations required
+	to make a decision.  Expressions for the distribution of the
+	number of observations are complicated and depend heavily on
+	the problem.  When an extremely large number of observation
+	are required to resolve a difficult case to the required
+	accuracy, we are forced to <emphasis>truncate</emphasis> the
+	sequential test, stopping when a specified number of
+	observations have been used.  A decision would then be made by
+	dividing the region between the boundaries in half and
+	selecting the model corresponding to the boundary nearest to
+	the sufficient statistic.  If this truncation point is larger
+	than the expected number, the performance probabilities will
+	change little.  "Larger" is again problem dependent;
+	analytic results are few, leaving the option of computer
+	simulations to estimate the distribution of the number of
+	observations required for a decision.
+      </para>
+
+    </section>
+  </content>
+  		
+  <bib:file>
+    <bib:entry id="Poor">
+      <bib:book>
+	<bib:author>H.V.Poor</bib:author>
+	<bib:title>An Introduction to Signal Detection and Estimation</bib:title>
+	<bib:publisher>Springer-Verlag</bib:publisher>
+	<bib:year>1988</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="Wald">
+      <bib:book>
+	<bib:author>A.Wald</bib:author>
+	<bib:title>Sequential Analysis</bib:title>
+	<bib:publisher>Wiley and Sons</bib:publisher>
+	<bib:year>1947</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+
+  </bib:file>
+</document>

@@ -1,0 +1,833 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Jointly Distributed Random Variables</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>5e96794b-448e-4a9d-9c71-ee730b752b17</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      Two (or more) random variables can be defined over the same
+      sample space.  Just as with jointly defined events, the
+      <term>joint distribution function</term> is easily defined.
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:equivalent/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:intersect/>
+		<m:set>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>X</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		</m:set>
+		<m:set>
+		  <m:apply>
+		    <m:leq/>
+		    <m:ci>Y</m:ci>
+		    <m:ci>y</m:ci>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The <term>joint probability density function</term> <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:ci>X</m:ci>
+	  </m:bvar>
+	  <m:bvar>
+	    <m:ci>Y</m:ci>
+	  </m:bvar>
+	  <m:ci>x</m:ci>
+	  <m:ci>y</m:ci>
+	</m:apply>
+      </m:math> is related to the distribution function via double
+      integration.
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>β</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:ci>x</m:ci></m:uplimit>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci>α</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:infinity/>
+		  </m:apply>
+		</m:lowlimit>
+		<m:uplimit><m:ci>y</m:ci></m:uplimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>X</m:ci>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:ci>Y</m:ci>
+		  </m:bvar>
+		  <m:ci>α</m:ci>
+		  <m:ci>β</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> or 
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:bvar>
+	      <m:ci>Y</m:ci>
+	    </m:bvar>
+	    <m:ci>x</m:ci>
+	    <m:ci>y</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:partialdiff/>
+	    <m:bvar><m:ci>x</m:ci></m:bvar>
+	    <m:bvar><m:ci>y</m:ci></m:bvar>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Since <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar><m:ci>y</m:ci></m:bvar>
+	    <m:lowlimit><m:infinity/></m:lowlimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, the so-called <term>marginal density functions</term>
+      can be related to the joint density function.
+      <equation id="eqn3">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>β</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>X</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>Y</m:ci>
+		</m:bvar>
+		<m:ci>x</m:ci>
+		<m:ci>β</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>Y</m:ci>
+	    </m:bvar>
+	    <m:ci>y</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>α</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit><m:infinity/></m:uplimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>α</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+    </para>
+
+    <para id="para2">
+      Extending the ideas of conditional probabilities, the
+      <term>conditional probability density function</term> 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>X</m:mi>
+		<m:mo>|</m:mo>
+		<m:mi>Y</m:mi>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <m:ci>
+	    <m:mrow>
+	      <m:mi>x</m:mi>
+	      <m:mo>|</m:mo>
+	      <m:mrow>
+		<m:mi>Y</m:mi>
+		<m:mo>=</m:mo>
+		<m:mi>y</m:mi>
+	      </m:mrow>
+	    </m:mrow></m:ci>
+	</m:apply>
+      </m:math> is defined (when <m:math>
+	<m:apply>
+	  <m:neq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>Y</m:ci>
+	    </m:bvar>
+	    <m:ci>y</m:ci>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>) as
+
+<!--  pdf -->
+      <equation id="eqn4">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mrow>
+		    <m:mi>X</m:mi>
+		    <m:mo>|</m:mo>
+		    <m:mi>Y</m:mi>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:ci>
+		<m:mrow>
+		  <m:mi>x</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:mrow>
+		    <m:mi>Y</m:mi>
+		    <m:mo>=</m:mo>
+		    <m:mi>y</m:mi>
+		  </m:mrow>
+		</m:mrow></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>X</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>Y</m:ci>
+		</m:bvar>
+		<m:ci>x</m:ci>
+		<m:ci>y</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>Y</m:ci>
+		</m:bvar>
+		<m:ci>y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Two random variables are <term>statistically independent</term>
+      when 
+<!--  pdf -->
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi>X</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:mi>Y</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:ci>
+	      <m:mrow>
+		<m:mi>x</m:mi>
+		<m:mo>|</m:mo>
+		<m:mrow>
+		  <m:mi>Y</m:mi>
+		  <m:mo>=</m:mo>
+		  <m:mi>y</m:mi>
+		</m:mrow>
+	      </m:mrow></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, which is equivalent to the condition that the joint
+      density function is separable: <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>X</m:ci>
+	    </m:bvar>
+	    <m:bvar>
+	      <m:ci>Y</m:ci>
+	    </m:bvar>
+	    <m:ci>x</m:ci>
+	    <m:ci>y</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>Y</m:ci>
+	      </m:bvar>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+    </para>
+
+    <para id="para3">
+      For jointly defined random variables, expected values are
+      defined similarly as with single random variables.  Probably the
+      most important joint moment is the <term>covariance</term>:
+      <equation id="eqn5">
+	<m:math>
+	  <m:apply>
+	    <m:equivalent/>
+	    <m:apply>
+	      <m:ci type="fn">cov</m:ci><!--covariance?-->
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>X</m:ci>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci>X</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      where
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>y</m:ci></m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:infinity/>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit><m:infinity/></m:uplimit>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci>x</m:ci>
+		<m:ci>y</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>X</m:ci>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:ci>Y</m:ci>
+		  </m:bvar>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Related to the covariance is the (confusingly named)
+      <term>correlation coefficient</term>: the covariance normalized
+      by the standard deviations of the component random variables.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>X</m:mi>
+		<m:mo>,</m:mo>
+		<m:mi>Y</m:mi>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:ci type="fn">cov</m:ci><!--covariance?-->
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>Y</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      When two random variables are <term>uncorrelated</term>, their
+      covariance and correlation coefficient equals zero so that
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci>X</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Statistically independent random variables are
+      always uncorrelated, but uncorrelated random variables can be
+      dependent.  <footnote id="idm11457424">Let
+      <m:math><m:ci>X</m:ci></m:math> be uniformly distributed over
+	<m:math>
+	  <m:interval>
+	    <m:cn>-1</m:cn>
+	    <m:cn>1</m:cn>
+	  </m:interval>
+	</m:math> and let <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>Y</m:ci>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>X</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The two random variables are uncorrelated, but are
+	clearly not independent.</footnote>
+    </para>
+
+    <para id="para4">
+      A <term>conditional expected value</term> is the mean of the
+      conditional density.
+      <equation id="eqn6">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci>Y</m:ci>
+	      </m:condition>
+	      <m:ci>X</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>x</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+<!-- pdf -->
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:mi>X</m:mi>
+		      <m:mo>|</m:mo>
+		      <m:mi>Y</m:mi>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci>
+		  <m:mrow>
+		    <m:mi>x</m:mi>
+		    <m:mo>|</m:mo>
+		    <m:mrow>
+		      <m:mi>Y</m:mi>
+		      <m:mo>=</m:mo>
+		      <m:mi>y</m:mi>
+		    </m:mrow>
+		  </m:mrow></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Note that the conditional expected value is now a function of
+      <m:math><m:ci>Y</m:ci></m:math> and is therefore a random
+      variable.  Consequently, it too has an expected value, which is
+      easily evaluated to be the expected value of
+      <m:math><m:ci>X</m:ci></m:math>.
+      <equation id="eqn7">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci>Y</m:ci>
+		</m:condition>
+		<m:ci>X</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>y</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:infinity/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:infinity/></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>x</m:ci></m:bvar>
+		  <m:lowlimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:infinity/>
+		    </m:apply>
+		  </m:lowlimit>
+		  <m:uplimit><m:infinity/></m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>x</m:ci>
+<!--  pdf -->
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>p</m:mi>
+			  <m:mrow>
+			    <m:mi>X</m:mi>
+			    <m:mo>|</m:mo>
+			    <m:mi>Y</m:mi>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:ci>
+			<m:mrow>
+			  <m:mi>x</m:mi>
+			  <m:mo>|</m:mo>
+			  <m:mrow>
+			    <m:mi>Y</m:mi>
+			    <m:mo>=</m:mo>
+			    <m:mi>y</m:mi>
+			  </m:mrow>
+			</m:mrow></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>Y</m:ci>
+		  </m:bvar>
+		  <m:ci>y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci>X</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      More generally, the expected value of a function of two random
+      variables can be shown to be the expected value of a conditional
+      expected value: 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci>Y</m:ci>
+	      </m:condition>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>X</m:ci>
+		<m:ci>Y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  This kind of calculation is frequently simpler to
+      evaluate than trying to find the expected value of <m:math>
+	<m:apply>
+	  <m:ci type="fn">f</m:ci>
+	  <m:ci>X</m:ci>
+	  <m:ci>Y</m:ci>
+	</m:apply>
+      </m:math> "all at once." A particularly interesting example of
+      this simplicity is the <term>random sum of random
+	variables</term>.  Let <m:math><m:ci>L</m:ci></m:math> be a
+      random variable and <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math> a sequence of random variables.  We will find occasion
+      to consider the quantity <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:bvar><m:ci>l</m:ci></m:bvar>
+	  <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+	  <m:uplimit><m:ci>L</m:ci></m:uplimit>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  Assuming that each component of the sequence has the
+      same expected value 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:ci>X</m:ci>
+	</m:apply>
+      </m:math>, the expected value of the sum is found to be
+      <equation id="eqn8">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci><m:msub>
+		  <m:mi>S</m:mi>
+		  <m:mi>L</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci>L</m:ci>
+		</m:condition>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar><m:ci>l</m:ci></m:bvar>
+		  <m:lowlimit><m:cn>1</m:cn></m:lowlimit>
+		  <m:uplimit><m:ci>L</m:ci></m:uplimit>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci>X</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci>X</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+    </para>
+  </content>
+</document>

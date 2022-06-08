@@ -1,0 +1,7167 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Probability and Stochastic Processes: Problems</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>691e974a-f2ba-4061-84ea-c1fcffe5708f</md:uuid>
+</metadata>
+
+  <content>
+    <exercise id="problem1">
+      <problem id="idp792320">
+	<para id="introp1">
+	  Joe is an astronaut for project Pluto.  The mission success
+	  or failure depends only on the behavior of three major
+	  systems.  Joe feels that the following assumptions are valid
+	  and apply to the performance of the entire mission:
+	  <list id="list1">
+	    <item>
+	      The mission is a failure only if two or more major
+	      systems fail.
+	    </item>
+	    <item>
+	      System I, the Gronk system, fails with probability 0.1.
+	    </item>
+	    <item>
+	      System II, the Frab system, fails with probability 0.5
+	      if at least one other system fails.  If no other system
+	      fails, the probability the Frab system fails is 0.1.
+	    </item>
+	    <item>
+	      System III, the beer cooler (obviously, the most
+	      important), fails with probability 0.5 if the Gronk
+	      system fails.  Otherwise the beer cooler cannot fail.
+	    </item>
+	  </list>
+	  
+	</para>
+
+	<section id="s1.1">
+	  <para id="p1.1">
+	    What is the probability that the mission succeeds but
+	    that the beer cooler fails?
+	  </para>
+	</section>
+	<section id="s1.2">
+	  <para id="p1.2">
+	    What is the probability that all three systems fail?
+	  </para>
+	</section>
+	<section id="s1.3">
+	  <para id="p1.3">
+	    Given that more than one system failed, determine the
+	    probability that:
+	  </para>
+	  <section id="s1.3.1">
+	    <para id="p1.3.1">
+	      The Gronk did not fail.
+	    </para>
+	  </section>
+	  <section id="s1.3.2">
+	    <para id="p1.3.2">
+	      The beer cooler failed.
+	    </para>
+	  </section>
+	  <section id="s1.3.3">
+	    <para id="p1.3.3">
+	      Both the Gronk and the Frab failed.
+	    </para>
+	  </section>
+	  
+	</section>
+	<section id="s1.4">
+	  <para id="p1.4">
+	    About the time Joe was due back on Earth, you overhear a
+	    radio broadcast about Joe while watching the Muppet
+	    Show.  You are not positive what the radio announcer
+	    said, but you decide that it is twice as likely that you
+	    heard "mission a success" as opposed to "mission a
+	    failure".  What is the probability that the Gronk
+	    failed?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem2">
+      <problem id="idp4012464">
+	<para id="intro2">
+	  The random variables
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>
+	  and
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>
+	  have the joint pdf
+	  <equation id="eqn1a">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>b</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>b</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:gt/>
+		    <m:apply>
+		      <m:and/>
+		      <m:ci><m:msub>
+			  <m:mi>b</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>b</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    </m:bvar>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:bvar>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:pi/>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:times/>
+			<m:ci><m:msub>
+			    <m:mi>b</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>b</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+				<m:mi>b</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+				<m:mi>x</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+				<m:mi>b</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci><m:msub>
+				<m:mi>x</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub></m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	</para>
+
+	<section id="s2.1">
+	  <para id="p2.1">
+	    Show that
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:math>
+	    and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	    </m:math>
+	    are statistically independent random variables with
+	    Cauchy density functions.
+	  </para>
+	</section>
+	<section id="s2.2">
+	  <para id="p2.2">
+	    Show that
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>Φ</m:mi>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>j</m:ci>
+		    <m:ci>u</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>b</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:abs/>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s2.3">
+	  <para id="p2.3">
+	    Define
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>Y</m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  Determine
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>Y</m:ci>
+		</m:bvar>
+		<m:ci>y</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s2.4">
+	  <para id="p2.4">
+	    Let
+	    <m:math>
+	      <m:set>
+		<m:ci><m:msub>
+		    <m:mi>Z</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:set>
+	    </m:math>
+	    be a set of
+	    <m:math>
+	      <m:ci>N</m:ci>
+	    </m:math>
+	    statistically independent Cauchy random variables with
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>b</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>b</m:ci>
+	      </m:apply>
+	    </m:math>,
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:cn>2</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>N</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:math>.  Define
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci>Z</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar><m:ci>1</m:ci></m:bvar>
+		    <m:lowlimit>
+		      <m:cn>1</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>N</m:ci>
+		    </m:uplimit>
+		    <m:ci><m:msub>
+			<m:mi>Z</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Determine
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>Z</m:ci>
+		</m:bvar>
+		<m:ci>z</m:ci>
+	      </m:apply>
+	    </m:math>.  Is
+	    <m:math>
+	      <m:ci>Z</m:ci>
+	    </m:math> - the sample mean - a good estimate of the expected value
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>Z</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+
+      </problem>
+    </exercise>
+    
+    <exercise id="problem3">
+      <problem id="idp1580240">
+	<para id="intro3">
+	  Let
+	  <m:math>
+	    <m:mrow>
+	      <m:msub>
+		<m:mi>X</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:mo>,</m:mo>
+	      <m:ci>…</m:ci>
+	      <m:mo>,</m:mo>
+	      <m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>N</m:mi>
+	      </m:msub>
+	    </m:mrow>
+	  </m:math>
+	  be independent, identically distributed random variables.
+	  The density of each random variable is
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	  </m:math>.  The <term>order statistics</term>
+	  <m:math>
+	    <m:mrow>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:mfenced>
+		  <m:mn>1</m:mn>
+		</m:mfenced>
+	      </m:mrow>
+	      <m:mo>,</m:mo>
+	      <m:ci>…</m:ci>
+	      <m:mo>,</m:mo>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:mfenced>
+		  <m:mi>N</m:mi>
+		</m:mfenced>
+	      </m:mrow>
+	    </m:mrow>
+	  </m:math>
+	  of this set of random variables is the set that results when
+	  the original one is ordered (sorted).
+	  <m:math display="block">
+	    <m:apply>
+	      <m:leq/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci>…</m:ci>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>N</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+
+	<section id="s3.1">
+	  <para id="p3.1">
+	    What is the joint density of the original set of random
+	    variables?
+	  </para>
+	</section>
+	<section id="s3.2">
+	  <para id="p3.2">
+	    What is the density of
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>N</m:ci>
+	      </m:apply>
+	    </m:math>, the largest of the set?
+	  </para>
+	</section>
+	<section id="s3.3">
+	  <para id="p3.3">
+	    Show that the joint density of the ordered random
+	    variables is
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:ci>…</m:ci>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>N</m:ci>
+		    </m:apply>
+		  </m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>…</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:ci>N</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>X</m:ci>
+		    </m:bvar>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>X</m:ci>
+		    </m:bvar>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>N</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+	<section id="s3.4">
+	  <para id="p3.4">
+	    Consider a Poisson process having intensity
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">λ</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math>.
+	    <m:math>
+	      <m:ci>N</m:ci>
+	    </m:math>
+	    events are observed to occur in the interval
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:cn>0</m:cn>
+		<m:ci>T</m:ci>
+	      </m:interval>
+	    </m:math>.  Show that the joint density of the times of
+	    occurrence
+	    <m:math>
+	      <m:mrow>
+		<m:msub>
+		  <m:mi>W</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+		<m:mo>,</m:mo>
+		<m:mi>…</m:mi>
+		<m:mo>,</m:mo>
+		<m:msub>
+		  <m:mi>W</m:mi>
+		  <m:mi>N</m:mi>
+		</m:msub>
+	      </m:mrow>
+	    </m:math>
+	    is the same as the order statistics of a set of random
+	    variables.  Identify the common density of these random
+	    variables.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem4">
+      <problem id="idp1369184">
+	<para id="intro4">
+	  A crucial skill in developing simulations of communication
+	  systems is <term>random variable generation</term>.  Most
+	  computers (and environments like Matlab) have software that
+	  generates statistically independent, uniformly distributed,
+	  random sequences.  in Matlab, the function is
+	  <code>rand</code>.  We want to change the probability
+	  distribution to one required by the problem at hand.  One
+	  technique is known as the <term>distribution method</term>.
+	</para>
+
+	
+	<section id="s4.1">
+	  <para id="p4.1">
+	    If
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		<m:bvar>
+		  <m:ci>X</m:ci>
+		</m:bvar>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:math>
+	    is the desired distribution, show that
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>U</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		  <m:bvar>
+		    <m:ci>X</m:ci>
+		  </m:bvar>
+		  <m:ci>X</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    (applying the distribution function to a random variable
+	    having that distribution) is uniformly distributed over
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:cn>0</m:cn>
+		<m:cn>1</m:cn>
+	      </m:interval>
+	    </m:math>.  This result means that
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>X</m:ci>
+		<m:apply>
+		  <m:inverse/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		    <m:bvar>
+		      <m:ci>X</m:ci>
+		    </m:bvar>
+		    <m:ci>U</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    has the desired distribution.  Consequently, to generate
+	    a random variable having any distribution we want, we
+	    only need the inverse function of the distribution
+	    function.
+	  </para>
+	</section>
+	<section id="s4.2">
+	  <para id="p4.2">
+	    Write a Matlab function that simulates random throws of
+	    two dice.  It should have the number of throws as its
+	    argument and return a vector containing the results.
+	    Use the Matlab function <code>hist</code> to plot the
+	    distribution of the sum.
+	  </para>
+	</section>
+	<section id="s4.3">
+	  <para id="p4.4">
+	    Write Matlab functions that generate (i) Laplacian and
+	    (ii) Cauchy random variables.  Again use
+	    <code>hist</code> to plot the distribution function.
+	  </para>
+	</section>
+
+      </problem>
+    </exercise>
+    
+    <exercise id="problem5">
+      <problem id="idm6471936">
+	<para id="intro5">
+	  Determine the mean and correlation function of each of the processes 
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>
+	  defined below.
+	</para>
+	
+	<section id="s5.1">
+	  <para id="p5.1">
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	    is defined by the following equally likely sample functions.
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>ω</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:mspace/><m:mspace/><m:mspace/><m:mspace/><m:mspace/>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>ω</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:cn>-2</m:cn>
+	      </m:apply>
+	      <m:mspace/><m:mspace/><m:mspace/><m:mspace/><m:mspace/>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>ω</m:mi>
+		      <m:mn>3</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sin/>
+		  <m:apply>
+		    <m:times/>
+		    <m:pi/>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:mspace/><m:mspace/><m:mspace/><m:mspace/><m:mspace/>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>ω</m:mi>
+		      <m:mn>4</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:times/>
+		    <m:pi/>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+
+	<section id="s5.2">
+	  <para id="p5.2">
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is defined by
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>A</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where <m:math><m:ci>A</m:ci></m:math> and
+	    <m:math><m:ci>θ</m:ci></m:math> are statistically
+	    independent random variables.
+	    <m:math><m:ci>θ</m:ci></m:math> is uniformly
+	    distributed over
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:pi/>
+		</m:apply>
+	      </m:interval>
+	    </m:math> and <m:math><m:ci>A</m:ci></m:math> has the
+	    density function
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>A</m:ci>
+		  </m:bvar>
+		  <m:ci>A</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:pi/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>A</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+	
+      </problem>
+    </exercise>
+
+    <exercise id="ex6">
+      <problem id="idp1803696">
+	<para id="para6">
+	  The joint density of the amplitudes of a stochastic process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> at the specific times
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>t</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>t</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math>
+	  (<m:math>
+	    <m:apply>
+	      <m:gt/>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math>) is found to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:mtext>constant</m:mtext>
+		  <m:apply>
+		    <m:and/>
+		    <m:apply>
+		      <m:gt/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:lt/>
+		      <m:cn>0</m:cn>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:lt/>
+		      <m:ci><m:msub>
+			  <m:mi>x</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+	  This joint density is found to be a valid joint density for
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> and
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>u</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> when
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>t</m:ci>
+		  <m:ci>u</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+		
+	<section id="s6.1">
+	  <para id="p6.1">
+	    Find the correlation function 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math> at the times
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>t</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>u</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s6.2">
+	  <para id="p6.2">Find the expected value of 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> for all <m:math><m:ci>t</m:ci></m:math>.
+	  </para>
+	</section>
+
+	<section id="s6.3">
+	  <para id="p6.3">Is this process wide-sense
+	  stationary?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex7">
+      <problem id="idp4796288">
+	<section id="s7.1">
+	  <para id="p7.1">
+	    Which of the following are valid correlation functions?
+	    Indicate your reasoning.
+	    <list id="list7" list-type="enumerated">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:abs/>
+			    <m:ci>τ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:apply>
+			      <m:abs/>
+			      <m:ci>τ</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>5</m:cn>
+			<m:apply>
+			  <m:sin/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>1000</m:cn>
+			    <m:ci>τ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:piecewise>
+		      <m:piece>
+			<m:apply>
+			  <m:minus/>
+			  <m:cn>1</m:cn>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:abs/>
+			      <m:ci>τ</m:ci>
+			    </m:apply>
+			    <m:ci>T</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:leq/>
+			  <m:apply>
+			    <m:abs/>
+			    <m:ci>τ</m:ci>
+			  </m:apply>
+			  <m:ci>T</m:ci>
+			</m:apply>
+		      </m:piece>
+		      <m:otherwise>
+			<m:cn>0</m:cn>
+		      </m:otherwise>
+		    </m:piecewise>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:piecewise>
+		      <m:piece>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:leq/>
+			  <m:apply>
+			    <m:abs/>
+			    <m:ci>τ</m:ci>
+			  </m:apply>
+			  <m:ci>T</m:ci>
+			</m:apply>
+		      </m:piece>
+		      <m:otherwise>
+			<m:cn>0</m:cn>
+		      </m:otherwise>
+		    </m:piecewise>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:ci type="fn">δ</m:ci>
+			<m:ci>τ</m:ci>
+		      </m:apply>
+		      <m:cn>25</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:ci type="fn">δ</m:ci>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>τ</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">δ</m:ci>
+			<m:ci>τ</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">δ</m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>τ</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	    </list>
+	  </para>
+	</section>
+
+	<section id="s7.2">
+	  <para id="p7.2">Which of the following are valid power
+	  density spectra? Indicate your reasoning.
+	    <list id="list7a" list-type="enumerated">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:sin/>
+			<m:apply>
+			  <m:times/>
+			  <m:pi/>
+			  <m:ci>f</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:pi/>
+			<m:ci>f</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:sin/>
+			  <m:apply>
+			    <m:times/>
+			    <m:pi/>
+			    <m:ci>f</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:pi/>
+			  <m:ci>f</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci>f</m:ci>
+			      <m:ci><m:msub>
+				  <m:mi>f</m:mi>
+				  <m:mn>0</m:mn>
+				</m:msub></m:ci>
+			    </m:apply>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:cn>4</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:abs/>
+			    <m:ci>f</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:apply>
+			      <m:abs/>
+			      <m:ci>f</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:times/>
+			<m:cn>0.25</m:cn>
+			<m:apply>
+			  <m:exp/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:apply>
+			      <m:times/>
+			      <m:imaginaryi/>
+			      <m:cn>2</m:cn>
+			      <m:pi/>
+			      <m:ci>f</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub></m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		    <m:piecewise>
+		      <m:piece>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:leq/>
+			  <m:apply>
+			    <m:abs/>
+			    <m:ci>f</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:ci>T</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:piece>
+		      <m:otherwise>
+			<m:cn>0</m:cn>
+		      </m:otherwise>
+		    </m:piecewise>
+		  </m:apply>
+		</m:math>
+	      </item>
+	    </list>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex8">
+      <problem id="idp3538816">
+	<para id="para8">Let
+	  <m:math>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math> denote a sequence of independent, indentically
+	  distributed random variables. This sequence serves as the
+	  input to a discrete-time system having an input-output
+	  relationship given by the difference equation
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mrow>
+			<m:mi>l</m:mi>
+			<m:mo>-</m:mo>
+			<m:mn>1</m:mn>
+		      </m:mrow>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+	
+	<section id="s8.1">
+	  <para id="p8.1">If
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		  <m:cn>0</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, find the probability density function of each
+	    element of the output sequence 
+	    <m:math>
+	      <m:set>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+	      </m:set>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s8.2">
+	  <para id="p8.2">Show that
+	    <m:math>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msub>
+			<m:mi>Φ</m:mi>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		    </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>Φ</m:mi>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> for all choices of
+	    <m:math><m:ci>u</m:ci></m:math> no matter what the
+	    amplitude distribution of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> may be.
+	  </para>
+	</section>
+
+	<section id="s8.3">
+	  <para id="p8.3">If
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is non-Gaussian, the computation of the
+		  probability density of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> can be difficult. On the other hand, if the
+		  density of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is known, the density of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> can be found. How is the characteristic function
+		  of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> related to the characteristic function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>?
+	  </para>
+	</section>
+
+	<section id="s8.4">
+	  <para id="p8.4">Show that if
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is uniformly distributed over
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:cn>-1</m:cn>
+		<m:cn>1</m:cn>
+	      </m:interval>
+	    </m:math>, the only allowed values of the parameter
+	    <m:math><m:ci>a</m:ci></m:math> are those equalling 
+	    <m:math>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	    </m:math>, 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>m</m:ci>
+		<m:set>
+		  <m:apply>
+		    <m:mo>±</m:mo>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:mo>±</m:mo>
+		    <m:cn>3</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:mo>±</m:mo>
+		    <m:cn>4</m:cn>
+		  </m:apply>
+		  <m:ci>…</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex9">
+      <problem id="idp3599024">
+	<section id="s9.1">
+	  <para id="p9.1">Show that necessary and sufficient
+	  conditions for the stochastic process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> defined by
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci><m:msub>
+			  <m:mi>f</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> to be wide-sense stationary is that the
+	    characteristic function
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>Φ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>u</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> satisfy
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>Φ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>Φ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    <note id="idp3621984">
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math> is a constant and is not a random variable.
+	    </note>
+	  </para>
+	</section>
+	
+	<section id="s9.2">
+	  <para id="p9.2">Let
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:cos/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci><m:msub>
+			    <m:mi>f</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>B</m:ci>
+		    <m:apply>
+		      <m:sin/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci><m:msub>
+			    <m:mi>f</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where <m:math><m:ci>A</m:ci></m:math> and
+	    <m:math><m:ci>B</m:ci></m:math> are random variables and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>f</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:math> constant. Find necessary and sufficient
+		  conditions for 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> to be wide-sense stationary.	    
+	  </para>
+	</section>
+
+	<section id="s9.3">
+	  <para id="p9.3">Consider the process defined by:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:apply>
+		    <m:cos/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci><m:msub>
+			  <m:mi>f</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math> 
+	    where <m:math><m:ci>A</m:ci></m:math> is a random variable and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>f</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:math> is a constant. Under what conditions is 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> wide-sense stationary?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex10">
+      <problem id="idp3656000">
+	<section id="s10.1">
+	  <para id="p10.1">Show that correlation and covariance
+	  functions have the following properties:
+	    <list list-type="enumerated" id="list10">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>u</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	      
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>τ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	      
+	       <item>
+		<m:math>
+		  <m:apply>
+		    <m:leq/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>x</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>t</m:ci>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>x</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>t</m:ci>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>x</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>u</m:ci>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:leq/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>x</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>t</m:ci>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>K</m:mi>
+			      <m:mi>x</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>t</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>K</m:mi>
+			      <m:mi>x</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>u</m:ci>
+			  <m:ci>u</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:leq/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>R</m:mi>
+			    <m:mi>x</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>τ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	    </list>
+	  </para>
+	</section>
+
+	<section id="s10.2">
+	  <para id="p10.2">Let
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> to be a wide-sense stationary random process. If
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> is a deterministic function and we define
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, what is the expected value and correlation
+	    function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>?
+	  </para>
+	</section>
+      
+	<section id="s10.3">
+	  <para id="p10.3">Which of the following are valid
+	  correlation functions? Justify your answer.
+	    <list list-type="enumerated" id="list10a">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>t</m:ci>
+			    <m:ci>u</m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:max/>
+			<m:ci>t</m:ci>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>t</m:ci>
+			  <m:ci>u</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>R</m:mi>
+			  <m:mi>x</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:cos/>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:cos/>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	    </list>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex11">
+      <problem id="idp5963952">
+	<para id="para11">It is desired to generate a wide-sense
+	stationary process with correlation function
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>τ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:ci>τ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Two methods are proposed.
+	  <list id="list11" list-type="enumerated">
+	    <item>Let
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>A</m:ci>
+		    <m:apply>
+		      <m:cos/>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:pi/>
+			  <m:ci>F</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math> where <m:math><m:ci>A</m:ci></m:math>,
+	      <m:math><m:ci>F</m:ci></m:math>, and
+	      <m:math><m:ci>θ</m:ci></m:math> are statistically
+	      independent random variables.
+	    </item>
+
+	    <item>Define
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> by:
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>α</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:infinity/>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">h</m:ci>
+			<m:ci>α</m:ci>
+		      </m:apply>
+		      <m:ci><m:msub>
+			  <m:mi>N</m:mi>
+			  <m:mrow>
+			    <m:mi>t</m:mi>
+			    <m:mo>-</m:mo>
+			    <m:mi>α</m:mi>
+			  </m:mrow>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	      where <m:math>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> is white and
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">h</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:math> is the impulse response of the appropriate
+	      filter.</item>
+	  </list>
+	</para>
+	
+	<section id="s11.1">
+	  <para id="p11.1">Find at least two impulse responses
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> that will work in method 2.
+	  </para>
+	</section>
+
+	<section id="s11.2">
+	  <para id="p11.2">Specify the densities for
+	      <m:math><m:ci>A</m:ci></m:math>,
+	      <m:math><m:ci>F</m:ci></m:math>, and
+	      <m:math><m:ci>θ</m:ci></m:math> in method 1 that
+	      yield the desired results.
+	  </para>
+	</section>
+
+	<section id="s11.3">
+	  <para id="p11.3">Sketch sample functions generated by each
+	  method. Interpret your results. What is the technical
+	  differences between these processes?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex12">
+      <problem id="idp6004912">
+	<para id="para12">Let the stochastic process 
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> be defined by
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:cos/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci>F</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> where <m:math><m:ci>A</m:ci></m:math>,
+	  <m:math><m:ci>F</m:ci></m:math>, and
+	  <m:math><m:ci>θ</m:ci></m:math> are statistically
+	  independent random variables. The random variable
+	  <m:math><m:ci>θ</m:ci></m:math> is uniformly
+	  distributed over the interval
+	  <m:math>
+	    <m:interval closure="closed-open">
+	      <m:apply>
+		<m:minus/>
+		<m:pi/>
+	      </m:apply>
+	      <m:pi/>
+	    </m:interval>
+	  </m:math>. The densities of the other random variables are
+	  to be determined.
+	</para>
+
+	<section id="s12.1">
+	  <para id="p12.1">Show that
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is a wide-sense stationary process.
+	  </para>
+	</section>
+	
+	<section id="s12.2">
+	  <para id="p12.2">Is
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> strict-sense stationary? Why or why not?
+	  </para>
+	</section>
+
+	<section id="s12.3">
+	  <para id="p12.3">The inventor of this process claims that
+	    <m:math>
+	      <m:ci><m:msub> 
+		  <m:mi>X</m:mi> 
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci> 
+	    </m:math> 
+	    can have <emphasis>any</emphasis> correlation function one
+	    desires by manipulating the densities of
+	    <m:math><m:ci>A</m:ci></m:math> and
+	    <m:math><m:ci>F</m:ci></m:math>. Demonstrate the validity
+	    of this result and the requirements these densities must
+	    satisfy.
+	  </para>
+	</section>
+
+	<section id="s12.4">
+	  <para id="p12.4">The inventor also claims that
+	    <m:math>
+	      <m:ci><m:msub> 
+		  <m:mi>X</m:mi> 
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci> 
+	    </m:math> 
+	    can have <emphasis>any</emphasis> first-order density one
+	    desires so long as the desired density is bounded. Show
+	    that this claim is also valid. Furthermore, show that the
+	    requirements placed on the densities of
+	    <m:math><m:ci>A</m:ci></m:math> and
+	    <m:math><m:ci>F</m:ci></m:math> are consistent with those
+	    found in the <link target-id="s12.3">previous part</link>.
+	  </para>
+	</section>
+
+	<section id="s12.5">
+	  <para id="p12.5">Could this be fruitfully used in
+	  simulations to emualte a process having a specific
+	  correlation function and first-order density? In other
+	  words, would statistics computed the results of the
+	  simulation be meaningful? Why or why not?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex13">
+      <problem id="idp6036640">
+	<para id="para13">Let
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> be a Gaussian random process with mean 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>m</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math> and covariance function
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	      <m:ci>u</m:ci>
+	    </m:apply>
+	  </m:math>. The process is passed through the system depicted in
+	  <link target-id="fig1"/>.
+
+	  <figure id="fig1">
+	    <media id="idp6046032" alt=""><image src="../../media/problem13.png" mime-type="image/png"/></media>
+	  </figure>
+	</para>
+	
+	<section id="s13.1">
+	  <para id="p13.1">Is
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> a Gaussian process? If so, compute the pdf of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s13.2">
+	  <para id="p13.2">What are the mean and covariance functions of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>?
+	  </para>
+	</section>
+	
+	<section id="s13.3">
+	  <para id="p13.3">If
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is stationary, is 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> stationary?
+	  </para>
+	</section>
+
+	<section id="s13.4">
+	  <para id="p13.4">Compute the cross-correlation function between
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex14">
+      <problem id="idp6064416">
+	<para id="para14">A stochasic process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is defined to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:cos/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:ci>F</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math> where 
+	  <m:math><m:ci>F</m:ci></m:math> and
+	  <m:math><m:ci>θ</m:ci></m:math> are statistically
+	  independent random variables. The quantity
+	  <m:math><m:ci>θ</m:ci></m:math> is uniformly
+	  distributed over 
+	  <m:math>
+	    <m:interval closure="closed-open">
+	      <m:apply>
+		<m:minus/>
+		<m:pi/>
+	      </m:apply>
+	      <m:pi/>
+	    </m:interval>
+	  </m:math> and <m:math><m:ci>F</m:ci></m:math> can assume one
+	  of the values 1, 2, or 3 with equal probability.
+	</para>
+
+	<section id="s14.1">
+	  <para id="p14.1">Compute the mean and correlation function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+
+	  <para id="p14.2">This process serves as the input to the
+	  system in <link target-id="fig2"/>.
+	    
+	    <figure id="fig2">
+	      <media id="idp6081696" alt=""><image src="../../media/problem14.png" mime-type="image/png"/></media>
+	    </figure>
+
+	    <note id="idp6082560">The signals are <emphasis>multiplied</emphasis>, not
+	    summed, at the node located just before the integrator.
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> and
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>Z</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> are related by
+	      <m:math display="block">
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>α</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>t</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>t</m:ci>
+		    </m:uplimit>   
+		    <m:ci><m:msub>
+			<m:mi>Z</m:mi>
+			<m:mi>α</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </note>
+	  </para>
+	</section>
+
+	<section id="s14.2">
+	  <para id="p14.2a">Is the process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> wide-sense stationary?
+	  </para>
+	</section>
+
+	<section id="s14.3">
+	  <para id="p14.3">What is the expected value and correlation
+	  function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex15">
+      <problem id="idp6101280">
+	<para id="para15">The white process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> serves as the input to a system having output
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>Y</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>. 
+	  The input-output relationship of this system is determined
+	  by the differential equation
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:diff/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci><m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	    </m:apply>
+	  </m:math>
+	</para>
+
+	<section id="s15.1">
+	  <para id="p15.1">Find the mean and correlation function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s15.2">
+	  <para id="p15.2">Compute the cross-correlation function between
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s15.3">
+	  <para id="p15.3">Show that the correlation function of 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    obeys a homogeneous version of the differential equation
+	    governing the system for positive values of
+	    <m:math><m:ci>τ</m:ci></m:math>.
+	    <equation id="eqn3">
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>τ</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:gt/>
+		      <m:ci>τ</m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:diff/>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>R</m:mi>
+			      <m:mi>Y</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>τ</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>R</m:mi>
+			      <m:mi>Y</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>τ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </equation>
+	    Do <emphasis>not</emphasis> use your answer from the <link target-id="s15.1">part above</link> to work this
+	    part. Rather, show the validity of this result in a more
+	    general fashion.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex16">
+      <problem id="idp6139040">
+	<para id="para16">Let
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> be a wide-sense stationary stochastic process. Let
+	  <m:math>
+	    <m:apply>
+	      <m:diff/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:math> denote the derivative of
+	  <m:math>
+	      <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>.
+	</para>
+
+	<section id="s16.1">
+	  <para id="p16.1">Compute the expected value and correlation
+	  function of
+	    <m:math>
+	      <m:apply>
+		<m:diff/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:math> in terms of the expected value and correlation
+	    function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	  </para>
+	</section>
+
+	<section id="s16.2">
+	  <para id="p16.2">Under what conditions are
+	    <m:math>
+	      <m:apply>
+		<m:diff/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> orthogonal? In other words when does
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:apply>
+		    <m:diff/>
+		    <m:ci>X</m:ci>
+		  </m:apply>
+		  <m:ci>X</m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math> where
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:apply>
+		    <m:diff/>
+		    <m:ci>X</m:ci>
+		  </m:apply>
+		  <m:ci>X</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		      <m:apply>
+			<m:diff/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>X</m:mi>
+			    <m:mi>t</m:mi>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		    <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+
+	<section id="s16.3">
+	  <para id="p16.3">Compute the mean and correlation function of
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:diff/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s16.4">
+	  <para id="p16.4">The bandwidth of the process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> can be defined by
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>B</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>f</m:ci>
+		    </m:bvar>
+		    <m:interval>
+		      <m:apply>
+			<m:minus/>
+			<m:infinity/>
+		      </m:apply>
+		      <m:infinity/>
+		    </m:interval>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>f</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>𝒮</m:mi>
+			    <m:mi>X</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>f</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>f</m:ci>
+		    </m:bvar>
+		    <m:interval>
+		      <m:apply>
+			<m:minus/>
+			<m:infinity/>
+		      </m:apply>
+		      <m:infinity/>
+		    </m:interval>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>𝒮</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>f</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Express this definition in terms of the mean and
+	    correlation functions of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:diff/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s16.5">
+	  <para id="p16.5">The statistic
+	  <m:math><m:ci>U</m:ci></m:math> is used to count the average
+	  number of excursions of the stochastic process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> across the level
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>A</m:ci>
+	      </m:apply>
+	    </m:math> in the interval
+	    <m:math>
+	      <m:interval>
+		<m:cn>0</m:cn>
+		<m:ci>T</m:ci>
+	      </m:interval>
+	    </m:math>. One form of this statistic is
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci>U</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>t</m:ci>
+		    </m:bvar>
+		    <m:interval>
+		      <m:cn>0</m:cn>
+		      <m:ci>T</m:ci>
+		    </m:interval>
+		    <m:apply>
+		      <m:abs/>
+		      <m:apply>
+			<m:diff/>
+			<m:bvar>
+			  <m:ci>t</m:ci>
+			</m:bvar>
+			<m:apply>
+			  <m:ci type="fn">u</m:ci>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci><m:msub>
+				<m:mi>X</m:mi>
+				<m:mi>t</m:mi>
+			      </m:msub></m:ci>
+			    <m:ci>A</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">u</m:ci>
+		<m:ci>·</m:ci>
+	      </m:apply>
+	    </m:math> denotes the unit step function. Find the
+	    expected value of <m:math><m:ci>U</m:ci></m:math> using in
+	    your final expression the formula for
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>B</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	    </m:math>. 
+	    Assume that the conditions found in the <link target-id="s16.2">part above</link> are met and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is a Gaussian process.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex17">
+      <problem id="idp6227744">
+	<para id="para17">Let
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>N</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> be a Poisson process with intensity
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">λ</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s17.1">
+	  <para id="p17.1">What is the expected value and variance of
+	  the number of events occurring in the time interval
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:interval>
+	    </m:math>?
+	  </para>
+	</section>
+
+	<section id="s17.2">
+	  <para id="p17.2">Under what conditions is
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> a stationary, independent increment process?
+	  </para>
+	</section>
+
+	<section id="s17.3">
+	  <para id="p17.3">Compute
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s17.4">
+	  <para id="p17.4">Assume that
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">λ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:ci><m:msub>
+		    <m:mi>λ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>, a constant. What is the conditional density
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>p</m:mi>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>W</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		      <m:mo>|</m:mo>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>W</m:mi>
+			  <m:mrow>
+			    <m:mi>n</m:mi>
+			    <m:mo>-</m:mo>
+			    <m:mn>1</m:mn>
+			  </m:mrow>
+			</m:msub>
+		      </m:mrow>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>w</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		    <m:mo>|</m:mo>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>w</m:mi>
+			<m:mrow>
+			  <m:mi>n</m:mi>
+			  <m:mo>-</m:mo>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub>
+		    </m:mrow>
+		  </m:mrow></m:ci>
+	      </m:apply>
+	    </m:math>? From this relationship, find the density of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>τ</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	    </m:math>, the time interval between
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>W</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub></m:ci>
+	    </m:math> and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>W</m:mi>
+		  <m:mrow>
+		    <m:mi>n</m:mi>
+		    <m:mo>-</m:mo>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex18">
+      <problem id="idp6267584">
+	<para id="para18">A stochastic process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> 
+	  is said to have <term>stationary, independent
+	    increments</term> if, for
+	  <m:math>
+	    <m:apply>
+	      <m:lt/>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>3</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>4</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math>:
+	  <list id="list18">
+	    <item>The random variable
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math> is statistically independent of the random variable
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>4</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>3</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>.
+	    </item>
+
+	    <item>The pdf of
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math> is equal to the pdf of
+	      <m:math>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+			<m:mo>+</m:mo>
+			<m:mi>T</m:mi>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>+</m:mo>
+			<m:mi>T</m:mi>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math> for all
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>,
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>, <m:math><m:ci>T</m:ci></m:math>.
+	    </item>
+	  </list>
+	  The process is identically equal to zero at 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>t</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math> 
+	  (<m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>).
+	</para>
+
+	<section id="s18.1">
+	  <para id="p18.1">What is the expected value and variance of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mrow>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		    <m:mo>+</m:mo>
+		    <m:msub>
+		      <m:mi>t</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:math>?
+	    <note type="Hint" id="idp6316400"><label>Hint</label>Write
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>+</m:mo>
+			<m:msub>
+			  <m:mi>t</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>X</m:mi>
+			    <m:mrow>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>1</m:mn>
+			      </m:msub>
+			      <m:mo>+</m:mo>
+			      <m:msub>
+				<m:mi>t</m:mi>
+				<m:mn>2</m:mn>
+			      </m:msub>
+			    </m:mrow>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>X</m:mi>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:ci><m:msub>
+			    <m:mi>X</m:mi>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:msub></m:ci>
+			<m:ci><m:msub>
+			    <m:mi>X</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:math>.
+	    </note>
+	  </para>
+	</section>
+
+	<section id="s18.2">
+	  <para id="p18.2">Using the result of the <link target-id="s18.1">previous part</link>, find expressions for
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:variance/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s18.3">
+	  <para id="p18.3">Define
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>Φ</m:mi>
+		    <m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:ci>u</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> to be the characteristic function of the
+	    first-order density of the process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>. 
+	    Show that the characteristic function must be of the form:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>Φ</m:mi>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>u</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>t</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">f</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where <m:math>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math> is a conjugate-symmetric function of
+	    <m:math><m:ci>u</m:ci></m:math>.
+	  </para>
+	</section>
+
+	<section id="s18.4">
+	  <para id="p18.4">Compute
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s18.5">
+	  <para id="p18.5">The process 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    is passed through a linear, time-invariant filter having
+	    the transfer function
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">H</m:ci>
+		  <m:ci>f</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:imaginaryi/>
+		  <m:cn>2</m:cn>
+		  <m:pi/>
+		  <m:ci>f</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>. Letting
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> denote the output, determine
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>Y</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex19">
+      <problem id="idp6376736">
+	<para id="para19">In optical communication systems, a
+	photomultiplier tube is used to convert the arrival of photons
+	into electric pulses so that each arrival can be counted by
+	other electronics. Being overly clever, a clever Rice engineer
+	bought a photomultiplier tube from AGGIE PMT, Inc. The AGGIE
+	PMT device is unreliable. When it is working, each photon is
+	properly converted to an electric pulse. When not working, it
+	has "dead-time" effects: the conversion of a photon arrival
+	blocks out the conversion of the next photon. After a photon
+	arrival has been missed, the device converts the next arrival
+	properly. To detect whether the Aggies device is working
+	properly or not, the clever Rice engineer decides to use
+	results from Detection Theory (ELEC 530) to help him. A
+	calibrated light source is used to give an average arrival
+	rate of <m:math><m:ci>λ</m:ci></m:math> photons/sec on
+	the surface of the photomultiplier tube. Photon arrivals are
+	described by a Poisson process.
+	</para>
+
+	<section id="s19.1">
+	  <para id="p19.1">Find the density of the time between
+	  electric pulses if the AGGIE device has these dead-time
+	  effects.
+	  </para>
+	</section>
+
+	<section id="s19.2">
+	  <para id="p19.2">Can the times of occurrence of electric
+	  pulses be well-described by a Poisson process when the
+	  dead-time effects are present? If so, find the parameters of
+	  the process; if not, state why.
+	  </para>
+	</section>
+
+	<section id="s19.3">
+	  <para id="p19.3">Assuming the device is as likely to not be
+	  working as it is to be working, find a procedure to
+	  determine its mode of operation based on the observation of
+	  the time between two successive electric pulses.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex20">
+      <problem id="idp6384208">
+	<para id="para20">In this problem, assume that the process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> has stationary, independent increments.
+	</para>
+
+	<section id="s20.1">
+	  <para id="p20.1">Define
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> to be:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mfrac>
+			<m:mrow>
+			  <m:mi>h</m:mi>
+			  <m:mo>(</m:mo>
+			  <m:mi>t</m:mi>
+			  <m:mo>)</m:mo>
+			</m:mrow>
+			<m:mrow>
+			  <m:mi>g</m:mi>
+			  <m:mo>(</m:mo>
+			  <m:mi>t</m:mi>
+			  <m:mo>)</m:mo>
+			</m:mrow>
+		      </m:mfrac>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">g</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> and 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> are deterministic functions and
+	    <m:math>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:ci type="fn">h</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">g</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> is a strictly increasing function. Find the mean
+	    and covariance functions of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s20.2">
+	  <para id="p20.2">A stochastic process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is said to be a <term>Markov</term> process if, for
+	    <m:math>
+	      <m:apply>
+		<m:lt/>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>…</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mrow>
+		      <m:mi>n</m:mi>
+		      <m:mo>-</m:mo>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>, the conditional density of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:msub></m:ci>
+	    </m:math> satisfies:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:mrow>
+			  <m:msub>
+			    <m:mi>X</m:mi>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:msub>
+			  <m:mo>,</m:mo>
+			  <m:mi>…</m:mi>
+			  <m:mo>,</m:mo>
+			  <m:msub>
+			    <m:mi>X</m:mi>
+			    <m:msub>
+			      <m:mi>t</m:mi>
+			      <m:mrow>
+				<m:mi>n</m:mi>
+				<m:mo>-</m:mo>
+				<m:mn>1</m:mn>
+			      </m:mrow>
+			    </m:msub>
+			  </m:msub>
+			</m:mrow>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		      <m:mo>|</m:mo>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+			<m:mo>,</m:mo>
+			<m:mi>…</m:mi>
+			<m:mo>,</m:mo>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mrow>
+			    <m:mi>n</m:mi>
+			    <m:mo>-</m:mo>
+			    <m:mn>1</m:mn>
+			  </m:mrow>
+			</m:msub>
+		      </m:mrow>
+		    </m:mrow></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>p</m:mi>
+		      <m:mrow>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:msub>
+			<m:mo>|</m:mo>
+			<m:msub>
+			  <m:mi>X</m:mi>
+			  <m:msub>
+			    <m:mi>t</m:mi>
+			    <m:mrow>
+			      <m:mi>n</m:mi>
+			      <m:mo>-</m:mo>
+			      <m:mn>1</m:mn>
+			    </m:mrow>
+			  </m:msub>
+			</m:msub>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		  <m:ci>
+		    <m:mrow>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		      <m:mo>|</m:mo>
+		      <m:msub>
+			<m:mi>X</m:mi>
+			<m:mrow>
+			  <m:mi>n</m:mi>
+			  <m:mo>-</m:mo>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub>
+		    </m:mrow></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Show that all independent-increment processes are Markov processes.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex21">
+      <problem id="idp6453584">
+	<para id="para21">Let
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> be a stochastic process with correlation function
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>R</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	      <m:ci>u</m:ci>
+	    </m:apply>
+	  </m:math>.
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is said to be <term>mean-square continuous</term> if
+	  <equation id="eqn4">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>u</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:limit/>
+		    <m:bvar>
+		      <m:ci>t</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:ci>u</m:ci>
+		    </m:lowlimit>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci><m:msub>
+			      <m:mi>X</m:mi>
+			      <m:mi>t</m:mi>
+			    </m:msub></m:ci>
+			  <m:ci><m:msub>
+			      <m:mi>X</m:mi>
+			      <m:mi>u</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	</para>
+
+	<section id="s21.1">
+	  <para id="p21.1">Show that
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    is mean-square continuous if and only if the correlation
+	    function
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math> is continuous at 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s21.2">
+	  <para id="p21.2">Show that if
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math> is continuous at 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>, it is continuous for all
+	    <m:math><m:ci>t</m:ci></m:math> and
+	    <m:math><m:ci>u</m:ci></m:math>.
+	  </para>
+	</section>
+
+	<section id="s21.3">
+	  <para id="p21.3">Show that a zero-mean,
+	  independent-increment process with stationary increments is
+	  mean-square continuous.
+	  </para>
+	</section>
+
+	<section id="s21.4">
+	  <para id="p21.4">Show that a stationary Poisson process is
+	  mean-square continuous. <note id="idp6490592">This process has no continuous
+	  sample functions, but is continuous in the mean-square
+	  sense.</note>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex22">
+      <problem id="idp6492096">
+	<para id="para22.0"><term>The Bispectrum</term></para> 
+
+	<para id="para22">The idea of a correlation function can be
+	extended to higher order moments. For example, the third order
+	"correlation" function
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msubsup>
+		  <m:mi>R</m:mi>
+		  <m:mi>X</m:mi>
+		  <m:mrow>
+		    <m:mo>(</m:mo>
+		    <m:mn>3</m:mn>
+		    <m:mo>)</m:mo>
+		  </m:mrow>
+		</m:msubsup>
+	      </m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>t</m:mi>
+		  <m:mn>3</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math> of a random process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is defined to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msubsup>
+		    <m:mi>R</m:mi>
+		    <m:mi>X</m:mi>
+		    <m:mrow>
+		      <m:mo>(</m:mo>
+		      <m:mn>3</m:mn>
+		      <m:mo>)</m:mo>
+		    </m:mrow>
+		  </m:msubsup>
+		</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>3</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+                <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:msub>
+			<m:mi>t</m:mi>
+			<m:mn>3</m:mn>
+		      </m:msub>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</para>
+
+	<section id="s22.1">
+	  <para id="p22.1">Show that if
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    is strict-sense stationary, then the third-order
+	    correlation function depends only on the time differences
+	    <m:math>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>3</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>t</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s22.2">
+	  <para id="p22.2">Find the third-order correlation function of
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>A</m:ci>
+		  <m:apply>
+		    <m:cos/>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci><m:msub>
+			    <m:mi>f</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		      <m:ci>Θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:ci>Θ</m:ci>
+		<m:apply>
+		  <m:ci type="fn">U</m:ci>
+		  <m:interval closure="closed-open">
+		    <m:apply>
+		      <m:minus/>
+		      <m:pi/>
+		    </m:apply>
+		    <m:pi/>
+		  </m:interval>
+		</m:apply>
+	      </m:apply>
+	    </m:math> and <m:math><m:ci>A</m:ci></m:math>,
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>f</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:math> are constants.
+	  </para>
+	</section>
+
+	<section id="s22.3">
+	  <para id="p22.3">Let
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>Z</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is Gaussian,
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is non-Gaussian, and 
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>,
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    are statistically independent, zero-mean processes. Find
+	    the third-order correlation function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex23">
+      <problem id="idp6563408">
+	<para id="para23">A process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> 
+
+	  is said to be a <term>martingale</term> if it satisfies the
+	  relationship
+	  <equation id="eqn5">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>u</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:leq/>
+		  <m:ci>u</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:condition>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:msup>
+			    <m:mi>u</m:mi>
+			    <m:mo>H</m:mo>
+			  </m:msup>
+			</m:msub></m:ci>
+		      <m:mo>,</m:mo>
+		      <m:apply>
+			<m:leq/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+			  <m:ci>u</m:ci>
+			</m:apply>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		    </m:condition>
+		    <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+
+	  In words, the expected value of a martingale at time
+	  <m:math><m:ci>t</m:ci></m:math> given all values of the
+	  process that have been observed up to time
+	  <m:math><m:ci>u</m:ci> </m:math>
+	  (<m:math>
+	    <m:apply>
+	      <m:leq/>
+	      <m:ci>u</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math>) is equal to the most recently observed value of
+	  the process
+	  (<m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>u</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>).
+	</para>
+
+	<section id="s23.1">
+	  <para id="p23.1">Show that the mean of a martingale is a
+	  constant.</para>
+	</section>
+
+	<section id="s23.2">
+	  <para id="p23.2">Show that all zero-mean, independent,
+	  stationary-increment processes are martingales. Are all
+	  martingales independent increment processes?
+	  </para>
+	</section>
+
+	<section id="s23.3">
+	  <para id="p23.3">If
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> 
+	    is a zero-mean martingale having a possibly time-varying
+	    variance
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">σ</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math>, show that its correlation function is given by
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>t</m:ci>
+		  <m:ci>u</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:ci type="fn">σ</m:ci>
+		    <m:apply>
+		      <m:min/>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex24">
+      <problem id="idp6605776">
+	<para id="para24"><term>Shot noise</term> is noise measured in
+	vacuum tube circuits which is due to the spontaneous emission
+	of electrons from each tube's cathode. The electron emission
+	is assumed to be described as a stationary Poisson process of
+	intensity <m:math><m:ci>λ</m:ci></m:math>. The impact
+	of each electron on a tube's anode causes a current to flow in
+	the attached circuit equal to the impulse response of the
+	circuit. Thus, shot noise is often modeled as a sequence of
+	impulses (whose times of occurrence are a Poisson process)
+	passing though a linear, time-invariant system.
+	</para>
+
+	<section id="s24.1">
+	  <para id="p24.1">What is the correlation function of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>?
+	    <note type="hint" id="idp6613280"><label>Hint</label>Related
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math> to the counting process
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:math>.</note>
+	  </para>
+	</section>
+
+	<section id="s24.2">
+	  <para id="p24.2">Show that for any wide-sense stationary process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> for which
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:limit/>
+		  <m:bvar>
+		    <m:ci>τ</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:infinity/>
+		  </m:lowlimit>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msub>
+			<m:mi>R</m:mi>
+			<m:mi>X</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci>τ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>, the mean of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math> is zero. Use this result to show that if
+	    <m:math>
+	      <m:apply>
+		<m:limit/>
+		<m:bvar>
+		  <m:ci>τ</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:infinity/>
+		</m:lowlimit>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>τ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> exists, the value of the limit equals the square
+	    of the mean of the process.
+	  </para>
+	</section>
+
+	<section id="s24.3">
+	  <para id="p24.3">Find the power density specturm of the shot
+	    noise process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s24.4">
+	  <para id="p24.4">Evaluate the mean and variance of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex25">
+      <problem id="idp6644800">
+	<para id="para25">Noise reduction filters are used to reduce,
+	as much as possible, the noise component of a noise-corrupted
+	signal. Let the signal of interest be described as a
+	wide-sense stationary process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>. The observed signal is given by
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/> 
+		<m:ci><m:msub>
+		    <m:mi>X</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, where
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>N</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> 
+	  is a process modeling the noise that is statistically
+	  independent of the signal.
+	</para>
+	
+	<section id="s25.1">
+	  <para id="p25.1">Assuming that the noise is white, find a
+	  relationship that the transfer function of the filter must
+	  satisfy to maximize the signal-to-noise ratio
+	  (<foreign>i.e.</foreign>, the ratio of the signal power the
+	  noise power) in the filtered output.
+	  </para>
+	</section>
+
+	<section id="s25.2">
+	  <para id="p25.2">Compute the resulting signal-to-noise ratio
+	  when the signal correlation function is
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>R</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>τ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>a</m:ci>
+			<m:apply>
+			  <m:abs/>
+			  <m:ci>τ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex26">
+      <problem id="idp6672416">
+	<para id="para26">In practice, one often wants to measure the
+	power density of a stochastic process. For the purposes of
+	this problem, assume the process
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>
+	  is wide-sense stationary, zero mean, and Gaussian. This
+	  measurement system is proposed (<link target-id="fig3"/>).
+
+	  <figure id="fig3" orient="vertical">
+	    <subfigure id="fig26a">
+	    <media id="idp6679328" alt=""><image src="../../media/problem26a.png" mime-type="image/png"/></media>
+	    </subfigure>
+	    <subfigure id="fig26b">
+	    <media id="idp6681728" alt=""><image src="../../media/problem26b.png" mime-type="image/png"/></media>
+	    </subfigure>
+	    <subfigure id="fig26c">
+	    <media id="idp6684128" alt=""><image src="../../media/problem26c.png" mime-type="image/png"/></media>
+	    </subfigure>
+	  </figure>
+
+	  where 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>H</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>f</m:ci>
+	    </m:apply>
+	  </m:math> is the transfer function of an ideal bandpass filter and
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>H</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>f</m:ci>
+	    </m:apply>
+	  </m:math> is an ideal lowpass. Assume that
+	  <m:math>
+	    <m:apply>
+	      <m:mo>Δ</m:mo>
+	      <m:ci>f</m:ci>
+	    </m:apply>
+	  </m:math> is small compared to the range of frequencies over which
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>𝒮</m:mi>
+		  <m:mi>X</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>f</m:ci>
+	    </m:apply>
+	  </m:math> varies.
+	</para>
+
+	<section id="s26.1">
+	  <para id="p26.1">Find the mean and correlation function of
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:ci><m:msub>
+		    <m:mi>Y</m:mi>
+		    <m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math> in terms of the second-order statistics of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s26.2">
+	  <para id="p26.2">Compute the power density spectrum of the process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s26.3">
+	  <para id="p26.3">Compute the expected value of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s26.4">
+	  <para id="p26.4">By considering the variance of
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Z</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>, 
+	    comment on the accuracy of this measurement of the power
+	    density of the process
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>X</m:mi>
+		  <m:mi>t</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <!-- Ex. 2.27 is the exact same as Ex. 2.22 -->
+
+    <exercise id="ex28">
+      <problem id="idp6719088">
+	<para id="para28">A student in freshman chemistry lab is
+	frustrated; an experiment is not going well and limited time
+	is available to perform the experiment again. The outcome of
+	each experiment is a Gaussian random variable
+	<m:math><m:ci>X</m:ci></m:math> having a mean equal to the
+	value being sought and variance
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>. The student decides to average his experimental
+	  outcomes.
+	  <equation id="eqn6">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci>l</m:ci>
+		    <m:set>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		      <m:ci>…</m:ci>
+		    </m:set>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>k</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>1</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>l</m:ci>
+		      </m:uplimit>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  Each outcome
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is uncorrelated with all other outcomes
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>j</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>, 
+	  <m:math>
+	    <m:apply>
+	      <m:neq/>
+	      <m:ci>j</m:ci>
+	      <m:ci>i</m:ci>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s28.1">
+	  <para id="p28.1">Find the mean and correlation function of
+	  the stochastic sequence
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s28.2">
+	  <para id="p28.2">Is  
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math> stationary? Indicate your reasoning.
+	  </para>
+	</section>
+
+	<section id="s28.3">
+	  <para id="p28.3">How large must <m:math><m:ci>n</m:ci>
+	    </m:math> be to ensure that the probability of the relative error
+	    <m:math>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>Y</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:ci><m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> being less than 0.1 is 0.95?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex29">
+      <problem id="idp6762448">
+	<para id="para29">The price of a certain stock can fluctuate
+	during the day while the true value is rising or falling. To
+	facilitate financial decisions, a Wall Street broker decides
+	to use stochastic process theory. The price
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> of a stock is described by
+	  <equation id="eqn7">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:lt/>
+		    <m:apply>
+		      <m:leq/>
+		      <m:cn>0</m:cn>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		  <m:times/>
+		      <m:ci>K</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:ci><m:msub>
+			<m:mi>N</m:mi>
+			<m:mi>t</m:mi>
+		  </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation>
+	  where <m:math><m:ci>K</m:ci></m:math> is the constant our
+	  knowledgeable broker is seeking and
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>N</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is a stochastic process describing the 
+	  random fluctutations.
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>N</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is a white, Gaussian process having spectral height
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>. The broker decides to estimate <m:math><m:ci>K</m:ci>
+	  </m:math> according to:
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci>K</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:cn>1</m:cn>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">g</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where the best function 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">g</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math> is to be found.
+	</para>
+
+	<section id="s29.1">
+	  <para id="p29.1">Find the probability density function of
+	  the estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci>K</m:ci>
+	      </m:apply>
+	    </m:math> for any
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">g</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> the broker might choose.
+	  </para>
+	</section>
+
+	<section id="s29.2">
+	  <para id="p29.2">A simple-minded estimate of <m:math><m:ci>K</m:ci>
+	    </m:math> is to use simple averaging (<foreign>i.e.</foreign>, set
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">g</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:mtext>constant</m:mtext>
+	      </m:apply>
+	    </m:math>). Find the value of this constant which results in
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>K</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>K</m:ci>
+	      </m:apply>
+	    </m:math>. What is the resulting percentage error as expressed by
+	    <m:math>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:root/>
+		  <m:apply>
+		    <m:variance/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>K</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>K</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s29.3">
+	  <para id="p29.3">Find
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">g</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> which minimizes the percentage error and yields
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>K</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>K</m:ci>
+	      </m:apply>
+	    </m:math>. How much better is this optimum choice than
+	    simple averaging?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex30">
+      <problem id="idp6827968">
+	<para id="para30">To determine the presence or absence of a
+	constant voltage measured in the presence of additive, white
+	Gaussian noise (spectral height
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci><m:msub>
+		  <m:mi>N</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>) an engineer decides to compute the average 
+	  <m:math>
+	    <m:apply>
+	      <m:mean/>
+	      <m:ci>V</m:ci>
+	    </m:apply>
+	  </m:math> of the measured voltage
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>V</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math>.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:mean/>
+		<m:ci>V</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>T</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:mi>t</m:mi>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:ci><m:msub>
+		      <m:mi>V</m:mi>
+		      <m:mi>t</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  The value of the constant voltage, if present, is
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>V</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>. The presence and absence of the voltage are 
+	  equally likely to occur.
+	</para>
+
+	<section id="s30.1">
+	  <para id="p30.1">Derive a good method by which the engineer
+	  can use the average to determine the presence or absence of
+	  the constant voltage.
+	  </para>
+	</section>
+
+	<section id="s30.2">
+	  <para id="p30.2">Determine the probability that the voltage
+	  is present when the engineer's method announces it is.
+	  </para>
+	</section>
+
+	<section id="s30.3">
+	  <para id="p30.3">The engineer decides to improve the
+	  performance of his technique by computing the more
+	  complicated quantity <m:math><m:ci>V</m:ci></m:math> given
+	  by
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:ci>V</m:ci>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>t</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">f</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:ci><m:msub>
+			<m:mi>V</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    What function 
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math> maximizes the probability found <link target-id="s30.2">above</link>?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="ex31">
+      <problem id="idp6866480">
+	<para id="para31">Let
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> 
+	  be a stationary, zero-mean random process that serves as the
+	  input to three linear, time-invariant filters. The power
+	  density spectrum of
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> is
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>𝒮</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>f</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msub>
+		    <m:mi>N</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>. The impulse responses of the filters are
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>h</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:leq/>
+		    <m:cn>0</m:cn>
+		    <m:ci>t</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>h</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:geq/>
+		    <m:ci>t</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>h</m:mi>
+		    <m:mn>3</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:sin/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:ci>t</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:leq/>
+		    <m:cn>0</m:cn>
+		    <m:ci>t</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+	  The output of filter <m:math><m:ci>i</m:ci></m:math> is denoted by
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msub>
+		  <m:mi>Y</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s31.1">
+	  <para id="p31.1">Compute
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>Y</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msub>
+			<m:mi>Y</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math> for 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>i</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:cn>2</m:cn>
+		  <m:cn>3</m:cn>
+		</m:set>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s31.2">
+	  <para id="p31.2">Compute
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>R</m:mi>
+		    <m:msub>
+		      <m:mi>XY</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:msub>
+		</m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math>. Interpret your result.
+	  </para>
+	</section>
+
+	<section id="s31.3">
+	  <para id="p31.3">Is there any pair of processes for which
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math> for all 
+	    <m:math>
+	      <m:ci>t</m:ci>
+	    </m:math>?
+	  </para>
+	</section>
+
+	<section id="s30.4">
+	  <para id="p30.4">Is there any pair of processes for which
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math> for all <m:math><m:ci>t</m:ci></m:math> and
+	    <m:math><m:ci>u</m:ci></m:math>?
+	  </para>
+	</section>   
+      </problem>
+    </exercise>
+
+    <exercise id="ex32">
+      <problem id="idp6954512">
+	<para id="para32">An impulse is associated with the occurrence
+	of each event in a stationary Poisson process. This derived
+	process serves as the input to a linear, time-invariant filter
+	having transfer function
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">H</m:ci>
+	      <m:ci>f</m:ci>
+	    </m:apply>
+	  </m:math>, which is given by
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">H</m:ci>
+		<m:ci>f</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:imaginaryi/>
+			<m:pi/>
+			<m:ci>f</m:ci>
+			<m:ci>T</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci>f</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where <m:math><m:ci>T</m:ci></m:math> is a constant.
+	</para>
+
+	<section id="s32.1">
+	  <para id="p32.1">What is the mean and covariance function of
+	  the input to the filter?
+	  </para>
+	</section>
+
+	<section id="s32.2">
+	  <para id="p32.2">What is the mean and covariance function of
+	  the output of the filter?
+	  </para>
+	</section>
+
+	<section id="s32.3">
+	  <para id="p32.3">Now let the filter have any impulse
+	  response that has duration <m:math><m:ci>T</m:ci></m:math>
+	  (<foreign>i.e.</foreign>,
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">h</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>, 
+	    <m:math>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>t</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math> and 
+	    <m:math>
+	      <m:apply>
+		<m:gt/>
+		<m:ci>t</m:ci>
+		<m:ci>T</m:ci>
+	      </m:apply>
+	    </m:math>). Find the impulse response that yields the
+	    smallest possible coefficient of variation
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">v</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:math>. The coefficient of variation is a measure of
+	    the percentage variation of a positive-valued process. It
+	    is defined to be the ratio of the standard deviation of
+	    the process at time <m:math><m:ci>t</m:ci></m:math> to the
+	    mean at time <m:math><m:ci>t</m:ci></m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex33">
+      <problem id="idp6989472">
+	<para id="para33">Do the following classes of stochastic
+	processes constitute a linear vector space? If so, indicate the
+	proof; if not, show why not.
+	  <list id="list33" list-type="enumerated">
+	    <item>All stochastic processes.</item>
+	    <item>All wide-sense stationary processes.</item>
+	    <item>All nonstationary stochastic process.</item>
+	  </list>
+	</para>
+      </problem>
+    </exercise>
+
+    <exercise id="ex34">
+      <problem id="idp6996736">
+	<para id="para34">Show that the inner product of two vectors
+	satisfies the following relationships.
+	</para>
+
+	<section id="s34.1">
+	  <para id="p34.1">
+	    <m:math>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:scalarproduct/>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, the Schwarz inequality.
+	  </para>
+	</section>
+
+	<section id="s34.2">
+	  <para id="p34.2">
+	    <m:math>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, the triangle inequality.
+	  </para>
+	</section>
+
+	<section id="s34.3">
+	  <para id="p34.3">
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		      <m:apply>
+			<m:plus/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, the parallelogram equality.
+	  </para>
+	</section>
+
+	<section id="s34.4">
+	  <para id="p34.4">Find an expression for the inner product
+	    <m:math>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	    </m:math> using norms <emphasis>only</emphasis>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex35">
+      <problem id="idp7044976">
+	<para id="para35">Let <m:math><m:ci>x</m:ci></m:math> and
+	<m:math><m:ci>y</m:ci></m:math> be elements of a normed,
+	linear vector space.
+	</para>
+
+	<section id="s35.1">
+	  <para id="p35.1">Determine whether the following are valid
+	  inner products for the indicated space.
+	    <list id="list35" list-type="enumerated">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		      <m:ci type="matrix">A</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+		where 
+		<m:math>
+		  <m:ci type="matrix">A</m:ci>
+		</m:math>
+		is a nonsingular, 
+		<m:math>
+		  <m:ci>N</m:ci>
+		  <m:ci>×</m:ci>
+		  <m:ci>N</m:ci>
+		</m:math>
+		matrix and <m:math><m:ci type="vector">x</m:ci>
+		</m:math>, <m:math><m:ci type="vector">y</m:ci>
+		</m:math> are elements of the space of
+		<m:math><m:ci>N</m:ci></m:math>-dimensional column
+		matrices.
+	      </item>
+	      
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci type="vector">x</m:ci>		    
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math> where
+		<m:math>
+		  <m:ci type="vector">x</m:ci>	
+		</m:math>,
+		<m:math>
+		  <m:ci type="vector">x</m:ci>	
+		</m:math> are elements of the space of <m:math><m:ci>N</m:ci>
+		</m:math>-dimensional column matrices.
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>t</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>T</m:ci>
+		      </m:uplimit>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:ci type="fn">x</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">y</m:ci>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>T</m:ci>
+			    <m:ci>t</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+		where <m:math><m:ci>x</m:ci></m:math>,
+		<m:math><m:ci>y</m:ci></m:math> are finite-energy
+		signals defined over
+		<m:math>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		</m:math>.
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:int/>
+		      <m:bvar>
+			<m:ci>t</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:ci>T</m:ci>
+		      </m:uplimit>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:ci type="fn">w</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">x</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">y</m:ci>
+			  <m:ci>t</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+		where 
+		<m:math>
+		  <m:apply>
+		    <m:ci type="fn">w</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:math> is a non-negative function and
+		<m:math><m:ci>x</m:ci></m:math>,
+		<m:math><m:ci>y</m:ci></m:math> are finite-energy
+		signals defined over
+		<m:math>
+		  <m:interval>
+		    <m:cn>0</m:cn>
+		    <m:ci>T</m:ci>
+		  </m:interval>
+		</m:math>.
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>X</m:ci>
+		      <m:ci>Y</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:math> where <m:math><m:ci>X</m:ci></m:math> and
+		<m:math><m:ci>Y</m:ci></m:math> are real-valued random
+		variables having finite mean-square values.
+	      </item>
+
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:ci type="fn">cov</m:ci>
+		    <m:ci>X</m:ci>
+		    <m:ci>Y</m:ci>
+		  </m:apply>
+		</m:math>, the covariance of the real-valued random
+		variables <m:math><m:ci>X</m:ci></m:math> and
+		<m:math><m:ci>Y</m:ci></m:math>. Assume that the
+		random variables have finite mean-square values.
+	      </item>
+	    </list>
+	  </para>
+	</section>
+
+	<section id="s35.2">
+	  <para id="p35.2">Under what conditions is
+	    <m:math display="block">
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>u</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci>T</m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>t</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">x</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">y</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    a valid inner product for the set of finite energy
+	    functions defined over
+	    <m:math>
+	      <m:interval>
+		<m:cn>0</m:cn>
+		<m:ci>T</m:ci>
+	      </m:interval>
+	    </m:math>?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex36">
+      <problem id="idp7128560">
+	<para id="para36">Let an inner product be defined with respect
+	to the positive-definite, symmetric kernel
+	<m:math><m:ci>Q</m:ci></m:math>.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:msub>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+		<m:ci>Q</m:ci>
+	      </m:msub>
+	      <m:apply>
+		<m:times/>
+		<m:ci>x</m:ci>
+		<m:ci>Q</m:ci>
+		<m:ci>y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where 
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>x</m:ci>
+	      <m:ci>Q</m:ci>
+	      <m:ci>y</m:ci>
+	    </m:apply>
+	  </m:math> is the abstract notation for the mapping of the
+	  two vectors to a scalar. For example, if <m:math><m:ci type="vector">x</m:ci></m:math> and <m:math><m:ci type="vector">y</m:ci></m:math> are column matrices,
+	  <m:math><m:ci type="matrix">Q</m:ci></m:math> is a
+	  positive-definite square matrix and
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:msub>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+		<m:ci>Q</m:ci>
+	      </m:msub>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:ci type="matrix">Q</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  If <m:math><m:ci>x</m:ci></m:math> and
+	  <m:math><m:ci>y</m:ci></m:math> are defined in
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>L</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>, then
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:msub>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+		<m:ci>Q</m:ci>
+	      </m:msub>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>u</m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>t</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">x</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">y</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Let <m:math><m:ci type="vector">v</m:ci> </m:math> denote an
+	  eigenvector of <m:math><m:ci type="matrix">Q</m:ci>
+	  </m:math>:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">Q</m:ci>
+		<m:ci type="vector">v</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>λ</m:ci>
+		<m:ci type="vector">v</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s36.1">
+	  <para id="p36.1">Show that the eigenvectors of a
+	  positive-definite, symmetric kernel are orthogonal.
+	    <equation id="eqn8">
+	      <m:math display="block">
+		<m:apply>
+		  <m:forall/>
+		  <m:bvar>
+		    <m:ci>i</m:ci>
+		  </m:bvar>
+		  <m:bvar>
+		    <m:ci>j</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:apply>
+		      <m:neq/>
+		      <m:ci>i</m:ci>
+		      <m:ci>j</m:ci>
+		    </m:apply>
+		  </m:condition>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>v</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		      <m:ci type="vector">
+			<m:msub>
+			  <m:mi>v</m:mi>
+			  <m:mi>j</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </equation>
+	  </para>
+	</section>
+
+	<section id="s36.2">
+	  <para id="p36.2">Show that these eigenvectors are orthogonal
+	  with respect to the inner product generated by
+	  <m:math><m:ci>Q</m:ci></m:math>. Consequently, the
+	  eigenvectors are orthogonal with respect to two different
+	  inner products.
+	  </para>
+	</section>
+
+	<section id="s36.3">
+	  <para id="p36.3">Let
+	    <m:math>
+	      <m:ci><m:mover>
+		  <m:mi>Q</m:mi>
+		  <m:mi>∼</m:mi>
+		</m:mover></m:ci>
+	    </m:math> be the inverse kernal associated with 
+	    <m:math><m:ci>Q</m:ci></m:math>. If
+	    <m:math><m:ci type="matrix">Q</m:ci></m:math>
+	    is a matrix, then
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="matrix">Q</m:ci>
+		  <m:ci type="matrix"><m:mover>
+		      <m:mi>Q</m:mi>
+		      <m:mi>∼</m:mi>
+		    </m:mover></m:ci>
+		</m:apply>
+		<m:ci type="matrix">I</m:ci>
+	      </m:apply>
+	    </m:math>. If <m:math><m:ci>Q</m:ci></m:math> is a
+	    continuous-time kernel, then
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>u</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">Q</m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:mover>
+			  <m:mi>Q</m:mi>
+			  <m:mi>∼</m:mi>
+			</m:mover></m:ci>
+		      <m:ci>u</m:ci>
+		      <m:ci>v</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">δ</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>t</m:ci>
+		    <m:ci>v</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Show that the eigenvectors of the inverse kernel are equal
+	    to those of the kernel. How are the associated eigenvalues
+	    of these kernels related to each other?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex37">
+      <problem id="idp7207584">
+	<para id="para37">The purpose of this problem is to derive
+	  a general result which describes conditions for an
+	  orthonormal basis to result in an uncorrelated
+	  representation of a process. Let
+	  <m:math><m:ci>X</m:ci></m:math> denote a stochastic
+	  process which has the expansion
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>X</m:ci>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>i</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:scalarproduct/>
+		    <m:ci>X</m:ci>
+		    <m:ci><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>φ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where 
+	  <m:math>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math> denotes a complete, orthonormal basis with
+	  respect to the inner product
+	  <m:math>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci>·</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math>.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>δ</m:mi>
+		  <m:mrow>
+		    <m:mi>i</m:mi>
+		    <m:mi>j</m:mi>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math>
+	  The process <m:math><m:ci>X</m:ci></m:math> may be
+	  nonstationary and may have non-zero mean.
+	</para>
+
+	<section id="s37.1">
+	  <para id="p37.1">To require that the representation be
+	    an uncorrelated sequence is equivalent to requiring:
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci>X</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci>X</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>j</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci>X</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci>X</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>j</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>λ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>δ</m:mi>
+		      <m:mrow>
+			<m:mi>i</m:mi>
+			<m:mi>j</m:mi>
+		      </m:mrow>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Show that this requirement implies:
+	    <equation id="eqn1">
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>X</m:ci>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>X</m:ci>
+			  <m:ci><m:msub>
+			      <m:mi>m</m:mi>
+			      <m:mi>X</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:ci><m:msub>
+			    <m:mi>φ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>λ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </equation>
+	    where 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:ci>X</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+
+	<section id="s37.2">
+	  <para id="p37.2">Let <m:math><m:ci>X</m:ci></m:math> be
+	    a finite-length stochastic sequence so that it can be
+	    considered a random vector. Define the inner product
+	    <m:math>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci>X</m:ci>
+		<m:ci>Y</m:ci>
+	      </m:apply>
+	    </m:math>
+	    to be
+	    <m:math>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">X</m:ci>
+		</m:apply>
+		<m:ci type="vector">Y</m:ci>
+	      </m:apply>
+	    </m:math>. Show that <link target-id="eqn1"/> is equivalent to
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>X</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>φ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:ci>φ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+
+	<section id="s37.3">
+	  <para id="p37.3">Let <m:math><m:ci>X</m:ci></m:math> be
+	    a continuous parameter process so that
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci>X</m:ci>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>t</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci><m:msub>
+			<m:mi>X</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>Y</m:mi>
+			<m:mi>t</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    Show that this inner product implies
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>u</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>K</m:mi>
+			  <m:mi>X</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>t</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">φ</m:ci>
+		      <m:ci>u</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>λ</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">φ</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+
+	<section id="s37.4">
+	  <para id="p37.4">Again let
+	    <m:math><m:ci>X</m:ci></m:math> be a continuous
+	    parameter process. However, define the inner product to
+	    be
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci>X</m:ci>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar>
+		    <m:ci>u</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:ci>T</m:ci>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:int/>
+		    <m:bvar>
+		      <m:ci>t</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:ci>T</m:ci>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">Q</m:ci>
+			<m:ci>t</m:ci>
+			<m:ci>u</m:ci>
+		      </m:apply>
+		      <m:ci><m:msub>
+			  <m:mi>X</m:mi>
+			  <m:mi>t</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>Y</m:mi>
+			  <m:mi>u</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">Q</m:ci>
+		<m:ci>t</m:ci>
+		<m:ci>u</m:ci>
+	      </m:apply>
+	    </m:math> is a non-negative definite function. Find
+	    the equivalent relationship implied by the
+	    requirements of the Karhunen-Loève
+	    expansion. Under what conditions will the φ's
+	    satisfying this relationship not depend on the
+	    covariance function of
+	    <m:math><m:ci>X</m:ci></m:math>?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex38">
+      <problem id="idp7326176">
+	<para id="para38">Let the covariance function of a
+	  wide-sense stationary process be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>X</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>τ</m:ci>
+	      </m:apply>
+	      <m:piecewise>
+		<m:piece>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:abs/>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:leq/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:ci>τ</m:ci>
+		    </m:apply>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:piece>
+		<m:otherwise>
+		  <m:cn>0</m:cn>
+		</m:otherwise>
+	      </m:piecewise>
+	    </m:apply>
+	  </m:math>
+	  Find the eigenfunctions and eigenvalues associated with
+	  the Karhunen-Loève expansion of
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>X</m:mi>
+		<m:mi>t</m:mi>
+	      </m:msub></m:ci>
+	  </m:math> over
+	  <m:math>
+	    <m:interval closure="open">
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	  </m:math> with
+	  <m:math>
+	    <m:apply>
+	      <m:lt/>
+	      <m:ci>T</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:math>.
+	</para>
+      </problem>
+    </exercise>
+    
+  </content> 
+
+</document>

@@ -1,0 +1,774 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Maximum Likelihood Estimators of Parameters</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>667832d4-7f6a-48a3-84b3-c216a2cdd51d</md:uuid>
+</metadata>
+
+  <content>
+    <para id="primero">
+      When the <foreign>a priori</foreign> density of a parameter is
+      not known or the parameter itself is inconveniently described as
+      a random variable, techniques must be developed that make no
+      presumption about the relative possibilities of parameter
+      values. Lacking this knowledge, we can expect the error
+      characteristics of the resulting estimates to be worse than
+      those which can use it.
+    </para>
+    
+    <para id="segundo">
+      The maximum likelihood estimate
+      <m:math>
+	<m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+            <m:ci type="fn">
+	      <m:msub>
+	        <m:mi>θ</m:mi>
+	        <m:mi>ML</m:mi>
+	      </m:msub>
+            </m:ci>
+	  </m:apply>
+	  <m:ci type="vector">r</m:ci>
+        </m:apply>
+      </m:math> of a nonrandom parameter is, simply, that value which
+      maximizes the likelihood function (the <foreign>a
+      priori</foreign> density of the observations). Assuming that the
+      maximum can be found by evaluating a derivative,
+      <m:math>
+	<m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+            <m:ci type="fn">
+	      <m:msub>
+	        <m:mi>θ</m:mi>
+	        <m:mi>ML</m:mi>
+	      </m:msub>
+            </m:ci>
+	  </m:apply>
+	  <m:ci type="vector">r</m:ci>
+        </m:apply>
+      </m:math> is defined by
+
+      <equation id="eq1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>ML</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The logarithm of the likelihood function may also be used in
+      this maximization.
+    </para>
+
+    <example id="ex1">
+      <para id="expara1">
+	Let 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">r</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math>
+	be a sequence of independent, identically distributed Gaussian
+	random variables having an unknown mean
+	<m:math><m:ci>θ</m:ci></m:math> but a known variance
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:mn>2</m:mn>
+	  </m:apply>
+	</m:math>. Often, we cannot assign a probability density to a
+	parameter of a random variable's density; we simply do not know
+	what the parameter's value is. Maximum likelihood estimates are
+	often used in such problems. In the specific case here, the
+	derivative of the logarithm of the likelihood function equals
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:mn>2</m:mn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>	    
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The solution of this equation is the maximum likelihood
+	estimate, which equals the sample average.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The expected value of this estimate 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:condition>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	equals the actual value <m:math><m:ci>θ</m:ci></m:math>,
+      showing that the maximum likelihood estimate is unbiased. The
+      mean-squared error equals
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:mn>2</m:mn>
+	      </m:apply>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>
+	and we infer that this estimate is consistent.
+      </para>
+
+    </example>
+    
+    <section id="onlysection">
+      <title>Parameter Vectors</title>
+      <para id="whatever">
+	The maximum likelihood procedure (as well as the others being
+	discussed) can be easily generalized to situations where more
+	than one parameter must be estimated. Letting
+	<m:math><m:ci>θ</m:ci></m:math> denote the parameter
+	vector, the likelihood function is now expressed as
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>. The maximum likelihood estimate 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mi>ML</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:math> of the parameter vector is given by the location of
+	the maximum of the likelihood function (or equivalently of its
+	logarithm). Using derivatives, the calculation of the maximum
+	likelihood estimate becomes
+
+	<equation id="ihavenoidea">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>ML</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:lowlimit>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:condition>
+			  <m:ci>θ</m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>
+	</equation>
+		 
+	where 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>∇</m:mi>
+	      <m:mi>θ</m:mi>
+	    </m:msub></m:ci>
+	</m:math>
+	denotes the gradient with respect to the parameter
+	vector. This equation means that we must estimate all of the
+	parameter <emphasis>simultaneously</emphasis> by setting the
+	partial of the likelihood function with respect to
+	<emphasis>each</emphasis> parameter to zero. Given
+	<m:math><m:ci>P</m:ci></m:math> parameters, we must solve in
+	most cases a set of <m:math><m:ci>P</m:ci></m:math> nonlinear,
+	simultaneous equations to find the maximum likelihood
+	estimates.
+      </para>
+    </section>		    
+
+    <example id="ex2">
+
+      <para id="ex2para1">
+	Let's extend the previous example to the situation where
+	neither the mean nor the variance of a sequence of independent
+	Gaussian random variables is known. The likelihood function
+	is, in this case,
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:condition>
+		<m:ci>θ</m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:product/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>      
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>2</m:cn>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Evaluating the partial derivatives of the logarithm of this
+	quantity, we find the following set of two equations to solve
+	for
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>, representing the mean, and 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msub>
+	  </m:ci>	       
+	</m:math>, representing the variance.<footnote id="idm6574848">The
+	variance rather than the standard deviation is represented by
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>. The mathematics is messier and the estimator has
+	less attractive properties in the latter case. 
+	  <link document="m11221" target-id="problem5">This problem</link>
+	illustrates this point.</footnote>
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>					       
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>	
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>L</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>	
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+
+	The solution of this set of equations is easily found to be
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msubsup>
+		  <m:mi>θ</m:mi>
+		  <m:mn>1</m:mn>
+		  <m:mi>ML</m:mi>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msubsup>
+		  <m:mi>θ</m:mi>
+		  <m:mn>2</m:mn>
+		  <m:mi>ML</m:mi>
+		</m:msubsup></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci><m:msubsup>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			  <m:mi>ML</m:mi>
+			</m:msubsup></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+
+      <para id="lastone">
+	The expected value of 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci><m:msubsup>
+		<m:mi>θ</m:mi>
+		<m:mn>1</m:mn>
+		<m:mi>ML</m:mi>
+	      </m:msubsup></m:ci>
+	  </m:apply>
+	</m:math>
+	equals the actual value of 
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:ci>
+	</m:math>; thus, this estimate is unbiased. However, the
+	expected value of the estimate of the variance equals
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:cn>L</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. The estimate of the variance is biased, but
+	asymptotically unbiased. This bias can be removed by replacing
+	the normalization of <m:math><m:ci>L</m:ci></m:math> in the
+	averaging computation for
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci><m:msubsup>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+		<m:mi>ML</m:mi>
+	      </m:msubsup></m:ci>
+	  </m:apply>
+	</m:math>
+	by
+	<m:math>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>L</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>.
+      </para>
+    </example>
+	
+  </content>
+</document>

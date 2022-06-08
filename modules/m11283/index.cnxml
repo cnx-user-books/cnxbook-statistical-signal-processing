@@ -1,0 +1,1228 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Unknown Signal Delay</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>2dd89fcc-ce0f-45ee-8019-3551913a1a1e</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       A uniformly most powerful decision rule may not exist when an
+       unknown parameter appears in a nonlinear way in the signal
+       model.  Most pertinent to array processing is the unknown time
+       origin case: the signal has been subjected to an unknown delay
+       (<m:math>
+	<m:apply>
+	  <m:ci type="fn">s</m:ci>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci>l</m:ci>
+	    <m:ci>Δ</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>Δ</m:ci>
+	  <m:ci>?</m:ci>
+	</m:apply>
+      </m:math>) and we must determine the signal's presence.  The
+      likelihood ratio cannot be manipulated so that the sufficient
+      statistic can be computed without having a value for
+      <m:math><m:ci>Δ</m:ci></m:math>.  Thus, the search for a
+      uniformly most powerful test ends in failure and other methods
+      must be sought.  As expected, we resort to the generalized
+      likelihood ratio test.
+    </para>
+
+    <para id="para2">
+      More specifically, consider the binary test where a signal is
+      either present (<m:math> <m:ci><m:msub> <m:mi>ℳ</m:mi>
+      <m:mn>1</m:mn> </m:msub></m:ci> </m:math>) or not (<m:math>
+      <m:ci><m:msub> <m:mi>ℳ</m:mi> <m:mn>0</m:mn>
+      </m:msub></m:ci> </m:math>).  The signal waveform is known, but
+      its time origin is not.  For all possible values of
+      <m:math><m:ci>Δ</m:ci></m:math>, the delayed signal is
+      assumed to lie <emphasis>entirely</emphasis> in the observations
+      (<link target-id="fig1"/>).  This signal model is ubiquitous in
+      active sonar and radar, where the reflected signal's exact
+      time-of-arrival is not known and we want to determine whether a
+      return is present or not <emphasis>and</emphasis> the value of
+      the delay. <footnote id="idp2655712">For a much more realistic (and
+      harder) version of the active radar/sonar problem, see <link document="m11300" target-id="ex16">this problem</link>.</footnote> Additive
+      white Gaussian noise is assumed present.  The conditional
+      density of the observations made under <m:math> <m:ci><m:msub>
+      <m:mi>ℳ</m:mi> <m:mn>1</m:mn> </m:msub></m:ci> </m:math> is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:condition>
+	      <m:ci>Δ</m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:pi/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar><m:ci>l</m:ci></m:bvar>
+		    <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">s</m:ci>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>l</m:ci>
+			    <m:ci>Δ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      <figure id="fig1">
+	<media id="idm6956848" alt=""><image src="../../media/delay.png" mime-type="image/png"/></media>
+	<caption>
+	  Despite uncertainties in the signal's delay
+	  <m:math><m:ci>Δ</m:ci></m:math>, the signal is assumed
+	  to lie entirely within the observation interval. Hence the
+	  signal's duration <m:math><m:ci>D</m:ci></m:math>, the
+	  duration <m:math><m:ci>L</m:ci></m:math> of the observation
+	  interval, and the maximum expected delay are assumed to be
+	  related by
+	  <m:math>
+	    <m:apply>
+	      <m:lt/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:max/>
+		    <m:ci>Δ</m:ci>
+		  </m:apply>
+		  <m:ci>D</m:ci>
+		</m:apply>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:math>. The figure shows a signal
+	  falling properly within the allowed window and a grey one
+	  falling just outside.
+	</caption>
+      </figure>
+	    
+      The exponent contains the only portion of this conditional
+      density that depends on the unknown quantity
+      <m:math><m:ci>Δ</m:ci></m:math>.  Maximizing the
+      conditional density with respect to
+      <m:math><m:ci>Δ</m:ci></m:math> is equivalent to
+      maximizing 
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:bvar><m:ci>l</m:ci></m:bvar>
+	  <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	  <m:uplimit>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>L</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:uplimit>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>l</m:ci>
+		  <m:ci>Δ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>l</m:ci>
+		    <m:ci>Δ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  As the signal is assumed to be contained entirely in
+      the observations for all possible values of
+      <m:math><m:ci>Δ</m:ci></m:math>, the second term does not
+      depend on <m:math><m:ci>Δ</m:ci></m:math> and equals half
+      of the signal energy <m:math><m:ci>E</m:ci></m:math>.  Rather
+      than analytically maximizing the first term now, we simply write
+      the logarithm of the generalized likelihood ratio test as
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:max/>
+	    <m:bvar>
+	      <m:ci>Δ</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:ci>Δ</m:ci>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>Δ</m:ci>
+		    <m:ci>D</m:ci>
+		  </m:apply>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>l</m:ci>
+		    <m:ci>Δ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:ln/>
+		<m:ci>η</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>E</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      where the non-zero portion of the summation is expressed
+      explicitly.  Using the matched filter interpretation of the
+      sufficient statistic, this decision rule is expressed by
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+            <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+            <m:bvar>
+              <m:ci>l</m:ci>
+            </m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>D</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+		<m:ci>Δ</m:ci>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:apply>
+	      <m:max/>
+	      <m:bvar>
+		<m:ci>Δ</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#convolve"/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>D</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      This formulation suggests that the matched filter having a
+      unit-sample response equal to the zero-origin signal be
+      evaluated for each possible value of
+      <m:math><m:ci>Δ</m:ci></m:math> and that we use the
+      maximim value of the resulting output in the decision rule.  In
+      the known-delay case, the matched-filter output is sampled at
+      the "end" of the signal; here, the filter, which has a duration
+      <m:math><m:ci>D</m:ci></m:math> less than the observation
+      interval <m:math><m:ci>L</m:ci></m:math>, is allowed to continue
+      processing over the allowed values of signal delay with the
+      maximum output value chosen.  The result of this procedure is
+      illustrated <link document="m11260" target-id="fig1">here</link>.
+      There two signals, each having the same energy, are passed
+      through the appropriate matched filter.  Note that the index at
+      which the maximim output occurs is the maximim likelihood
+      estimate of <m:math><m:ci>Δ</m:ci></m:math>.  Thus,
+      <emphasis>the detection and the estimation problems are solved
+      simultaneously</emphasis>.  Furthermore, <emphasis>the amplitude
+      of the signal need not be known</emphasis> as it enters in
+      expression for the sufficient statistic in a linear fashion and
+      an UMP test exists in that case.  We can easily find the
+      threshold <m:math><m:ci>γ</m:ci></m:math> by establishing
+      a criterion on the false-alarm probability; the resulting simple
+      computation of <m:math><m:ci>γ</m:ci></m:math> can be
+      traced to the lack of a signal-related quantity or an unknown
+      parameter appearing in <m:math> <m:ci><m:msub>
+      <m:mi>ℳ</m:mi> <m:mn>0</m:mn> </m:msub></m:ci> </m:math>.
+    </para>
+
+    <para id="para3">
+      We have argued the doubtfulness of assuming that the noise is
+      white in discrete-time detection problems.  The approach for
+      solving the colored noise problem is to use spectral detection.
+      Handling the unknown delay problem in this way is relatively
+      straightforward.  Since a sequence can be represented
+      equivalently by its values or by its DFT, maximization can be
+      calculated in either the time or the frequency domain without
+      affecting the final answer.  Thus, the spectral detector's
+      decision rule for the unknown delay problem is (from <link document="m11282" target-id="eqn1">this equation</link>)
+      <equation id="eqn1">
+	<m:math>
+	  <m:mrow>
+	    <m:apply>
+	      <m:max/>
+	      <m:bvar>
+		<m:ci>Δ</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>k</m:ci></m:bvar>
+		<m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:real/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:conjugate/>
+			  <m:apply>
+			    <m:ci type="fn">R</m:ci>
+			    <m:ci>k</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">S</m:ci>
+			  <m:ci>k</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:exp/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:apply>
+			      <m:divide/>
+			      <m:apply>
+				<m:times/>
+				<m:imaginaryi/>
+				<m:cn>2</m:cn>
+				<m:pi/>
+				<m:ci>k</m:ci>
+				<m:ci>Δ</m:ci>
+			      </m:apply>
+			      <m:ci>L</m:ci>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci><m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>k</m:mi>
+			</m:msub></m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:abs/>
+			  <m:apply>
+			    <m:ci type="fn">S</m:ci>
+			    <m:ci>k</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>k</m:mi>
+			  </m:msub></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+
+	    <m:ci>γ</m:ci>
+	  </m:mrow>
+	</m:math>
+      </equation>
+      where, as usual in unknown delay problems, the observation
+      interval captures the entire signal waveform no matter what the
+      delay might be.  The energy term is a constant and can be
+      incorporated into the threshold.  The maximization amounts to
+      finding the best linear phase fit to the observations' spectrum
+      once the signal's phase has been removed.  A more interesting
+      interpretation arises by noting that the sufficient statistic is
+      itself a Fourier Transform; the maximization amounts to finding
+      the location of the maximum of a sequence given by
+      <m:math display="block">
+	<m:apply>
+	  <m:real/>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>k</m:ci></m:bvar>
+	    <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:apply>
+		      <m:ci type="fn">R</m:ci>
+		      <m:ci>k</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">S</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>k</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:imaginaryi/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci>k</m:ci>
+		      <m:ci>Δ</m:ci>
+		    </m:apply>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The spectral detector thus becomes a succession of two
+      Fourier Transforms with the final result determined by the
+      maximum of a sequence!
+    </para>
+
+    <para id="para4">
+      Unfortunately, the solution to the unknown-signal-delay problem
+      in either the time or frequency domains is confounded when two
+      or more signals are present.  Assume two signals are known to be
+      present in the array output, each of which has an unknown delay:
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">r</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>l</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>Δ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>l</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>Δ</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">n</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Using arguments similar to those used in the
+      one-signal case, the generalized likelihood ratio test becomes
+      
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:max/>
+	    <m:bvar>
+	      <m:ci><m:msub>
+		  <m:mi>Δ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:bvar>
+	    <m:bvar>
+	      <m:ci><m:msub>
+		  <m:mi>Δ</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>l</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>Δ</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>l</m:ci>
+			<m:ci><m:msub>
+			    <m:mi>Δ</m:mi>
+			    <m:mn>2</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>l</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>Δ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>l</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>Δ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:ln/>
+		<m:ci>η</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:plus/>
+		<m:ci><m:msub>
+		    <m:mi>E</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>E</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+
+      Not only do matched filter terms for each signal appear, but
+      also a cross-term between the two signals.  It is this latter
+      term that complicates the multiple signal problem: if this term
+      is not zero for <emphasis>all</emphasis> possible delays, a
+      non-separable maximization process results and both delays must
+      be varied in concert to locate the maximum.  If, however, the
+      two signals are orthogonal regardless of the delay values, the
+      delays can be found separately and the structure of the single
+      signal detector (modified to include matched filters for each
+      signal) will suffice.  This seemingly impossible situation can
+      occur, at least approximately.  Using Parseval's Theorem, the
+      cross term can be expressed in the frequency domain.
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar><m:ci>l</m:ci></m:bvar>
+	    <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+	    <m:uplimit>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>l</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>l</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:pi/>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>ω</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:pi/>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:uplimit><m:pi/></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>S</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>ω</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>S</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci>ω</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:times/>
+		    <m:imaginaryi/>
+		    <m:ci>ω</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:msub>
+			  <m:mi>Δ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>Δ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      For this integral to be zero for all <m:math> <m:ci><m:msub>
+      <m:mi>Δ</m:mi> <m:mn>1</m:mn> </m:msub></m:ci> </m:math>,
+      <m:math> <m:ci><m:msub> <m:mi>Δ</m:mi> <m:mn>2</m:mn>
+      </m:msub></m:ci> </m:math>, the product of the spectra must be
+      zero.  Consequently, if the two signals have disjoint spectral
+      support, they are orthogonal no matter what the delays may
+      be.<footnote id="idm6624608">We stated earlier that this situation
+      happens "at least approximately." Why the qualification?</footnote>
+      Under these conditions, the detector becomes
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>D</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:max/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#convolve"/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>D</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>D</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:max/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>Δ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#convolve"/>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>D</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+      with the threshold again computed independently of the received
+      signal amplitudes.<footnote id="idm7547200">Not to be boring, but we
+      emphasize that <m:math> <m:ci><m:msub> <m:mi>E</m:mi>
+      <m:mn>1</m:mn> </m:msub></m:ci> </m:math> and <m:math>
+      <m:ci><m:msub> <m:mi>E</m:mi> <m:mn>2</m:mn> </m:msub></m:ci>
+      </m:math> are the energies of the signals <m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> and <m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>s</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> used in the detector, <emphasis>not</emphasis> those
+	of their received correlates <m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>A</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and <m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>A</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.</footnote>
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>λ</m:ci>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci><m:msub>
+			<m:mi>E</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>E</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      This detector has the structure of two parallel, independently
+      operating, matched filters, each of which is tuned to the
+      specific signal of interest.
+    </para>
+
+    <para id="para5">
+      Reality is insensitive to mathematically simple results.  The
+      orthogonality condition on the signals that yielded the
+      relatively simple two-signal, unknown-delay detector is often
+      elusive.  The signals often share similar spectral supports,
+      thereby violating the orthogonality condition.  In fact, we may
+      be interested in detecting the <emphasis>same</emphasis> signal
+      repeated twice (or more) within the observation interval.
+      Because of the complexity of incorporating inter-signal
+      correlations, which are dependent on the relative delay, the
+      idealistic detector is often used in practice.  In the repeated
+      signal case, the matched filter is operated over the entire
+      observation interval and the number of <term>excursions</term>
+      above the threshold noted.  An <term>excursion</term> is defined
+      to be a portion of the matched filter's output that exceeds the
+      detection threshold over a contiguous interval.  Because of the
+      signal's non-zero duration, the matched filter's response to
+      just the signal has a non-zero duration, implying that the
+      threshold can be crossed at more than a single sample.  When one
+      signal is assumed, the maximization step automatically selects
+      the peak value of an excursion.  As shown in lower panels of
+      <link document="m11260" target-id="fig1">this figure</link>, a
+      low-amplitude excursion may have a peak value less than a
+      non-maximal value in a larger excursion.  Thus, when considering
+      multiple signals, the important quantities are the times at
+      which excursion peaks occur, not all of the times the output
+      exceeds the threshold.
+    </para>
+
+    <para id="para6">
+      <link document="m11260" target-id="fig1">This figure</link>
+      illustrates the two kinds of errors prevalent in multiple signal
+      detectors.  In the left panel, we find two excursions, the first
+      of which is due to the signal, the second due to noise.  This
+      kind of error cannot be avoided; we never said that detectors
+      could be perfect!  The right panel illustrates a more serious
+      problem: the threshold is crossed by four excursions, all of
+      which are due to a single signal.  Hence, excursions must be
+      sorted through, taking into account the nature of the signal
+      being sought.  In the example, excursions surrounding a large
+      one should be discarded if they occur in close proximity.  This
+      requirement means that closely spaced signals cannot be
+      distinguished from a single one.
+    </para>
+  </content>
+  
+</document>

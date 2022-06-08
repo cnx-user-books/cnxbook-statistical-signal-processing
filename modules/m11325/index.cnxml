@@ -1,0 +1,572 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  
+  <title>Non-Parametric Detection</title>
+  
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0a7ee62b-3bfd-44b0-ad7d-db25df29ca87</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      In situations when no nominal density can be reasonably assigned
+      or when the possible extent of deviations from the nominal
+      cannot be assessed, non-parametric detection theory can rise to
+      the occasion (<cite target-id="GibsonandMelsa"><cite-title>Gisbon and
+      Melsa</cite-title></cite>, <cite target-id="KassamandThomas"><cite-title>Kassam and
+      Thomas</cite-title></cite>). In this framework first explored in <link document="m11304">Non-Parametric Model Evaluation</link>, little
+      is assumed about the form of the noise density. Assume that
+      model
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> corresponds to the noise-only situation and 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> to the presence of a signal. Moreover, assume that the
+      noise density has zero median: any noise value is equally likely
+      to be positive or negative. This assumption does not necessarily
+      demand that the density be symmetric about the origin, but such
+      densities do have zero median. Given these assumptions, the
+      formalism of non-parametric model evaluation yields the sign
+      test as the best decision rule. As described in the simpler
+      model evaluation context,
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> had constant, positive mean for each observation.
+      Signal values are usually unequal and change sign; we must
+      extend the sign test to this more realistic situation.  Noting
+      that the statistic of the sign test did not depend on the value
+      of the mean but on its sign, the sign of each observation should
+      be "matched" with the sign of each signal value. A kind of
+      matched filter results, where
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn" class="discrete">sign</m:ci>
+	  <m:apply>
+	    <m:ci type="fn">r</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> is match-filtered with
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn" class="discrete">sign</m:ci>
+	  <m:apply>
+	    <m:ci type="fn">s</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+
+      <equation id="eq1">
+	<m:math>
+	  <m:mrow>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:ci type="fn">u</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn" class="discrete">sign</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn" class="discrete">sign</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:mi>γ</m:mi>
+	  </m:mrow>
+	</m:math>
+      </equation>
+      the quantity 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">u</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is the unit-step function; the sum counts the times
+      when the signal and the observation signs matched.
+    </para>
+
+    <para id="para2">
+      To find the threshold, the ubiquitous <link document="m11251">Central Limit Theorem</link> can be
+      invoked. Under
+      <m:math>
+	<m:apply>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:apply>
+      </m:math>, the expected value of summation is
+
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:ci>L</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> and its variance
+
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:ci>L</m:ci>
+	  <m:cn>4</m:cn>				 
+	</m:apply>
+      </m:math>. The false alarm probability for a given value of
+      <m:math><m:ci>γ</m:ci></m:math> is therefore
+      <emphasis>approximately</emphasis> given by
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>γ</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:root/>  
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:cn>4</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      and the threshold easily found. We find the probability of
+      detection with similar techniques, assuming a Gaussian density
+      describes the distribution of the sum when a signal is
+      present. Letting
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>l</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> denote the probability the observation and the signal
+      value agree in sign at the
+      <m:math>
+	<m:apply>
+	  <m:ci>
+	    <m:msup>
+	      <m:mi>l</m:mi>
+	      <m:mi>th</m:mi>
+	    </m:msup>
+	  </m:ci>
+	</m:apply>
+      </m:math> sample, the sum's expected value is
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:domainofapplication>
+	    <m:ci>l</m:ci>
+	  </m:domainofapplication>
+	  <m:apply>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      and its variance 
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:domainofapplication>
+	    <m:ci>l</m:ci>
+	  </m:domainofapplication>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:cn>1</m:cn>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. Using the Central Limit Theorem approximation, the
+      probability of detection is given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>γ</m:ci>
+		<m:apply>
+		  <m:sum/>
+		  <m:domainofapplication>
+		    <m:ci>l</m:ci>
+		  </m:domainofapplication>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:sum/>
+		  <m:domainofapplication>
+		    <m:ci>l</m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>P</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:cn>1</m:cn>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>P</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      For a symmetric as well as zero-median density for the noise
+      amplitude, this probability is given by
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar>
+	      <m:ci>n</m:ci>
+	    </m:bvar>
+	    <m:lowlimit>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:abs/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:lowlimit>
+	    <m:uplimit>
+	      <m:infinity/>
+	    </m:uplimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar><m:ci>n</m:ci></m:bvar>
+	      <m:ci>n</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. If Gaussian noise were present, this probability would be 
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:cn>1</m:cn>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:ci>σ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      and for Laplacian noise 
+      <m:math>
+	<m:apply>		
+	  <m:minus/>
+	  <m:cn>1</m:cn>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:root/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+    </para>
+
+    <para id="para3">
+      The non-parametric detector expressed by <link target-id="eq1"/>
+      has many attractive properties for array processing
+      applications. First, the detector does not require knowledge of
+      the amplitude of the signal. In addition, note that the
+      false-alarm probability does <emphasis>not</emphasis> depend on
+      the variance of the noise; the sign detector is therefore
+      CFAR. Another property of the sign detector is its robustness:
+      we have implicitly assumed that the nosie values have
+      <emphasis>the</emphasis> worst-case probability density - the
+      Laplacian. A more practical property is the one bit of precision
+      required by the quantities used in the computation of the
+      sufficient statistic: each observation is passed through an
+      infinite clipper (a one-bit quantizer) and matched (ANDed) with
+      a one bit representation of the signal. A less desirable
+      property is the dependence of the sign detector's performance on
+      the signal waveform. A signal having a few dominant peak values
+      may be less frequently detected than an equal energy one having
+      a more constant envelope. As the following example demonstrates,
+      the loss in performance compared to a detector specially
+      tailored to the signal and noise properties can be small.
+    </para>
+
+    <example id="ex1">
+      <para id="para4">
+      Let the signal to be detected be a sinusoid having, for
+      simplicity, an integer number of cycles within the
+      <m:math><m:ci>L</m:ci></m:math> observations
+      [<m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">s</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>	 
+	      <m:root/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:ci>E</m:ci>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:sin/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ω</m:mi>
+		    <m:mi>o</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>]. Setting a false alarm probability of 0.01 results in
+      a threshold value of
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>γ</m:ci>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>1.16</m:cn>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>L</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. This <link document="m11262" target-id="fig1">previous
+      figure</link> depicts the probability of detection for various
+      signal-to-noise ratios when the case
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>ω</m:mi>
+	      <m:mi>o</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:cn>2</m:cn>
+	    <m:pi/>
+	    <m:cn>0.1</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math> and 
+	<m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>L</m:ci>
+	  <m:cn>100</m:cn>
+	</m:apply>
+      </m:math>. The loss in performance compared to the matched
+      filter is small - approximately 3 dB!
+      </para>
+    </example>
+	     
+  </content>
+
+  <bib:file>
+    <bib:entry id="GibsonandMelsa">
+      <bib:book>
+	<bib:author>J.D. Gibson and J.L. Melsa</bib:author>
+	<bib:title>Introduction to Non-Parametric Detection with Applications</bib:title>
+	<bib:publisher>Academic Press</bib:publisher>
+	<bib:year>1975</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="KassamandThomas">
+      <bib:book>
+	<bib:editor>S.A. Kassam and J.B. Thomas</bib:editor>
+	<bib:title>Nonparametric Detection: Theory and Applications.</bib:title>
+	<bib:publisher>Dowden, Hutchinson and Ross</bib:publisher>
+	<bib:year>1980</bib:year>
+	<bib:address>Stroudsburg, PA</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>	      
+</document>

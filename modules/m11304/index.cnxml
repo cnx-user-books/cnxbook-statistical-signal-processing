@@ -1,0 +1,1124 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+
+  <title>Non-Parametric Model Evaluation</title>
+
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ce6b463f-b125-4fac-9d5b-4367702a0055</md:uuid>
+</metadata>
+
+  <content>
+    <para id="red">
+       If <emphasis>very</emphasis> uncertain about model accuracy,
+    assuming a form for the nominal density may be questionable or
+    quantifying the degree of uncertainty may be unreasonable. In
+    these cases, <emphasis>any</emphasis> formula for the underlying
+    probability densities may be unjustified, but the model evaluation
+    problem remains. For example, we may want to determine a signal
+    presence or absence in an array output (non-zero mean vs. zero
+    mean) without much knowledge of the contaminating noise. If
+    minimal assumptions can be made about the probability densities,
+    <term>non-parametric model evaluation</term> can be used (<cite target-id="GibsonandMelsa"><cite-title>Gibson and Melsa</cite-title></cite>). In this
+    theoretical framework, no formula for the conditional densities is
+    required; instead, we use worst-case densities which conform to
+    the weak problem specification. Because few assumptions about the
+    probability models are used, non-parametric decision rules are
+    robust: they are insensitive to modeling assumptions because so
+    few are used. The "robust" test of the previous section are
+    so-named because they explicitly encapsulate model imprecision. In
+    either case, one should expect greater performance (smaller error
+    probabilities) in non-parametric decision rules than possible from
+    a "robust" one.
+    </para>
+
+    <para id="orange">
+      Two hypothesized models are to be tested;
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> is intended to describe the situation "the observed
+      data have zero mean" and the other "a non-zero mean is present."
+      We make the usual assumption that the
+      <m:math><m:ci>L</m:ci></m:math> observed data values are
+      statistically independent. The <emphasis>only</emphasis>
+      assumption we will make about the probabilistic descriptions
+      underlying these models is that the median of the observations
+      is zero in the first instance and non-zero in the second. The
+      <term>median</term> of a random variable is the "half-way"
+      value: the probability that the random variable is less than the
+      median is one-half as is the probability that it is greater. The
+      median and mean of a random variable are not necessarily equal;
+      for the special case of a symmetric probability density they
+      are. In any case, the non-parametric models will be stated in
+      terms of the probability that an observation is greater than
+      zero.
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	    <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+
+      <m:math display="block">
+	<m:mrow>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	  <m:mo>:</m:mo>
+	  <m:apply>
+	    <m:gt/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      The first model is equivalent to a zero-median model for the
+      data; the second implies that the median is greater than
+      zero. Note that the form of the two underlying probability
+      densities need not be the same to correspond to the two models;
+      they can differ in more general ways than in their means.
+    </para>
+    
+    <para id="yellow">
+      To solve this model evaluation problem, we seek (as do all
+      robust techniques) the worst-case density, the density
+      satisfying the conditions for one model that is maximally
+      difficult to distinguish from a given density under the
+      other. Several interesting problems arise in this
+      approach. First of all, we seek a non-parametric answer: the
+      solution must not depend on unstated parameters (we should not
+      have to specify how large the non-zero mean might be). Secondly,
+      the model evaluation rule must not depend on the form for the
+      given density. These seemingly impossible properties are easily
+      satisfied. To find the worst-case density, first define
+      
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	    <m:msup>
+	      <m:mi>p</m:mi>
+	      <m:mo>+</m:mo>
+	    </m:msup>
+	  </m:csymbol>
+	  <m:bvar>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:bvar>
+	  <m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:condition>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math> to be the probability density of the 
+      <m:math>
+	<m:ci>
+	  <m:msup>
+	    <m:mi>l</m:mi>
+	    <m:mi>th</m:mi>
+	  </m:msup>
+	</m:ci>
+      </m:math> observation assuming that 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> is true <emphasis>and</emphasis> that the observation
+      was non-negative. A similar definition for negative values is
+      needed.
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	      <m:msup>
+		<m:mi>p</m:mi>
+		<m:mo>+</m:mo>
+	      </m:msup>
+	    </m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:condition>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+	      <m:msup>
+		<m:mi>p</m:mi>
+		<m:mo>-</m:mo>
+	      </m:msup>
+	    </m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:condition>
+	      <m:apply>
+		<m:lt/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      In terms of these quantities, the conditional density of an
+      observation under
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> is given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:apply>
+		  <m:geq/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mo>+</m:mo>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		  <m:apply>
+		  <m:geq/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mo>-</m:mo>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      The worst-case density under
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> would have <emphasis>exactly</emphasis> the same
+      functional form as this one for positive and negative values
+      while having a zero median. <footnote id="idp1501152">Don't forget
+      that the worst-case density in model evaluation agrees with the
+      given one over as large a range as possible.</footnote> As depicted
+      in <link target-id="figure5"/>, a density meeting these
+      requirements is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mo>+</m:mo>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">
+		  <m:msup>
+		    <m:mi>p</m:mi>
+		    <m:mo>-</m:mo>
+		  </m:msup>
+		</m:csymbol>
+		<m:bvar>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+    </para>
+
+    <figure id="figure5">
+      <media id="idm6395472" alt=""><image src="../../media/zeromedian.png" mime-type="image/png"/></media>
+      <caption>For each
+      density having a positive-valued median, the worst-case density
+      having zero median would have exactly the same functional form as
+      the given one on the positive and negative real lines, but with
+      the areas adjusted to be equal. Here, a unit-mean, unit-variance
+      Gaussian density and its corresponding worst-case density is
+      usually discontinuous at the origin; be that as it may, this
+      rather bizarre worst-case density leads to a simple
+      non-parametric decision rule.</caption>
+    </figure>
+
+    <para id="green">
+      The likelihood ratio for a single observation would be 
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:cn>2</m:cn>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:condition>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	    </m:condition>
+	    <m:apply>
+	      <m:geq/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> for non-negative values and 
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:cn>2</m:cn>
+	  <m:apply>
+	    <m:minus/>
+	    <m:cn>1</m:cn>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:apply>
+		<m:geq/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> for negative values. While the likelihood ratio depends on 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	  <m:condition>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:condition>
+	  <m:apply>
+	    <m:geq/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>, which is not specified in out non-parametric model,
+      the sufficient statistic will <emphasis>not</emphasis> depend on
+      it! To see this, note that the likelihood ratio varies only with
+      the sign of the observation. Hence, the optimal decision rule
+      amounts to counting how many of the observations are positive;
+      this count can be succinctly expressed with the unit-step
+      function
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">u</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> as
+      <m:math>
+	<m:apply>
+	  <m:sum/>
+	  <m:bvar><m:ci>l</m:ci></m:bvar>
+	  <m:lowlimit>
+	    <m:cn>0</m:cn>
+	  </m:lowlimit>
+	  <m:uplimit>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>L</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:uplimit>
+	  <m:apply>
+	    <m:ci type="fn">u</m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>. <footnote id="idm6639024">We define the unit-step function as
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">u</m:ci>
+	      <m:ci>x</m:ci>
+	    </m:apply>
+	    <m:piecewise>
+	      <m:piece>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:gt/>
+		  <m:ci>x</m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:piece>
+	      <m:piece>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:lt/>
+		  <m:ci>x</m:ci>
+		  <m:cn>0</m:cn>
+		</m:apply>
+	      </m:piece>
+	    </m:piecewise>
+	  </m:apply>
+	</m:math>, with the value at the origin undefined. We presume
+	that the densities have no mass at the origin under either
+	model. Although appearing unusual,
+	<m:math>
+	  <m:apply>
+	    <m:sum/>
+	    <m:apply>
+	      <m:ci type="fn">u</m:ci>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> does indeed yield the number of positively values
+	observations.</footnote> Thus, the likelihood ratio for the
+	<m:math><m:ci>L</m:ci></m:math> statistically independent
+	observations is written
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:cn>2</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		  <m:condition>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub>
+		    </m:ci>
+		  </m:condition>
+		  <m:apply>
+		    <m:geq/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:domainofapplication><m:ci>l</m:ci></m:domainofapplication>
+		  <m:apply>
+		    <m:ci type="fn">u</m:ci>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>r</m:mi>
+			<m:mi>l</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		    <m:condition>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>ℳ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:condition>
+		    <m:apply>
+		      <m:geq/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:sum/>
+		    <m:domainofapplication><m:ci>l</m:ci></m:domainofapplication>
+		    <m:apply>
+		      <m:ci type="fn">u</m:ci>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:ci>η</m:ci>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+      Making the usual simplifications, the unknown probability 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	  <m:condition>			   
+	    <m:ci>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:condition>
+	  <m:apply>
+	    <m:geq/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>l</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math> can be maneuvered to the right side and merged with
+      the threshold. The optimal non-parametric decision rule thus
+      compares the sufficient statistic - the count of positive-valued
+      observations - with a threshold determined by the Neyman-Pearson
+      criterion.
+
+      <equation id="neymanperson">
+	<m:math>
+	  <m:mrow>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:uplimit>
+	      <m:apply>
+		<m:ci type="fn">u</m:ci>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:mi>γ</m:mi>
+	  </m:mrow>
+	</m:math>
+      </equation>
+      This decision rule is called the <term>sign test</term> as it
+      depends only on the signs of the observed data. The sign test is
+      uniformly most powerful and robust.
+    </para>
+
+    <para id="blue">
+      To find the threshold <m:math><m:ci>γ</m:ci></m:math>, we
+      can use the Central Limit Theorem to approximate the
+      probability distribution of the sum by a Gaussian. Under
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>, the expected value of
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">u</m:ci>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>r</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math> is 
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:cn>1</m:cn>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> and the variance is 
+      <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:cn>1</m:cn>
+	  <m:cn>4</m:cn>
+	</m:apply>
+      </m:math>. To the degree that the Central Limit Theorem reflects
+      the false-alarm probability (see <link document="m11222" target-id="problem2">this problem</link>),
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi>
+	  </m:msub>
+	</m:ci>
+      </m:math> is approximately given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>						       
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>γ</m:ci>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:root/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci>L</m:ci>
+		  <m:cn>4</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      and the threshold is found to be
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>γ</m:ci>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:root/>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:apply>
+		  <m:ci type="fn">Q</m:ci>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>P</m:mi>
+		      <m:mi>F</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>L</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      As it makes no sense for the threshold to be greater than
+      <m:math><m:ci>L</m:ci></m:math> (how many positively values
+      observations can there be?), the specified false-alarm
+      probability must satisfy
+      <m:math>
+	<m:apply>
+	  <m:geq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:ci type="fn">Q</m:ci>
+	    <m:apply>
+	      <m:root/>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>. This restriction means that increasing stringent
+      requirements on the false-alarm probability can only be met if
+      we have sufficient data.
+    </para>
+      
+  </content>
+
+  <bib:file>
+    <bib:entry id="GibsonandMelsa">
+      <bib:book>
+   	<bib:author>J.D. Gibson and J.L. Melsa</bib:author>
+    	<bib:title>Introduction to Non-Parametric Detection with Applications</bib:title>
+    	<bib:publisher>Academic Press</bib:publisher>
+    	<bib:year>1975</bib:year>
+    	<bib:address>New York</bib:address>
+      </bib:book>   
+    </bib:entry>    
+  </bib:file>
+  
+</document>
