@@ -1,0 +1,617 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Maximum a Posteriori Estimators</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>44cf31e9-2f7e-4dbe-8375-3252e168c2f9</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      In those cases in which the expected value of the <foreign>a
+	posteriori</foreign> density cannot be computed, a related but
+	simpler estimate, the maximum <foreign>a posteriori</foreign>
+	(MAP) estimate, can usually be evaluated. The estimate
+      <m:math>
+	<m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+            <m:ci type="fn">
+	      <m:msub>
+	        <m:mi>θ</m:mi>
+	        <m:mi>MAP</m:mi>
+	      </m:msub>
+            </m:ci>
+	  </m:apply>
+	  <m:ci type="vector">r</m:ci>
+        </m:apply>
+      </m:math>
+      equals the location of the maximum of the <foreign>a
+      posteriori</foreign> density. Assuming that this maximum can be
+      found by evaluating the derivative of the <foreign>a
+      posteriori</foreign> density, the MAP estimate is the solution
+      of the equation
+     
+      <equation id="eq1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#evaluateat"/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MAP</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:lowlimit>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar><m:ci>θ</m:ci></m:bvar>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:condition>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      Any scaling of the density by a positive quantity that depends
+      on <m:math><m:ci type="vector">r</m:ci></m:math> does not change
+      the location of the maximum. Symbolically,
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>p</m:mi>
+	      <m:mrow>
+		<m:mi>θ</m:mi>
+		<m:mo>|</m:mo>
+		<m:mi mathvariant="bold">r</m:mi>
+	      </m:mrow>
+	    </m:msub>
+	  </m:ci>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>p</m:mi>
+		<m:mrow>
+		  <m:mi mathvariant="bold">r</m:mi>
+		  <m:mo>|</m:mo>
+		  <m:mi>θ</m:mi>
+		</m:mrow>   
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mi>θ</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>p</m:mi>
+		  <m:mi mathvariant="bold">r</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>; the derivative does not involve the denominator, and
+      this term can be ignored. Thus, the only quantities required to
+      compute
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mi>MAP</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:apply>
+      </m:math> are the likelihood function and the parameter's
+      <foreign>a priori</foreign> density.
+    </para>
+
+    <para id="anotherpara">
+      Although not apparent in its definition, the MAP estimate does
+      satisfy an error criterion. Define a criterion that is zero over
+      a small range of values about
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>ε</m:ci>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math> and a positive constant outside that
+      range. Minimization of the expected value of this criterion with
+      respect to
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math> is accomplished by centering the criterion function at
+      the maximum of the density. The region having the largest area
+      is thus "notched out," and the criterion is minimized. Whenever
+      the <foreign>a posteriori</foreign> density is symmetric and
+      unimodal, the MAP and MMSE estimates coincide. In Gaussian
+      problems, such as the last example, this equivalence is alway
+      valid. In more general circumstances, they differ.
+    </para>
+
+    <example id="ex1">
+      <para id="yetanother">
+	Let the observations have the same form as the previous example,
+	but with the modification that the parameter is now uniformly
+	distributed over the interval
+	<m:math>
+	  <m:interval>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:ci>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:interval>
+	</m:math>. The <foreign>a posteriori</foreign> mean cannot be
+	computed in closed form. To obtain the MAP estimate, we need
+	to find the location of the maximum of
+	<equation id="superneato">
+	  <m:math>
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>θ</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>	
+		  <m:leq/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>θ</m:ci>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:product/>
+		    <m:bvar>
+		      <m:ci>l</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:root/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:pi/>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>σ</m:mi>
+				  <m:mi>n</m:mi>
+				</m:msub>
+			      </m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:apply>
+			      <m:divide/>
+			      <m:cn>1</m:cn>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:apply>
+			      <m:power/>
+			      <m:apply>
+				<m:divide/>
+				<m:apply>
+				  <m:minus/>
+				  <m:apply>
+				    <m:ci type="fn">r</m:ci>
+				    <m:ci>l</m:ci>
+				  </m:apply>
+				  <m:ci>θ</m:ci>
+				</m:apply>
+				<m:ci>
+				  <m:msub>
+				    <m:mi>σ</m:mi>
+				    <m:mi>n</m:mi>
+				  </m:msub>
+				</m:ci>
+			      </m:apply>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	Evaluating the logarithm of this quantity does not change the
+	location of the maximum and simplifies the manipulations in
+	many problems. Here, the logarithm is
+
+	<equation id="anotherone">
+	  <m:math>
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>θ</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>	
+		  <m:leq/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>θ</m:ci>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ln/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci>θ</m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:ln/>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mn>2</m:mn>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub>
+			  </m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ln/>
+		    <m:ci>C</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	where <m:math><m:ci>C</m:ci></m:math> is a constant with
+	respect to <m:math><m:ci>θ</m:ci></m:math>. Assuming
+	that the maximum is interior to the domain of the parameter,
+	the MAP estimate is found to be the sample average
+	<m:math>
+	  <m:apply>
+	    <m:sum/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. If the average lies outside this interval, the
+	corresponding endpoint of the interval is the location of the
+	maximum. To summarize,
+	<equation id="piecewise">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MAP</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:piecewise>
+		  <m:piece>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		    <m:apply>
+		      <m:lt/>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>l</m:ci>
+			</m:bvar>
+			<m:domainofapplication>
+			  <m:ci>l</m:ci>
+			</m:domainofapplication>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:ci>L</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:piece>
+		  <m:piece>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:domainofapplication>
+			<m:ci>l</m:ci>
+		      </m:domainofapplication>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:leq/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>l</m:ci>
+			</m:bvar>
+			<m:domainofapplication>
+			  <m:ci>l</m:ci>
+			</m:domainofapplication>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:ci>L</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		    </m:apply>
+		  </m:piece>
+		  <m:piece>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:lt/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub>
+		      </m:ci>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>l</m:ci>
+			</m:bvar>
+			<m:domainofapplication>
+			  <m:ci>l</m:ci>
+			</m:domainofapplication>
+			<m:apply>
+			  <m:divide/>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:ci>L</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:piece>
+		 
+		</m:piecewise>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	
+	The <foreign>a posteriori</foreign> density is not symmetric
+	because of the finite domain of
+	<m:math><m:ci>θ</m:ci></m:math>. Thus, the MAP estimate
+	is not equivalent to the MMSE estimate, and the accompanying
+	increase in the mean-squared error is difficult to
+	compute. When the sample average is the estimate, the estimate
+	is unbiased; otherwise it is biased. Asymptotically, the
+	variance of the average tends to zero, with the consequences
+	that the estimate is unbiased and consistent.
+      </para>
+    </example>	  
+      
+  </content>  
+</document>

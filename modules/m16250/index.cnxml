@@ -1,0 +1,1286 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Detection Theory Basics</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e64dfef3-f4c1-4f19-b387-ac0f7e35fb33</md:uuid>
+</metadata>
+
+
+  <content>
+    <para id="intro">Detection theory concerns making decisions from data.
+      Decisions are based on presumptive models that may have produced the data.
+      Making a decision involves inspecting the data and determining which model was most likely to have produced them.
+      In this way, we are detecting which model was correct.
+      Decision problems pervade signal processing. In digital communications, for example, determining if the current bit received in the presence of channel disturbances was a zero or a one is a detection problem.
+</para>
+
+    <para id="element-993">More concretely, we denote by <m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>i</m:mn>
+	    </m:msub></m:ci>
+	</m:math> the
+	<m:math><m:msup><m:mi>i</m:mi><m:mtext>th</m:mtext></m:msup></m:math>
+	model that could have generated the data
+        <m:math><m:ci type="vector">R</m:ci></m:math>.
+        A "model" is captured by the conditional probability distribution of the data, which is denoted by the vector <m:math><m:ci type="vector">R</m:ci></m:math>.
+        For example, model
+        <m:math><m:ci>i</m:ci></m:math> is described by
+        <m:math>
+           <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar>
+			<m:ci type="vector">R</m:ci>
+		      </m:bvar>
+		      <m:condition>
+			<m:ci><m:msub>
+			    <m:mi>ℳ</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:condition>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		 </m:math>.
+		 Given all the models that can describe the data, we need to choose which model best matched what was observed.
+		 The word "best" is key here:
+	     what is the optimality criterion, and does the detection processing and the decision rule depend heavily on the criterion used?
+         Surprisingly, the answer to the second question is "No."
+         All of detection theory revolves around the <term>likelihood ratio test</term>, which as we shall see, emerges as the optimal detector under a wide variety of optimality criteria.
+    </para><section id="likelihood">
+      
+<title>The Likelihood Ratio Test</title>
+      <para id="binary">In a binary detection problem in which we have two models, four possible decision outcomes can result.  Model 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> did in fact represent the best model for the data
+	and the decision rule said it was (a correct decision) or said
+	it wasn't (an erroneous decision).  The other two outcomes
+	arise when model 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> was in fact true with either a correct or incorrect
+	decision made.  The decision process operates by segmenting
+	the range of observation values into two disjoint
+	<term>decision regions</term> 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>.  All values of 
+	<m:math>
+	  <m:ci type="vector">R</m:ci>
+	</m:math> fall into either 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> or
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>.  If a given 
+	<m:math>
+	  <m:ci type="vector">R</m:ci>
+	</m:math> lies in 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, we will announce our decision <quote display="inline" class="no-marks">"model
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> was true"</quote>; if in 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, model 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> would be proclaimed.  To derive a rational method of
+	deciding which model best describes the observations, we need
+	a criterion to assess the quality of the decision process so that
+	optimizing this criterion will specify the decision regions.
+      </para>
+
+      <para id="decision">
+	The <term>Bayes' decision criterion</term> seeks to minimize a
+	cost function associated with making a decision.  Let
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mrow>
+		<m:mi>i</m:mi>
+		<m:mi>j</m:mi>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	</m:math> be the cost of mistaking model
+	<m:math>
+	  <m:ci>j</m:ci> 
+	</m:math> for model
+	<m:math>
+	  <m:ci>i</m:ci> 
+	</m:math>
+	(<m:math>
+	  <m:apply>
+	    <m:neq/>
+	    <m:ci>i</m:ci>
+	    <m:ci>j</m:ci>
+	  </m:apply>
+	</m:math>) and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mrow>
+		<m:mi>i</m:mi>
+		<m:mi>i</m:mi>
+	      </m:mrow>
+	    </m:msub></m:ci>
+	</m:math> the presumably smaller cost of correctly choosing
+	model 
+	<m:math>
+	  <m:ci>i</m:ci> 
+	</m:math>: 
+	<m:math>
+	  <m:apply>
+	    <m:gt/>
+	    <m:ci><m:msub>
+		<m:mi>C</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>j</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>C</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>i</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:neq/>
+	    <m:ci>i</m:ci>
+	    <m:ci>j</m:ci>
+	  </m:apply>
+	</m:math>.  Let 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>π</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:math> be the <foreign>a priori</foreign> probability of model
+	<m:math>
+	  <m:ci>i</m:ci> 
+	</m:math>.  The so-called <term>Bayes' cost</term>
+	<m:math>
+	  <m:apply>
+	    <m:mean/>
+	    <m:ci>C</m:ci>
+	  </m:apply>
+	</m:math> is the average cost of making a decision. 
+
+	<equation id="eq1">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+
+	      <m:apply><m:mean/><m:ci>C</m:ci></m:apply>
+
+	      <m:apply><m:sum/>
+		   <m:bvar><m:ci>i</m:ci></m:bvar>
+		   <m:bvar><m:ci>j</m:ci></m:bvar>
+		   <m:domainofapplication>
+		     <m:set>
+		      <m:ci>i</m:ci>
+		      <m:ci>j</m:ci>
+		     </m:set>
+		   </m:domainofapplication>
+           <m:apply>
+		    <m:times/>
+		     <m:ci>
+		       <m:msub>
+		       <m:mi>C</m:mi>
+		        <m:mrow>
+			    <m:mi>i</m:mi>
+			    <m:mi>j</m:mi>
+		        </m:mrow>
+		       </m:msub>
+		     </m:ci>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		      <m:mrow>
+		        <m:mtext>say  </m:mtext> 
+		        <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mi>i</m:mi>
+		          </m:msub> 
+		        <m:mtext>  when  </m:mtext>
+		        <m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mi>j</m:mi>
+		        </m:msub> 
+		        <m:mtext>  true</m:mtext>
+		      </m:mrow>
+		     </m:apply>
+		    </m:apply>
+	      </m:apply>
+
+	      <m:apply>
+		   <m:sum/>
+		     <m:bvar><m:ci>i</m:ci></m:bvar>
+		     <m:bvar><m:ci>j</m:ci></m:bvar>
+		     <m:domainofapplication>
+		       <m:set>
+		         <m:ci>i</m:ci>
+		         <m:ci>j</m:ci>
+		       </m:set>
+		     </m:domainofapplication>
+		     <m:apply>
+		      <m:times/>
+		       <m:ci>
+		         <m:msub>
+		           <m:mi>C</m:mi>
+		           <m:mrow>
+			         <m:mi>i</m:mi>
+			         <m:mi>j</m:mi>
+		           </m:mrow>
+		         </m:msub>
+		       </m:ci>
+		       <m:ci>
+		         <m:msub>
+		           <m:mi>π</m:mi>
+		           <m:mi>j</m:mi>
+		         </m:msub>
+		       </m:ci>
+		      <m:apply>
+		        <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		          <m:condition>
+		          <m:mrow>
+			        <m:msub>
+			          <m:mi>ℳ</m:mi>
+			          <m:mi>j</m:mi>
+			        </m:msub> 
+			       <m:mtext>  true</m:mtext>
+		          </m:mrow>
+		          </m:condition>
+		          <m:mrow>
+		            <m:mtext>say  </m:mtext>
+		              <m:msub>
+			            <m:mi>ℳ</m:mi>
+			            <m:mi>i</m:mi>
+		              </m:msub> 
+		          </m:mrow>
+		        </m:apply>
+		       </m:apply>
+	         </m:apply> <!---sum-->
+
+ 	       </m:apply> <!--eq-->
+	  </m:math>
+	</equation>
+
+	The Bayes' cost can be expressed as
+	<equation id="eq2">
+	  <m:math>
+	    <m:apply><m:eq/>
+
+	      <m:apply><m:mean/><m:ci>C</m:ci></m:apply>
+
+	      <m:apply><m:sum/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:bvar><m:ci>j</m:ci></m:bvar>
+		    <m:domainofapplication>
+		      <m:set>
+		        <m:ci>i</m:ci>
+		        <m:ci>j</m:ci>
+		      </m:set>
+		    </m:domainofapplication>
+		    <m:apply><m:times/>
+		      <m:ci>
+		        <m:msub>
+		          <m:mi>C</m:mi>
+		          <m:mrow>
+			        <m:mi>i</m:mi>
+			        <m:mi>j</m:mi>
+		          </m:mrow>
+		        </m:msub>
+		      </m:ci>
+		      <m:ci>
+		        <m:msub>
+		          <m:mi>π</m:mi>
+		          <m:mi>j</m:mi>
+		        </m:msub>
+		      </m:ci>
+		      <m:apply>
+		        <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		          <m:condition>
+		            <m:mrow>
+			          <m:msub>
+			            <m:mi>ℳ</m:mi>
+			            <m:mn>j</m:mn>
+			          </m:msub>
+			          <m:mtext>  true</m:mtext>
+		            </m:mrow>
+		          </m:condition>
+		        <m:apply><m:in/>
+		          <m:ci type="vector">R</m:ci>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>Z</m:mi>
+			          <m:mi>i</m:mi>
+			        </m:msub>
+			      </m:ci>
+		        </m:apply> <!--in-->
+		      </m:apply> <!--pdf-->
+		    </m:apply> <!--times-->
+	      </m:apply> <!--sum-->
+
+	      <m:apply><m:sum/>
+		    <m:bvar><m:ci>i</m:ci></m:bvar>
+		    <m:bvar><m:ci>j</m:ci></m:bvar>
+		    <m:domainofapplication>
+		      <m:set>
+		        <m:ci>i</m:ci>
+		        <m:ci>j</m:ci>
+		      </m:set>
+		    </m:domainofapplication>
+		    <m:apply><m:times/>
+		      <m:ci>
+		        <m:msub>
+		          <m:mi>C</m:mi>
+		          <m:mrow>
+			        <m:mi>i</m:mi>
+			        <m:mi>j</m:mi>
+		          </m:mrow>
+		        </m:msub>
+		      </m:ci>
+		      <m:ci>
+		        <m:msub>
+		          <m:mi>π</m:mi>
+		          <m:mi>j</m:mi>
+		        </m:msub>
+		      </m:ci>
+		      <m:apply><m:int/>
+		        <m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+		        <m:domainofapplication>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>Z</m:mi>
+			          <m:mi>i</m:mi>
+			        </m:msub>
+			      </m:ci>
+		        </m:domainofapplication>
+		        <!--pdf-->
+		        <m:apply>
+		          <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		            <m:bvar><m:ci type="vector">R</m:ci></m:bvar>
+		            <m:condition>
+			          <m:ci>
+			            <m:msub>
+			              <m:mi>ℳ</m:mi>
+			              <m:mi>j</m:mi>
+			            </m:msub>
+			          </m:ci>
+		            </m:condition>
+		          <m:ci type="vector">r</m:ci>
+		        </m:apply> <!--pdf-->
+		      </m:apply> <!--int-->
+		    </m:apply>
+	      </m:apply>
+
+	      <m:apply><m:plus/>
+		    <m:apply><m:int/>
+		      <m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+		      <m:domainofapplication>
+		        <m:ci>
+		          <m:msub>
+			        <m:mi>Z</m:mi>
+			        <m:mn>0</m:mn>
+		          </m:msub>
+		        </m:ci>
+		      </m:domainofapplication>
+		      <m:mfenced>
+		       <m:apply><m:plus/>
+		        <m:apply><m:times/>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>C</m:mi>
+			            <m:mrow>
+			              <m:mn>0</m:mn>
+			              <m:mn>0</m:mn>
+			            </m:mrow>
+			        </m:msub>
+			      </m:ci>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>π</m:mi>
+			          <m:mn>0</m:mn>
+			        </m:msub>
+			      </m:ci>
+		          <!--pdf-->
+		          <m:apply><m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			        <m:bvar><m:ci type="vector">R</m:ci></m:bvar>
+			        <m:condition>
+			          <m:ci>
+			            <m:msub>
+			              <m:mi>ℳ</m:mi>
+			              <m:mn>0</m:mn>
+			            </m:msub>
+			          </m:ci>
+			        </m:condition>
+			        <m:ci type="vector">r</m:ci>
+		          </m:apply> <!--pdf-->
+		        </m:apply> <!--times-->
+		        <m:apply><m:times/>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>C</m:mi>
+			            <m:mrow>
+			              <m:mn>0</m:mn>
+			              <m:mn>1</m:mn>
+			            </m:mrow>
+			        </m:msub>
+			      </m:ci>
+		          <m:ci>
+		            <m:msub>
+			          <m:mi>π</m:mi>
+			          <m:mn>1</m:mn>
+			        </m:msub>
+			      </m:ci>
+		          <!--pdf-->
+		          <m:apply><m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			        <m:bvar><m:ci type="vector">R</m:ci></m:bvar>
+			        <m:condition>
+			          <m:ci>
+			            <m:msub>
+			             <m:mi>ℳ</m:mi>
+			             <m:mn>1</m:mn>
+			            </m:msub>
+			          </m:ci>
+			        </m:condition>
+			        <m:ci type="vector">r</m:ci>
+		          </m:apply> <!--pdf-->
+		        </m:apply> <!--times-->
+		      </m:apply> <!--plus-->
+		     </m:mfenced>
+		    </m:apply>  <!--int-->
+
+		  <m:apply><m:int/>
+		  <m:bvar>
+		    <m:ci type="vector">r</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci><m:msub>
+			<m:mi>Z</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:domainofapplication>
+		  <m:mfenced>
+		   <m:apply><m:plus/>
+		    <m:apply><m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>C</m:mi>
+			  <m:mrow>
+			    <m:mn>1</m:mn>
+			    <m:mn>0</m:mn>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>π</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci type="vector">R</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci><m:msub>
+			  <m:mi>C</m:mi>
+			  <m:mrow>
+			    <m:mn>1</m:mn>
+			    <m:mn>1</m:mn>
+			  </m:mrow>
+			</m:msub></m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>π</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		      <!--pdf-->
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+			<m:bvar>
+			  <m:ci type="vector">R</m:ci>
+			</m:bvar>
+			<m:condition>
+			  <m:ci><m:msub>
+			      <m:mi>ℳ</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+	     </m:mfenced>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+To minimize this expression with respect to the decision regions 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math>, ponder which integral would yield the smallest
+	value if its integration domain included a specific value of the
+	observation vector.
+	To minimize the sum of the two integrals, whichever integrand is smaller should include that value of <m:math><m:ci type="vector">r</m:ci></m:math> in its integration domain.
+	We conclude that we choose <m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> for those values of 
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math> yielding a smaller value for the first integral.
+	<m:math display="block">
+	  <m:apply>
+	    <m:lt/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>0</m:mn>
+		      <m:mn>0</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--pdf-->
+		  <m:bvar>
+		    <m:ci type="vector">R</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>0</m:mn>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--Probability Density Function-->
+		  <m:bvar>
+		    <m:ci type="vector">R</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>1</m:mn>
+		      <m:mn>0</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--Probability Density Function-->
+		  <m:bvar>
+		    <m:ci type="vector">R</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>π</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>1</m:mn>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <!--Probability Density Function-->
+		  <m:bvar>
+		    <m:ci type="vector">R</m:ci>
+		  </m:bvar>
+		  <m:condition>
+		    <m:ci><m:msub>
+			<m:mi>ℳ</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	We choose 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> when the inequality is reversed.  This expression is
+	easily manipulated to obtain the crowning result of detection theory:
+	the <term>likelihood ratio test</term>.  
+	<equation id="ratio">
+	  <m:math>
+	    <m:apply><m:times/>
+	      <m:apply><m:divide/>
+		    <m:apply>
+		    <!--pdf-->
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:bvar><m:ci type="vector">R</m:ci></m:bvar>
+		      <m:condition>
+		        <m:ci><m:msub>
+			     <m:mi>ℳ</m:mi>
+			     <m:mn>1</m:mn>
+		        </m:msub></m:ci>
+		      </m:condition>
+		     <m:ci type="vector">r</m:ci>
+		   </m:apply> <!--pdf-->
+		   <m:apply><m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		     <m:bvar><m:ci type="vector">R</m:ci></m:bvar>
+		     <m:condition>
+		       <m:ci>
+		         <m:msub>
+			       <m:mi>ℳ</m:mi>
+			       <m:mn>0</m:mn>
+		         </m:msub>
+		       </m:ci>
+		     </m:condition>
+		     <m:ci type="vector">r</m:ci>
+		   </m:apply> <!--pdf-->
+	     </m:apply> <!--divide-->
+	    <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>C</m:mi>
+			<m:mrow>
+			  <m:mn>1</m:mn>
+			  <m:mn>0</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>C</m:mi>
+			<m:mrow>
+			  <m:mn>0</m:mn>
+			  <m:mn>0</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>π</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>C</m:mi>
+			<m:mrow>
+			  <m:mn>0</m:mn>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>C</m:mi>
+			<m:mrow>
+			  <m:mn>1</m:mn>
+			  <m:mn>1</m:mn>
+			</m:mrow>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation> The comparison relation means selecting model
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> if the left-hand ratio exceeds the value on the right;
+	otherwise, 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> is selected.
+	The <term>likelihood
+	ratio</term> 
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <!--pdf-->
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">R</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <!--pdf-->
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci type="vector">R</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:condition>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, symbolically represented by 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">Λ</m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>, encapsulates the signal processing performed by the optimal detector on the observations
+	<m:math>
+	  <m:ci type="vector">r</m:ci> 
+	</m:math>.
+	The optimal decision rule then compares that scalar-valued result with a <term>threshold</term>
+	<m:math>
+	  <m:ci>η</m:ci> 
+	</m:math> equaling
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>1</m:mn>
+		      <m:mn>0</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>0</m:mn>
+		      <m:mn>0</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>0</m:mn>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>C</m:mi>
+		    <m:mrow>
+		      <m:mn>1</m:mn>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.
+	The likelihood ratio test can be succinctly expressed as the
+	comparison of the likelihood ratio with a threshold.
+	<equation id="threshold">
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:ci>η</m:ci>
+	    </m:apply>
+	  </m:math>
+	</equation>
+      </para>
+
+      <para id="dataops">
+      The data processing operations are captured entirely by the
+	likelihood ratio 
+	<m:math>
+	      <m:apply>
+		<m:ci type="fn">Λ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	</m:math>.  However, the calculations required by the likelihood ratio can be simplified in many cases.
+	Note that only the value of the
+	likelihood ratio <emphasis>relative</emphasis> to the
+	threshold matters.
+	Consequently, we can perform <emphasis>any</emphasis>
+	positively monotonic transformation simultaneously on the
+	likelihood ratio and the threshold without affecting the result of the
+	comparison.  For example, we can multiply by a positive constant,
+	add any constant or apply a monotonically increasing function
+	to reduce the complexity of the expressions.  We single out one such
+	function, the logarithm, because it often simplifies likelihood
+	ratios that commonly occur in signal processing
+	applications. Known as the <term>log-likelihood</term>, we explicitly
+	express the likelihood ratio test with it as  
+	<equation id="loglike">
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply><m:ln/>
+		<m:apply>
+		  <m:ci type="fn">Λ</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:apply><m:ln/>
+		<m:ci>η</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	What simplifying transformations are useful are problem-dependent.
+	But, by
+	laying bare what aspect of the observations is essential to the
+	model-testing problem, we reveal the <term>sufficient
+	statistic</term> 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">ϒ</m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>: the scalar quantity which best summarizes the data for detection purposes.  The
+	likelihood ratio test is best expressed in terms of the
+	sufficient statistic.
+	<equation id="sufficientstat">
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">ϒ</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:ci>γ</m:ci>
+	    </m:apply>
+	  </m:math>
+	</equation> We denote the threshold value for the sufficient statistic by
+	<m:math>
+	  <m:ci>γ</m:ci> 
+	</m:math> or by
+	<m:math>
+	  <m:ci>η</m:ci> 
+	</m:math> when the likelihood ratio is used in the comparison.
+      </para>
+
+      <para id="different">
+     The likelihood ratio is comprised of the quantities 
+	<m:math>
+	  <m:apply>
+	    <!--pdf-->
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">R</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math>, which are known as <term>likelihood functions</term> and play an important role in estimation theory.  It is the
+	likelihood function that portrays the probabilistic model
+	describing data generation.  The likelihood function
+	completely characterizes the kind of "world" assumed by each
+	model. For each model, we must specify the likelihood function
+	so that we can solve the hypothesis testing problem.
+      </para>
+      <para id="complication">A complication, which arises in some cases, is that the
+	sufficient statistic may not be monotonic.  If it is monotonic, the
+	decision regions 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:math> and 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>Z</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:math> are simply connected:
+	all portions of a region can
+	be reached without crossing into the other region.  If not,
+	the regions are not simply connected and decision region
+	islands are created.  Disconnected regions usually
+	complicate calculations of decision performance.  Monotonic or
+	not, the decision rule proceeds as described: the sufficient
+	statistic is computed for each observation vector and compared
+	to a threshold.
+      </para>
+
+      <example id="studying">
+	<para id="soccer">The coach of a soccer team suspects his goalie has been less than attentive to his training regimen.
+	  The coach focuses on the kicks the goalie makes to send the ball down the field.
+	  The data <m:math>
+	    <m:ci type="vector">r</m:ci>
+	  </m:math> he observes is the length of a kick.
+	  The coach defines the models as
+	  <list id="list1">
+	    <item>
+	      <m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>:   not maintaining a training regimen</item>
+	    <item>
+	      <m:math>
+		<m:ci><m:msub> 
+		    <m:mi>ℳ</m:mi> 
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci> 
+	      </m:math>:   is maintaining a training regimen</item>
+	  </list>
+	  The conditional densities---models---of the kick length are shown in
+	  <link target-id="soccerfig"/>.
+
+	  <figure id="soccerfig"><media id="idm329616" alt=""><image src="../../media/soccersmall.png" mime-type="image/png"/></media><caption>Conditional densities for the distribution of the lengths of soccer kicks
+	    assuming that the goalie has not attended to his training 
+	      (<m:math>
+		<m:ci><m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+	      </m:math>) or did
+	      (<m:math>
+		<m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:math>) are shown in the top row.  The lower portion
+	      depicts the likelihood ratio formed from these densities.
+	    </caption></figure>
+
+	  Based on knowledge of soccer player behavior, the coach
+	  assigns <foreign>a priori</foreign> probabilities of 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:cn type="rational">1<m:sep/>4</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:cn type="rational">3<m:sep/>4</m:cn>
+	    </m:apply>
+	  </m:math>.  The costs 
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>C</m:mi>
+		<m:mrow>
+		  <m:mi>i</m:mi>
+		  <m:mi>j</m:mi>
+		</m:mrow>
+	      </m:msub></m:ci>
+	  </m:math> are chosen to reflect the coach's sensitivity
+	  to the goalies feelings: 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mrow>
+		    <m:mn>0</m:mn>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:cn>1</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mrow>
+		    <m:mn>1</m:mn>
+		    <m:mn>0</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math> (an erroneous decision either way is given the
+	  same cost) and 
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mrow>
+		    <m:mn>0</m:mn>
+		    <m:mn>0</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	      <m:cn>0</m:cn>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mrow>
+		    <m:mn>1</m:mn>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:math>.  The likelihood ratio is plotted in <link target-id="soccerfig"/> and the threshold value
+	  <m:math>
+	    <m:ci>η</m:ci> 
+	  </m:math>, which is computed from the <foreign>a
+	  priori</foreign> probabilities and the costs to be
+	  <m:math><m:cn type="rational">1<m:sep/>3</m:cn></m:math>, is indicated.  The calculations of this
+	  comparison can be simplified in an obvious way.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>r</m:ci>
+		<m:cn>50</m:cn>
+	      </m:apply>
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:cn type="rational">1<m:sep/>3</m:cn>
+	    </m:apply>
+	  </m:math> or
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>r</m:ci>
+		<m:munderover>
+		  <m:mo>≷</m:mo>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:munderover>
+		<m:cn type="rational">50<m:sep/>3</m:cn>
+	      </m:apply>
+	      <m:cn>16.7</m:cn>
+	    </m:apply>
+	  </m:math> The multiplication by the factor of 50 is a simple
+	  illustration of the reduction of the likelihood ratio to a
+	  sufficient statistic.  Based on the assigned costs and
+	  <foreign>a priori</foreign> probabilities, the optimum
+	  decision rule says the coach must assume that the
+	  student did not train if a kick is less than
+	  16.7; if greater, the goalie is assumed to have trained
+	  despite producing an abysmally short kick such as 20.  Note
+	  that as the densities given by each model overlap entirely:
+	  the possibility of making the wrong interpretation
+	  <emphasis>always</emphasis> haunts the coach.  However,
+	  no other procedure will be better (produce a smaller Bayes' cost)!
+	</para>
+      </example>
+    </section>
+  </content>
+
+</document>

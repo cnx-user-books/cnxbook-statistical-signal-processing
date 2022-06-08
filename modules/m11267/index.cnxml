@@ -1,0 +1,1323 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Minimum Mean Squared Error Estimators</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9d7cd26a-f0eb-4a6c-9c4e-78ce9c835144</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      In terms of the densities involved in scalar random-parameter
+      problems, the mean-squared error is given by
+      <equation id="eqn1">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>θ</m:ci></m:bvar>
+	      <m:apply>
+		<m:int/>
+		<m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>θ</m:ci>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:ci type="vector">r</m:ci>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      where
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:ci type="vector">r</m:ci>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math>
+      
+      is the joint density of the observations and the parameter. To
+      minimize this integral with respect to
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math>, we rewrite using the laws of conditional
+      probability as
+      <equation id="eqn2">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci type="vector">r</m:ci></m:bvar>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:int/>
+		  <m:bvar><m:ci>θ</m:ci></m:bvar>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>θ</m:ci>
+			<m:apply>
+			  <m:apply>
+			    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			    <m:ci type="fn">θ</m:ci>
+			  </m:apply>
+			  <m:ci type="vector">r</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		      <m:condition>
+			<m:ci type="vector">r</m:ci>
+		      </m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      The density 
+      <m:math>
+	<m:mrow>
+	  <m:msub>
+	    <m:mi>p</m:mi>
+	    <m:mi mathvariant="bold">r</m:mi>
+	  </m:msub>
+	  <m:mo>(</m:mo>
+	  <m:mi>·</m:mi>
+	  <m:mo>)</m:mo>
+	</m:mrow>
+      </m:math>
+      is nonnegative.  To minimize the mean-squared error, we must
+      minimize the inner integral for each value of <m:math><m:ci type="vector">r</m:ci></m:math> because the integral is weighted
+      by a positive quantity.  We focus attention on the inner
+      integral, which is the conditional expected value of the squared
+      estimation error.  The condition, a fixed value of <m:math><m:ci type="vector">r</m:ci></m:math>, implies that we seek that
+      constant
+      <m:math>
+	<m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="fn">θ</m:ci>
+	  </m:apply>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>
+      derived from <m:math><m:ci type="vector">r</m:ci></m:math> that minimizes the second moment
+      of the random parameter <m:math><m:mi>θ</m:mi></m:math>. A
+      well-known result from probability theory states that the
+      minimum of
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>x</m:ci>
+	      <m:ci>c</m:ci>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      occurs when the constant <m:math><m:ci>c</m:ci></m:math>
+      equals the expected value of the random variable <m:math><m:ci>x</m:ci></m:math>
+      (see <link document="m11247">Expected Values of Probability
+      Functions</link>). The inner integral and thereby the
+      mean-squared error is minimized by choosing the estimator to be
+      the conditional expected value of the parameter given the
+      observations.
+      <equation id="nottoobad">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>MMSE</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      Thus, a parameter's minimum mean-squared error (MMSE) estimate
+      is the parameter's <foreign>a posteriori</foreign> (after the
+      observations have been obtained) expected value.
+    </para>
+
+    <para id="para2">
+      The associated conditional probability density
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:condition>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math>
+      
+      is not often directly stated in a problem definition and must
+      somehow be derived. In many applications, the likelihood
+      function
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:condition>
+	    <m:ci>θ</m:ci>
+	  </m:condition>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>
+      
+      and the <foreign>a priori</foreign> density of the parameter are
+      a direct consequence of the problem statement. These densities
+      can be used to find the joint density of the observations and
+      the parameter, enabling us to use Bayes's Rule to fine the
+      <foreign>a posteriori</foreign> density <emphasis>if</emphasis>
+      we knew the unconditional probability density of the
+      observations.
+
+      <equation id="yuck">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:condition>
+	      <m:ci>θ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:condition>
+		    <m:ci>θ</m:ci>
+		  </m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+    This density
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>
+      
+    is often difficult to determine. Be that as it may, to find the
+    <foreign>a posteriori</foreign> conditional expected value, it
+    need not be known. The numerator entirely expresses the <foreign>a
+    posteriori</foreign> density's dependence on
+    <m:math><m:ci>θ</m:ci></m:math>; the denominator only serves
+    as the scaling factor to yield a unit-area quantity. The expected
+    value is the center-of-mass of the probability density and does
+    <emphasis>not</emphasis> depend directly on the "weight" of the
+    density, bypassing calculation of the scaling factor. If not, the
+    MMSE estimate can be exceedingly difficult to compute.
+    </para>
+    
+    <example id="fun">
+      <para id="ie">
+	Let <m:math><m:ci>L</m:ci></m:math> statistically independent
+	observations be obtained, each of which is expressed by
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci>θ</m:ci>
+	      <m:apply>
+		<m:ci type="fn">n</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.
+	Each 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">n</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math>
+	is a Gaussian random variable having zero mean and variance
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>.  Thus, the unknown parameter in this problem is the
+	mean of the observations. Assume it to be a Gaussian random
+	variable <foreign>a priori</foreign> (mean
+	<m:math>
+	  <m:msub>
+	    <m:mi>m</m:mi>
+	    <m:mi>θ</m:mi>
+	  </m:msub>
+	</m:math>
+	and variance 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>θ</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>).
+	The likelihood function is easily found to be
+
+	<equation id="exeq1">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:product/>
+		<m:bvar><m:ci>l</m:ci></m:bvar>
+		<m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci><m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub></m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:apply>
+			      <m:ci type="fn">r</m:ci>
+				<m:ci>l</m:ci>
+			      </m:apply>
+			      <m:ci>θ</m:ci>
+			    </m:apply>
+			    <m:ci>
+			      <m:msub>
+				<m:mi>σ</m:mi>
+				<m:mi>n</m:mi>
+			      </m:msub>
+			    </m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	so that the <foreign>a posteriori</foreign> density is given by
+
+	<equation id="equationfromhell">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:condition>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:pi/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>θ</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:exp/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:divide/>
+			  <m:cn>1</m:cn>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:ci>θ</m:ci>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>m</m:mi>
+				  <m:mi>θ</m:mi>
+				</m:msub>
+			      </m:ci>
+			    </m:apply>
+			    <m:ci>
+			      <m:msub>
+				<m:mi>σ</m:mi>
+				<m:mi>θ</m:mi>
+			      </m:msub>
+			    </m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:product/>
+		    <m:bvar><m:ci>l</m:ci></m:bvar>
+		    <m:lowlimit><m:cn>0</m:cn></m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>1</m:cn>
+			<m:apply>
+			  <m:root/>
+			  <m:apply>
+			    <m:times/>
+			    <m:cn>2</m:cn>
+			    <m:pi/>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>σ</m:mi>
+				  <m:mi>n</m:mi>
+				</m:msub>
+			      </m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:exp/>
+			<m:apply>
+			  <m:minus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:apply>
+			      <m:divide/>
+			      <m:cn>1</m:cn>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:apply>
+			      <m:power/>
+			      <m:apply>
+				<m:divide/>
+				<m:apply>
+				  <m:minus/>
+				  <m:apply>
+				    <m:ci type="fn">r</m:ci>
+				    <m:ci>l</m:ci>
+				  </m:apply>
+				  <m:ci>θ</m:ci>
+				</m:apply>
+				<m:ci>
+				  <m:msub>
+				    <m:mi>σ</m:mi>
+				    <m:mi>n</m:mi>
+				  </m:msub>
+				</m:ci>
+			      </m:apply>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	In an attempt to find the expected value of this distribution,
+	lump all terms that do not depend
+	<emphasis>explicitly</emphasis> on the quantity <m:math><m:ci>θ</m:ci></m:math>
+	into a proportionality term.
+
+	<equation id="ugly">
+	  <m:math>
+	    <m:apply>
+	      <m:ci><m:mo>∝</m:mo></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:condition>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:sum/>
+			  <m:apply>
+			    <m:power/>
+			    <m:apply>
+			      <m:minus/>
+			      <m:apply>
+				<m:ci type="fn">r</m:ci>
+				<m:ci>l</m:ci>
+			      </m:apply>
+			      <m:ci>θ</m:ci>
+			    </m:apply>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>θ</m:ci>
+			    <m:ci>		
+			      <m:msub>
+				<m:mi>m</m:mi>
+				<m:mi>θ</m:mi>
+			      </m:msub>
+			    </m:ci>
+			  </m:apply>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>θ</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>	
+
+	After some manipulation, this expression can be written as
+	
+	<equation id="ugly2">
+	  <m:math>
+	    <m:apply>
+	      <m:ci><m:mo>∝</m:mo></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:condition>
+		  <m:ci type="vector">r</m:ci>
+		</m:condition>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:exp/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:times/>
+			<m:cn>2</m:cn>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>θ</m:ci>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:power/>
+			    <m:ci>σ</m:ci>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:apply>
+			    <m:plus/>
+			    <m:apply>
+			      <m:divide/>
+			      <m:ci>
+				<m:msub>
+				  <m:mi>m</m:mi>
+				  <m:mi>θ</m:mi>
+				</m:msub>
+			      </m:ci>
+			      <m:apply>
+				<m:power/>
+				<m:ci>
+				  <m:msub>
+				    <m:mi>σ</m:mi>
+				    <m:mi>θ</m:mi>
+				  </m:msub>
+				</m:ci>
+				<m:cn>2</m:cn>
+			      </m:apply>
+			    </m:apply>
+			    <m:apply>
+			      <m:divide/>
+			      <m:apply>
+				<m:sum/>
+				<m:apply>
+				  <m:ci type="fn">r</m:ci>
+				  <m:ci>l</m:ci>
+				</m:apply>
+			      </m:apply>
+			      <m:apply>
+				<m:power/>
+				<m:ci>
+				  <m:msub>
+				    <m:mi>σ</m:mi>
+				    <m:mi>n</m:mi>
+				  </m:msub>
+				</m:ci>
+				<m:cn>2</m:cn>
+			      </m:apply>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	where 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>σ</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>
+	is a quantity that succinctly expresses the ratio
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The form of the <foreign>a posteriori</foreign>
+	density suggests that it too is Gaussian; its mean, and
+	therefore the MMSE estimate of
+	<m:math><m:ci>θ</m:ci></m:math>, is given by
+
+	<equation id="notsougly">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MMSE</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>m</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:sum/>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+      </para>	
+
+      <para id="ie2">
+	More insight into the nature of this estimate is gained by
+	rewriting it as
+
+	<equation id="erg">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci type="fn">
+		    <m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MMSE</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>θ</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>m</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>θ</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	The term 
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>
+	is the variance of the averaged observations for a given value
+	of <m:math><m:ci>θ</m:ci></m:math>; it expresses the
+	squared error encountered in estimating the mean by simple
+	averaging. If this error is much greater than the <foreign>a
+	priori</foreign> variance of
+	<m:math><m:ci>θ</m:ci></m:math> (
+	<m:math>
+	  <m:apply>
+	    <m:ci><m:mo>≫</m:mo></m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>θ</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>), implying that the observations are noisier than
+	the variation of the parameter, the MMSE estimate ignores the
+	observations and tends to yield the <foreign>a
+	priori</foreign> mean
+	<m:math>
+	  <m:ci>
+	    <m:msub>
+	      <m:mi>m</m:mi>
+	      <m:mi>θ</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>
+	as its value. If the averaged observations are less variable
+	than the parameter, the second term dominates, and the average
+	of the observations is the estimate's value. This estimate
+	behavior between these extremes is very intuitive. The
+	detailed form of the estimate indicates how the squared error
+	can be minimized by a linear combination of these extreme
+	estimates.
+      </para>
+			
+      <para id="lastpara">
+	The conditional expected value of the estimate equals
+	
+	<equation id="lasteq">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MMSE</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>θ</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>m</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>θ</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:divide/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>
+			    <m:msub>
+			      <m:mi>σ</m:mi>
+			      <m:mi>n</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+
+	This estimate is biased because its expected value does not
+	equal the value of the sought-after parameter. It is
+	asymptotically unbiased as the squared measurement error
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:math>
+	tends to zero as <m:math><m:ci>L</m:ci></m:math> becomes
+	large. The consistency of the estimator is determined by
+	investigating the expected value of the squared error. Note
+	that the variance of the <foreign>a posteriori</foreign>
+	density is the quantity
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>σ</m:ci>
+	    <m:cn>2</m:cn>
+	    </m:apply>
+	</m:math>; as this quantity does not depend on <m:math><m:ci type="vector">r</m:ci></m:math>, it also equals the
+	unconditional variance. As the number of observations
+	increases, this variance tends to zero. In concert with the
+	estimate being asymptotically unbiased, the expected value of
+	the estimation error thus tends to zero, implying that we have
+	a consistent estimate.
+      </para>
+    </example>
+  </content>	      	   
+</document>

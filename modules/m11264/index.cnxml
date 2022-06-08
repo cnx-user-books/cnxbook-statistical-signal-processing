@@ -1,0 +1,1214 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Signal Parameter Estimation</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b7e6a200-5db4-431e-a617-47a8fc65ae07</md:uuid>
+</metadata>
+
+
+  <content>
+    <para id="intro">
+      One extension of parametric estimation theory necessary for its
+      application to array processing is the estimation of signal
+      parameters.  We assume that we observe a signal
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">s</m:ci>
+	  <m:ci>l</m:ci>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math>, whose characteristics are known save a few parameters
+      <m:math>
+	<m:ci>θ</m:ci> </m:math>, in the presence of noise.
+      Signal parameters, such as amplitude, time origin, and frequency
+      if the signal is sinusoidal, must be determined in some way.  In
+      many cases of interest, we would find it difficult to justify a
+      particular form for the unknown parameters' <foreign>a
+      priori</foreign> density.  Because of such uncertainties, the
+      minimum mean-squared error and maximum <foreign>a
+      posteriori</foreign> estimators <emphasis>cannot</emphasis> be
+      used in many cases.  The minimum mean-squared error
+      <emphasis>linear</emphasis> estimator does not require this
+      density, but it is most fruitfully used when the unknown
+      parameter appears in the problem in a linear fashion (such as
+      signal amplitude as we shall see).
+    </para>
+    <section id="linearest">
+      <title>Linear Minimum Mean-Squared Error Estimator</title>
+      <para id="linear">
+	The only parameter that is linearly related to a signal is the
+	amplitude.  Consider, therefore, the problem where the
+	observations at an array's output are modeled as
+	<equation id="eqn1a">
+	  <m:math display="block">
+	    <m:apply> 
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:in/>
+		  <m:ci>l</m:ci>
+		  <m:set>
+		    <m:cn>0</m:cn>
+		    <m:ci>…</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:set>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>θ</m:ci>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	The signal waveform 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">s</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> is known and its energy normalized to be unity (
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>).  The linear estimate of the signal's amplitude is
+	assumed to be of the form 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">h</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">h</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> minimizes the mean-squared error.  To use the
+	Orthogonality Principle expressed by <link document="m11276" target-id="eqone">this equation</link>, an inner product must be
+	defined for scalars.  Little choice avails itself but
+	multiplication as the inner product of two scalars.  The
+	Orthogonality Principle states that the estimation error must
+	be orthogonal to all linear transformations defining the kind
+	of estimator being sought.
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:mo>·</m:mo>
+	      </m:apply>
+	    </m:bvar>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>h</m:mi>
+			      <m:mi>LIN</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">r</m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>k</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">h</m:ci>
+			<m:ci>k</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>k</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Manipulating this equation to make the universality constraint
+	more transparent results in 
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:apply>
+		<m:ci type="fn">h</m:ci>
+		<m:mo>·</m:mo>
+	      </m:apply>
+	    </m:bvar>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>k</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:ci type="fn">h</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:sum/>
+			<m:bvar>
+			  <m:ci>l</m:ci>
+			</m:bvar>
+			<m:lowlimit>
+			  <m:cn>0</m:cn>
+			</m:lowlimit>
+			<m:uplimit>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>L</m:ci>
+			    <m:cn>1</m:cn>
+			  </m:apply>
+			</m:uplimit>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:ci type="fn">
+			      <m:msub>
+				<m:mi>h</m:mi>
+				<m:mi>LIN</m:mi>
+			      </m:msub>
+			    </m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:ci type="fn">r</m:ci>
+			    <m:ci>l</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>k</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math> Written in this way, the expected value must be 0
+	for each value of 
+	<m:math>
+	  <m:ci>k</m:ci> 
+	</m:math> to satisfy the constraint.  Thus, the quantity
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">
+	      <m:msub>
+		<m:mi>h</m:mi>
+		<m:mi>LIN</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:mo>·</m:mo>
+	  </m:apply>
+	</m:math> of the estimator of the signal's amplitude must
+	satisfy
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci>k</m:ci>
+	    </m:bvar>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>h</m:mi>
+			<m:mi>LIN</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>k</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>θ</m:ci>
+		  <m:apply>
+		    <m:ci type="fn">r</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Assuming that the signal's amplitude has zero mean and is
+	statistically independent of the zero-mean noise, the expected
+	values in this equation are given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>k</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>θ</m:ci>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>k</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>k</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> where 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">
+	      <m:msub>
+		<m:mi>K</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:ci>k</m:ci>
+	    <m:ci>l</m:ci>
+	  </m:apply>
+	</m:math> is the covariance function of the noise.  The
+	equation that must be solved for the unit-sample response
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">
+	      <m:msub>
+		<m:mi>h</m:mi>
+		<m:mi>LIN</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:mo>·</m:mo>
+	  </m:apply>
+	</m:math> of the optimal linear MMSE estimator of signal
+	amplitude becomes
+	<equation id="estimator">
+	  <m:math>
+	    <m:apply>
+	      <m:forall/>
+	      <m:bvar>
+		<m:ci>k</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>h</m:mi>
+			  <m:mi>LIN</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>K</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>k</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:sum/>
+		      <m:bvar>
+			<m:ci>l</m:ci>
+		      </m:bvar>
+		      <m:lowlimit>
+			<m:cn>0</m:cn>
+		      </m:lowlimit>
+		      <m:uplimit>
+			<m:apply>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:uplimit>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:ci type="fn">
+			    <m:msub>
+			      <m:mi>h</m:mi>
+			      <m:mi>LIN</m:mi>
+			    </m:msub>
+			  </m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:ci type="fn">s</m:ci>
+			  <m:ci>l</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	This equation is easily solved once phrased in matrix
+	notation.  Letting
+	<m:math>
+	  <m:ci type="matrix">
+	    <m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>n</m:mi>
+	    </m:msub>
+	    </m:ci>
+	</m:math> denote the covariance matrix of the noise,
+	<m:math>
+	  <m:ci type="vector">s</m:ci>
+	</m:math> the signal vector, and
+	<m:math>
+	  <m:ci type="vector">
+	    <m:msub>
+	      <m:mi>h</m:mi>
+	      <m:mi>LIN</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math> the vector of coefficients, this equation becomes
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">
+		<m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>h</m:mi>
+		  <m:mi>LIN</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>h</m:mi>
+		      <m:mi>LIN</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The matched filter for colored-noise problems consisted of the
+	dot product between the vector of observations and
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix">
+		<m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:ci type="vector">s</m:ci> 
+	  </m:apply>
+	</m:math>
+	(see the <link document="m11260" target-id="eq1">detector
+	result</link>).  Assume that the solution to the linear
+	estimation problem is proportional to the detection
+	theoretical one:
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">
+	      <m:msub>
+		<m:mi>h</m:mi>
+		<m:mi>LIN</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>c</m:ci>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">s</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where 
+	<m:math>
+	  <m:ci>c</m:ci> </m:math> is a scalar constant.  This
+	proposed solution satisfies the equation; the MMSE estimate of
+	signal amplitude corresponds to applying a matched filter to
+	the observations with
+	<equation id="solution">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="vector">
+		<m:msub>
+		  <m:mi>h</m:mi>
+		  <m:mi>LIN</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>
+			  <m:msub>
+			    <m:mi>σ</m:mi>
+			    <m:mi>θ</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">s</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">
+			  <m:msub>
+			    <m:mi>K</m:mi>
+			    <m:mi>n</m:mi>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">s</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">s</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	The mean-squared estimation error of signal amplitude is given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>θ</m:ci>
+		  <m:apply>
+		    <m:sum/>
+		    <m:bvar>
+		      <m:ci>l</m:ci>
+		    </m:bvar>
+		    <m:lowlimit>
+		      <m:cn>0</m:cn>
+		    </m:lowlimit>
+		    <m:uplimit>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>L</m:ci>
+			<m:cn>1</m:cn>
+		      </m:apply>
+		    </m:uplimit>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>h</m:mi>
+			    <m:mi>LIN</m:mi>
+			  </m:msub>
+			</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Substituting the vector expression for
+	<m:math>
+	  <m:ci type="vector">
+	    <m:msub>
+	      <m:mi>h</m:mi>
+	      <m:mi>LIN</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math>
+	yields the result that the mean-squared estimation error
+	equals the proportionality constant 
+	<m:math>
+	  <m:ci>c</m:ci>
+	</m:math> defined earlier.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>ε</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:cn>1</m:cn>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="vector">s</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix">
+		      <m:msub>
+			<m:mi>K</m:mi>
+			<m:mi>n</m:mi>
+		      </m:msub>
+		    </m:ci>
+		  </m:apply>
+		  <m:ci type="vector">s</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+      <para id="optimalest">
+	Thus, the linear filter that produces the optimal estimate of
+	signal amplitude is equivalent to the matched filter used to
+	detect the signal's presence.  We have found this situation to
+	occur when estimates of unknown parameters are needed to solve
+	the detection problem (see <link document="m11262">Detection
+	in the Presence of Uncertainties</link>).  If we had not
+	assumed the noise to be Gaussian, however, this
+	detection-theoretic result would be different, but the
+	estimator would be unchanged.  To repeat, this invariance
+	occurs because the linear MMSE estimator requires
+	<emphasis>no</emphasis> assumptions on the noise's amplitude
+	characteristics.
+      </para>
+      <example id="sleepy">
+	<para id="example">
+	  Let the noise be white so that its covariance matrix is
+	  proportional to the identity matrix (
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci type="matrix">
+		<m:msub>
+		  <m:mi>K</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci type="matrix">I</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>).  The weighting factor in the minimum
+	  mean-squared error linear estimator is proportional to the
+	  signal waveform.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>h</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  This proportionality constant depends only on the relative
+	  variances of the noise and the parameter.
+	  <emphasis>If</emphasis> the noise variance can be considered
+	  to be much smaller than the <foreign>a priori</foreign>
+	  variance of the amplitude, then this constant does not
+	  depend on these variances and equals unity.  Otherwise, the
+	  variances must be known.
+	</para>
+	<para id="wefindthe">
+	  We find the mean-squared estimation error to be
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>ε</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  This error is significantly reduced from its nominal value
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>θ</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>2</m:cn> </m:apply> </m:math> only when the
+	    variance of the noise is small compared with the
+	    <foreign>a priori</foreign> variance of the amplitude.
+	    Otherwise, this admittedly optimum amplitude estimate
+	    performs poorly, and we might as well as have ignored the
+	    data and "guessed" that the amplitude was zero<footnote id="idp2350944"> In other words, the problem is difficult
+	    in this case.</footnote>.
+	</para>
+      </example>
+    </section>
+  </content>
+  
+</document>

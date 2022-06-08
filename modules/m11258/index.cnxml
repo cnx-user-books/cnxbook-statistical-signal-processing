@@ -1,0 +1,500 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>A Hilbert Space for Stochastic Processes</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>3c27ba4a-255b-43ac-8520-966897ab823a</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+      The result of primary concern here is the construction of a
+      Hilbert space for stochastic processes.  The space consisting of
+      random variables <m:math><m:ci>X</m:ci></m:math> having a finite
+      mean-square value is (almost) a Hilbert space with inner product
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci>X</m:ci>
+	    <m:ci>Y</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  Consequently, the distance between two random
+      variables <m:math><m:ci>X</m:ci></m:math> and
+      <m:math><m:ci>Y</m:ci></m:math> is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">d</m:ci><!--distance function-->
+	    <m:ci>X</m:ci>
+	    <m:ci>Y</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>X</m:ci>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>1/2</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Now <m:math>
+	<m:apply>
+	  <m:implies/>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">d</m:ci><!--distance function-->
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>X</m:ci>
+		  <m:ci>Y</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  However, this does not imply that <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>X</m:ci>
+	  <m:ci>Y</m:ci>
+	</m:apply>
+      </m:math>.  Those sets with probability zero appear again.
+      Consequently, we do not have a Hilbert space unless we agree
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>X</m:ci>
+	  <m:ci>Y</m:ci>
+	</m:apply>
+      </m:math> means <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>X</m:ci>
+	      <m:ci>Y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math>.
+    </para>
+
+    <para id="para2">
+      Let <m:math>
+	<m:apply>
+	  <m:ci>X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> be a process with <m:math>
+	<m:apply>
+	  <m:lt/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:ci type="fn">X</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:infinity/>
+	</m:apply>
+      </m:math>.  For each <m:math><m:ci>t</m:ci></m:math>, <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> is an element of the Hilbert space just defined.
+      Parametrically, <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> is therefore regarded as a "curve" in a Hilbert space.
+      This curve is continuous if
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:limit/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:lowlimit><m:ci>u</m:ci></m:lowlimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">X</m:ci>
+		    <m:ci>u</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:cn>0</m:cn>
+	</m:apply>
+      </m:math>
+      Processes satisfying this condition are said to be
+      <term>continuous in the quadratic mean</term>.  The vector space
+      of greatest importance is analogous to 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>T</m:mi>
+	      <m:mi>f</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  Consider the collection of real-valued stochastic
+      processes <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> for which
+      <m:math display="block">
+	<m:apply>
+	  <m:lt/>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:lowlimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci></m:lowlimit>
+	    <m:uplimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>f</m:mi>
+		</m:msub></m:ci></m:uplimit>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">X</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:infinity/>
+	</m:apply>
+      </m:math>
+      Stochastic processes in this collection are easily verified to
+      constitute a linear vector space.  Define an inner product for
+      this space as:
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:apply>
+		<m:ci type="fn">X</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">Y</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar><m:ci>t</m:ci></m:bvar>
+	      <m:lowlimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci></m:lowlimit>
+	      <m:uplimit><m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>f</m:mi>
+		  </m:msub></m:ci></m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:ci type="fn">X</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">Y</m:ci>
+		  <m:ci>t</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      While this equation is a valid inner product, the left-hand side
+      will be used to denote the inner product instead of the notation
+      previously defined.  We take <m:math>
+	<m:apply>
+	  <m:scalarproduct/>
+	  <m:apply>
+	    <m:ci type="fn">X</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn">Y</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> to be the <term>time-domain inner product</term> as
+      shown <link document="m11257" target-id="eqn1">here</link>.  In
+      this way, the deterministic portion of the inner product and the
+      expected value portion are explicitly indicated.  This
+      convention allows certain theoretical manipulations to be
+      performed more easily.
+    </para>
+
+    <para id="para3">
+      One of the more interesting results of the theory of stochastic
+      processes is that the normed vector space for processes
+      previously defined is separable.  Consequently, there exists a
+      complete (and, by assumption, orthonormal) set 
+      <m:math>
+	<m:set>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>φ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:set>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>i</m:ci>
+	  <m:set>
+	    <m:cn>1</m:cn>
+	    <m:mo>…</m:mo>
+	  </m:set>
+	</m:apply>
+      </m:math> of deterministic (nonrandom) functions which
+      constitutes a basis.  A process in the space of stochastic
+      processes can be represented as
+      <equation id="eqn1">
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:leq/>
+		<m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>T</m:mi>
+		    <m:mi>f</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">X</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:infinity/>
+		</m:uplimit>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>X</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn"><m:msub>
+			<m:mi>φ</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci>t</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      where <m:math>
+	<m:set>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:set>
+      </m:math>, the representation of <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math>, is a sequence of random variables given by
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:scalarproduct/>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>φ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      or
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>X</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <m:int/>
+	    <m:bvar><m:ci>t</m:ci></m:bvar>
+	    <m:lowlimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci></m:lowlimit>
+	    <m:uplimit><m:ci><m:msub>
+		  <m:mi>T</m:mi>
+		  <m:mi>f</m:mi>
+		</m:msub></m:ci></m:uplimit>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn">X</m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>φ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci>t</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Strict equality between a process and its representation cannot
+      be assured.  Not only does the analogous issue in
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msup>
+	      <m:mi>L</m:mi>
+	      <m:mn>2</m:mn>
+	    </m:msup></m:ci>
+	  <m:cn>0</m:cn>
+	  <m:ci>T</m:ci>
+	</m:apply>
+      </m:math> occur with respect to representing individual sample
+      functions, but also sample functions assigned a zero probability
+      of occurrence can be troublesome.  In fact, the ensemble of any
+      stochastic process can be augmented by a set of sample functions
+      that are not well-behaved (<foreign>e.g.</foreign>, a sequence
+      of pulses) but have probability zero.  In a practical sense,
+      this augmentation is trivial: such members of the process cannot
+      occur.  Therefore, one says that two processes <m:math>
+	<m:apply>
+	  <m:ci type="fn">X</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> and <m:math>
+	<m:apply>
+	  <m:ci type="fn">Y</m:ci>
+	  <m:ci>t</m:ci>
+	</m:apply>
+      </m:math> are equal almost everywhere if the distance between <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:ci type="fn">X</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">Y</m:ci>
+	      <m:ci>t</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> is zero.  The implication is that any lack of strict
+      equality between the processes (strict equality means the
+      processes match on a sample-function-by-sample-function basis)
+      is "trivial."
+    </para>
+  </content>
+  
+</document>

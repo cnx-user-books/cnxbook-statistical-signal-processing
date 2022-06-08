@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Non-Gaussian Observations</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f5431c2b-e0ef-49d4-aa81-47329aad0465</md:uuid>
+</metadata>
+
+  <content>
+    <para id="only">
+       The term <term>non-Gaussian</term> has a connotation similar to
+    that of "non-linear;" rather than meaning those problems which are
+    not simple (the simple ones being the Gaussian or linear ones),
+    these terms refer instead to the general problem - all possible
+    stationary random sequences or all systems. In general,
+    "non-Gaussian detection theory" makes <emphasis>no</emphasis>
+    assumption as to the specific form of the noise amplitude
+    distribution (<cite target-id="Kassam"><cite-title>Kassam</cite-title></cite>). This generality
+    mimics situations where the additive noise is variable, having an
+    unpredictable structure which makes <foreign>a priori</foreign> models of the noise
+    difficult to justify. This section describes detection algorithms
+    that make few assumptions about the joint probability density
+    function of the noise amplitudes at several samples. For
+    simplicity, the noise sequence is assumed in sequel to be white.
+    </para>
+  </content>
+ 
+  <bib:file>
+    <bib:entry id="Kassam">
+      <bib:book>
+	<bib:author>S.A. Kassam</bib:author>
+	<bib:title>Signal Detection in Non-Gaussian Noise</bib:title>
+	<bib:publisher>Springer-Verlag</bib:publisher>
+	<bib:year>1988</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+  
+</document>

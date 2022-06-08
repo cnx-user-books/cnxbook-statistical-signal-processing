@@ -1,0 +1,1133 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Optimization Theory</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>fc8682d5-96c3-4648-b845-f55ef3b243f1</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro">
+       Optimization theory is the study of the
+      <emphasis>extremal</emphasis> values of a function: its minima
+      and maxima.  Topics in this theory range from conditions for the
+      existence of a unique extremal value to methods---both analytic
+      and numeric---for finding the extremal values and for what
+      values of the independent variables the function attains its
+      extremes.  In this book, minimizing an error criterion is an
+      essential step toward deriving optimal signal processing
+      algorithms.  An appendix summarizing the key results of
+      optimization theory is essential to understand optimal
+      algorithms.  
+    </para>
+    <section id="unconstrained">
+      <title>Unconstrained Optimization</title>
+      <para id="simplest">
+	The simplest optimization problem is to find the minimum of a
+	scalar-valued function of a scalar variable 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math>---the so-called <term>objective
+	function</term>---and where that minimum is located.  Assuming
+	the function is differentiable, the well-known conditions for
+	finding the minima---local and global---are<footnote id="idm4472752">The maximum of a function is found by finding
+	the minimum of its negative.</footnote>  
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:gt/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+		<m:degree>
+		  <m:cn>2</m:cn>
+		</m:degree>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	All values of the independent variable <m:math><m:ci>x</m:ci>
+	</m:math> satisfying these relations are locations of local
+	minima.
+      </para>
+      <para id="condition">
+	Without the second condition, solutions to the first could be
+	either maxima, minima, or inflection points.  Solutions to the
+	first equation are termed the <term>stationary points</term>
+	of the objective function.  To find the
+	<term><emphasis>global</emphasis> minimum</term>---that value
+	(or values) where the function achieves its smallest
+	value---each candidate extremum must be tested: the objective
+	function must be evaluated at each stationary point and the
+	smallest selected.  If, however, the objective function can be
+	shown to be strictly convex, then only one solution of
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff/>
+	      <m:bvar>
+		<m:ci>x</m:ci>
+	      </m:bvar>
+	      <m:ci type="fn">f</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math> exists and that solution corresponds to the global
+	minimum.  The function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math> is <term>strictly convex</term> if, for any choice
+	of <m:math><m:ci><m:msub><m:mi>x</m:mi><m:mn>1</m:mn>
+	</m:msub></m:ci> </m:math>,
+	<m:math><m:ci><m:msub><m:mi>x</m:mi><m:mn>2</m:mn>
+	</m:msub></m:ci> </m:math>, and the scalar
+	<m:math><m:ci>a</m:ci> </m:math>, 
+	<m:math>
+	  <m:apply>
+	    <m:lt/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:cn>1</m:cn>
+		    <m:ci>a</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:cn>1</m:cn>
+		  <m:ci>a</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  Convex objective functions occur often in practice
+	and are more easily minimized because of this property.
+      </para>
+      <para id="complexvariable">When the objective function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> depends on a complex variable <m:math><m:ci>z</m:ci>
+	</m:math>, subtleties enter the
+	picture. <emphasis>If</emphasis> the function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math> is differentiable, its extremes can be found in the
+	obvious way: find the derivative, set it equal to zero, and
+	solve for the locations of the extrema. However, there are many
+        situations in which this
+	function is <emphasis>not</emphasis> differentiable.  In
+	contrast to functions of a real variable, non-differentiable
+	functions of a complex variable occur frequently.  The
+	simplest example is 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:abs/>
+		<m:ci>z</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The minimum value of this function obviously
+	occurs at the origin.  To calculate this obvious answer, a
+	complication arises: the function 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:conjugate/>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> is not analytic with respect to
+	<m:math><m:ci>z</m:ci> </m:math> and hence not differentiable.
+	More generally, the derivative of a function with respect to a
+	complex-valued variable cannot be evaluated directly when the
+	function depends on the variable's conjugate. See Churchill <cite target-id="ref1"/> for more about the analysis of functions of a complex variable.
+</para>
+      <para id="resolve">
+	This complication can be resolved with either of two methods
+	tailored for optimization problems.  The first is to express
+	the objective function in terms of the real and imaginary
+	parts of <m:math><m:ci>z</m:ci> </m:math> and find the
+	function's minimum with respect to these two variables.<footnote id="idm4577264">The multi-variate minimization problem is
+	discussed in a few paragraphs.</footnote> This approach is
+	unnecessarily tedious but will yield the solution.  The
+	second, more elegant, approach relies on two results from
+	complex variable theory.  First, the quantities
+	<m:math><m:ci>z</m:ci> </m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:conjugate/>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math> can be treated as independent variables, each
+	considered a constant with respect to the other.  A variable
+	and its conjugate are thus viewed as the result of applying an
+	invertible linear transformation to the variable's real and
+	imaginary parts.  Thus, if the real and imaginary parts can be
+	considered as independent variables, so can the variable and
+	its conjugate with the advantage that the mathematics is far
+	simpler.  In this way, 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:ci>z</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:conjugate/>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:bvar>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math>.  Seemingly, the next step to minimizing the
+	objective function is to set the derivatives with respect to
+	each quantity to zero and then solve the resulting pair of
+	equations.  As the following theorem suggests, that solution
+	is overly complicated.
+	<rule id="stationary" type="theorem"><statement id="idm2556352">
+	    <para id="stat1">If the function 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci>z</m:ci>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:ci>z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> is real-valued and analytic with respect to
+	      <m:math><m:ci>z</m:ci> </m:math> and 
+	      <m:math>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:math>, all stationary points can be found by setting
+	      the derivative (in the sense just given) with respect to
+	      <emphasis>either</emphasis> <m:math><m:ci>z</m:ci>
+	      </m:math> or 
+	      <m:math>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:math> to zero <cite target-id="ref2"/>.
+	    </para>
+	  </statement>
+	</rule>
+	Thus, to find the minimum of 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:abs/>
+	      <m:ci>z</m:ci>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math>, compute the derivative with respect to either
+	<m:math><m:ci>z</m:ci> </m:math> or
+	<m:math>
+	  <m:apply>
+	    <m:conjugate/>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math>.  In most cases, the derivative with respect to
+	<m:math>
+	  <m:apply>
+	    <m:conjugate/>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math> is the most convenient choice.<footnote id="idm84512">Why should this be?  In the next few examples,
+	try both and see which you feel is "easier".</footnote> Thus,
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+	      </m:bvar>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>z</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>z</m:ci>
+	  </m:apply>
+	</m:math> and the stationary point is 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>z</m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>.  As this objective function is strictly convex, the
+	objective function's sole stationary point is its global
+	minimum.  
+      </para> 
+      <para id="quanitityx">When the objective function depends on a vector-valued
+	quantity <m:math><m:ci type="vector">x</m:ci> </m:math>, the
+	evaluation of the function's stationary points is a simple
+	extension of the scalar-variable case.  However, testing
+	stationary points as possible locations for minima is more
+	complicated <cite target-id="ref3"/>.  The <term>gradient</term> of the scalar-valued
+	function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math> of a vector <m:math><m:ci type="vector">x</m:ci>
+	</m:math> (dimension <m:math><m:ci>N</m:ci> </m:math>) equals
+	an <m:math><m:ci>N</m:ci> </m:math>-dimensional vector where
+	each component is the partial derivative of 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math> with respect to each component of <m:math><m:ci type="vector">x</m:ci> </m:math>.  
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:vector>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>⋮</m:ci>
+	      <m:apply>
+		<m:partialdiff/>
+		<m:bvar>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:vector>
+	  </m:apply>
+	</m:math>
+	For example, the gradient of 
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math> is 
+	<m:math>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">A</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  This result is easily derived by expressing the
+	quadratic form as a double sum (
+	<m:math>
+	  <m:apply>
+	    <m:sum/>
+	    <m:bvar>
+	      <m:apply>
+		<m:and/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:bvar>
+	    <m:domainofapplication>
+	      <m:apply>
+		<m:and/>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:domainofapplication>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="matrix">A</m:ci>
+		<m:ci>i</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci>i</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci>j</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>) and evaluating the partials directly.  When
+	<m:math><m:ci type="matrix">A</m:ci> </m:math> is symmetric,
+	which is often the case, this gradient becomes
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:cn>2</m:cn>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math>.
+      </para>
+      <para id="steep">
+	The gradient "points" in the direction of the maximum rate
+	of increase of the function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math>.  This fact is often used in numerical optimization
+	algorithms.  The <term>method of steepest descent</term> is an
+	iterative algorithm where a candidate minimum is augmented by
+	a quantity proportional to the negative of the objective
+	function's gradient to yield the next candidate.  
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:bvar>
+	      <m:ci>α</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:apply>
+		<m:gt/>
+		<m:ci>α</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:condition>
+	    <m:eq/>
+	    <m:apply>
+	      <m:selector/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci>k</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:selector/>
+		<m:ci type="vector">x</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>k</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>α</m:ci>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">f</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	If the objective function is sufficiently "smooth" (there
+	aren't too many minima and maxima), this approach will yield
+	the global minimum.  Strictly convex functions are certainly
+	smooth for this method to work.
+      </para>
+      <para id="hessian">
+	The gradient of the gradient of 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math>, denoted by 
+	<m:math>
+	  <m:apply>
+	    <!--directional derivative with degree-->
+	    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	    <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+	    <m:degree>
+	      <m:cn>2</m:cn>
+	    </m:degree>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, is a matrix where
+	<m:math><m:ci><m:msup><m:mi>j</m:mi><m:mi>th</m:mi>
+	</m:msup></m:ci> </m:math> column is the gradient of the
+	<m:math><m:ci><m:msup><m:mi>j</m:mi><m:mi>th</m:mi>
+	</m:msup></m:ci> </m:math> component of <m:math><m:ci type="fn">f</m:ci> </m:math>'s gradient.  This quantity is
+	known as the <term>Hessian</term>, defined to be the matrix of
+	all the second partials of
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci>·</m:ci>
+	  </m:apply>
+	</m:math>.  
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:selector/>
+	      <m:apply>
+		<!--directional derivative with degree-->
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+		<m:degree>
+		  <m:cn>2</m:cn>
+		</m:degree>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:ci>i</m:ci>
+	      <m:ci>j</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:partialdiff/>
+	      <m:bvar>
+		<m:apply>
+		  <m:selector/>
+		  <m:ci>x</m:ci>
+		  <m:ci>i</m:ci>
+		</m:apply>
+	      </m:bvar>
+	      <m:bvar>
+		<m:apply>
+		  <m:selector/>
+		  <m:ci>x</m:ci>
+		  <m:ci>j</m:ci>
+		</m:apply>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The Hessian is always a symmetric matrix.
+      </para>
+      <para id="minima">
+	The minima of the objective function 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	</m:math> occur when
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar><m:ci type="vector">x</m:ci></m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	and
+	<m:math display="block">
+	  <m:apply>
+	    <m:gt/>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar>
+		<m:ci type="vector">x</m:ci>
+	      </m:bvar>
+	      <m:degree>
+		<m:cn>2</m:cn>
+	      </m:degree>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	<foreign>i.e.</foreign>, positive definite. Thus, for a
+	stationary point to be a minimum, the Hessian evaluated at
+	that point must be a positive definite matrix. When the
+	objective function is strictly convex, this test need not be
+	performed.  For example, the objective function 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">f</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> is convex whenever <m:math><m:ci type="matrix">A</m:ci> </m:math> is positive definite and
+	symmetric.<footnote id="idm298496">Note that the Hessian of
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:math> is
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:ci type="matrix">A</m:ci>
+	    </m:apply>
+	  </m:math>.</footnote>
+      </para>
+      <para id="unique">
+	When the independent vector is complex-valued, the issues
+	discussed in the scalar case also arise.  Because of the
+	complex-valued quantities involved, how to evaluate the
+	gradient becomes an issue: is
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>∇</m:mi>
+	      <m:mi>z</m:mi>
+	    </m:msub></m:ci> 
+	</m:math> or
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>∇</m:mi>
+	      <m:msup>
+		<m:mi>z</m:mi> 
+		<m:mo>*</m:mo> 
+	      </m:msup> 
+	    </m:msub></m:ci> 
+	</m:math>
+	more appropriate?.  In contrast to the case of complex
+	scalars, the choice in the case of complex vectors is unique.
+	<rule id="complex" type="theorem">
+	  <statement id="idp500064">
+	    <para id="complex1">Let 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">z</m:ci>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> be a real-valued function of the vector-valued
+	      complex variable <m:math><m:ci type="vector">z</m:ci>
+	      </m:math> where the dependence on the variable and its
+	      conjugate is explicit.  By treating <m:math><m:ci type="vector">z</m:ci> </m:math> and
+	      <m:math>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+	      </m:math> as independent variables, the quantity
+	      pointing in the direction of the maximum rate of change
+	      of 
+	      <m:math>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">z</m:ci>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> is 
+	      <m:math>
+		<m:apply>
+		  <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		  <m:bvar>
+		    <m:apply>
+		      <m:conjugate/>
+		      <m:ci type="vector">z</m:ci>
+		    </m:apply>
+		  </m:bvar>
+		  <m:apply>
+		    <m:ci type="fn">f</m:ci>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:math> <cite target-id="ref2"/>.
+	    </para>
+	  </statement>
+	</rule>
+	To show this result, consider the variation of <m:math><m:ci type="fn">f</m:ci> </m:math> given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:mo>δ</m:mo>
+	      <m:ci type="fn">f</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>i</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci>i</m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:ci><m:msub>
+			  <m:mi>z</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:bvar>
+		    <m:ci type="fn">f</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:mo>δ</m:mo>
+		    <m:ci><m:msub>
+			<m:mi>z</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:partialdiff/>
+		    <m:bvar>
+		      <m:apply>
+			<m:conjugate/>
+			<m:ci><m:msub>
+			    <m:mi>z</m:mi>
+			    <m:mi>i</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:bvar>
+		    <m:ci type="fn">f</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:mo>δ</m:mo>
+		    <m:apply>
+		      <m:conjugate/>
+		      <m:ci><m:msub>
+			  <m:mi>z</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar><m:ci type="vector">z</m:ci></m:bvar>
+		    <m:ci type="fn">f</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:mo>δ</m:mo>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:apply>
+		    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		    <m:bvar>
+		      <m:apply>
+			<m:conjugate/>
+			<m:ci type="vector">z</m:ci>
+		      </m:apply>
+		    </m:bvar>
+		    <m:ci type="fn">f</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:mo>δ</m:mo>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	This quantity is concisely expressed as 
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:mo>δ</m:mo>
+	      <m:ci type="fn">f</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:apply>
+		<m:real/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+		    <m:apply>
+		      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		      <m:bvar>
+			<m:apply>
+			  <m:conjugate/>
+			  <m:ci type="vector">z</m:ci>
+			</m:apply>
+		      </m:bvar>
+		      <m:ci type="fn">f</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:mo>δ</m:mo>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  By the Schwarz inequality, the maximum value of
+	this variation occurs when 
+	<m:math>
+	  <m:apply>
+	    <m:mo>δ</m:mo>
+	    <m:ci type="vector">z</m:ci>
+	  </m:apply>
+	</m:math> is in the same direction as 
+	(<m:math>
+	  <m:apply>
+	    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	    <m:bvar>
+	      <m:apply>
+		<m:conjugate/>
+		<m:ci type="vector">z</m:ci>
+	      </m:apply>
+	    </m:bvar>
+	    <m:ci type="fn">f</m:ci>
+	  </m:apply>
+	</m:math>).  Thus, the direction corresponding to the largest
+	change in the quantity 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">f</m:ci>
+	    <m:ci type="vector">z</m:ci>
+	    <m:apply>
+	      <m:conjugate/>
+	      <m:ci type="vector">z</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> is in the direction of its gradient with respect to
+	<m:math>
+	  <m:apply>
+	    <m:conjugate/>
+	    <m:ci type="vector">z</m:ci>
+	  </m:apply>
+	</m:math>. To implement the method of steepest descent, for
+	example, the gradient with respect to the conjugate
+	<emphasis>must</emphasis> be used.
+      </para>
+      <para id="scalar">
+	To find the stationary points of a scalar-valued function of a
+	complex-valued vector, we must solve 
+	<equation id="scalarcomplex">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+		<m:bvar>
+		  <m:apply>
+		    <m:conjugate/>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:bvar>
+		<m:apply>
+		  <m:ci type="fn">f</m:ci>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	For solutions of this equation to be minima, the Hessian
+	defined to be the matrix of mixed partials given by
+	<m:math>
+	  <m:apply>
+	    <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	    <m:bvar><m:ci type="vector">z</m:ci></m:bvar>
+	    <m:apply>
+	      <m:diff definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#vectorderivative"/>
+	      <m:bvar>
+		<m:apply>
+		  <m:conjugate/>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+	      </m:bvar>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci type="vector">z</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> must be positive definite.  For example, the
+	required gradient of the objective function
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#adjoint"/>
+	      <m:ci type="vector">z</m:ci>
+	    </m:apply>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="vector">z</m:ci>
+	  </m:apply>
+	</m:math> is given by
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:ci type="vector">z</m:ci>
+	  </m:apply>
+	</m:math>, implying for positive definite <m:math><m:ci type="matrix">A</m:ci> </m:math> that a stationary point is
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">z</m:ci>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>.  The Hessian of the objective function is simply
+	<m:math><m:ci type="matrix">A</m:ci> </m:math>, confirming
+	that the minimum of a quadratic form is always the origin.
+      </para>
+    </section>
+
+  </content>
+  <bib:file>
+    <bib:entry id="ref1">
+      <bib:book>
+<!--required fields-->
+        <bib:author>R.V. Churchill and J.W. Brown</bib:author>
+        <bib:title>Complex Variables and Applications</bib:title>
+        <bib:publisher>McGraw-Hill</bib:publisher>
+        <bib:year>1989</bib:year>
+      </bib:book>
+    </bib:entry>
+    <bib:entry id="ref2">
+      <bib:article>
+<!--required fields-->
+        <bib:author>D.H. Brandwood</bib:author>
+        <bib:title>A complex gradient operator and its application in adaptive array theory</bib:title>
+        <bib:journal>IEE Proc., Pts. F and H</bib:journal>
+        <bib:year>1983</bib:year>
+<!--optional fields-->
+        <bib:volume>130</bib:volume>
+        <bib:pages>11-16</bib:pages>
+      </bib:article>
+    </bib:entry>
+    <bib:entry id="ref3">
+      <bib:book>
+<!--required fields-->
+        <bib:author>D.G. Luenberger</bib:author>
+        <bib:title>Optimization by Vector Space Methods</bib:title>
+        <bib:publisher>Wiley</bib:publisher>
+        <bib:year>1969</bib:year>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

@@ -1,0 +1,1369 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Linear Estimators</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a08337eb-20c1-4224-b48c-5db0a0b53544</md:uuid>
+</metadata>
+
+  <content>
+    <para id="one">
+      We derived the minimum mean-squared error estimator in the <link document="m11267">previous section</link> with no constraint on
+      the form of the estimator. Depending on the problem, the
+      computations could be a linear function of the observations
+      (which is always the case in Gaussian problems) or
+      nonlinear. Deriving this estimator is often difficult, which
+      limits its application. We consider here a variation of MMSE
+      estimation by constraining the estimator to be linear while
+      minimizing the mean-squared estimation error. Such <term>linear
+      estimators</term> may not be optimum; the conditional expected
+      value may be nonlinear and it <emphasis>always</emphasis> has
+      the smallest mean-squared error. Despite this occasional
+      performance deficit, linear estimators have well-understood
+      properties, they interact will with other signal processing
+      algorithms because of linearity, and they can always be derived,
+      no matter what the problem.
+    </para>
+    
+    <para id="two">
+      Let the parameter estimate 
+      <m:math>
+	<m:apply>
+	  <m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci type="fn">θ</m:ci>
+	  </m:apply>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>  
+      be expressed as 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">ℒ</m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> where 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">ℒ</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> is a linear operator:
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">ℒ</m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>a</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>a</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>a</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:ci type="fn">ℒ</m:ci>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>a</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msub>
+	      </m:ci>
+	      <m:apply>
+		<m:ci type="fn">ℒ</m:ci>
+		<m:ci type="vector">
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> where 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>a</m:mi>
+	    <m:mn>1</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math>, 
+      <m:math>
+	<m:ci>
+	  <m:msub>
+	    <m:mi>a</m:mi>
+	    <m:mn>2</m:mn>
+	  </m:msub>
+	</m:ci>
+      </m:math> are scalars. Although all estimators of this form are
+      obviously linear, the term <term>linear estimator</term> denotes
+      that member of this family that minimizes the mean-squared
+      error.
+
+      <equation id="eqone">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#argmin"/>
+	      <m:domainofapplication>
+		<m:apply>
+		  <m:ci type="fn">ℒ</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:ci type="matrix">ε</m:ci>
+		  </m:apply>
+		  <m:ci>ε</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>	
+	  </m:apply>
+	</m:math>
+      </equation>
+    </para>
+
+    <para id="three">
+      Because of the transformation's linearity, the theory of linear
+      vector spaces can be fruitfully used to derive the estimator and
+      to specify its properties. One result of that theoretical
+      framework is the well-known <term>Orthogonality Principle</term>
+      <cite target-id="Papoulis"><cite-title>(Papoulis, pp. 407-414)</cite-title></cite> The linear
+      estimator is that particular linear transformation that yields
+      an estimation error orthogonal to all linear transformations of
+      the data. The orthogonality of the error to
+      <emphasis>all</emphasis> linear transformations is termed the
+      <term>universality constraint.</term> This principle provides us
+      not only with a formal definition of the linear estimator but
+      also with the mechanism to derive it. To demonstrate this
+      intriguing result, let
+      <m:math>
+	<m:apply>
+	  <m:scalarproduct/>
+	  <m:ci>·</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> denote the absract inner product between two vectors and 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> the associated norm.
+      <equation id="eqtwo">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      For example, if <m:math><m:ci type="vector">x</m:ci></m:math>
+      and <m:math><m:ci type="vector">y</m:ci></m:math> are each
+      column matrices having only one column,<footnote id="idp2273008">There is a confusion as to what a vector
+      it. "Matricies having one column" are colloquially termed
+      vectors as are the field quantities such as electric and
+      magnetic fields. "Vectors" and their associated inner products
+      are taken to be much more general mathematical objects than
+      these. Hence the prose in this section is rather
+      contorted.</footnote> their inner product might be defined as
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:scalarproduct/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:ci type="vector">x</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:ci type="vector">y</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>. Thus, the linear estimator as defined by the
+      Orthogonality Principle must satisfy
+
+      <equation id="eqthree">
+	<m:math>
+	  <m:apply>
+	    <m:forall/>
+	    <m:condition>
+	      <m:mtext>  for all linear transformations  </m:mtext>
+	      <m:apply>	    
+		<m:ci type="fn">ℒ</m:ci>
+		<m:ci>·</m:ci>
+	      </m:apply>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci type="fn">
+			  <m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mi>LIN</m:mi>
+			  </m:msub>
+			</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">ℒ</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+
+      To see that this principle produces the MMSE linear estimator,
+      we express the mean-squared estimation error
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">ε</m:ci>
+	      </m:apply>
+	      <m:ci>ε</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci type="matrix">ε</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> for <emphasis>any</emphasis> choice of linear estimator
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math> as
+      <equation id="eqa">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci><m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mi>LIN</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci><m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mi>LIN</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			<m:ci><m:msub>
+			    <m:mi>θ</m:mi>
+			    <m:mi>LIN</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci><m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mi>LIN</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+	     	  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci><m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mi>LIN</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:ci>θ</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci><m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mi>LIN</m:mi>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> As
+
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mi>LIN</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci>θ</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> is the difference of two linear transformations, it
+      too is linear and is orthogonal to the estimation error resulting
+      from
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci><m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mi>LIN</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.  As a result, the last term is zero and the
+      mean-squared estimation error is the sum of two squared norms,
+      each of which is, of course, nonnegative. Only the second norm
+      varies with estimator choice; we minimize the mean-squared
+      estimation error by choosing the estimator
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci>θ</m:ci>
+	</m:apply>
+      </m:math> to be the estimator
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	  <m:ci><m:msub>
+	      <m:mi>θ</m:mi>
+	      <m:mi>LIN</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>, which sets the second term to zero.
+    </para>
+
+    <para id="paraa">
+      The estimation error for the minimum mean-squared linear
+      estimator can be calculated to some degree without knowledge of
+      the form of the estimator. The mean-squared estimation error is
+      given by
+
+      <equation id="eqb">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>LIN</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>LIN</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>LIN</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>LIN</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>LIN</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mi>LIN</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation>
+      The first term is zero because of the Orthogonality
+      Principle. Rewriting the second term yields a general expression
+      for the MMSE linear estimator's mean-squared error.
+      <equation id="eqc">
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci type="matrix">ε</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="matrix">θ</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:scalarproduct/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msub>
+			<m:mi>θ</m:mi>
+			<m:mi>LIN</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      </equation>
+      This error is the difference of two terms. The first, the
+      mean-squared value of the parameter, represents the largest
+      value that the estimation error can be for any reasonable
+      estimator. That error can be obtained by the estimator that
+      ignores the data and has a value of zero. The second term
+      reduces this maximum error and represents the degree to which
+      the estimate and the parameter agree on the average.
+    </para>
+
+    <para id="parab">
+      Note that the definition of the minimum mean-squared error
+      <emphasis>linear</emphasis> estimator makes no explicit
+      assumptions about the parameter estimation problem being
+      solved. This property makes this kind of estimator attractive in
+      many applications where neither the <foreign>a priori</foreign>
+      density of the parameter vector nor the density of the
+      observations is known precisely. Linear transformations,
+      however, are homogeneous: A zero-values input yields a zero
+      output. Thus, the linear estimator is especially pertinent to
+      those problems where the expected value of the parameter is
+      zero. If the expected value is nonzero, the linear estimator
+      would not necessarily yield the best result (See <link document="m11221" target-id="problem9">this problem</link>)
+    </para>
+    <example id="ex1">
+      <para id="parac">
+	Express the <link document="m11267" target-id="fun">first
+	example</link> in vector notation so that the observation
+	vector is written as
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">r</m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">A</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">n</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	where the matrix <m:math><m:ci type="matrix">A</m:ci></m:math>
+	has the form
+	<m:math display="inline">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:vector>
+	      <m:cn>1</m:cn>
+	      <m:ci>…</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:vector>
+	  </m:apply>
+	</m:math>. The expected value of the parameter is zero. The
+	linear estimator has the form
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci><m:msub>
+		  <m:mi>θ</m:mi>
+		  <m:mi>LIN</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">L</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where <m:math><m:ci type="matrix">L</m:ci></m:math> is a
+	<m:math>
+	  <m:mrow>
+	    <m:mn>1</m:mn>
+	    <m:mo>×</m:mo>
+	    <m:mi>L</m:mi>
+	  </m:mrow>
+	</m:math> matrix. The orthogonality Principle states that the
+	linear estimator satisfies
+	<m:math display="block">
+	  <m:apply>
+	    <m:forall/>
+	    <m:condition>
+	      <m:mtext>for all </m:mtext>
+	      <m:mrow>
+		<m:mn>1</m:mn>
+		<m:mo>×</m:mo>
+		<m:mi>L</m:mi>
+	      </m:mrow>
+	      <m:mtext> matricies </m:mtext>
+	      <m:ci type="matrix">M</m:ci>
+	    </m:condition>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:times/>
+			<m:ci type="matrix">L</m:ci>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci type="matrix">M</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	To use the Orthogonality Principle to derive an equation
+	implicitly specifying the linear estimator, the "for all
+	linear transformations" phrase must be interpreted. Usually
+	the quantity specifying the linear transformation must be
+	removed from the constraining inner product by imposing a very
+	stringent but equivalent condition. In this example, this
+	phrase becomes one about matrices. The elements of the matrix
+	<m:math><m:ci type="matrix">M</m:ci></m:math> can be such that
+	each element of the observation vector multiplies each element
+	of the estimation error. Thus, in this problem the
+	Othogonality Principle means that the expected value of the
+	matrix consisting of all pairwise priducts of these elements
+	must be zero.
+
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:minus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci type="matrix">L</m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+	Thus, two terms must equal each other:
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci type="matrix">L</m:ci>
+		<m:ci type="vector">r</m:ci>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>θ</m:ci>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. The second term equals
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>θ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">A</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> as the additive noise and the parameter are assumed
+	to be statistically independent quantities. The quantity
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="vector">r</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> in the first term is the correlation matrix of the
+	observations, which is given by
+	<m:math>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci type="matrix">A</m:ci>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="matrix">A</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>θ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci type="matrix">
+	      <m:msub>
+		<m:mi>K</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	</m:math>. Here, 
+	<m:math>
+	  <m:ci type="matrix">
+	    <m:msub>
+	      <m:mi>K</m:mi>
+	      <m:mi>n</m:mi>
+	    </m:msub>
+	  </m:ci>
+	</m:math> is the noise covariance matrix, and 
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>θ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math> is the parameter's variance. The quantity
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci type="matrix">A</m:ci>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="matrix">A</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math> is a
+	<m:math>
+	  <m:mrow>
+	    <m:mi>L</m:mi>
+	    <m:mo>×</m:mo>
+	    <m:mi>L</m:mi>
+	  </m:mrow>
+	</m:math> matrix with each element equaling 1. The noise
+	vector has independent components; the covariance matrix thus
+	equals
+	<m:math>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>n</m:mi>
+		</m:msub>
+	      </m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:ci type="matrix">I</m:ci>
+	  </m:apply>
+	</m:math>. The equation that <m:math><m:ci type="matrix">L</m:ci></m:math> must satisfy is therefore
+	given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:matrix>
+		<m:matrixrow>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>L</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub>
+		  </m:ci>
+		  <m:ci>⋯</m:ci>
+		  <m:ci type="matrix">
+		    <m:msub>
+		      <m:mi>L</m:mi>
+		      <m:mi>L</m:mi>
+		    </m:msub>
+		  </m:ci>
+		</m:matrixrow>
+	      </m:matrix>
+	      <m:matrix>
+		<m:matrixrow>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:ci>⋯</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:matrixrow>
+		<m:matrixrow>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:ci>⋱</m:ci>
+		  <m:ci>⋮</m:ci>
+		</m:matrixrow>
+		<m:matrixrow>
+		  <m:ci>⋮</m:ci>
+		  <m:ci>⋱</m:ci>
+		  <m:ci>⋱</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:matrixrow>
+		<m:matrixrow>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:ci>⋯</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>θ</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:matrixrow>
+	      </m:matrix>
+	    </m:apply>
+	    <m:matrix>
+	      <m:matrixrow>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>⋯</m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:matrixrow>
+	    </m:matrix>
+	  </m:apply>
+	</m:math>
+	The components of <m:math><m:ci type="matrix">L</m:ci></m:math> are equal and are given by
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="matrix">
+	      <m:msub>
+		<m:mi>L</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub>
+	    </m:ci>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:power/>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>σ</m:mi>
+		    <m:mi>θ</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>L</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>. Thus, the minimum mean-squared error linear
+	estimator has the form
+	
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub>
+		</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>
+		    <m:msub>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub>
+		  </m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>
+		      <m:msub>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+		      </m:msub>
+		    </m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>
+			<m:msub>
+			  <m:mi>σ</m:mi>
+			  <m:mi>n</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </para>
+      
+      <para id="parad">
+	Note that this result equals the minimum mean-squared error
+	estimate derived <link document="m11267">earlier</link> under
+	the condition that
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+	      <m:ci>θ</m:ci>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>. Mean-squared error, linear estimators, and Gaussian
+	problems are intimately related to each other. The linear
+	minimum mean-squared error solution to a problem is optimal if
+	the underlying distributions are Gaussian.
+      </para>
+
+    </example>
+  </content>
+
+  <bib:file>
+    <bib:entry id="Papoulis">
+      <bib:book>
+	<bib:author>A. Papoulis</bib:author>
+    	<bib:title>Probability, Random Variables, and Stochastic Processes</bib:title>
+    	<bib:publisher>McGraw-Hill</bib:publisher>
+   	<bib:year>1984</bib:year>
+    	<bib:address>New York</bib:address>
+   	<bib:edition>second edition</bib:edition>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>

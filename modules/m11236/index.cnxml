@@ -1,0 +1,1624 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Linear Vector Spaces</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>fcd87acc-4d47-4e51-a09f-7df0e8e95036</md:uuid>
+</metadata>
+
+  <content>
+    <para id="intro">
+      One of the more powerful tools in statistical communication
+      theory is the abstract concept of a <term>linear vector
+      space</term>.  The key result that concerns us is the
+      <term>representation theorem</term>: a deterministic time
+      function can be uniquely represented by a sequence of numbers.
+      The stochastic version of this theorem states that a process can
+      be represented by a sequence of uncorrelated random variables.
+      These results will allow us to exploit the theory of hypothesis
+      testing to derive the <emphasis>optimum</emphasis> detection
+      strategy.
+    </para>
+
+    <section id="basics">
+      <title>Basics</title>
+      <rule id="def1" type="definition"><label>Definition</label>
+	<statement id="idp8315504">
+	  <para id="introdef1">
+	    A linear vector space
+	    <m:math>
+	      <m:ci>S</m:ci>
+	    </m:math>
+	    is a collection of elements called vectors having the
+	    following properties:
+	    <list id="list1" list-type="enumerated">
+	      <item>
+		The vector-addition operation can be defined so that if
+		<m:math>
+		  <m:apply>
+		    <m:in/>
+		    <m:apply>
+		      <m:and/>
+		      <m:ci>x</m:ci>
+		      <m:ci>y</m:ci>
+		      <m:ci>z</m:ci>
+		    </m:apply>
+		    <m:ci>S</m:ci>
+		  </m:apply>
+		</m:math>:
+		<list id="list1abcde">
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:in/>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>x</m:ci>
+			  <m:ci>y</m:ci>
+			</m:apply>
+			<m:ci>S</m:ci>
+		      </m:apply>
+		    </m:math>
+		    (the space is closed under addition)
+		  </item>
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>x</m:ci>
+			  <m:ci>y</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>y</m:ci>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:math>
+		    (Commutivity)
+		  </item>
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:plus/>
+			  <m:mfenced>
+			    <m:mrow>
+			      <m:mi>x</m:mi>
+			      <m:mo>+</m:mo>
+			      <m:mi>y</m:mi>
+			    </m:mrow>
+			  </m:mfenced>
+			  <m:ci>z</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>x</m:ci>
+			  <m:mfenced>
+			    <m:mrow>
+			      <m:mi>y</m:mi>
+			      <m:mo>+</m:mo>
+			      <m:mi>z</m:mi>
+			    </m:mrow>
+			  </m:mfenced>
+			</m:apply>
+		      </m:apply>
+		    </m:math>
+		    (Associativity)
+		  </item>
+		  <item>
+		    The zero vector exists and is always an element of
+		    <m:math>
+		      <m:ci>S</m:ci>
+		    </m:math>.
+		    The zero vector is defined by
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>x</m:ci>
+			  <m:cn>0</m:cn>
+			</m:apply>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:math>.
+		  </item>
+		  <item>
+		    For each
+		    <m:math>
+		      <m:apply>
+			<m:in/>
+			<m:ci>x</m:ci>
+			<m:ci>S</m:ci>
+		      </m:apply>
+		    </m:math>,
+		    a unique vector
+		    <m:math>
+		      <m:apply>
+			<m:minus/>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:math>
+		    is also an element of
+		    <m:math>
+		      <m:ci>S</m:ci>
+		    </m:math>
+		    so that
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:plus/>
+			  <m:ci>x</m:ci>
+			  <m:apply>
+			    <m:minus/>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:cn>0</m:cn>
+		      </m:apply>
+		    </m:math>, the zero vector.
+		  </item>
+		</list>
+	      </item>
+
+	      <item>
+		Associated with the set of vectors is a set of scalars
+		which constitute an algebraic field.  A
+		<term>field</term> is a set of elements which obey the
+		well-known laws of associativity and commutivity for
+		both addition and multiplication.  If
+		<m:math>
+		  <m:ci>a</m:ci>
+		</m:math>,
+		<m:math>
+		  <m:ci>b</m:ci>
+		</m:math>
+		are scalars, the elements
+		<m:math>
+		  <m:ci>x</m:ci>
+		</m:math>,
+		<m:math>
+		  <m:ci>y</m:ci>
+		</m:math>
+		of a linear vector space have the properties that:
+		
+		<list id="list2abcd">
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:times/>
+			<m:ci>a</m:ci>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:math>
+		    (multiplication by scalar
+		    <m:math>
+		      <m:ci>a</m:ci>
+		    </m:math>) is defined and
+		    <m:math>
+		      <m:apply>
+			<m:in/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>a</m:ci>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:ci>S</m:ci>
+		      </m:apply>
+		    </m:math>.
+		  </item>
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>a</m:ci>
+			  <m:mfenced>
+			    <m:mrow>
+			      <m:mi>b</m:mi>
+			      <m:mi>x</m:mi>
+			    </m:mrow>
+			  </m:mfenced>
+			</m:apply>
+			<m:apply>
+			  <m:times/>
+			  <m:mfenced>
+			    <m:mrow>
+			      <m:mi>a</m:mi>
+			      <m:mi>b</m:mi>
+			    </m:mrow>
+			  </m:mfenced>
+			  <m:ci>x</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:math>.
+		  </item>
+		  <item>
+		    If "1" and "0" denotes the multiplicative and
+		    additive identity elements respectively of the
+		    field of scalars; then
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>1</m:cn>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		    </m:math>
+		    and
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:times/>
+			  <m:cn>0</m:cn>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:cn>0</m:cn>
+		      </m:apply>
+		    </m:math>
+		  </item>
+		  <item>
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>a</m:ci>
+			  <m:apply>
+			    <m:plus/>
+			    <m:ci>x</m:ci>
+			    <m:ci>y</m:ci>
+			  </m:apply>
+			</m:apply>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:ci>a</m:ci>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:times/>
+			    <m:ci>a</m:ci>
+			    <m:ci>y</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:math> and
+		    <m:math>
+		      <m:apply>
+			<m:eq/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:plus/>
+			    <m:ci>a</m:ci>
+			    <m:ci>b</m:ci>
+			  </m:apply>
+			  <m:ci>x</m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:plus/>
+			  <m:apply>
+			    <m:times/>
+			    <m:ci>a</m:ci>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:times/>
+			    <m:ci>b</m:ci>
+			    <m:ci>x</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:math>.
+		  </item>
+		</list>
+	      </item>
+	    </list>
+	  </para>
+	</statement>
+      </rule>
+      <para id="thereare">
+	There are many examples of linear vector spaces.  A familiar
+	example is the set of column vectors of length
+	<m:math>
+	  <m:ci>N</m:ci>
+	</m:math>.
+	In this case, we define the sum of two vectors to be:
+	<equation id="matrices">
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:plus/>
+		<m:vector>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>⋮</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		</m:vector>
+		<m:vector>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>⋮</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mi>N</m:mi>
+		    </m:msub></m:ci>
+		</m:vector>
+	      </m:apply>
+	      <m:vector>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:ci>⋮</m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mn>N</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>y</m:mi>
+		      <m:mn>N</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:vector>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	and scalar multiplication to be
+	<m:math display="inline">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>a</m:ci>
+	      <m:vector>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+		<m:ci>…</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:vector>
+	    </m:apply>
+	    <m:vector>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:ci>…</m:ci>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>N</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:vector>
+	  </m:apply>
+	</m:math>.
+	All of the properties listed above are satisfied.
+      </para>
+      <para id="intfuncs">
+	A more interesting (and useful) example is the collection of
+	<term>square integrable functions</term>.  A square-integrable
+	function
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">x</m:ci>
+	    <m:ci>t</m:ci>
+	  </m:apply>
+	</m:math>
+	satisfies:
+	<equation id="integral">
+	  <m:math>
+	    <m:apply>
+	      <m:lt/>
+	      <m:apply>
+		<m:int/>
+		<m:bvar>
+		  <m:ci>t</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:ci><m:msub>
+		      <m:mi>T</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci><m:msub>
+		      <m:mi>T</m:mi>
+		      <m:mi>f</m:mi>
+		    </m:msub></m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">x</m:ci>
+		      <m:ci>t</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:infinity/>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	One can verify that this collection constitutes a linear
+	vector space.  In fact, this space is so important that it has
+	a special name - 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn"><m:msup>
+		<m:mi>L</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msup></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>T</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci><m:msub>
+		<m:mi>T</m:mi>
+		<m:mi>f</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>
+	(read this as <emphasis>el-two</emphasis>); the arguments
+	denote the range of integration.
+      </para>
+      <rule id="def2" type="definition"><label>Definition</label>
+	<statement id="idm353312">
+	  <para id="introdef2">
+	    Let <m:math><m:ci>S</m:ci></m:math> be a linear vector
+	    space.  A subspace <m:math><m:ci>𝒯</m:ci></m:math> of
+	    <m:math><m:ci>S</m:ci></m:math> is a subset of
+	    <m:math><m:ci>S</m:ci></m:math> which is closed.  In other
+	    words, if
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:and/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+		<m:ci>𝒯</m:ci>
+	      </m:apply>
+	    </m:math>, then
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:and/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+		<m:ci>S</m:ci>
+	      </m:apply>
+	    </m:math>
+	    and all elements of <m:math><m:ci>𝒯</m:ci></m:math>
+	    are elements of <m:math><m:ci>S</m:ci></m:math>, but some
+	    elements of <m:math><m:ci>S</m:ci></m:math> are not
+	    elements of <m:math><m:ci>𝒯</m:ci></m:math>.
+	    Furthermore, the linear combination
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>a</m:ci>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>b</m:ci>
+		    <m:ci>y</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>𝒯</m:ci>
+	      </m:apply>
+	    </m:math>
+	    for all scalars <m:math><m:ci>a</m:ci></m:math>,
+	    <m:math><m:ci>b</m:ci></m:math>.  A subspace is sometimes
+	    referred to as a <term>closed linear manifold</term>.
+	  </para>
+	</statement>
+      </rule>
+    </section>
+
+    <section id="innerproductspaces">
+      <title>Inner Product Spaces</title>
+      <para id="intro232">
+	A structure needs to be defined for linear vector spaces so
+	that definitions for the length of a vector and for the
+	distance between any two vectors can be obtained.  The notions
+	of length and distance are closely related to the concept of
+	an inner product.
+      </para>
+      <rule id="def3" type="definition"><label>Definition</label>
+	<statement id="idp6128960">
+	  <para id="introdef3">
+	    An <term>inner product</term> of two real vectors
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:apply>
+		  <m:and/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+		<m:ci>S</m:ci>
+	      </m:apply>
+	    </m:math>, is denoted by
+	    <m:math>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	    </m:math>
+	    and is a <emphasis>scalar</emphasis> assigned to the
+	    vectors
+	    <m:math>
+	      <m:ci type="vector">x</m:ci>
+	    </m:math>
+	    and 
+	    <m:math>
+	      <m:ci type="vector">y</m:ci>
+	    </m:math>
+	    which satisfies the following properties:
+	    <list id="list1abcd" list-type="enumerated">
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">y</m:ci>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:math>
+	      </item>
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:apply>
+			<m:times/>
+			<m:ci>a</m:ci>
+			<m:ci type="vector">x</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>a</m:ci>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>,
+		<m:math>
+		  <m:ci>a</m:ci>
+		</m:math> is a scalar
+	      </item>
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:apply>
+			<m:plus/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">z</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">z</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector">y</m:ci>
+			<m:ci type="vector">z</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:math>,
+		<m:math>
+		  <m:ci type="vector">z</m:ci>
+		</m:math> a vector.
+	      </item>
+	      <item>
+		<m:math>
+		  <m:apply>
+		    <m:gt/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:math>
+		unless
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:ci type="vector">x</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:math>.
+		In this case,
+		<m:math>
+		  <m:apply>
+		    <m:eq/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">x</m:ci>
+		    </m:apply>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:math>.
+	      </item>
+	    </list>
+	  </para>
+	</statement>
+      </rule>
+      <para id="asanex">
+	As an example, an inner product for the space consisting
+	of column matrices can be defined as
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>i</m:ci></m:bvar>
+	      <m:lowlimit>
+		<m:cn>1</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:ci>N</m:ci>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msub>
+		    <m:mi>x</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci><m:msub>
+		    <m:mi>y</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	The reader should verify that this is indeed a valid inner
+	product (i.e., it satisfies all of the properties given
+	above).  It should be noted that this definition of an inner
+	product is <emphasis>not</emphasis> unique: there are other
+	inner product definitions which also satisfy all of these
+	properties.  For example, another valid inner product is
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:ci type="vector">x</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	      <m:ci type="matrix">K</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	where <m:math><m:ci type="matrix">K</m:ci></m:math> is an
+	<m:math>
+	  <m:mrow>
+	    <m:mi>N</m:mi>
+	    <m:mo>x</m:mo>
+	    <m:mi>N</m:mi>
+	  </m:mrow>
+	</m:math>
+	positive-definite matrix.  Choices of the matrix <m:math><m:ci type="matrix">K</m:ci></m:math> which are not positive
+	definite do not yield valid inner products (<link target-id="list1abcd">property 4</link> is not satisfied).  The
+	matrix <m:math><m:ci type="matrix">K</m:ci></m:math> is termed
+	the <term>kernel</term> of the inner product.  When this
+	matrix is something other than an identity matrix, the inner
+	product is sometimes written as
+	<m:math>
+	  <m:msub>
+	    <m:mfenced open="&lt;" close="&gt;">
+	      <m:mrow>
+		<m:mi>x</m:mi>
+		<m:mo>,</m:mo>
+		<m:mi>y</m:mi>
+	      </m:mrow>
+	    </m:mfenced>
+	    <m:mi>K</m:mi>
+	  </m:msub>
+	</m:math>
+	to denote explicitly the presence of the kernel in the
+	inner product.
+      </para>
+      <rule id="def4" type="definition"><label>Definition</label>
+	<statement id="idm17280">
+	  <para id="introdef4">
+	    The <term>norm</term> of a vector
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="matrix">S</m:ci>
+	      </m:apply>
+	    </m:math>
+	    is denoted by
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci type="vector">x</m:ci>
+	      </m:apply>
+	    </m:math>
+	    and is defined by:
+	    <equation id="norm">
+	      <m:math>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci>x</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci>x</m:ci>
+		      <m:ci>x</m:ci>
+		    </m:apply>
+		    <m:cn type="rational">1<m:sep/>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:math>
+	    </equation>
+	  </para>
+	</statement>
+      </rule>
+      <para id="becauseof">
+	Because of the properties of an inner product, the norm of a
+	vector is always greater than zero unless the vector is
+	identically zero.  The norm of a vector is related to the
+	notion of the <emphasis>length</emphasis> of a vector.  For
+	example, if the vector
+	<m:math>
+	  <m:ci type="vector">x</m:ci>
+	</m:math>
+	is multiplied by the constant scalar
+	<m:math>
+	  <m:ci>a</m:ci>
+	</m:math>,
+	the norm of the vector is also multiplied by
+	<m:math>
+	  <m:ci>a</m:ci>
+	</m:math>.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:cn type="rational">1<m:sep/>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>a</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:ci>x</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	In other words, "longer" vectors
+	(<m:math>
+	  <m:apply>
+	    <m:gt/>
+	    <m:ci>a</m:ci>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>) have larger norms.  A norm can also be defined when
+	the inner product contains a kernel.  In this case, the norm
+	is written
+	<m:math>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	    <m:domainofapplication>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:domainofapplication>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math>
+	for clarity.
+      </para>
+      <rule id="def5" type="definition"><label>Definition</label>
+	<statement id="idp9183184">
+	  <para id="intdef5">
+	    An <term>inner product space</term> is a linear vector
+	    space in which an inner product can be defined for all
+	    elements of the space and a norm is given by <link target-id="norm"/>.  Note in particular
+	    that every element of an inner product space must satisfy
+	    the axioms of a valid inner product.
+	  </para>
+	</statement>
+      </rule>
+      <para id="forthespace">
+	For the space
+	<m:math>
+	  <m:ci>S</m:ci>
+	</m:math>
+	consisting of column matrices, the norm of a vector is given
+	by (consistent with the first choice of an inner product)
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:ci type="vector">x</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci>N</m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:cn type="rational">1<m:sep/>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	This choice of a norm corresponds to the Cartesian definition
+	of the length of a vector.
+      </para>
+      <para id="schw">
+	One of the fundamental properties of inner product spaces is the
+	<term>Schwarz inequality</term>
+	<equation id="schwarz">
+	  <m:math>
+	    <m:apply>
+	      <m:leq/>
+	      <m:apply>
+		<m:abs/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	</equation>
+	This is one of the most important inequalities we shall
+	encounter.  To demonstrate this inequality, consider the norm
+	squared of
+	<m:math>
+	  <m:apply>
+	    <m:plus/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>a</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>a</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:scalarproduct/>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="vector">x</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:ci type="vector">x</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>a</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:cn>2</m:cn>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>a</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Let
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci>a</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  In this case:
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>a</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">x</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:abs/>
+			<m:apply>
+			  <m:scalarproduct/>
+			  <m:ci type="vector">x</m:ci>
+			  <m:ci type="vector">y</m:ci>
+			</m:apply>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:apply>
+			<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:abs/>
+		      <m:apply>
+			<m:scalarproduct/>
+			<m:ci type="vector">x</m:ci>
+			<m:ci type="vector">y</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		    <m:cn>4</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:scalarproduct/>
+		      <m:ci type="vector">x</m:ci>
+		      <m:ci type="vector">y</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	As the left hand side of this result is non-negative, the
+	right-hand side is lower-bounded by zero.  The <link target-id="schwarz">Schwarz inequality</link> is thus obtained.
+	Note that the equality occurs <emphasis>only</emphasis> when
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>a</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, or equivalently when
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci type="vector">x</m:ci>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci>c</m:ci>
+	      <m:ci type="vector">y</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, where
+	<m:math>
+	  <m:ci>c</m:ci>
+	</m:math>
+	is any constant.
+      </para>
+      <rule id="def6" type="definition"><label>Definition</label>
+	<statement id="idp337632">
+	  <para id="intdef6">
+	    Two vectors are said to be <term>orthogonal</term> if the
+	    inner product of the vectors is zero:
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:scalarproduct/>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</statement>
+      </rule>
+      <para id="consistent">
+	Consistent with these results is the concept of the
+	<emphasis>"angle"</emphasis> between two vectors.  The cosine
+	of this angle is defined by:
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:cos/>
+	      <m:ci>
+		<m:mrow>
+		  <m:mi>x</m:mi>
+		  <m:mo>,</m:mo>
+		  <m:mi>y</m:mi>
+		</m:mrow>
+	      </m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:scalarproduct/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	Because of the Schwarz inequality,
+	<m:math>
+	  <m:apply>
+	    <m:leq/>
+	    <m:apply>
+	      <m:abs/>
+	      <m:apply>
+		<m:cos/>
+		<m:ci><m:mrow>
+		  <m:mi>x</m:mi>
+		  <m:mo>,</m:mo>
+		  <m:mi>y</m:mi>
+		</m:mrow></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>1</m:cn>
+	  </m:apply>
+	</m:math>.
+	The angle between the orthogonal vectors is
+	<m:math display="inline">
+	  <m:apply>
+	    <m:mo>±</m:mo>
+	    <m:apply>
+	      <m:divide/>
+	      <m:pi/>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	and the angle between vectors satisfying the <link target-id="schwarz">Schwarz inequality</link> with equality 
+	<m:math>
+	  <m:apply>
+	    <m:mo>∝</m:mo>
+	    <m:ci>x</m:ci>
+	    <m:ci>y</m:ci>
+	  </m:apply>
+	</m:math>
+	is zero (the vectors are parallel to each other).
+      </para>
+
+      <rule id="def7" type="definition"><label>Definition</label>
+	<statement id="idp7660080">
+	  <para id="thedistance">
+	    The <term>distance between two vectors</term> is taken to
+	    be the norm of the difference of the vectors.
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">d</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		  <m:apply>	 
+		    <m:minus/>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</statement>
+      </rule>  
+      <para id="inour">
+	In our example of the normed space of column matrices, the
+	distance between <m:math><m:ci type="vector">x</m:ci></m:math>
+	and <m:math><m:ci type="vector">y</m:ci></m:math> would be
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">x</m:ci>
+		<m:ci type="vector">y</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar><m:ci>i</m:ci></m:bvar>
+		<m:lowlimit>
+		  <m:cn>1</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:ci>N</m:ci>
+		</m:uplimit>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci><m:msub>
+			<m:mi>x</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci><m:msub>
+			<m:mi>y</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:cn type="rational">1<m:sep/>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math> 
+	which agrees with the Cartesian notion of
+	distance. Because of the properties of the inner product, this
+	distance measure (or <term>metric</term>) has the following
+	properties:
+	<list id="distances">
+	  <item>
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">d</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">d</m:ci>
+		  <m:ci type="vector">y</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    (Distance does not depend on how it is measured.)
+	  </item>
+	  <item>
+	    <m:math>
+	      <m:apply>
+		<m:implies/>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">d</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:cn>0</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:eq/>
+		  <m:ci>x</m:ci>
+		  <m:ci>y</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    (Zero distance means equality)
+	  </item>
+	  <item>
+	    <m:math>
+	      <m:apply>
+		<m:leq/>
+		<m:apply>
+		  <m:ci type="fn">d</m:ci>
+		  <m:ci type="vector">x</m:ci>
+		  <m:ci type="vector">z</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">d</m:ci>
+		    <m:ci type="vector">x</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">d</m:ci>
+		    <m:ci type="vector">y</m:ci>
+		    <m:ci type="vector">z</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    (Triangle inequality)
+	  </item>
+	</list>
+	We use this distance measure to define what we mean by
+	<term>convergence</term>.  When we say the sequence of vectors
+	<m:math>
+	  <m:set>
+	    <m:ci><m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub></m:ci>
+	  </m:set>
+	</m:math>
+	<term>converges</term> to <m:math><m:ci>x</m:ci></m:math>
+	(<m:math>
+	  <m:apply>
+	    <m:tendsto/>
+	    <m:ci><m:msub>
+		<m:mi>x</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>x</m:ci>
+	  </m:apply>
+	</m:math>), we mean
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:limit/>
+	      <m:bvar><m:ci>n</m:ci></m:bvar>
+	      <m:condition>
+		<m:apply>
+		  <m:tendsto/>
+		  <m:ci>n</m:ci>
+		  <m:infinity/>
+		</m:apply>
+	      </m:condition>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#norm"/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci><m:msub>
+		      <m:mi>x</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:cn>0</m:cn>
+	  </m:apply>
+	</m:math>
+      </para>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,1411 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Discrete-Time Detection: Problems</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>e42011a5-2870-4031-a569-0fc69908e739</md:uuid>
+</metadata>
+
+  <content>
+    <exercise id="ex1">
+      <problem id="idp1193440">
+	<para id="para1.1">
+	  Assume that observations of a sinusoidal signal
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:ci>A</m:ci>
+		<m:apply>
+		  <m:sin/>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:pi/>
+		    <m:ci>f</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, 
+
+	  <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>l</m:ci>
+	      <m:set>
+		<m:cn>0</m:cn>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:set>
+	    </m:apply>
+	  </m:math>, are contaminated by first-order colored noise as
+	  decribed in the <link document="m11260" target-id="LastExample">example</link>.
+	</para>
+
+	<section id="s1.1">
+	  <para id="p1.1">Find the unit-sample response of the
+	  whitening filter.</para>
+	</section>
+
+	<section id="s1.2">
+	  <para id="p1.2">Assuming that the alternative model is the
+	  sole presence of the colored Gaussian noise, what is the
+	  probaiblity of detection?</para>
+	</section>
+
+	<section id="s1.3">
+	  <para id="p1.3">How does this probability vary with signal
+	    frequency <m:math><m:ci>f</m:ci></m:math> when the
+	    first-order coefficient is positive? Does your result make
+	    sense? Why?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex2">
+      <problem id="idm6222288">
+	<para id="para2">In space-time decoding systems, a common bit
+	stream is transmitted over several channels simultaneously but
+	using different signals.
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msup>
+		<m:mi>r</m:mi>
+		<m:mrow>
+		  <m:mo>(</m:mo>
+		  <m:mi>k</m:mi>
+		  <m:mo>)</m:mo>
+		</m:mrow>
+	      </m:msup>
+	    </m:ci>
+	  </m:math> denotes the signal received from the 
+	  <m:math>
+	    <m:ci>
+	      <m:msup>
+		<m:mi>k</m:mi>
+		<m:mi>th</m:mi>
+	      </m:msup>
+	    </m:ci>
+	  </m:math> channel, 
+	  <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>k</m:ci>
+	      <m:set>
+		<m:cn>1</m:cn>
+		<m:ci>…</m:ci>
+		<m:ci>K</m:ci>
+	      </m:set>
+	    </m:apply>
+	  </m:math>, and the received signal equals
+	  <m:math>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci type="vector">
+		<m:msup>
+		  <m:mi>s</m:mi>
+		  <m:mrow>
+		    <m:mo>(</m:mo>
+		    <m:mi>k</m:mi>
+		    <m:mo>,</m:mo>
+		    <m:mi>i</m:mi>
+		    <m:mo>)</m:mo>
+		  </m:mrow>
+		</m:msup>
+	      </m:ci>
+	      <m:ci type="vector">
+		<m:msup>
+		  <m:mi>n</m:mi>
+		  <m:mrow>
+		    <m:mo>(</m:mo>
+		    <m:mi>k</m:mi>
+		    <m:mo>)</m:mo>
+		  </m:mrow>
+		</m:msup>
+	      </m:ci>
+	    </m:apply>
+	  </m:math>. Here <m:math><m:ci>i</m:ci></m:math> equals 0 or
+	  1, corresponding to the bit being transmitted. Each signal
+	  has length <m:math><m:ci>L</m:ci></m:math>. 
+	  <m:math>
+	    <m:ci type="vector">
+	      <m:msup>
+		<m:mi>n</m:mi>
+		<m:mrow>
+		  <m:mo>(</m:mo>
+		  <m:mi>k</m:mi>
+		  <m:mo>)</m:mo>
+		</m:mrow>
+	      </m:msup>
+	    </m:ci>
+	  </m:math> denotes a Gaussian random vector with
+	  statistically independent components having mean zero and
+	  variance
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>k</m:mi>
+	      </m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math> (the variance depends on the channel).
+	</para>
+
+	<section id="s2.1">
+	  <para id="p2.1">Assuming equally likely bit transmissions,
+	  find the minimum probability of error decision rule.</para>
+	</section>
+
+	<section id="s2.2">
+	  <para id="p2.2">What is the probability that your decision
+	  rule makes an error?</para>
+	</section>
+
+	<section id="s2.3">
+	  <para id="p2.3">Suppose each channel has its
+	  <emphasis>own</emphasis> decision rule, which is designed to
+	  yield the same miss probability as the others. Now what is
+	  the minimum probability of error decision rule of the system
+	  that combines the individual decisions into one?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex3">
+      <problem id="idm5808064">
+	<para id="para3">The performance for the optimal detector in
+	white Gaussian noise problems depends only on the distance
+	between the signals. Let's confirm this result
+	experimentally. Define the signal under one hypothesis to be a
+	unit-amplitude sinusoid having one cycle within the 50-sample
+	observation interval. Observations of this signal are
+	contaminated by additive white Gaussian noise having variance
+	equal to 1.5. The hypotheses are equally likely.
+	</para>
+	
+	<section id="s3.1">
+	  <para id="p3.1">Let the second hypothesis be a cosine of the
+	  same frequency. Calculate and estimate the detector's
+	  false-alarm probability.</para>
+	</section>
+
+	<section id="s3.2">
+	  <para id="p3.2">Now let the signals correspond to
+	  square-waves constructed from the sinusoids used in the
+	  <link target-id="s3.1">previous part</link>. Normalize them so
+	  that they have the same energy as the sinusoids. Calculate
+	  and estimate the detector's false-alarm probability.</para>
+	</section>
+
+	<section id="s3.3">
+	  <para id="p3.3">
+	    Now let the noise be Laplacian with variance 1.5. Although
+	    no analytic expression for the detector performance can be
+	    found, do the simulated performances for the sinusoid and
+	    the square-wave signals change significantly?
+	  </para>
+	</section>
+
+	<section id="s3.4">
+	  <para id="p3.4">Finally, let the second signal be the
+	  negative of the sinusoid. Repeat the calculations and the
+	  simulation for Gaussian noise.</para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="ex4">
+      <problem id="idp1250128">
+	<para id="para4">Physical constraints imposed on signals can
+	change what signal set choices result in the best detection
+	performance. Let one of two equally likely discrete-time
+	signals be observed in the presence of white Gaussian noise
+	(variance/sample equals
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>).
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:mi>l</m:mi>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msup>
+			<m:mi>s</m:mi>
+			<m:mrow>
+			  <m:mo>(</m:mo>
+			  <m:mn>0</m:mn>
+			  <m:mo>)</m:mo>
+			</m:mrow>
+		      </m:msup>
+		    </m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:mrow>
+	    <m:mi> </m:mi>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>l</m:ci>
+	      <m:set>
+		<m:cn>0</m:cn>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:set>
+	    </m:apply>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:mi>l</m:mi>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msup>
+			<m:mi>s</m:mi>
+			<m:mrow>
+			  <m:mo>(</m:mo>
+			  <m:mn>1</m:mn>
+			  <m:mo>)</m:mo>
+			</m:mrow>
+		      </m:msup>
+		    </m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:mrow>
+	    <m:mi> </m:mi>
+
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>l</m:ci>
+	      <m:set>
+		<m:cn>0</m:cn>
+		<m:ci>…</m:ci>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+	      </m:set>
+	    </m:apply>
+	  </m:math> We are free to choose any signals we like, but
+	  there are constraints. Average signals power equals
+	  <m:math>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:domainofapplication>
+		<m:ci>l</m:ci>
+	      </m:domainofapplication>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, and the peak power equals
+	  <m:math>
+	    <m:apply>
+	      <m:max/>
+	      <m:bvar>
+		<m:ci>l</m:ci>
+	      </m:bvar>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:ci type="fn">s</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s4.1">
+	  <para id="p4.1">Assuming the average signal power must be less than
+	    <m:math>
+	      <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>ave</m:mi>
+	      </m:msub></m:ci>
+	    </m:math>, what are the optimal signal choices? Is your
+	    answer unique?</para>
+	</section>
+
+	<section id="s4.2">
+	  <para id="p4.2">When the peak power
+	    <m:math>
+	      <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>peak</m:mi>
+	      </m:msub></m:ci>
+	    </m:math> is constrained, what are the optimal signal
+	    choices?</para>
+	</section>
+
+	<section id="s4.3">
+	  <para id="p4.3">If
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>ave</m:mi>
+		</m:msub></m:ci>
+		<m:ci><m:msub>
+		  <m:mi>P</m:mi>
+		  <m:mi>peak</m:mi>
+		</m:msub></m:ci>
+	      </m:apply>
+	    </m:math>, which constraint yields the best detection
+	    performance?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex5">
+      <problem id="idm6694944">
+	<para id="para5.1">In many signal detection problems, the signal
+	itself is not known accurately; for example, the signal could
+	have been the result of a measurement, in which case the
+	"signal" used to specify the observations is actually the
+	actual signal plus noise. We want to determine how the
+	measurement noise affects the detector.</para>
+	
+	<para id="para5.2">The formal statement of the detection
+	problem is
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:mi>l</m:mi>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msup>
+			<m:mover>
+			  <m:mi>s</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+			<m:mn>0</m:mn>
+		      </m:msup>
+		    </m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:mi> </m:mi>
+
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:mi>l</m:mi>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msup>
+			<m:mover>
+			  <m:mi>s</m:mi>
+			  <m:mo>˜</m:mo>
+			</m:mover>
+			<m:mn>1</m:mn>
+		      </m:msup>
+		    </m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:mi>l</m:mi>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:mi> </m:mi>
+	      
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math> where 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mover>
+		    <m:mi>s</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		  <m:mi>i</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:mi>l</m:mi>
+	    </m:apply>
+	  </m:math> equals
+	  <m:math>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msup>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msup>
+		</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:ci type="fn">w</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, with 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">w</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:math> and
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">n</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:math> comprising white Gaussian noise having variances
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>w</m:mi>
+	      </m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math> and 
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci><m:msub>
+		<m:mi>σ</m:mi>
+		<m:mi>n</m:mi>
+	      </m:msub></m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>, respectively. We know precisely what the signals 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">
+		<m:msup>
+		  <m:mover>
+		    <m:mi>s</m:mi>
+		    <m:mo>˜</m:mo>
+		  </m:mover>
+		  <m:mi>i</m:mi>
+		</m:msup>
+	      </m:ci>
+	      <m:mi>l</m:mi>
+	    </m:apply>
+	  </m:math> are, but not the underlying "actual" signal.</para>
+
+	<section id="s5.1">
+	  <para id="p5.1">Find a detector for this problem.</para>
+	</section>
+
+	<section id="s5.2">
+	  <para id="p5.2">Analyze, as much as possible, how this
+	  detector is affected by the measurement noise, constrasting
+	  its performance with that obtained when the signals are
+	  known precisely.</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex6">
+      <problem id="idp2346496">
+	<para id="para6.1">One of the more interesting problems in
+	detection theory is determining when the probability
+	distribution of the observations differs from that in other
+	portions of the observation interval. The most common form of
+	the problem is that over the interval
+	  <m:math>
+	    <m:interval closure="closed-open">
+	      <m:cn>0</m:cn>
+	      <m:ci>C</m:ci>
+	    </m:interval>
+	  </m:math>, the observations have one form, and that in the
+	  remainder of the observation interval
+	  <m:math>
+	    <m:interval>
+	      <m:ci>C</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:ci>L</m:ci>
+		<m:cn>1</m:cn>
+	      </m:apply>
+	    </m:interval>
+	  </m:math> have a different probability distribution. The
+	  change detection problem is to determine whether in fact a
+	  change has occurred and, if so, estimate when that change
+	  occurs.</para>
+
+	<para id="para6.2">To explore the change detection problem,
+	let's explore the simple situation where the mean of white
+	Gaussian noise changes at the
+	  <m:math>
+	    <m:ci>
+	      <m:msup>
+		<m:mi>C</m:mi>
+		<m:mi>th</m:mi>
+	      </m:msup>
+	    </m:ci>
+	  </m:math> sample.
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo> 
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		  <m:cn>0</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:mi> </m:mi>
+
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>
+
+	  <m:math display="block">
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:mo>:</m:mo>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:piecewise>
+		  <m:piece>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		      <m:cn>0</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:in/>
+		      <m:ci>l</m:ci>
+		      <m:set>
+			<m:cn>0</m:cn>
+			<m:ci>…</m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>C</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:set>
+		    </m:apply>
+		  </m:piece>
+		
+		  <m:piece>
+		    <m:apply>
+		      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		      <m:ci>m</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:in/>
+		      <m:ci>l</m:ci>
+		      <m:set>
+			<m:ci>C</m:ci>
+			<m:ci>…</m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>L</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:set>
+		    </m:apply>
+		  </m:piece>
+		</m:piecewise>
+	      </m:apply>
+	    </m:mrow>
+	  </m:math>The observations in each case are statistically
+	  independent of the others.</para>
+
+	<section id="s6.1">
+	  <para id="p6.1">Find a detector for this change problem when
+	  <m:math><m:ci>m</m:ci></m:math> is a known positive
+	  number.</para>
+	</section>
+	
+	<section id="s6.2">
+	  <para id="p6.2">Find an expression for the threshold in the
+	  detector using the Neyman-Pearson criterion.</para>
+	</section>
+
+	<section id="s6.3">
+	  <para id="p6.3">How does the detector change when the value
+	  of <m:math><m:ci>m</m:ci></m:math> is not known?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex7">
+      <problem id="idm7269248">
+	<para id="para7">Noise generated by a system having zeros
+	complicates the calculations for the colored noise detection
+	problem. To illustrate these difficulties, assume the
+	observation noise is produced as the output of a filter
+	governed by the difference equation
+	  <equation id="eqn1a">
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar>
+		  <m:ci>a</m:ci>
+		</m:bvar>
+		<m:bvar>
+		  <m:ci>b</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:neq/>
+		    <m:ci>a</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>b</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:plus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>a</m:ci>
+		      <m:apply>
+			<m:ci type="fn">n</m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>l</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">w</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>b</m:ci>
+		      <m:apply>
+			<m:ci type="fn">w</m:ci>
+			<m:apply>
+			  <m:minus/>
+			  <m:ci>l</m:ci>
+			  <m:cn>1</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </equation> where 
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">w</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:math> is white, Gaussian noise. Assume an observation
+	  duration sufficiently long to capture the colored
+	  effects.</para>
+
+	<section id="s7.1">
+	  <para id="p7.1">
+	    Find the covariance matrix of this noise process</para>
+	</section>
+
+	<section id="s7.2">
+	  <para id="p7.2">Calculate the Cholesky factorization of the
+	  covariance matrix</para>
+	</section>
+
+	<section id="s7.3">
+	  <para id="p7.3">Find the unit-sample response of the optimal
+	  detector's whitening filter. If it weren't for the finite
+	  observation interval, would it indeed have an
+	  infinite-duration unit-sample reponse as claimed <link document="m11260" target-id="Last Paragraph">here</link>?
+	  Describe the edge-effects of your filter, constrasting them
+	  with the case when
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>b</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex8">
+      <problem id="idp2148064">
+	<para id="para8">The calculation of the sufficient statistic
+	in spectrally based detectors (see <link document="m11282" target-id="Eqn5pt3Secondtolasteqninmodule">this
+	equation</link>) can be simplified using signal processing
+	notions. When the observations are real-valued, their spectra
+	are conjugate symmetric.
+	</para>
+
+	<section id="s8.1">
+	  <para id="p8.1">Exploiting this symmetry, how can the
+	    calculations of <link document="m11282" target-id="Eqn5pt3Secondtolasteqninmodule">this equation</link> be simplified? Be
+	    careful to note "spectral edge-effects."</para>
+	</section>
+
+	<section id="s8.2">
+	  <para id="p8.2">Can your formula be manipulated to depend on
+	  the power spectra of the signals and the observations? Why
+	  or why not?</para>
+	</section>
+      </problem>
+    </exercise>
+  
+    <exercise id="ex9">
+      <problem id="idm6702912">
+	<para id="para9"><link document="m11282" target-id="Eqn5pt3Secondtolasteqninmoduleorparagraphitsin">Here</link>, we claimed that the
+	    relation between noise bandwidth and reciprocal duration
+	    of the observation interval played a key role in determining
+	    whether DFT values were approximately uncorrelated. While
+	    the statements sound plausible, their veracity should be
+	    checked. Let the covariance function of the observation
+	    noise be
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>K</m:mi>
+		    <m:mi>n</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:power/>
+		<m:ci>a</m:ci>
+		<m:apply>
+		  <m:abs/>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s9.1">
+	  <para id="p9.1">How is the bandwidth (defined by the
+	  half-power point) of this noise's power spectrum related to
+	  the parameter <m:math><m:ci>a</m:ci></m:math>? How is the
+	  duration (defined to be two time constants) of the
+	  covariance function related to
+	  <m:math><m:ci>a</m:ci></m:math>?</para>
+	</section>
+
+	<section id="s9.2">
+	  <para id="p9.2">Find the variance of the
+	  length-<m:math><m:ci>L</m:ci></m:math> DFT of this noise
+	  process as a function of frequency index
+	  <m:math><m:ci>k</m:ci></m:math>. This result should be
+	  compared with the power spectrum calculated in the <link target-id="p9.1">previous part</link>; they
+	  <emphasis>should</emphasis> resemble each other when the
+	  "memory" of the noise - the duration of the covariance
+	  function - is much less than <m:math><m:ci>L</m:ci></m:math>
+	  while demonstrating differences as the memory becomes
+	  comparable to or exceeds
+	  <m:math><m:ci>L</m:ci></m:math>.</para>
+	</section>
+
+	<section id="s9.3">
+	  <para id="p9.3">Calculate the covariance between adjacent
+	  frequency indices. Under what conditions will they be
+	  approximately uncorrelated? Relate your answer to the
+	  relations of <m:math><m:ci>a</m:ci></m:math> to
+	  <m:math><m:ci>L</m:ci></m:math> found in the <link target-id="p9.2">previous part</link>.</para>
+	</section>
+      </problem>
+    </exercise>
+  
+    <exercise id="ex10">
+      <problem id="idp2608112">
+	<para id="para10">The results derived in <link target-id="ex9"/>
+	assumed that a length-<m:math><m:ci>L</m:ci></m:math> Fourier
+	Transform was computed from a
+	length-<m:math><m:ci>L</m:ci></m:math> segment of the noise
+	process. What will happen if the transform has length
+	  <m:math>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>2</m:cn>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:math> with the observation interval remaining unchanged?</para>
+
+	<section id="s10.1">
+	  <para id="p10.1">Find the variance of DFT values at
+	  index <m:math><m:ci>k</m:ci></m:math>.</para>
+	</section>
+
+	<section id="s10.2">
+	  <para id="p10.2">Assuming the conditions in <link target-id="ex9"/> for uncorrelated adjacent samples, now what
+	  is the correlation between adjacent DFT values?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex11">
+      <problem id="idm5547344">
+	<para id="para11">A common application of spectral detection
+	is the detection of sinusoids in noise. Not only can one
+	sinusoidal signal be present, but several. The problem is to
+	determine which combination of sinusoids is present. Let's
+	first assume that no more than two sinusoids can be present,
+	the frequencies of which are integer fractions of the number
+	of observations:
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		<m:mi>f</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msub>
+		  <m:mi>k</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, 
+	  <m:math>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>i</m:ci>
+	      <m:set>
+		<m:cn>1</m:cn>
+		<m:cn>2</m:cn>
+	      </m:set>
+	    </m:apply>
+	  </m:math>. Assume additive Gaussian noise is present.
+	</para>
+
+	<section id="s11.1">
+	  <para id="p11.1">What is the detection procedure for
+	  determining if one of the sinusoids is present while
+	  ignoring the second? The amplitude of the sinusoid is
+	  known.</para>
+	</section>
+
+	<section id="s11.2">
+	  <para id="p11.2">How does the probability of detection vary
+	  with the ratio of the signal's squared amplitude to the
+	  noise variance at the frequency of the signal? Sketch this
+	  result for several false-alarm probabilities.</para>
+	</section>
+
+	<section id="s11.3">
+	  <para id="p11.3">Now assume that none, either, or both of the
+	  signals can be present. Find the detector that best
+	  determines the combination present in the observations. Does
+	  your answer have a simple interpretation?</para>
+	</section>
+	
+	<section id="s11.4">
+	  <para id="p11.4">Derive a detector that determines the
+	  number of sinusoids present in the input.</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex12">
+      <problem id="idp1795808">
+	<para id="para12">In a discrete-time detection problem, one of
+	two, equally likely, length-<m:math><m:ci>L</m:ci></m:math>
+	sinusoids (each having a frequency equal to a known multiple
+	of
+	  <m:math>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:ci>L</m:ci>
+	    </m:apply>
+	  </m:math>) is observed in additive colored Gaussian
+	  noise. Signal amplitudes are also unknown by the
+	  receiver. In addition, the power spectrum of the noise is
+	  uncertain: what is known is that the noise power spectrum is
+	  broadband, and varies gently across frequency. Find a
+	  detector that performs well for this problem. What notable
+	  properties (if any) does your receiver have?</para>
+      </problem>
+    </exercise>
+
+    <exercise id="ex13">
+      <problem id="idp1800592">
+	<para id="para13">A sampled signal is suspected of consisting
+	of a periodic component and additive Gaussian noise. The
+	signal, if present, has a known period
+	<m:math><m:ci>L</m:ci></m:math>. The number of samples equals
+	<m:math><m:ci>N</m:ci></m:math>, a multiple of
+	<m:math><m:ci>L</m:ci></m:math>. The noise is white and has
+	known variance of
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>. A consultant (you!) has been asked to determine
+	  the signal's presence.</para>
+	
+	<section id="s13.1">
+	  <para id="p13.1">Assuming the signal is a sinusoid with
+	  unknown phase and amplitude, what should be done to
+	  determine the presence of the sinusoid so that a false-alarm
+	  probability criterion of 0.1 is met?</para>
+	</section>
+
+	<section id="s13.2">
+	  <para id="p13.2">Other than its periodic nature, now assume
+	  that the signal's waveform is unknown. What computations
+	  must the optimum detector perform?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex14">
+      <problem id="idp1072928">
+	<para id="para14">The QAM (Quadrature Amplitude Modulation)
+	signal set consists of signals of the form
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub>
+		</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>A</m:mi>
+		      <m:mi>i</m:mi>
+		      <m:mi>c</m:mi>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:cos/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci><m:msub>
+			<m:mi>f</m:mi>
+			<m:mi>c</m:mi>
+		      </m:msub></m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>
+		    <m:msubsup>
+		      <m:mi>A</m:mi>
+		      <m:mi>i</m:mi>
+		      <m:mi>s</m:mi>
+		    </m:msubsup>
+		  </m:ci>
+		  <m:apply>
+		    <m:sin/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci><m:msub>
+			<m:mi>f</m:mi>
+			<m:mi>c</m:mi>
+		      </m:msub></m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>where
+	  <m:math>
+	    <m:ci>
+	      <m:msubsup>
+		<m:mi>A</m:mi>
+		<m:mi>i</m:mi>
+		<m:mi>c</m:mi>
+	      </m:msubsup>
+	    </m:ci>
+	  </m:math> and
+	  <m:math>
+	    <m:ci>
+	      <m:msubsup>
+		<m:mi>A</m:mi>
+		<m:mi>i</m:mi>
+		<m:mi>s</m:mi>
+	      </m:msubsup>
+	    </m:ci>
+	  </m:math> are amplitudes that define each element of the
+	  signal set. These are chosen according to design
+	  constraints. Assume the signals are observed in additive
+	  Gaussian noise.</para>
+
+	<section id="s14.1">
+	  <para id="p14.1">What is the optimal amplitude choice for
+	  the binary and quaternary (four-signal) signal sets when the
+	  noise is white and the signal energy is constrained
+	    (<m:math>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:domainofapplication>
+		    <m:ci>l</m:ci>
+		  </m:domainofapplication>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:ci>E</m:ci>
+	      </m:apply>
+	    </m:math>)? Comment on the uniqueness of your answers.</para>
+	</section>
+
+	<section id="s14.2">
+	  <para id="p14.2">Describe the optimal binary QAM signal set
+	  when the noise is colored.</para>
+	</section>
+
+	<section id="s14.3">
+	  <para id="p14.3">Now suppose the <emphasis>peak</emphasis> amplitude
+	    (<m:math>
+	      <m:apply>
+		<m:lt/>
+		<m:apply>
+		  <m:max/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:apply>
+		    <m:abs/>
+		    <m:apply>
+		      <m:ci type="fn">
+			<m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub>
+		      </m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:ci><m:msub>
+		  <m:mi>A</m:mi>
+		  <m:mi>max</m:mi>
+		</m:msub></m:ci>
+	      </m:apply>
+	    </m:math>) is constrained. What are the optimal signal
+	    sets (both binary and quaternary) for the white noise
+	    case? Again, comment on uniqueness.</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex15">
+      <problem id="idp2696912">
+	<para id="para15">Because sources rarely remain still, a
+	common problem in radar applications is uncertainty of the
+	signal frequency because of Doppler shifts. This effect is
+	usually small, but conceivably could be large enough for a
+	sinusoidal signal to "wander" from its presumed frequency
+	index.</para>
+
+	<section id="s15.1">
+	  <para id="p15.1">Design a spectrally based detection
+	  strategy which examines a range of frequencies, testing for
+	  the presence of a sinusoid in any one of the bins or no
+	  sinusoid in any bin.</para>
+	</section>
+
+	<section id="s15.2">
+	  <para id="p15.2">Predict the detection loss (or gain)
+	  relative to the known frequency case (no Doppler shift) by
+	  constrasting the signal-to-noise ratio terms in the
+	  detection probability expression for each detector.</para>
+	</section>
+
+	<section id="s15.3">
+	  <para id="p15.3">Contrast the performance of this detector
+	  with a square-law detector that only considers the frequency
+	  band in question.</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex16">
+      <problem id="idp3445728">
+	<para id="para16">I confess that unknown-delay problem given
+	<link document="m11283">previously</link> is not terribly
+	relevant to active sonar and radar ranging problems. In these
+	cases, the signal's delay, measured with respect to its
+	emission by a source, presents the round-trip propagation
+	time from the source to the energy-reflecting object and
+	back. Hence, delay is proportional to twice the range. What
+	makes the example overly simplistic is the independence of
+	signal amplitude on delay.</para>
+
+	<section id="s16.1">
+	  <para id="p16.1">Because of attenuation due to spherical
+	  propagation, show that the received signal energy is
+	  inversely related to the fourth power of the range. This
+	  result is known as the <term>radar equation</term>.</para>
+	</section>
+
+	<section id="s16.2">
+	  <para id="p16.2">Derive the detector that takes the
+	  dependence of delay and amplitude into account, thereby
+	  optimally determining the presence of a signal in active
+	  radar/sonar applications, and produces a delay estimate,
+	  thereby simultaneously providing the object's range. Not
+	  only determine the detector's structure, but also how the
+	  threshold and false-alarm probability are related.</para>
+	</section>
+
+	<section id="s16.3">
+	  <para id="p16.3">Does the object's reflectivity need to be
+	  known to implement your detector?</para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="ex17">
+      <problem id="idp1952384">
+	<para id="para17">Derive the frequency domain counterpart of
+	the CFAR detector, explicitly indicating its independence on
+	noise variance. Constrast this detector to that derived in
+	<link target-id="ex15"/>: how do they differ? How much penalty in
+	performance is paid by uncertainty in the noise
+	variance?</para>
+      </problem>
+    </exercise>
+  
+    <exercise id="ex18">
+      <problem id="idp1955808">
+	<para id="para18">CFAR detectors are extremely important in
+	applications because they automatically adapt to the value of
+	noise variance during the observations, allowing them to be
+	used in varying noise situations. However, as described in
+	<link target-id="ex16"/>, unknown delays must be also considered
+	in realistic problems.</para>
+
+	<section id="s18.1">
+	  <para id="p18.1">Derive a CFAR detector that also takes
+	  unknown signal delay into account.</para>
+	</section>
+
+	<section id="s18.2">
+	  <para id="p18.2">Show that your detector
+	  <emphasis>automatically</emphasis> incorporates amplitude
+	  uncertainties.</para>
+	</section>
+
+	<section id="s18.3">
+	  <para id="p18.3">Under the no-signal model, what is the
+	    distribution of the sufficient statistic?</para>
+	</section> 
+      </problem>
+    </exercise>
+
+  </content>
+</document>

@@ -1,0 +1,96 @@
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col10232</md:content-id>
+    <md:title>Statistical Signal Processing</md:title>
+    <md:language>en</md:language>
+    <md:license url="http://creativecommons.org/licenses/by/1.0">Creative Commons Attribution License</md:license>
+    <md:uuid>68ebe763-38ea-436e-9fbd-c8abd71bae60</md:uuid>
+<md:slug>statistical-signal-processing</md:slug>
+</metadata>
+  <col:content>
+    <col:module document="m11947"/>
+    <col:subcollection>
+      <md:title>Preliminaries</md:title>
+      <col:content>
+        <col:module document="m11948"/>
+        <col:module document="m11444"/>
+        <col:subcollection>
+          <md:title>Sufficiency</md:title>
+          <col:content>
+            <col:module document="m11481"/>
+            <col:module document="m11480"/>
+          </col:content>
+        </col:subcollection>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Signal Representation and Modeling</md:title>
+      <col:content>
+        <col:module document="m10057"/>
+        <col:subcollection>
+          <md:title>Signal Models</md:title>
+          <col:content>
+            <col:module document="m11432"/>
+          </col:content>
+        </col:subcollection>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Detection Theory</md:title>
+      <col:content>
+        <col:module document="m11531"/>
+        <col:subcollection>
+          <md:title>Criteria</md:title>
+          <col:content>
+            <col:module document="m11228"/>
+            <col:module document="m11533"/>
+            <col:module document="m11534"/>
+            <col:subcollection>
+              <md:title>Neyman-Person</md:title>
+              <col:content>
+                <col:module document="m11548"/>
+              </col:content>
+            </col:subcollection>
+          </col:content>
+        </col:subcollection>
+        <col:subcollection>
+          <md:title>Detection with Unknowns</md:title>
+          <col:content/>
+        </col:subcollection>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Estimation Theory</md:title>
+      <col:content>
+        <col:subcollection>
+          <md:title>Minimum Variance Unbiased Estimation</md:title>
+          <col:content>
+            <col:module document="m11426"/>
+            <col:module document="m11429"/>
+          </col:content>
+        </col:subcollection>
+        <col:module document="m11446"/>
+        <col:subcollection>
+          <md:title>Bayesian Estimation</md:title>
+          <col:content>
+            <col:module document="m11660"/>
+            <col:subcollection>
+              <md:title>LMMSE</md:title>
+              <col:content>
+                <col:module document="m11462"/>
+                <col:module document="m11438"/>
+              </col:content>
+            </col:subcollection>
+          </col:content>
+        </col:subcollection>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>Adaptive Filtering</md:title>
+      <col:content>
+        <col:module document="m11433"/>
+        <col:module document="m11439"/>
+      </col:content>
+    </col:subcollection>
+  </col:content>
+</col:collection>

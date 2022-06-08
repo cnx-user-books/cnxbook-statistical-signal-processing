@@ -1,0 +1,692 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Beyond Two Models</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b3f1c212-be0d-4da9-b71d-56fa44ea51fa</md:uuid>
+</metadata>
+
+  <content>
+    <para id="twomodels">
+      Frequently, more than two viable models for data generation can
+      be defined for a given situation.  The
+      <term>classification</term> problem is to determine which of
+      several models best "fits" a set of measurements.  For example,
+      determining the type of airplane from its radar returns forms a
+      classification problem.  The model evaluation framework has the
+      right structure if we can allow more than two models.  We happily
+      note that in deriving the likelihood ratio test we did not need
+      to assume that only two possible descriptions exist.  Go back
+      and examine the expression for the <link document="m11228" target-id="maximum">maximum probability correct decision
+      rule</link>.  If <m:math><m:ci>K</m:ci></m:math> models seem
+      appropriate for a specific problem, the decision rule maximizing
+      the probability of making a correct choice is
+      <m:math display="block">
+	<m:apply>
+	  <m:forall/>
+	  <m:bvar>
+	    <m:ci>i</m:ci>
+	  </m:bvar>
+	  <m:condition>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>i</m:ci>
+	      <m:set>
+		<m:cn>1</m:cn>
+		<m:ci>…</m:ci>
+		<m:ci>K</m:ci>
+	      </m:set>
+	    </m:apply>
+	  </m:condition>
+	  <m:apply>
+	    <m:max/>
+	    <m:apply>
+	      <m:times/>
+	      <m:ci><m:msub>
+		  <m:mi>π</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> To determine the largest of 
+      <m:math>
+	<m:ci>K</m:ci>
+      </m:math> quantities, exactly
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci>K</m:ci>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> numeric comparisons need be made.  When we have two
+      possible models 
+      (<m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci>K</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math>), this decision rule reduces to the computation of the
+      likelihood ratio and its comparison to a threshold.  In general,
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci>K</m:ci>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> likelihood ratios need to be computed and compared to
+      a threshold.  Thus the likelihood ratio test can be viewed as a
+      specific method for determining the largest of the decision
+      statistics 
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci><m:msub>
+	      <m:mi>π</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:apply>
+	    <!--pdf-->
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>.
+    </para>
+    <para id="ordering">
+      Since we need only the relative ordering of the
+      <m:math>
+	<m:ci>K</m:ci> 
+      </m:math> decision statistics to make a decision, we can apply
+      any transformation
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn">T</m:ci>
+	  <m:ci>·</m:ci>
+	</m:apply>
+      </m:math> to them that does not affect ordering.  In general,
+      possible transformations must be positively monotonic to satisfy
+      this condition.  For example, the needless common additive
+      components in the decision statistics can be eliminated, even if
+      they depend on the observations.  Mathematically, "common" means
+      that the quantity does not depend on the model index 
+      <m:math>
+	<m:ci>i</m:ci>
+      </m:math>.  The transformation in this case would be of the form
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:ci type="fn">T</m:ci>
+	    <m:ci><m:msub>
+		<m:mi>z</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:minus/>
+	    <m:ci><m:msub>
+		<m:mi>z</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:ci>a</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>, clearly a monotonic transformation.  A
+      <emphasis>positive</emphasis> multiplicative factor can also be
+      "canceled"; if negative, the ordering would be reversed and
+      that cannot be allowed.  The simplest resulting expression
+      becomes the sufficient statistic 
+      <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>ϒ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> for the model.  Expressed in terms of the sufficient
+      statistic, the maximum probability correct or the Bayesian
+      decision rule becomes
+      <m:math display="block">
+	<m:apply>
+	  <m:forall/>
+	  <m:bvar>
+	    <m:ci>i</m:ci>
+	  </m:bvar>
+	  <m:condition>
+	    <m:apply>
+	      <m:in/>
+	      <m:ci>i</m:ci>
+	      <m:set>
+		<m:cn>1</m:cn>
+		<m:ci>…</m:ci>
+		<m:ci>K</m:ci>
+	      </m:set>
+	    </m:apply>
+	  </m:condition>
+	  <m:apply>
+	    <m:max/>
+	    <m:apply>
+	      <m:plus/>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>ϒ</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math> where 
+      <m:math>
+	<m:ci><m:msub> 
+	    <m:mi>C</m:mi> 
+	    <m:mi>i</m:mi> 
+	  </m:msub></m:ci>
+      </m:math> summarizes all additive terms that do not depend on
+      the observation vector 
+      <m:math>
+	<m:ci type="vector">r</m:ci>
+      </m:math>.  The quantity 
+       <m:math>
+	<m:apply>
+	  <m:ci type="fn"><m:msub>
+	      <m:mi>ϒ</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> is termed the <term>sufficient statistic associated
+      with model 
+	<m:math>
+	  <m:ci>i</m:ci> 
+	</m:math></term>.  In many cases, the functional form of the
+      sufficient statistic varies little from one model to another and
+      expresses the necessary operations that summarize the
+      observations.  The constants
+      <m:math>
+	<m:ci><m:msub> 
+	    <m:mi>C</m:mi> 
+	    <m:mi>i</m:mi> 
+	  </m:msub></m:ci>
+      </m:math> are usually lumped together to yield the threshold
+      against which we compare the sufficient statistic.  For example,
+      in the binary model situation, the decision rule becomes
+      <m:math display="block">
+	<m:apply>
+	  <m:plus/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>ϒ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:ci><m:msub>
+		<m:mi>C</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>ϒ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> or
+      <m:math display="block">
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:minus/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>ϒ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:ci type="fn"><m:msub>
+		    <m:mi>ϒ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub></m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:munderover>
+		<m:mo>≷</m:mo>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub>
+		<m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub>
+	      </m:munderover>
+	      <m:ci><m:msub>
+		  <m:mi>C</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> Thus, the sufficient statistic for the decision rule
+      is
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>ϒ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:ci type="fn"><m:msub>
+		<m:mi>ϒ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math> and the threshold 
+      <m:math>
+	<m:ci>γ</m:ci>
+      </m:math> is 
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>C</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>.
+    </para>
+    <example id="Gauss">
+      <para id="previous">
+	In the Gaussian problem just discussed, the logarithm of the
+	likelihood function is
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci type="vector">r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>L</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ln/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci><m:msub>
+			  <m:mi>r</m:mi>
+			  <m:mi>l</m:mi>
+			</m:msub></m:ci>
+		      <m:ci><m:msup>
+			  <m:mi>m</m:mi>
+			  <m:mrow>
+			    <m:mo>(</m:mo>
+			    <m:mi>i</m:mi>
+			    <m:mo>)</m:mo>
+			  </m:mrow>
+			</m:msup></m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> where 
+	<m:math>
+	  <m:ci><m:msup>
+	      <m:mi>m</m:mi>
+	      <m:mrow>
+		<m:mo>(</m:mo>
+		<m:mi>i</m:mi>
+		<m:mo>)</m:mo>
+	      </m:mrow>
+	    </m:msup></m:ci>
+	</m:math> is the mean under model 
+	<m:math>
+	  <m:ci>i</m:ci>
+	</m:math>.  After appropriate simplification that retains the
+	ordering, we have
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn"><m:msub>
+		  <m:mi>ϒ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msup>
+		    <m:mi>m</m:mi>
+		    <m:mrow>
+		      <m:mo>(</m:mo>
+		      <m:mi>i</m:mi>
+		      <m:mo>)</m:mo>
+		    </m:mrow>
+		  </m:msup></m:ci>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:lowlimit>
+		  <m:cn>0</m:cn>
+		</m:lowlimit>
+		<m:uplimit>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:uplimit>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>C</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:plus/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:cn type="rational">1<m:sep/>2</m:cn>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>L</m:ci>
+		      <m:apply>
+			<m:power/>
+			<m:ci><m:msup>
+			    <m:mi>m</m:mi>
+			    <m:mrow>
+			      <m:mo>(</m:mo>
+			      <m:mi>i</m:mi>
+			      <m:mo>)</m:mo>
+			    </m:mrow>
+			  </m:msup></m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>σ</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	      <m:ci><m:msub>
+		  <m:mi>c</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>  The term 
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>c</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci> 
+	</m:math> is a constant defined by the error criterion; for
+	the maximum probability correct criterion, this constant is
+	<m:math>
+	  <m:apply>
+	    <m:ln/>
+	    <m:ci><m:msub>
+		<m:mi>π</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:apply>
+	</m:math>.
+      </para>
+    </example>
+    <para id="NPtest">
+      When employing the Neyman-Pearson test, we need to specify the
+      various error probabilities 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+          <m:condition>
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>H</m:mi>
+		  <m:mi>j</m:mi>
+		</m:msub></m:ci>
+	      <m:mtext>  true</m:mtext>
+	    </m:mrow>
+	  </m:condition>
+	  <m:mrow>
+	    <m:mtext>say  </m:mtext>
+	    <m:ci><m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:mrow>
+	</m:apply>
+      </m:math>.  These specifications amount to determining the
+      constants 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>c</m:mi>
+	    <m:mi>i</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> when the sufficient statistic is used.  Since
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci>K</m:ci>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> comparisons will be used to home in on the optimal
+      decision, only 
+      <m:math>
+	<m:apply>
+	  <m:minus/>
+	  <m:ci>K</m:ci>
+	  <m:cn>1</m:cn>
+	</m:apply>
+      </m:math> error probabilities need be specified.  Typically, the
+      quantities 
+      <m:math>
+	<m:apply>
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+          <m:condition>
+	    <m:mrow>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:mtext>  true</m:mtext>
+	    </m:mrow>
+	  </m:condition>
+	  <m:mrow>
+	    <m:mtext>say  </m:mtext>
+	    <m:ci><m:msub>
+		<m:mi>H</m:mi>
+		<m:mi>i</m:mi>
+	      </m:msub></m:ci>
+	  </m:mrow>
+	</m:apply>
+      </m:math>, 
+      <m:math>
+	<m:apply>
+	  <m:in/>
+	  <m:ci>i</m:ci>
+	  <m:set>
+	    <m:cn>1</m:cn>
+	    <m:ci>…</m:ci>
+	    <m:apply>
+	      <m:minus/>
+	      <m:ci>K</m:ci>
+	      <m:cn>1</m:cn>
+	    </m:apply>
+	  </m:set>
+	</m:apply>
+      </m:math> are used, particularly when the model
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>ℳ</m:mi>
+	    <m:mn>0</m:mn>
+	  </m:msub></m:ci> 
+      </m:math> represents the situation when no signal is present
+      (see <link document="m11271" target-id="problem5">this
+      problem</link>).
+    </para>
+  </content>
+  	       
+</document>

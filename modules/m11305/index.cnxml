@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Partially Known Signals and Noise</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>506ae4a2-2d33-4535-9abf-7cb8e3b4b3f4</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       Rather than assuming that aspects of the signal, such as its
+    amplitude are beyond any set of justifiable assumptions and are
+    thus "unknown," we may have a situation where these signal aspects
+    are "uncertain." For example, the amplitude may be known to be
+    within ten percent of a nominal value. If the case, we would
+    expect better performance characteristics from a detection
+    strategy exploiting this partial knowledge from one that
+    doesn't. To derive detectors that use partial information about
+    signal and noise models, we apply the approach used in robust
+    model evaluation: find the worst-case combination of signal and
+    noise consistent with the partial information, then derive the
+    detection strategy that best copes with it. We have seen that the
+    optimal detection strategy is found from the likelihood ratio: no
+    matter what the signal and noise model are, the likelihood ratio
+    yields the best decision rule. When applied to additive Gaussian
+    noise problems, the performance of the likelihood ratio test
+    increases with the signal-to-noise ratio of the difference between
+    the two hypothesized signals. Since we focus on deciding whether a
+    particular signal is present or not, performance is determined by
+    that signal's SNR and the worst-case situation occurs when this
+    signal-to-noise ratio is smallest. The results from robust model
+    evaluation taught us to design the detector to the worst-case
+    situation, which in our case roughly means employing matched
+    filters based on the worst-case signal. Employing this approach
+    results in what are known as <term>robust detectors</term>.
+    </para>
+  </content>
+  
+</document>

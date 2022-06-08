@@ -1,0 +1,580 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Performance Evaluation</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0cb47f02-940e-4dfd-b904-0b91e88dd8a2</md:uuid>
+</metadata>
+
+  <content>
+    <para id="roc">
+      We alluded <link document="m11228" target-id="neypear">earlier</link> to the relationship between the
+      false-alarm probability
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi> 
+	  </m:msub></m:ci>
+      </m:math> and the detection probability 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>D</m:mi> 
+	  </m:msub></m:ci>
+      </m:math> as one varies the decision region.  Because the
+      Neyman-Pearson criterion depends on specifying the false-alarm
+      probability to yield an acceptable detection probability, we
+      need to examine carefully how the detection probability is
+      affected by a specification of the false-alarm probability.  The
+      usual way these quantities are discussed is through a parametric
+      plot of 
+      <m:math> 
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>D</m:mi>
+	  </m:msub></m:ci> 
+      </m:math> versus 
+      <m:math>
+	<m:ci><m:msub>
+	    <m:mi>P</m:mi>
+	    <m:mi>F</m:mi> 
+	  </m:msub></m:ci>
+      </m:math>: the <term>receiver operating characteristic</term> or
+      ROC.
+    </para>
+    <para id="density">
+      As we discovered in the <link document="m11228" target-id="gaussian">Gaussian example</link>, the sufficient
+      statistic provides the simplest way of computing these
+      probabilities; thus, they are usually considered to depend on
+      the threshold parameter 
+      <m:math>
+	<m:ci>γ</m:ci> 
+      </m:math>.  In these terms, we have
+      <equation id="detection">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci>ϒ</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:ci>γ</m:ci>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:infinity/>
+	      </m:uplimit>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>ϒ</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci>ϒ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> and 
+      <equation id="falsealarm">
+	<m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:int/>
+	      <m:bvar>
+		<m:ci>ϒ</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:ci>γ</m:ci>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:infinity/>
+	      </m:uplimit>
+	      <m:apply>
+		<!--pdf-->
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>ϒ</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci><m:msub>
+		      <m:mi>ℳ</m:mi>
+		      <m:mn>0</m:mn>
+		    </m:msub></m:ci>
+		</m:condition>
+		<m:ci>ϒ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+      </equation> These densities and their relationship to the
+      threshold 
+      <m:math>
+	<m:ci>γ</m:ci> 
+      </m:math> are shown in <link target-id="phi-densities"/>.
+    </para>
+    <figure id="phi-densities">
+      <title>Densities of the sufficient statistic</title> 
+      <media id="idm9822608" alt=""><image src="../../media/suff.jpg" mime-type="image/jpeg"/></media> 
+      <caption>The densities of the sufficient statistic 
+	<m:math>
+	  <m:apply>
+	    <m:ci type="fn">ϒ</m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math> conditioned on two hypotheses are shown for the
+	Gaussian example.  The threshold 
+	<m:math>
+	  <m:ci>γ</m:ci>
+	</m:math> used to distinguish between the two models is
+	indicated.  The false-alarm probability is the area under the
+	density corresponding to
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	</m:msub></m:ci> 
+	</m:math> to the right of the threshold; the detection
+	probability is the area under the density corresponding to
+	<m:math>
+	  <m:ci><m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub></m:ci> </m:math>.
+      </caption>
+    </figure>
+    <para id="greater">
+      We see that the detection probability is greater than or equal
+      to the false-alarm probability.  Since these probabilities must
+      decrease monotonically as the threshold is increased, the ROC
+      curve must be concave-down and must <emphasis>always</emphasis>
+      exceed the equality line (<link target-id="ROC"/>).<footnote id="idp938192"> This seemingly haughty claim is proved when we
+      consider the sequential hypothesis test.</footnote>
+    </para>
+
+    <figure id="ROC">
+      <media id="idp939872" alt=""><image src="../../media/roc.jpg" mime-type="image/jpeg"/></media> 
+      <caption>
+	A plot of the receiver operating characteristic for the
+	densities shown in the previous figure.  Three ROC curves are
+	shown corresponding to different values for the parameter
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>m</m:ci>
+	    </m:apply>
+	    <m:ci>σ</m:ci>
+	  </m:apply>
+	</m:math>.
+      </caption>
+    </figure>
+
+    <para id="distinct">
+      The degree to which the ROC departs from the equality line 
+      <m:math>
+	<m:apply>
+	  <m:eq/>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>D</m:mi>
+	    </m:msub></m:ci>
+	  <m:ci><m:msub>
+	      <m:mi>P</m:mi>
+	      <m:mi>F</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math> measures the relative <term>distinctiveness</term>
+      between the two hypothesized models for generating the
+      observations.  In the limit, the two models can be distinguished
+      perfectly if the ROC is discontinuous and consists of the point
+      (1,0).  The two are totally confused if the ROC lies on the
+      equality line (this would mean, of course, that the two models
+      are identical); distinguishing the two in this case would be
+      "somewhat difficult".
+    </para>
+    <example id="ratios">
+      <para id="example">
+	Consider the Gaussian example we have been discussing where
+	the two models differ only in the means of the conditional
+	distributions.  In this case, the two model-testing
+	probabilities are given by
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>γ</m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> and 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>γ</m:ci>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>L</m:ci>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:root/>
+		    <m:ci>L</m:ci>
+		  </m:apply>
+		  <m:ci>σ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>  By re-expressing 
+	<m:math>
+	  <m:ci>γ</m:ci> 
+	</m:math> as
+	<m:math>
+	  <m:apply>
+	    <m:plus/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:ci>σ</m:ci>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	      <m:ci><m:msup>
+		  <m:mi>γ</m:mi>
+		  <m:mo>′</m:mo>
+		</m:msup></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>L</m:ci>
+		<m:ci>m</m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:apply>
+	</m:math>, we discover that these probabilities depend only on
+	the ratio
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>m</m:ci>
+	    </m:apply>
+	    <m:ci>σ</m:ci>
+	  </m:apply>
+	</m:math>.
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>F</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci><m:msup>
+		      <m:mi>γ</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:root/>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:ci><m:msub>
+		<m:mi>P</m:mi>
+		<m:mi>D</m:mi>
+	      </m:msub></m:ci>
+	    <m:apply>
+	      <m:ci type="fn">Q</m:ci>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:divide/>
+		  <m:ci><m:msup>
+		      <m:mi>γ</m:mi>
+		      <m:mo>′</m:mo>
+		    </m:msup></m:ci>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:root/>
+			<m:ci>L</m:ci>
+		      </m:apply>
+		      <m:ci>m</m:ci>
+		    </m:apply>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:ci>L</m:ci>
+		    </m:apply>
+		    <m:ci>m</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:cn>2</m:cn>
+		    <m:ci>σ</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math> As this signal-to-noise ratio increases, the ROC
+	curve approaches its "ideal" form: the northwest corner of a
+	square as illustrated in <link target-id="ROC"/> by the value of
+	7.44 for
+	<m:math>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:root/>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	      <m:ci>m</m:ci>
+	    </m:apply>
+	    <m:ci>σ</m:ci>
+	  </m:apply>
+	</m:math>, which corresponds to a signal-to-noise
+	ratio of 
+	<m:math>
+	  <m:apply>
+	    <m:approx/>
+	    <m:apply>
+	      <m:power/>
+	      <m:cn>7.44</m:cn>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:cn>17</m:cn>
+	      <m:ci>dB</m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  If a small false-alarm probability (say 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:cn>10</m:cn>
+	    <m:cn>-4</m:cn>
+	  </m:apply>
+	</m:math>) is specified, a large detection probability
+	(0.9999) can result.  Such values of signal-to-noise ratios can thus
+	be considered "large" and the corresponding model evaluation problem
+	relatively easy.  If, however, the signal-to-noise ratio equals 4 (6
+	dB), the figure illustrates the worsened performance: a 
+	<m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:cn>10</m:cn>
+	    <m:cn>-4</m:cn>
+	  </m:apply>
+	</m:math> specification on the false-alarm probability would
+	result in a detection probability of essentially zero.  Thus,
+	in a fairly small signal-to-noise ratio range, the likelihood
+	ratio test's performance capabilities can vary dramatically.
+	However, no other decision rule can yield better performance.
+      </para>
+    </example>
+    <para id="specification">
+      Specification of the false-alarm probability for a new problem
+      requires experience.  Choosing a "reasonable" value for the
+      false-alarm probability in the Neyman-Pearson criterion depends
+      strongly on the problem difficulty.  Too small a number will
+      result in small detection probabilities; too large and the
+      detection probability will be close to unity, suggesting that
+      fewer false alarms could have been tolerated.  Problem
+      difficulty is assessed by the degree to which the conditional
+      densities 
+      <m:math>
+	<m:apply>
+	  <!--pdf-->
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:ci type="vector">r</m:ci>
+	  </m:bvar>
+	  <m:condition>
+	    <m:ci><m:msub>
+		<m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	      </m:msub></m:ci>
+	  </m:condition>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> and 
+      <m:math>
+	<m:apply>
+	  <!--pdf-->
+	  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	  <m:bvar>
+	    <m:ci type="vector">r</m:ci>
+	  </m:bvar>
+	  <m:condition>
+	    <m:ci><m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:condition>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math> overlap, a problem dependent measurement.  If we are
+      testing whether a distribution has one of two possible mean
+      values as in our Gaussian example, a quantity like a
+      signal-to-noise ratio will probably emerge as determining
+      performance.  The performance in this case can vary drastically
+      depending on whether the signal-to-noise ratio is large or
+      small.  In other kinds of problems, the best possible
+      performance provided by the likelihood ratio test can be poor.
+      For example, consider the problem of determining which of two
+      zero-mean probability densities describes a given set of data
+      consisting of statistically independent observations (See <link document="m11271" target-id="problem2">this problem</link>).
+      Presumably, the variances of these two densities are equal as we
+      are trying to determine which density is most appropriate.  In
+      this case, the performance probabilities can be quite low,
+      especially when the general shapes of the densities are similar.
+      Thus a single quantity, like the signal-to-noise ratio, does
+      <emphasis>not</emphasis> emerge to characterize problem
+      difficulty in all hypothesis testing problems.  In sequel, we
+      will analyze each model evaluation and detection problem in a
+      standard way.  After the sufficient statistic has been found, we
+      will seek a value for the threshold that attains a specified
+      false-alarm probability.  The detection probability will then be
+      determined as a function of "problem difficulty", the measure of
+      which is problem-dependent.  We can control the choice of
+      false-alarm probability; we cannot control over problem
+      difficulty.  Confusingly, the detection probability will vary
+      with <emphasis>both</emphasis> the specified false-alarm
+      probability and the problem difficulty.
+    </para>
+    <para id="method">
+      We are implicitly assuming that we have a rational method for
+      choosing the false-alarm probability criterion value.  In signal
+      processing applications, we usually make a sequence of decisions
+      and pass them to systems making more global determinations.  For
+      example, in digital communications problems the model evaluation
+      formalism could be used to "receive" each bit.  Each bit is
+      received in sequence and then passed to the decoder which
+      invokes error-correction algorithms.  The important notions here
+      are that the decision-making process occurs at a given
+      <emphasis>rate</emphasis> and that the decisions are presented
+      to other signal processing systems.  The rate at which errors
+      occur in system input(s) greatly influences system design.
+      Thus, the selection of a false-alarm probability is usually
+      governed by the <term>error rate</term> that can be tolerated by
+      succeeding systems.  If the decision rate is one per day, then a
+      moderately large (say 0.1) false-alarm probability might be
+      appropriate.  If the decision rate is a million per second as in
+      a one megabit communication channel, the false-alarm probability
+      should be much lower:
+      <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:cn>10</m:cn>
+	  <m:cn>-12</m:cn>
+	</m:apply>
+      </m:math> would suffice for the one-tenth per day error rate.
+    </para>
+  </content>
+  
+</document>

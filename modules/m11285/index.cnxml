@@ -1,0 +1,1097 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Unknown Noise Parameters</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>2c23cc16-56ad-4994-99ea-e104190b59f4</md:uuid>
+</metadata>
+
+  <content>
+    <para id="para1">
+       When aspects of the noise, such as the variance or power
+       spectrum, are in doubt, the detection problem becomes more
+       difficult to solve.  Although a decision rule can be derived
+       for such problems using the techniques we have been discussing,
+       establishing a rational threshold value is impossible in many
+       cases.  The reason for this inability is simple:
+       <emphasis>all</emphasis> models depend on the noise, thereby
+       disallowing a computation of a threshold based on a performance
+       probability.  The solution is innovative: derive decision rules
+       and accompanying thresholds that do not depend on false-alarm
+       probabilities!
+    </para>
+
+    <para id="para2">
+      Consider the case in which the variance of the noise is not
+      known and the noise covariance matrix is written as <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>σ</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	  <m:ci type="matrix"><m:mover>
+	      <m:mi>K</m:mi>
+	      <m:mo>∼</m:mo>
+	    </m:mover></m:ci>
+	</m:apply>
+      </m:math> where the trace of <m:math> <m:ci type="matrix"><m:mover> <m:mi>K</m:mi> <m:mo>∼</m:mo>
+      </m:mover></m:ci> </m:math> is normalized to
+      <m:math><m:ci>L</m:ci></m:math>.  The conditional density of the
+      observations under a signal-related model is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	    <m:bvar>
+	      <m:ci type="vector">r</m:ci>
+	    </m:bvar>
+	    <m:condition>
+	      <m:ci><m:msub>
+		  <m:mi>ℳ</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:condition>
+	    <m:condition>
+	      <m:ci><m:msup>
+		  <m:mi>σ</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msup></m:ci>
+	    </m:condition>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:cn>1</m:cn>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:ci>L</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:root/>
+		  <m:apply>
+		    <m:determinant/>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:pi/>
+		      <m:ci type="matrix"><m:mover>
+			  <m:mi>K</m:mi>
+			  <m:mo>∼</m:mo>
+			</m:mover></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:exp/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:apply>
+		      <m:times/>
+		      <m:cn>2</m:cn>
+		      <m:apply>
+			<m:power/>
+			<m:ci>σ</m:ci>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">r</m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mi>i</m:mi>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix"><m:mover>
+			<m:mi>K</m:mi>
+			<m:mo>∼</m:mo>
+		      </m:mover></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="vector">r</m:ci>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mi>i</m:mi>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Using the generalized-likelihood-ratio approach, the maximum
+      value of this density with respect to <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>σ</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math> occurs when
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:power/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	      <m:ci>
+		<m:msub>
+		  <m:mi>σ</m:mi>
+		  <m:mi>ML</m:mi>
+		</m:msub>
+	      </m:ci>
+	    </m:apply>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci type="vector">r</m:ci>
+		  <m:ci type="vector"><m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mi>i</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix"><m:mover>
+		    <m:mi>K</m:mi>
+		    <m:mo>∼</m:mo>
+		  </m:mover></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:minus/>
+		<m:ci type="vector">r</m:ci>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:ci>L</m:ci>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      This seemingly complicated answer is easily interpreted.  The
+      presence of <m:math>
+	<m:apply>
+	  <m:inverse/>
+	  <m:ci type="matrix"><m:mover>
+	      <m:mi>K</m:mi>
+	      <m:mo>∼</m:mo>
+	    </m:mover></m:ci>
+	</m:apply>
+      </m:math> in the dot product can be considered a whitening
+      filter.  Under the <m:math> <m:ci><m:msup> <m:mi>i</m:mi>
+      <m:mtext>th</m:mtext> </m:msup></m:ci> </m:math> model, the
+      expected value of the observation vector is the signal.  This
+      computation amounts to subtracting the expected value from the
+      observations, whitening the result, then averaging the squared
+      values - the usual form for the estimate of a variance.  Using
+      this estimate for each model, the logarithm of the generalized
+      likelihood ratio becomes
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:divide/>
+	      <m:ci>L</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:ln/>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">r</m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>0</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix"><m:mover>
+			<m:mi>K</m:mi>
+			<m:mo>∼</m:mo>
+		      </m:mover></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="vector">r</m:ci>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>0</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+		
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:transpose/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci type="vector">r</m:ci>
+		      <m:ci type="vector"><m:msub>
+			  <m:mi>s</m:mi>
+			  <m:mn>1</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:inverse/>
+		    <m:ci type="matrix"><m:mover>
+			<m:mi>K</m:mi>
+			<m:mo>∼</m:mo>
+		      </m:mover></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci type="vector">r</m:ci>
+		    <m:ci type="vector"><m:msub>
+			<m:mi>s</m:mi>
+			<m:mn>1</m:mn>
+		      </m:msub></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+
+	  <m:apply>
+	    <m:ln/>
+	    <m:ci>η</m:ci>
+	  </m:apply>
+	</m:mrow>
+      </m:math>
+
+      Computation of the threshold remains.  Both models depend on the
+      unknown variance.  However, a false-alarm probability, for
+      example, can be computed <emphasis>if</emphasis> the probability
+      density of the sufficient statistic does
+      <emphasis>not</emphasis> depend on the variance of the noise.
+      In this case, we would have what is known as a <term>constant
+      false-alarm rate</term> or <term>CFAR</term> detector (<cite target-id="carlylethomas"><cite-title>Carlyle &amp; Thomas</cite-title></cite>; <cite target-id="helstrom"><cite-title>Helstrom: p.317ff</cite-title></cite>).  If a detector has this
+      property, the value of the statistic will not change if the
+      observations are scaled about their presumed mean.
+      Unfortunately, the statistic just derived does not have this
+      property.  Let there be no signal under <m:math> <m:ci><m:msub>
+      <m:mi>ℳ</m:mi> <m:mn>0</m:mn> </m:msub></m:ci> </m:math>.
+      The scaling property can be checked in this zero-mean case by
+      replacing <m:math><m:ci type="vector">r</m:ci></m:math> by
+      <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci>c</m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>.  With this substitution, the statistic becomes <m:math>
+	<m:apply>
+	  <m:divide/>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>c</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix"><m:mover>
+		  <m:mi>K</m:mi>
+		  <m:mo>∼</m:mo>
+		</m:mover></m:ci>
+	    </m:apply>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:times/>
+	    <m:apply>
+	      <m:transpose/>
+	      <m:apply>
+		<m:minus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>c</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	    <m:apply>
+	      <m:inverse/>
+	      <m:ci type="matrix"><m:mover>
+		  <m:mo>K</m:mo>
+		  <m:mo>∼</m:mo>
+		</m:mover></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:minus/>
+	      <m:apply>
+		<m:times/>
+		<m:ci>c</m:ci>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mn>1</m:mn>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>.  The constant <m:math><m:ci>c</m:ci></m:math> cannot
+      be eliminated and the detector does not have the CFAR property.
+      If, however, the amplitude of the signal is also assumed to be
+      in doubt, a CFAR detector emerges.  Express the signal component
+      of model <m:math><m:ci>i</m:ci></m:math> as <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci>A</m:ci>
+	  <m:ci type="vector"><m:msub>
+	      <m:mi>s</m:mi>
+	      <m:mi>i</m:mi>
+	    </m:msub></m:ci>
+	</m:apply>
+      </m:math>, where <m:math><m:ci>A</m:ci></m:math> is an unknown
+      constant.  The maximum likelihood estimate of this amplitude
+      under model <m:math><m:ci>i</m:ci></m:math> is
+      <m:math display="block">
+	<m:apply>
+	  <m:eq/>
+	  <m:apply>
+	    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+	    <m:ci>
+	      <m:msub>
+		<m:mi>A</m:mi>
+		<m:mi>ML</m:mi>
+	      </m:msub>
+	    </m:ci>
+	  </m:apply>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix"><m:mover>
+		    <m:mi>K</m:mi>
+		    <m:mo>∼</m:mo>
+		  </m:mover></m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:transpose/>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mi>i</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:inverse/>
+		<m:ci type="matrix"><m:mover>
+		    <m:mi>K</m:mi>
+		    <m:mo>∼</m:mo>
+		  </m:mover></m:ci>
+	      </m:apply>
+	      <m:ci type="vector"><m:msub>
+		  <m:mi>s</m:mi>
+		  <m:mi>i</m:mi>
+		</m:msub></m:ci>
+	    </m:apply>
+	  </m:apply>
+	</m:apply>
+      </m:math>
+      Using this estimate in the likelihood ratio, we find the
+      decision rule for the CFAR detector.  <footnote id="idp1372880"><m:math> <m:ci type="matrix"><m:mover>
+      <m:mi>K</m:mi> <m:mo>∼</m:mo> </m:mover></m:ci> </m:math>
+      is the <emphasis>normalized</emphasis> noise covariance
+      matrix.</footnote> 
+      
+      <equation id="eqn1">
+	<m:math>
+	  <m:mrow>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>L</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:ln/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">
+			  <m:mover>
+			    <m:mi>K</m:mi>
+			    <m:mo>∼</m:mo>
+			  </m:mover>
+			</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:transpose/>
+			    <m:ci type="vector">r</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:inverse/>
+			    <m:ci type="matrix">
+			      <m:mover>
+				<m:mi>K</m:mi>
+				<m:mo>∼</m:mo>
+			      </m:mover>
+			    </m:ci>
+			  </m:apply>
+			  <m:ci type="vector"><m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:transpose/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>0</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:inverse/>
+			  <m:ci type="matrix">
+			    <m:mover>
+			      <m:mi>K</m:mi>
+			      <m:mo>∼</m:mo>
+			    </m:mover>
+			  </m:ci>
+			</m:apply>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>0</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:transpose/>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">
+			  <m:mover>
+			    <m:mi>K</m:mi>
+			    <m:mo>∼</m:mo>
+			  </m:mover>
+			</m:ci>
+		      </m:apply>
+		      <m:ci type="vector">r</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:power/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:transpose/>
+			    <m:ci type="vector">r</m:ci>
+			  </m:apply>
+			  <m:apply>
+			    <m:inverse/>
+			    <m:ci type="matrix">
+			      <m:mover>
+				<m:mi>K</m:mi>
+				<m:mo>∼</m:mo>
+			      </m:mover>
+			    </m:ci>
+			  </m:apply>
+			  <m:ci type="vector"><m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:cn>2</m:cn>
+		      </m:apply>
+		      <m:apply>
+			<m:times/>
+			<m:apply>
+			  <m:transpose/>
+			  <m:ci type="vector">
+			    <m:msub>
+			      <m:mi>s</m:mi>
+			      <m:mn>1</m:mn>
+			    </m:msub></m:ci>
+			</m:apply>
+			<m:apply>
+			  <m:inverse/>
+			  <m:ci type="matrix">
+			    <m:mover>
+			      <m:mi>K</m:mi>
+			      <m:mo>∼</m:mo>
+			    </m:mover>
+			  </m:ci>
+			</m:apply>
+			<m:ci type="vector"><m:msub>
+			    <m:mi>s</m:mi>
+			    <m:mn>1</m:mn>
+			  </m:msub></m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+
+	    <m:munderover>
+	      <m:mo>≷</m:mo>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>0</m:mn>
+	      </m:msub>
+	      <m:msub>
+		<m:mi>ℳ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	    </m:munderover>
+
+	    <m:apply>
+	      <m:ln/>
+	      <m:ci>η</m:ci>
+	    </m:apply>
+	  </m:mrow>
+	</m:math>
+      </equation>
+      Now we find that when <m:math><m:ci type="vector">r</m:ci></m:math> is replaced by <m:math>
+	<m:apply>
+	  <m:times/>
+	  <m:ci>c</m:ci>
+	  <m:ci type="vector">r</m:ci>
+	</m:apply>
+      </m:math>, the statistic is unchanged.  Thus, the probability
+      distribution of this statistic does <emphasis>not</emphasis>
+      depend on the unknown variance <m:math>
+	<m:apply>
+	  <m:power/>
+	  <m:ci>σ</m:ci>
+	  <m:cn>2</m:cn>
+	</m:apply>
+      </m:math>.  In most array processing applications, no signal is
+      assumed present in model <m:math> <m:ci><m:msub>
+      <m:mi>ℳ</m:mi> <m:mn>0</m:mn> </m:msub></m:ci> </m:math>;
+      in this case, <m:math> <m:ci><m:msub> <m:mi>ℳ</m:mi>
+      <m:mn>0</m:mn> </m:msub></m:ci> </m:math> does not depend on the
+      unknown amplitude <m:math><m:ci>A</m:ci></m:math> and a
+      threshold can be found to ensure a specified false-alarm rate
+      for <emphasis>any</emphasis> value of the unknown variance.  For
+      this specific problem, the likelihood ratio can be manipulated
+      to yield the CFAR decision rule
+      <m:math display="block">
+	<m:mrow>
+	  <m:apply>
+	    <m:divide/>
+	    <m:apply>
+	      <m:power/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:mover>
+		      <m:mi>K</m:mi>
+		      <m:mo>∼</m:mo>
+		    </m:mover>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:times/>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:mover>
+		      <m:mi>K</m:mi>
+		      <m:mo>∼</m:mo>
+		    </m:mover>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector">r</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:transpose/>
+		  <m:ci type="vector">
+		    <m:msub>
+		      <m:mi>s</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:inverse/>
+		  <m:ci type="matrix">
+		    <m:mover>
+		      <m:mi>K</m:mi>
+		      <m:mo>∼</m:mo>
+		    </m:mover>
+		  </m:ci>
+		</m:apply>
+		<m:ci type="vector"><m:msub>
+		    <m:mi>s</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+
+	  <m:munderover>
+	    <m:mo>≷</m:mo>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>0</m:mn>
+	    </m:msub>
+	    <m:msub>
+	      <m:mi>ℳ</m:mi>
+	      <m:mn>1</m:mn>
+	    </m:msub>
+	  </m:munderover>
+	  
+	  <m:ci>γ</m:ci>
+	</m:mrow>
+      </m:math>
+    
+    </para>
+
+    <example id="ex1">
+      <para id="para3">
+	Let's extend the <link document="m11284" target-id="ex1">previous
+	example</link> to the CFAR statistic just discussed to the
+	white noise case.  The sufficient statistic is 
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:ci type="fn">ϒ</m:ci>
+	      <m:ci type="vector">r</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:divide/>
+	      <m:apply>
+		<m:power/>
+		<m:apply>
+		  <m:sum/>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:sum/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:ci type="fn">r</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>  
+		      <m:ci type="fn">s</m:ci>
+		      <m:ci>l</m:ci>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	We first need to find the false-alarm probability as a
+	function of the threshold
+	<m:math><m:ci>γ</m:ci></m:math>.  Using the techniques
+	described in <cite target-id="wishner"><cite-title>Wishner</cite-title></cite>, the probability
+	density of <m:math>
+	  <m:apply>
+	    <m:ci type="fn">ϒ</m:ci>
+	    <m:ci type="vector">r</m:ci>
+	  </m:apply>
+	</m:math> under <m:math> <m:ci><m:msub> <m:mi>ℳ</m:mi>
+	<m:mn>0</m:mn> </m:msub></m:ci> </m:math> is given by a Beta
+	density (see <link document="m11241" target-id="table2">Probability
+	Distributions</link>), the parameters of which do
+	<emphasis>not</emphasis> depend on either the noise variance
+	(expectedly) or the signal values (unexpectedly).
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>ϒ</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>0</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>ϒ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:ci type="fn">β</m:ci>
+	      <m:ci>ϒ</m:ci>
+	      <m:apply>
+		<m:divide/>
+		<m:cn>1</m:cn>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>L</m:ci>
+		  <m:cn>1</m:cn>
+		</m:apply>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	We express the false-alarm probability derived from this
+	density as an incomplete Beta function (<cite target-id="bib1"><cite-title>Abramowitz &amp; Stegun</cite-title></cite>), resulting in
+	the curves shown in <link target-id="fig1"/>.  
+	
+	<figure id="fig1">
+	  <media id="idm6272384" alt=""><image src="../../media/cfarpf.png" mime-type="image/png"/></media> 
+	  <caption>The false-alarm probability for the CFAR receiver
+	  is plotted against the threshold value
+	  <m:math><m:ci>γ</m:ci></m:math> for several values of
+	  <m:math><m:ci>L</m:ci></m:math>, the number of observations.
+	  Note that the test statistic, and thereby the threshold,
+	  does not exceed one.
+	  </caption>
+	</figure>
+
+	The statistic's density under model <m:math> <m:ci><m:msub>
+	<m:mi>ℳ</m:mi> <m:mn>1</m:mn> </m:msub></m:ci> </m:math>
+	is related to the non-central <m:math><m:ci>F</m:ci></m:math>
+	distribution, expressible by the fairly simple, quickly
+	converging, infinite sum of Beta densities
+	<m:math display="block">
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+	      <m:bvar>
+		<m:ci>ϒ</m:ci>
+	      </m:bvar>
+	      <m:condition>
+		<m:ci>
+		  <m:msub>
+		    <m:mi>ℳ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+	      </m:condition>
+	      <m:ci>ϒ</m:ci>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar>
+		<m:ci>k</m:ci>
+	      </m:bvar>
+	      <m:lowlimit>
+		<m:cn>0</m:cn>
+	      </m:lowlimit>
+	      <m:uplimit>
+		<m:infinity/>
+	      </m:uplimit>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>d</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>d</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:ci>k</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">β</m:ci>
+		  <m:ci>ϒ</m:ci>
+		  <m:apply>
+		    <m:plus/>
+		    <m:ci>k</m:ci>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>
+	where <m:math>
+	  <m:apply>
+	    <m:power/>
+	    <m:ci>d</m:ci>
+	    <m:cn>2</m:cn>
+	  </m:apply>
+	</m:math> equals a signal-to-noise ratio: <m:math>
+	  <m:apply>
+	    <m:eq/>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>d</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	    <m:apply>
+	      <m:sum/>
+	      <m:bvar><m:ci>l</m:ci></m:bvar>
+	      <m:apply>
+		<m:divide/>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:cn>2</m:cn>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:apply>
+	</m:math>.  The results of using this CFAR detector are shown
+	in <link target-id="fig2"/>.
+	
+	<figure id="fig2">
+	  <media id="idp2589168" alt=""><image src="../../media/cfarpd.png" mime-type="image/png"/></media>
+	  <caption>The probability of detection for the CFAR detector
+	    and the matched filter detector is shown as a function of
+	    signal-to-noise ratio.  The signal and false-alarm
+	    criterion are the same as in <link document="m11262" target-id="fig1">this figure</link>.  Note how little
+	    performance has been lost in this case!
+	  </caption>
+	</figure>
+	 
+      </para>
+    </example>
+  </content>
+
+  <bib:file>
+    <bib:entry id="carlylethomas">
+      <bib:article>
+	<bib:author>J. W. Carlyle &amp; J. B. Thomas</bib:author>
+	<bib:title>On nonparametric signal detectors</bib:title>
+	<bib:journal>IEEE Trans. Info. Th.</bib:journal>
+	<bib:year>1964</bib:year>
+	<bib:volume>IT-10</bib:volume>
+	<bib:pages>146-152</bib:pages>
+	<bib:month>April</bib:month>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="helstrom">
+      <bib:book>
+	<bib:author>C. W. Helstrom</bib:author>
+	<bib:title>Statistical Theory of Signal Detection</bib:title>
+	<bib:publisher>Pergamon Press</bib:publisher>
+	<bib:year>1968</bib:year>
+	<bib:address>Oxford</bib:address>
+	<bib:edition>second edition</bib:edition>
+      </bib:book>
+    </bib:entry>
+
+    <bib:entry id="wishner">
+      <bib:article>
+	<bib:author>R. P. Wishner</bib:author>
+	<bib:title>Distribution of the normalized periodogram
+	detector</bib:title>
+	<bib:journal>IRE Trans. Info. Th.</bib:journal>
+	<bib:year>1962</bib:year>
+	<bib:volume>IT-8</bib:volume>
+	<bib:pages>342-349</bib:pages>
+	<bib:month>September</bib:month>
+      </bib:article>
+    </bib:entry>
+
+    <bib:entry id="bib1">
+      <bib:book>
+	<bib:editor>M. Abramowitz &amp; I. A. Stegun</bib:editor>
+	<bib:title>Handbook of Mathematical Functions</bib:title>
+	<bib:publisher>U.S. Government Printing Office</bib:publisher>
+	<bib:year>1968</bib:year>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+
+</document>

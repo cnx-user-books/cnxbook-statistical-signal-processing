@@ -1,0 +1,2222 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml" xmlns:bib="http://bibtexml.sf.net/">
+  <title>Estimation Theory: Problems</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>fd39ba6f-c6f0-4257-9bac-c7c1e7ab4875</md:uuid>
+</metadata>
+
+  <content>
+    <exercise id="problem1">
+      <problem id="idp2887984">
+	<para id="introp1">
+	  Estimates for identical parameters are heavily dependent on the
+	  assumed underlying probability densities.  To understand this
+	  sensitivity better, consider the following variety of
+	  problems, each of which asks for estimates of quantities
+	  related to variance.  Determine the bias and consistency in
+	  each case.
+	</para>
+	<section id="s1a">
+	  <para id="p1a">
+	    Compute the maximum <foreign>a posteriori</foreign> and
+	    maximum likelihood estimates of
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    based on
+	    <m:math>
+	      <m:ci>L</m:ci>
+	    </m:math>
+	    statistically independent observations of a Maxwellian
+	    random variable
+	    <m:math>
+	      <m:ci>r</m:ci>
+	    </m:math>.
+
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar><m:ci>r</m:ci>
+		</m:bvar>
+		<m:bvar><m:ci>θ</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:and/>
+		    <m:apply>
+		      <m:gt/>
+		      <m:ci>r</m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:gt/>
+		      <m:ci>θ</m:ci>
+		      <m:cn>0</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>r</m:ci>
+		    </m:bvar>
+		    <m:condition>
+		      <m:ci>θ</m:ci>
+		    </m:condition>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:root/>
+		      <m:apply>
+			<m:divide/>
+			<m:cn>2</m:cn>
+			<m:ci>π</m:ci>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>θ</m:ci>
+		      <m:cn type="rational">-3<m:sep/>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:power/>
+		      <m:ci>r</m:ci>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:apply>
+			    <m:divide/>
+			    <m:cn>1</m:cn>
+			    <m:cn>2</m:cn>
+			  </m:apply>
+			  <m:apply>
+			    <m:divide/>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>r</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			    <m:ci>θ</m:ci>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar><m:ci>θ</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:gt/>
+		    <m:ci>θ</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>θ</m:ci>
+		    </m:bvar>
+		    <m:ci>θ</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>λ</m:ci>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:times/>
+			  <m:ci>λ</m:ci>
+			  <m:ci>θ</m:ci>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+	<section id="s1b">
+	  <para id="p1b">
+	    Find the maximum <foreign>a posteriori</foreign> estimate
+	    of the variance
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:ci>σ</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math>
+	    from
+	    <m:math>
+	      <m:ci>L</m:ci>
+	    </m:math>
+	    statistically independent observations having the
+	    exponential density
+	    <m:math display="block">
+	      <m:apply>
+		<m:forall/>
+		<m:bvar><m:ci>r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:apply>
+		    <m:gt/>
+		    <m:ci>r</m:ci>
+		    <m:cn>0</m:cn>
+		  </m:apply>
+		</m:condition>
+		<m:apply>
+		  <m:eq/>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		    <m:bvar>
+		      <m:ci>r</m:ci>
+		    </m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:times/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:cn>1</m:cn>
+		      <m:apply>
+			<m:root/>
+			<m:apply>
+			  <m:power/>
+			  <m:ci>σ</m:ci>
+			  <m:cn>2</m:cn>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		    <m:apply>
+		      <m:exp/>
+		      <m:apply>
+			<m:minus/>
+			<m:apply>
+			  <m:divide/>
+			  <m:ci>r</m:ci>
+			  <m:apply>
+			    <m:root/>
+			    <m:apply>
+			      <m:power/>
+			      <m:ci>σ</m:ci>
+			      <m:cn>2</m:cn>
+			    </m:apply>
+			  </m:apply>
+			</m:apply>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where the variance is uniformly distributed over the interval
+	    <m:math>
+	      <m:interval closure="closed-open">
+		<m:cn>0</m:cn>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>max</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:interval>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s1c">
+	  <para id="p1c">
+	    Find the maximum likelihood estimate of the variance of
+	    <m:math>
+	      <m:ci>L</m:ci>
+	    </m:math>
+	    identically distributed, but dependent Gaussian random
+	    variables.  Here, the covariance matrix is written
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:selector/>
+		  <m:ci type="matrix">K</m:ci>
+		  <m:ci>r</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>σ</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:selector/>
+		    <m:mover>
+		      <m:ci type="matrix">K</m:ci>
+		      <m:mo>∼</m:mo>
+		    </m:mover>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>,
+	    where the normalized covariance matrix has trace
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn" class="discrete">tr</m:ci>
+		  <m:apply>
+		    <m:selector/>
+		    <m:mover>
+		      <m:ci type="matrix">K</m:ci>
+		      <m:mo>∼</m:mo>
+		    </m:mover>
+		    <m:ci>r</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:ci>L</m:ci>
+	      </m:apply>
+	    </m:math>  
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem2">
+      <problem id="idp2231808">
+	<para id="introp2">
+	  Imagine yourself idly standing on the corner in a large city
+	  when you note the serial number of a passing beer truck.
+	  Because you are idle, you wish to estimate (guess may be
+	  more accurate here) how many beer trucks the city has from
+	  this single operation
+	</para>
+
+	<section id="s2a">
+	  <para id="p2a">
+	    Making appropriate assumptions, the beer truck's number is
+	    drawn from a uniform probability density ranging between
+	    zero and some unknown upper limit, find the maximum
+	    likelihood estimate of the upper limit.
+	  </para>
+	</section>
+	<section id="s2b">
+	  <para id="p2b">
+	    Show that this estimate is biased.
+	  </para>
+	</section>
+	<section id="s2c">
+	  <para id="p2c">
+	    In one of your extraordinarily idle moments, you observe
+	    throughout the city
+	    <m:math>
+	      <m:ci>L</m:ci>
+	    </m:math>
+	    beer trucks.  Assuming them to be independent
+	    observations, now what is the maximum likelihood estimate
+	    of the total?
+	  </para>
+	</section>
+	<section id="s2d">
+	  <para id="p2d">
+	    Is this estimate of
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    biased? asymptotically biased? consistent?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem3">
+      <problem id="idm6928816">
+	<para id="introp3">
+	  We make
+	  <m:math>
+	    <m:ci>L</m:ci>
+	  </m:math>
+	  observations
+	  <m:math>
+	    <m:mrow>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub>
+	      <m:mo>,</m:mo>
+	      <m:ci>…</m:ci>
+	      <m:mo>,</m:mo>
+	      <m:msub>
+		<m:mi>r</m:mi>
+		<m:mi>L</m:mi>
+	      </m:msub>
+	    </m:mrow>
+	  </m:math>
+	  of a parameter
+	  <m:math>
+	    <m:ci>θ</m:ci>
+	  </m:math>
+	  corrupted by additive noise (
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>θ</m:ci>
+		<m:ci><m:msub>
+		    <m:mi>n</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  ).  The parameter
+	  <m:math>
+	    <m:ci>θ</m:ci>
+	  </m:math>
+	  is a Gaussian random variable
+	  [<m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci>θ</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci><m:msubsup>
+		      <m:mi>σ</m:mi>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>]
+	  and
+	  <m:math>
+	    <m:msub>
+	      <m:mi>n</m:mi>
+	      <m:mi>l</m:mi>
+	    </m:msub>
+	  </m:math>
+	  are statistically independent Gaussian random variables
+	  [<m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci><m:msub>
+		  <m:mi>n</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci><m:msubsup>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>].
+	</para>
+
+	<section id="s3a">
+	  <para id="p3a">
+	    Find the MMSE estimate of
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s3b">
+	  <para id="p3b">
+	    Find the maximum <foreign>a posteriori</foreign> estimate of
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s3c">
+	  <para id="p3c">
+	    Compute the resulting mean-squared error for each estimate.
+	  </para>
+	</section>
+	<section id="s3d">
+	  <para id="p3d">
+	    Consider an alternate procedure based on the same observations
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	    .  Using the MMSE criterion, we estimate
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math> 
+	    immediately after each observation.  This procedure yields
+	    the sequence of estimates
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, …, 
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>L</m:mi>
+		    </m:msub></m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>…</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>L</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.  Express
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    as a function of
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mrow>
+		      <m:mi>l</m:mi>
+		      <m:mo>-</m:mo>
+		      <m:mn>1</m:mn>
+		    </m:mrow>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>,
+	    <m:math>
+	      <m:ci><m:msubsup>
+		  <m:mi>σ</m:mi>
+		  <m:mrow>
+		    <m:mi>l</m:mi>
+		    <m:mo>-</m:mo>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		  <m:mn>2</m:mn>
+		</m:msubsup></m:ci>
+	    </m:math>, and
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>.  Here,
+	    <m:math>
+	      <m:ci><m:msubsup>
+		  <m:mi>σ</m:mi>
+		  <m:mi>l</m:mi>
+		  <m:mn>2</m:mn>
+		</m:msubsup></m:ci>
+	    </m:math>
+	    denotes the variance of the estimation error of the
+	    <m:math>
+	      <m:ci><m:msup>
+		<m:mi>l</m:mi>
+		<m:mi>th</m:mi>
+	      </m:msup></m:ci>
+	    </m:math>
+	    estimate.  Show that
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci><m:msubsup>
+		      <m:mi>σ</m:mi>
+		      <m:mi>l</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msubsup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci><m:msubsup>
+			<m:mi>σ</m:mi>
+			<m:mi>θ</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:ci><m:msubsup>
+			<m:mi>σ</m:mi>
+			<m:mi>n</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem4">
+      <problem id="idm5672480">
+	<para id="introp4">
+	  Although the maximum likelihood estimation procedure was not
+	  clearly defined until early in the 20th century, Gauss
+	  showed in 1905 that the Gaussian density <footnote id="idm5671264">It wasn't called the Gaussian density in
+	  1805; this result is one of the reasons why it is.</footnote>
+	  was the <emphasis>sole</emphasis> density for which the
+	  maximum likelihood estimate of the mean equaled the sample
+	  average.  Let
+	  <m:math>
+	    <m:set>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mn>0</m:mn>
+		</m:msub></m:ci>
+	      <m:ci>…</m:ci>
+	      <m:ci><m:msub>
+		  <m:mi>r</m:mi>
+		  <m:mrow>
+		    <m:mi>L</m:mi>
+		    <m:mo>-</m:mo>
+		    <m:mn>1</m:mn>
+		  </m:mrow>
+		</m:msub></m:ci>
+	    </m:set>
+	  </m:math>
+	  be a sequence of statistically independent, identically
+	  distributed random variables.
+	</para>
+
+	<section id="s4a">
+	  <para id="p4a">
+	    What equation defines the maximum likelihood estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		  <m:mi>m</m:mi>
+		    <m:mi>ML</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    of the mean
+	    <m:math>
+	      <m:ci>m</m:ci>
+	    </m:math>
+	    when the common probability density function of the data
+	    has the form
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:apply>
+		  <m:minus/>
+		  <m:ci>r</m:ci>
+		  <m:ci>m</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+
+	<section id="s4b">
+	  <para id="p4b">
+	    The sample average is, of course,
+	    <m:math>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:divide/>
+		  <m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub>
+		  <m:mi>L</m:mi>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	    Show that it minimizes the mean-square error
+	    <m:math>
+	      <m:apply>
+		<m:sum/>
+		<m:bvar>
+		  <m:ci>l</m:ci>
+		</m:bvar>
+		<m:domainofapplication>
+		  <m:ci>l</m:ci>
+		</m:domainofapplication>
+		<m:apply>
+		  <m:power/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:msub>
+		      <m:mi>r</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub>
+		    <m:mi>m</m:mi>
+		  </m:apply>
+		  <m:cn>2</m:cn>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s4c">
+	  <para id="p4c">
+	    Equating the sample average to
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>m</m:mi>
+		    <m:mi>ML</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>, combine this equation with the maximum
+	    likelihood equation to show that the Gaussian density
+	    uniquely satisfies the equations.
+	  </para>
+	</section>
+
+	<para id="note">
+	  <note type="note" id="idp1160368">
+	    Because both equations equal 0, they can be equated.  Use
+	    the fact that they must hold for <emphasis>all</emphasis>
+	    <m:math>
+	      <m:ci>L</m:ci>
+	    </m:math>
+	    to derive the result.  Gauss thus showed that mean-squared
+	    error and the Gaussian density were closely linked,
+	    presaging ideas from modern robust estimation theory.
+	  </note>
+	</para>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem5">
+      <problem id="idm6105440">
+	<para id="Introp5">
+	  In <link document="m11269" target-id="ex2">this example</link>,
+	  we derived the maximum likelihood estimate of the mean and
+	  variance of a Gaussian random vector.  You might wonder why
+	  we chose to estimate the variance
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>
+	  rather than the standard deviation
+	  <m:math>
+	    <m:ci>σ</m:ci> </m:math>.  Using the same
+	  assumptions provided in the example, let's explore the
+	  consequences of estimating a <emphasis>function</emphasis>
+	  of a parameter (<cite target-id="vanTrees"><cite-title>van Trees: Probs
+	  2.4.9, 2.4.10</cite-title></cite>).
+	</para>
+
+	<section id="s5a">
+	  <para id="p5a">
+	    Assuming that the mean is known, find the maximum
+	    likelihood estimates of first the variance, then the
+	    standard deviation.
+	  </para>
+	</section>
+	<section id="s5b">
+	  <para id="p5b">
+	    Are these estimates biased?
+	  </para>
+	</section>
+	<section id="s5c">
+	  <para id="p5c">
+	    Describe how these two estimates are related.  Assuming that
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">f</m:ci>
+		<m:ci>·</m:ci>
+	      </m:apply>
+	    </m:math>
+	    is a monotonic function, how are
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>ML</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    and
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mrow>
+		      <m:mi>f</m:mi>
+		      <m:mrow>
+			<m:mo>(</m:mo>
+			<m:mi>θ</m:mi>
+			<m:mo>)</m:mo>
+		      </m:mrow>
+		    </m:mrow>
+		    <m:mi>ML</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    related in general?  These results suggest a general
+	    question.  Consider the problem of estimating some
+	    function of a parameter
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>, say
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:math>.
+	    The observed quantity is
+	    <m:math>
+	      <m:ci>r</m:ci>
+	    </m:math>
+	    and the conditional density
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		<m:bvar>
+		  <m:ci>r</m:ci>
+		</m:bvar>
+		<m:condition>
+		  <m:ci>θ</m:ci>
+		</m:condition>
+		<m:ci>r</m:ci>
+	      </m:apply>
+	    </m:math>
+	    is known.  Assume that
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    is a nonrandom parameter.
+	  </para>
+	</section>
+
+	<section id="s5d">
+	  <para id="p5d">
+	    What are the conditions for an efficient estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:ci type="fn"><m:msub>
+		      <m:mi>f</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    to exist?
+	  </para>
+	</section>
+
+	<section id="s5e">
+	  <para id="p5e">
+	    What is the lower bound on the variance of the error of
+	    any unbiased estimate of
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+	<section id="s5f">
+	  <para id="p5f">
+	    Assume an efficient estimate of
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>1</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:math>
+	    exists; when can an efficient estimate of some other function
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">
+		  <m:msub>
+		    <m:mi>f</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msub>
+		</m:ci>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	    </m:math>
+	    exist?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem6">
+      <problem id="idm5987296">
+	<para id="Introp6">
+	  Let the observations
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:math>
+	  consist of statistically independent, identically
+	  distributed Gaussian random variables having zero mean but
+	  unknown variance.  We wish to estimate
+	  <m:math>
+	    <m:apply>
+	      <m:power/>
+	      <m:ci>σ</m:ci>
+	      <m:cn>2</m:cn>
+	    </m:apply>
+	  </m:math>, their variance.
+	</para>
+
+	<section id="s6a">
+	  <para id="p6a">
+	    Find the maximum likelihood estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>ML</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>
+	    and compute the resulting mean-squared error.
+	  </para>
+	</section>
+	<section id="s6b">
+	  <para id="p6b">
+	    Show that this estimate is efficient.
+	  </para>
+	</section>
+	<section id="s6c">
+	  <para id="p6c">
+	    Consider a new estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>NEW</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>
+	    given by
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msubsup>
+		      <m:mi>σ</m:mi>
+		      <m:mi>NEW</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msubsup></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>α</m:ci>
+		  <m:apply>
+		    <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		    <m:ci><m:msubsup>
+			<m:mi>σ</m:mi>
+			<m:mi>ML</m:mi>
+			<m:mn>2</m:mn>
+		      </m:msubsup></m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where
+	    <m:math>
+	      <m:ci>α</m:ci>
+	    </m:math>
+	    is a constant.  Find the value of
+	    <m:math>
+	      <m:ci>α</m:ci>
+	    </m:math>
+	    that minimizes the mean-squared error for
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>NEW</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>.
+	    Show that the mean-squared error of
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>NEW</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>
+	    is less than that of
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>ML</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>.  Is this result compatible with <link target-id="p6b">this previous part</link>?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem7">
+      <problem id="idm6045824">
+	<para id="Introp7">
+	  Let the observations be of the form
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>r</m:ci>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>H</m:ci>
+		  <m:ci type="vector">θ</m:ci>
+		</m:apply>
+		<m:ci type="vector">n</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where
+	  <m:math>
+	    <m:ci type="vector">θ</m:ci>
+	  </m:math>
+	  and
+	  <m:math>
+	    <m:ci type="vector">n</m:ci>
+	  </m:math>
+	  are statistically independent Gaussian random vectors.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci>θ</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci type="matrix"><m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>θ</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  <m:math display="block">
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci>n</m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci type="matrix"><m:msub>
+		      <m:mi>K</m:mi>
+		      <m:mi>n</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	    
+	  The vector
+	  <m:math>
+	    <m:ci type="vector">θ</m:ci>
+	  </m:math>
+	  has dimension
+	  <m:math>
+	    <m:ci>M</m:ci>
+	  </m:math>;
+	  the vectors
+	  <m:math>
+	    <m:ci type="vector">r</m:ci>
+	  </m:math>
+	  and
+	  <m:math>
+	    <m:ci type="vector">n</m:ci>
+	  </m:math>
+	  have dimension
+	  <m:math>
+	    <m:ci>N</m:ci>
+	  </m:math>.
+	</para>
+
+	<section id="s7a">
+	  <para id="p7a">
+	    Derive the minimum mean-squared error estimate of
+	    <m:math>
+	      <m:ci type="vector">θ</m:ci>
+	    </m:math>,
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>MMSE</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>,
+	    from the relationship
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>MMSE</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:condition>
+		    <m:ci type="vector">r</m:ci>
+		  </m:condition>
+		  <m:ci>θ</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	  </para>
+	</section>
+	<section id="s7b">
+	  <para id="p7b">
+	    Show that this estimate and the optimum linear estimate
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    derived by the Orthogonality Principle are equal.
+	  </para>
+	</section>
+	<section id="s7c">
+	  <para id="p7c">
+	    Find an expression for the mean-squared error when these
+	    estimates are used.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem8">
+      <problem id="idm151376">
+	<para id="Introp8">
+	  To illustrate the power of importance sampling, let's
+	  consider a somewhat naïve example.  Let
+	  <m:math>
+	    <m:ci>r</m:ci>
+	  </m:math>
+	  have a zero-mean Laplacian distribution; we want to employ
+	  importance sampling techniques to estimate
+	  <m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+	      <m:apply>
+		<m:gt/>
+		<m:ci>r</m:ci>
+		<m:ci>γ</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  (despite the fact that we can calculate it easily).  Let the
+	  density for
+	  <m:math>
+	    <m:mover>
+	      <m:mi>r</m:mi>
+	      <m:mo>˜</m:mo>
+	    </m:mover>
+	  </m:math>
+	  be Laplacian having mean
+	  <m:math>
+	    <m:ci>γ</m:ci>
+	  </m:math>.
+	</para>
+
+	<section id="s8a">
+	  <para id="p8a">
+	    Find the weight
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>c</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	    that must be applied to each decision based on the variable
+	    <m:math>
+	      <m:mover>
+		<m:mi>r</m:mi>
+		<m:mo>˜</m:mo>
+	      </m:mover>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s8b">
+	  <para id="p8b">
+	    Find the importance sampling gain.  Show that this gain
+	    means that a <emphasis>fixed</emphasis> number of
+	    simulations are needed to achieve a given percentage
+	    estimation error (as defined by the coefficient of
+	    variation).  Express this number as a function of the
+	    criterion value for the coefficient of variation.
+	  </para>
+	</section>
+	<section id="s8c">
+	  <para id="p8c">
+	    Now assume that the density for
+	    <m:math>
+	      <m:ci><m:mover>
+		  <m:mi>r</m:mi>
+		  <m:mo>˜</m:mo>
+		</m:mover></m:ci>
+	    </m:math>
+	    is Laplacian, but with mean
+	    <m:math>
+	      <m:ci>m</m:ci>
+	    </m:math>.  Optimize
+	    <m:math>
+	      <m:ci>m</m:ci>
+	    </m:math>
+	    by finding the value that maximizes the importance
+	    sampling gain.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem9">
+      <problem id="idm5962608">
+	<para id="Introp9">
+	  Suppose we consider an estimate of the parameter
+	  <m:math>
+	    <m:ci>θ</m:ci>
+	  </m:math>
+	  having the form
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci>θ</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:ci type="fn">ℒ</m:ci>
+		  <m:ci type="vector">r</m:ci>
+		</m:apply>
+		<m:ci>C</m:ci>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>, where
+	  <m:math>
+	    <m:ci type="vector">r</m:ci>
+	  </m:math>
+	  denotes the vector of the observables and
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">ℒ</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math>
+	  is a linear operator.  The quantity
+	  <m:math>
+	    <m:ci>C</m:ci>
+	  </m:math>
+	  is a constant.  This estimate is <emphasis>not</emphasis> a
+	  linear function of the observables unless
+	  <m:math>
+	    <m:apply>
+	      <m:eq/>
+	      <m:ci>C</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>.  We are interested in finding applications for
+	  which it is advantageous to allow
+	  <m:math>
+	    <m:apply>
+	      <m:neq/>
+	      <m:ci>C</m:ci>
+	      <m:cn>0</m:cn>
+	    </m:apply>
+	  </m:math>.  Estimates of this form we term
+	  <term>"quasi-linear"</term>.
+	</para>
+
+	<section id="s9a">
+	  <para id="p9a">
+	    Show that the optimum (minimum mean-squared error)
+	    quasi-linear estimate satisfies
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#expectedvalue"/>
+		  <m:apply>
+		    <m:scalarproduct/>
+		    <m:apply>
+		      <m:minus/>
+		      <m:apply>
+			<m:plus/>
+			<m:apply>
+			  <m:ci type="fn"><m:msub>
+			      <m:mi>ℒ</m:mi>
+			      <m:mi>⋄</m:mi>
+			    </m:msub></m:ci>
+			  <m:ci type="vector">r</m:ci>
+			</m:apply>
+			<m:ci><m:msub>
+			    <m:mi>C</m:mi>
+			    <m:mi>⋄</m:mi>
+			  </m:msub></m:ci>
+		      </m:apply>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		    <m:apply>
+		      <m:plus/>
+		      <m:apply>
+			<m:ci type="fn">ℒ</m:ci>
+			<m:ci type="vector">r</m:ci>
+		      </m:apply>
+		      <m:ci>C</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>
+	    for all
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">ℒ</m:ci>
+		<m:ci>·</m:ci>
+	      </m:apply>
+	    </m:math> and 
+	    <m:math>
+	      <m:ci>C</m:ci>
+	    </m:math> where 
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mi>QLIN</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">
+		      <m:msub>
+			<m:mi>ℒ</m:mi>
+			<m:mi>⋄</m:mi>
+		      </m:msub></m:ci>
+		    <m:ci type="vector">r</m:ci>
+		  </m:apply>
+		  <m:ci><m:msub>
+		      <m:mi>C</m:mi>
+		      <m:mi>⋄</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s9b">
+	  <para id="p9b">
+	    Find a general expression for the mean-squared error
+	    incurred by the optimum quasi-linear estimate.
+	  </para>
+	</section>
+	<section id="s9c">
+	  <para id="p9c">
+	    Such estimates yield a smaller mean-squared error when
+	    the parameter
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    has a nonzero mean.  Let
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    be a scalar parameter with mean
+	    <m:math>
+	      <m:ci>m</m:ci>
+	    </m:math>.  The observables comprise a vector
+	    <m:math>
+	      <m:ci type="vector">r</m:ci>
+	    </m:math>
+	    having components given by
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci><m:msub>
+		    <m:mi>r</m:mi>
+		    <m:mi>l</m:mi>
+		  </m:msub></m:ci>
+		<m:apply>
+		  <m:plus/>
+		  <m:ci>θ</m:ci>
+		  <m:ci><m:msub>
+		      <m:mi>n</m:mi>
+		      <m:mi>l</m:mi>
+		    </m:msub></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>,
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>1</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:ci>N</m:ci>
+		</m:set>
+	      </m:apply>
+	    </m:math>
+	    where
+	    <m:math>
+	      <m:ci><m:msub>
+		  <m:mi>n</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	    </m:math>
+	    are statistically independent Gaussian random variables
+	    [<m:math>
+	    <m:apply>
+	      <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#distributedin"/>
+	      <m:ci><m:msub>
+		  <m:mi>n</m:mi>
+		  <m:mi>l</m:mi>
+		</m:msub></m:ci>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#normaldistribution"/>
+		<m:cn>0</m:cn>
+		<m:apply>
+		  <m:ci><m:msubsup>
+		      <m:mi>σ</m:mi>
+		      <m:mi>n</m:mi>
+		      <m:mn>2</m:mn>
+		    </m:msubsup></m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>] independent of
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>.  Compute expressions for
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>QLIN</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math> and
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>LIN</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>.  Verify that
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:ci><m:msub>
+		    <m:mi>θ</m:mi>
+		    <m:mi>QLIN</m:mi>
+		  </m:msub></m:ci>
+	      </m:apply>
+	    </m:math>
+	    yields a smaller mean-squared error when
+	    <m:math>
+	      <m:apply>
+		<m:neq/>
+		<m:ci>m</m:ci>
+		<m:cn>0</m:cn>
+	      </m:apply>
+	    </m:math>.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem10">
+      <problem id="idm6536768">
+	<para id="Introp10">
+	  In <link document="m11237">this section</link>, we
+	  questioned the existence of an efficient estimator for
+	  signal parameters.  We found in the succeeding example that
+	  an unbiased efficient estimator exists for the signal
+	  amplitude.  Can a nonlinearly represented parameter, such as
+	  time delay, have an efficient estimator?
+	</para>
+
+	<section id="s10a">
+	  <para id="p10a">
+	    Simplify the condition for the existence of an efficient
+	    estimator by assuming it to be unbiased.  Note carefully
+	    the dimensions of the matrices involved.
+	  </para>
+	</section>
+	<section id="s10b">
+	  <para id="p10b">
+	    Show that the only solution in this case occurs when the
+	    signal depends "linearly" on the parameter vector.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem11">
+      <problem id="idm193568">
+	<para id="Introp11">
+	  In Poission problems, the number of events
+	  <m:math>
+	    <m:ci>n</m:ci>
+	  </m:math>
+	  occurring in the interval
+	  <m:math>
+	    <m:interval closure="closed-open">
+	      <m:cn>0</m:cn>
+	      <m:ci>T</m:ci>
+	    </m:interval>
+	  </m:math>
+	  is governed by the probability distribution (see <link document="m11255">The Poission Process</link>)
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#probability"/>
+		<m:ci>n</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:apply>
+		    <m:power/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>λ</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		  <m:apply>
+		    <m:factorial/>
+		    <m:ci>n</m:ci>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:exp/>
+		  <m:apply>
+		    <m:minus/>
+		    <m:apply>
+		      <m:times/>
+		      <m:ci>λ</m:ci>
+		      <m:ci>T</m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where
+	  <m:math>
+	    <m:ci>λ</m:ci>
+	  </m:math>
+	  is the average rate at which events occur.
+	</para>
+
+	<section id="s11a">
+	  <para id="p11a">
+	    What is the maximum likelihood estimate of average rate?
+	  </para>
+	</section>
+	<section id="s11b">
+	  <para id="p11b">
+	    Does this estimate satisfy the Cramér-Rao bound?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+    
+    <exercise id="problem12">
+      <problem id="idm7189760">
+	<para id="Introp12">
+	  In the "classic" radar problem, not only is the time of
+	  arrival of the radar pulse unknown but also the amplitude.
+	  In this problem, we seek methods of simultaneously
+	  estimating these parameters.  The received signal
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">r</m:ci>
+	      <m:ci>l</m:ci>
+	    </m:apply>
+	  </m:math>
+	  is of the form
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:ci type="fn">r</m:ci>
+		<m:ci>l</m:ci>
+	      </m:apply>
+	      <m:apply>
+		<m:plus/>
+		<m:apply>
+		  <m:times/>
+		  <m:ci><m:msub>
+		      <m:mi>θ</m:mi>
+		      <m:mn>1</m:mn>
+		    </m:msub></m:ci>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>l</m:ci>
+		      <m:ci><m:msub>
+			  <m:mi>θ</m:mi>
+			  <m:mn>2</m:mn>
+			</m:msub></m:ci>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+		<m:apply>
+		  <m:ci type="fn">n</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  where
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>
+	  is Gaussian with zero mean and variance
+	  <m:math>
+	    <m:ci><m:msubsup>
+		<m:mi>σ</m:mi>
+		<m:mn>1</m:mn>
+		<m:mn>2</m:mn>
+	      </m:msubsup></m:ci>
+	  </m:math>
+	  and 
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>
+	  is uniformly distributed over the observation interval.
+	  Find the receiver that computes the maximum <foreign>a
+	  posteriori</foreign> estimates of
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>1</m:mn>
+	      </m:msub></m:ci>
+	  </m:math> and
+	  <m:math>
+	    <m:ci><m:msub>
+		<m:mi>θ</m:mi>
+		<m:mn>2</m:mn>
+	      </m:msub></m:ci>
+	  </m:math>
+	  jointly.  Draw a block diagram of this receiver and
+	  interpret its structure.
+	</para>
+      </problem>
+    </exercise>
+
+    <exercise id="problem13">
+      <problem id="idm6470640">
+	<para id="Introp13">
+	  We state without derivation the Cramér-Rao bound for
+	  estimates of signal delay (see <link document="m11243" target-id="unbiasedest">this equation</link>).
+	</para>
+
+	<section id="s13a">
+	  <para id="p13a">
+	    The parameter
+	    <m:math>
+	      <m:ci>θ</m:ci>
+	    </m:math>
+	    is the delay of the signal
+	    <m:math>
+	      <m:apply>
+		<m:ci type="fn">s</m:ci>
+		<m:ci>·</m:ci>
+	      </m:apply>
+	    </m:math>
+	    observed in additive, white Gaussian noise:
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:ci type="fn">r</m:ci>
+		  <m:ci>l</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:plus/>
+		  <m:apply>
+		    <m:ci type="fn">s</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>l</m:ci>
+		      <m:ci>θ</m:ci>
+		    </m:apply>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn">n</m:ci>
+		    <m:ci>l</m:ci>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>,
+	    <m:math>
+	      <m:apply>
+		<m:in/>
+		<m:ci>l</m:ci>
+		<m:set>
+		  <m:cn>0</m:cn>
+		  <m:ci>…</m:ci>
+		  <m:apply>
+		    <m:minus/>
+		    <m:ci>L</m:ci>
+		    <m:cn>1</m:cn>
+		  </m:apply>
+		</m:set>
+	      </m:apply>
+	    </m:math>.
+	    Derive the Cramér-Rao bound for this problem.
+	  </para>
+	</section>
+	<section id="s13b">
+	  <para id="p13b">
+	    In <link document="m11243">Time-delay Estimation</link>,
+	    this bound is claimed to be given by
+	    <m:math>
+	      <m:apply>
+		<m:divide/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+		<m:apply>
+		  <m:times/>
+		  <m:ci>E</m:ci>
+		  <m:apply>
+		    <m:power/>
+		    <m:ci>β</m:ci>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>, where
+	    <m:math>
+	      <m:apply>
+		<m:power/>
+		<m:ci>β</m:ci>
+		<m:cn>2</m:cn>
+	      </m:apply>
+	    </m:math>
+	    is the mean-squared bandwidth.  Derive this result from
+	    your general formula.  Does the bound make sense for all
+	    values of signal-to-noise ratio
+	    <m:math>
+	      <m:apply>
+		<m:divide/>
+		<m:ci>E</m:ci>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+	<section id="s13c">
+	  <para id="p13c">
+	     Using optimal detection theory, derive the expression
+	    (see <link document="m11243">Time-Delay Estimation</link>)
+	    for the probability of error incurred when trying to
+	    distinguish between a delay of
+	    <m:math><m:ci>τ</m:ci></m:math> and a delay of
+	    <m:math>
+	      <m:apply>
+		<m:plus/>
+		<m:ci>τ</m:ci>
+		<m:ci>Δ</m:ci>
+	      </m:apply>
+	    </m:math>.  Consistent with the problem pposed for the
+	    Cramér-Rao bound, assume the delayed signals are
+	    observed in additive, white Gaussian noise.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem14">
+      <problem id="idm5310800">
+	<para id="Introp14">
+	  In formulating detection problems, the signal as well as the
+	  noise are sometimes modeled as Gaussian processes.  Let's
+	  explore what differences arise in the Cramér-Rao
+	  bound derived when the signal is deterministic.  Assume that
+	  the signal contains unknown parameters
+	  <m:math>
+	    <m:ci>θ</m:ci> </m:math>, that it is statistically
+	  independent of the noise, and that the noise covariance
+	  matrix is known.
+	</para>
+
+	<section id="s14a">
+	  <para id="p14a">
+	    What forms do the conditional densities of the
+	    observations take under the two assumptions?  What are the
+	    two covariance matrices?
+	  </para>
+	</section>
+	<section id="s14b">
+	  <para id="p14b">
+	    Assuming the stochastic signal model, show that each
+	    element of the Fisher information matrix has the form
+	    <m:math display="block">
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:selector/>
+		  <m:ci>F</m:ci>
+		  <m:ci>i</m:ci>
+		  <m:ci>j</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:ci type="fn" class="discrete">tr</m:ci>
+		    <m:apply>
+		      <m:times/>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">K</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mi>i</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:ci type="matrix">K</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:inverse/>
+			<m:ci type="matrix">K</m:ci>
+		      </m:apply>
+		      <m:apply>
+			<m:partialdiff/>
+			<m:bvar>
+			  <m:ci><m:msub>
+			      <m:mi>θ</m:mi>
+			      <m:mi>j</m:mi>
+			    </m:msub></m:ci>
+			</m:bvar>
+			<m:ci type="matrix">K</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    where
+	    <m:math>
+	      <m:ci type="matrix">K</m:ci>
+	    </m:math>
+	    denotes the covariance matrix of the observations.  Make
+	    this expression more complex by assuming the noise
+	    complement has no unknown parameters.
+	  </para>
+	</section>
+	<section id="s14c">
+	  <para id="p14c">
+	    Compare the stochastic and deterministic bounds, the
+	    latter is given by <link document="m11237" target-id="Fishereq">this equation</link>, when the unknown
+	    signal parameters are amplitude and delay.  Assume the
+	    noise covariance matrix equals
+	    <m:math>
+	      <m:apply>
+		<m:times/>
+		<m:ci><m:msubsup>
+		    <m:mi>σ</m:mi>
+		    <m:mi>n</m:mi>
+		    <m:mn>2</m:mn>
+		  </m:msubsup></m:ci>
+		<m:ci type="matrix">I</m:ci>
+	      </m:apply>
+	    </m:math>.  Do these bounds have similar dependence on
+	    signal-to-noise ratio?
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem15">
+      <problem id="idp3141776">
+	<para id="Introp15">
+	  The histogram probability density estimator is a special
+	  case of a more general class of estimators known as
+	  <term>kernel estimators</term>.
+	  <m:math display="block">
+	    <m:apply>
+	      <m:eq/>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:bvar>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	      <m:apply>
+		<m:times/>
+		<m:apply>
+		  <m:divide/>
+		  <m:cn>1</m:cn>
+		  <m:ci>L</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:sum/>
+		  <m:bvar>
+		    <m:ci>l</m:ci>
+		  </m:bvar>
+		  <m:lowlimit>
+		    <m:cn>0</m:cn>
+		  </m:lowlimit>
+		  <m:uplimit>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>L</m:ci>
+		      <m:cn>1</m:cn>
+		    </m:apply>
+		  </m:uplimit>
+		  <m:apply>
+		    <m:times/>
+		    <m:ci>k</m:ci>
+		    <m:apply>
+		      <m:minus/>
+		      <m:ci>x</m:ci>
+		      <m:apply>
+			<m:ci type="fn">r</m:ci>
+			<m:ci>l</m:ci>
+		      </m:apply>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:apply>
+	  </m:math>
+	  Here, the kernel
+	  <m:math>
+	    <m:apply>
+	      <m:ci type="fn">k</m:ci>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math>
+	  is usually taken to be a density itself.
+	</para>
+
+	<section id="s15a">
+	  <para id="p15a">
+	    What is the kernel for the histogram estimator.
+	  </para>
+	</section>
+	<section id="s15b">
+	  <para id="p15b">
+	    Interpret the kernel estimator in signal processing
+	    terminology.  Predict what the most time consuming
+	    computation of this estimate might be.  Why?
+	  </para>
+	</section>
+	<section id="s15c">
+	  <para id="p15c">
+	    Show that the sample average equals the expected value
+	    of a random variable having the density
+	    <m:math>
+	      <m:apply>
+		<m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#estimate"/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>r</m:ci>
+		  </m:bvar>
+		  <m:ci>x</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    <emphasis>regardless</emphasis> of the choice of kernel.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+
+    <exercise id="problem16">
+      <problem id="idm7239920">
+	<para id="Introp16">
+	  Random variables can be generated quite easily if the
+	  probability <emphasis>distribution</emphasis> function is
+	  "nice."  Let
+	  <m:math>
+	    <m:ci>X</m:ci>
+	  </m:math>
+	  be a random variable having distribution function
+	  <m:math>
+	    <m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+	      <m:bvar>
+		<m:ci>X</m:ci>
+	      </m:bvar>
+	      <m:ci>·</m:ci>
+	    </m:apply>
+	  </m:math>.
+	</para>
+
+	<section id="s16a">
+	  <para id="p16a">
+	    Show that the random variable
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:ci>U</m:ci>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#cdf">P</m:csymbol>
+		  <m:bvar>
+		    <m:ci>X</m:ci>
+		  </m:bvar>
+		  <m:ci>X</m:ci>
+		</m:apply>
+	      </m:apply>
+	    </m:math>
+	    is uniformly distributed over
+	    <m:math>
+	      <m:interval closure="open">
+		<m:cn>0</m:cn>
+		<m:cn>1</m:cn>
+	      </m:interval>
+	    </m:math>.
+	  </para>
+	</section>
+	<section id="s16b">
+	  <para id="p16b">
+	    Based on this result, how would you generate a random
+	    variable having a specific density with a uniform random
+	    variable generator, which is commonly supplied with most
+	    computer and calculator systems?
+	  </para>
+	</section>
+	<section id="s16c">
+	  <para id="p16c">
+	    How would you generate random variables having the
+	    hyperbolic secant density
+	    <m:math>
+	      <m:apply>
+		<m:eq/>
+		<m:apply>
+		  <m:csymbol definitionURL="http://cnx.rice.edu/cd/cnxmath.ocd#pdf">p</m:csymbol>
+		  <m:bvar>
+		    <m:ci>X</m:ci>
+		  </m:bvar>
+		  <m:ci>x</m:ci>
+		</m:apply>
+		<m:apply>
+		  <m:times/>
+		  <m:apply>
+		    <m:divide/>
+		    <m:cn>1</m:cn>
+		    <m:cn>2</m:cn>
+		  </m:apply>
+		  <m:apply>
+		    <m:sech/>
+		    <m:apply>
+		      <m:divide/>
+		      <m:apply>
+			<m:times/>
+			<m:pi/>
+			<m:ci>x</m:ci>
+		      </m:apply>
+		      <m:cn>2</m:cn>
+		    </m:apply>
+		  </m:apply>
+		</m:apply>
+	      </m:apply>
+	    </m:math>?
+	  </para>
+	</section>
+	<section id="s16d">
+	  <para id="p16d">
+	    Why is the Gaussian not in the class of "nice" probability
+	    distribution functions?  Despite this fact, the Gaussian
+	    and other similarly unfriendly random variables can be
+	    generated using tabulated rather than analytic forms for
+	    the distribution function.
+	  </para>
+	</section>
+      </problem>
+    </exercise>
+  </content>
+
+  <bib:file>
+    <bib:entry id="vanTrees">
+      <bib:book>
+   	<bib:author>H.L. van Trees</bib:author>
+    	<bib:title>Detection, Estimation, and Modulation Theory, Part I</bib:title>
+	<bib:publisher>John Wiley and Sons</bib:publisher>
+    	<bib:year>1968</bib:year>
+	<bib:address>New York</bib:address>
+      </bib:book>
+    </bib:entry>
+  </bib:file>
+</document>
